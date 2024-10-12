@@ -1,0 +1,16 @@
+﻿  1.c
+  10.c
+  11.c
+  13.c
+  2.c
+  20.c
+  3.c
+  4.c
+  5.c
+  7.c
+  8.c
+  9.c
+D:\Stepan Orlov\programming university\RGU\lab1\lab1\10.c(16,8): warning C4013: 'time' undefined; assuming extern returning int
+  Generating Code...
+D:\Stepan Orlov\programming university\RGU\lab1\lab1\20.c(12,1): warning C4716: 'mai2n': must return a value
+  lab1.vcxproj -> D:\Stepan Orlov\programming university\RGU\lab1\x64\Debug\lab1.exe
