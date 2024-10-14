@@ -3,7 +3,7 @@
 //#include <stdlib.h>
 //
 //#define MATRIX_MAX 101
-//#define MAX_RANGE 101
+//#define MAX_RANGE 100
 //#define MIN_RANGE -100
 //
 //void generate_matrix(int matrix[MATRIX_MAX][MATRIX_MAX], int size_x, int size_y, int type);

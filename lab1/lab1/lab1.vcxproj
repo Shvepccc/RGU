@@ -130,9 +130,12 @@
     <ClCompile Include="1.c" />
     <ClCompile Include="10.c" />
     <ClCompile Include="11.c" />
+    <ClCompile Include="12.c" />
     <ClCompile Include="13.c" />
     <ClCompile Include="14.c" />
     <ClCompile Include="15.c" />
+    <ClCompile Include="17.c" />
+    <ClCompile Include="18.c" />
     <ClCompile Include="2.c" />
     <ClCompile Include="20.c" />
     <ClCompile Include="3.c" />

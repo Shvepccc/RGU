@@ -1,5 +1,6 @@
-﻿  15.c
-D:\Stepan Orlov\programming university\RGU\lab1\lab1\15.c(15,8): warning C4013: 'isdigit' undefined; assuming extern returning int
-D:\Stepan Orlov\programming university\RGU\lab1\lab1\15.c(16,13): warning C4013: 'isalpha' undefined; assuming extern returning int
-D:\Stepan Orlov\programming university\RGU\lab1\lab1\15.c(6,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  12.c
+  17.c
+  18.c
+D:\Stepan Orlov\programming university\RGU\lab1\lab1\18.c(16,6): warning C4101: 'matrix2': unreferenced local variable
+  Generating Code...
   lab1.vcxproj -> D:\Stepan Orlov\programming university\RGU\lab1\x64\Debug\lab1.exe
