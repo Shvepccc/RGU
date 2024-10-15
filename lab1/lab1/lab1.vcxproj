@@ -136,6 +136,7 @@
     <ClCompile Include="15.c" />
     <ClCompile Include="17.c" />
     <ClCompile Include="18.c" />
+    <ClCompile Include="19.c" />
     <ClCompile Include="2.c" />
     <ClCompile Include="20.c" />
     <ClCompile Include="21.c" />
