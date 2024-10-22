@@ -1,66 +1,81 @@
+//#define _CRT_SECURE_NO_WARNINGS
 //#include <stdio.h>
 //#include <math.h>
 //#include <stdlib.h>
 //
-//char* str_rev(char* str);
+//int convert_FROM_decimal_bin(int n, int r, char** str);
 //
 //int main() {
 //	int n ,r;
-//	char* str;
+//	char* ans;
+//	int err;
 //	printf("Enter number: ");
 //	scanf("%d", &n);
 //	printf("Enter base (2^r - enter r): ");
 //	scanf("%d", &r);
 //
-//	printf("Result:")
+//	err = convert_FROM_decimal_bin(n, r, &ans);
+//	switch (err)
+//	{
+//		case 0:
+//			printf("Result: %s", ans);
+//			break;
+//		case 1: 
+//			printf("Incorrect base");
+//			break;
+//		case 2:
+//			printf("Memory not allocated");
+//		default:
+//			break;
+//	}
+//	free(ans);
+//
+//	return 0;
 //}
 //
-//char* convert_FROM_decimal_bin(int n, int base, char** res) {
+//int convert_FROM_decimal_bin(int n, int r, char** str) {
 //
+//	int base = 1 << r;
 //	char* res;
-//	int i = 0, j = 0, sign = 0;
+//	int len = 0, j = 0, sign = 0;
+//
+//	if (base < 2 || base > 32) {
+//		return 1;
+//	}
 //
 //	if (n == 0) {
-//		res = (char*)malloc(2 * sizeof(char));
-//		res[i++] = '0';
+//		*str = (char*)malloc(2 * sizeof(char));
+//		if (*str == NULL) { return 2; }
+//		(*str)[0] = '0';
+//		(*str)[1] = '\0';
+//		return 0;
 //	}
-//	if (n < 0) { sign = -1; n = -n; }
 //
-//	res = (char*)malloc((int)log2(n)+1 * sizeof(char));
+//	len = (log(abs(n)) / log(base)) + 1;
+//
+//	if (n < 0) { sign = 1; len++; n = -n; }
+//
+//	*str = (char*)malloc((len + 1) * sizeof(char));
+//	if (*str == NULL) { return 2; }
+//	res = *str;
+//
+//	if (n < 0) { *res = '-'; }
+//
+//	res += len - sign;
+//	*res-- = 0;
+//	
 //	while (n > 0) {
-//		j = (int)n & (base - 1);
+//		j = n & (base - 1);
 //		if (j < 10) {
-//			res[i] = j + '0';
+//			*res = j + '0';
 //		}
 //		else {
-//			res[i] = j + 'A' - 10;
+//			*res = j + 'A' - 10;
 //		}
 //
-//		n >>= base;
-//		i++;
+//		n >>= r;
+//		res--;
 //	}
 //
-//	if (sign == -1) res[i++] = '-';
-//	res[i++] = 0;
-//	res = str_rev(res);
-//	return res;
-//}
-//
-//char* str_rev(char* str) {
-//	int c = 0;
-//	char r, l;
-//	char* ptr = str;
-//	while (*ptr != '\0') {
-//		ptr++;
-//		c += 1;
-//	}
-//
-//	for (int i = 0; i < (c / 2); i++) {
-//		l = str[i];
-//		r = str[c - i - 1];
-//		str[i] = r;
-//		str[c - i - 1] = l;
-//	}
-//
-//	return str;
+//	return 0;
 //}
