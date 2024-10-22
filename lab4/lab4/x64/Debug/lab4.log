@@ -1,6 +1,3 @@
 ﻿  1.c
-  2.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(49,5): warning C4013: 'memcpy' undefined; assuming extern returning int
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(148,5): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
-  Generating Code...
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\1.c(54,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
