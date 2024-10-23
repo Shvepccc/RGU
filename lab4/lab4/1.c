@@ -2,6 +2,7 @@
 //#include <stdio.h>
 //#include <math.h>
 //#include <stdlib.h>
+//#include "error.h"
 //
 //int convert_FROM_decimal_bin(int n, int r, char** str);
 //
@@ -20,11 +21,11 @@
 //		case 0:
 //			printf("Result: %s", ans);
 //			break;
-//		case 1: 
-//			printf("Incorrect base");
+//		case INCORRECT_BASE: 
+//			printf("Incorrect base \n");
 //			break;
-//		case 2:
-//			printf("Memory not allocated");
+//		case MEMORY_ALLOCATE_ERROR:
+//			printf("Memory not allocated \n");
 //		default:
 //			break;
 //	}
@@ -40,12 +41,12 @@
 //	int len = 0, j = 0, sign = 0;
 //
 //	if (base < 2 || base > 32) {
-//		return 1;
+//		return INCORRECT_BASE;
 //	}
 //
 //	if (n == 0) {
 //		*str = (char*)malloc(2 * sizeof(char));
-//		if (*str == NULL) { return 2; }
+//		if (*str == NULL) { return MEMORY_ALLOCATE_ERROR; }
 //		(*str)[0] = '0';
 //		(*str)[1] = '\0';
 //		return 0;
@@ -56,7 +57,7 @@
 //	if (n < 0) { sign = 1; len++; n = -n; }
 //
 //	*str = (char*)malloc((len + 1) * sizeof(char));
-//	if (*str == NULL) { return 2; }
+//	if (*str == NULL) { return MEMORY_ALLOCATE_ERROR; }
 //	res = *str;
 //
 //	if (n < 0) { *res = '-'; }

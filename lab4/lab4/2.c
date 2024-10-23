@@ -2,6 +2,7 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <ctype.h>
+//#include "error.h"
 //
 //int str_len(char* str);
 //char* str_rev(char* str);
@@ -11,8 +12,8 @@
 //	int err = 0;
 //	int len = 0;
 //	char f;
-//	if (argc < 3) { err = 1;  }
-//	else if (argc > 3 && argv[1][1] != 'c') { err = 3; }
+//	if (argc < 3) { err = NOT_ENOUGHT_ARGS;  }
+//	else if (argc > 3 && argv[1][1] != 'c') { err = TOO_MANY_ARGS; }
 //	else {
 //		f = argv[1][1];
 //		switch (f) {
@@ -83,19 +84,19 @@
 //				break;
 //			}
 //			default: {
-//				err = 2;
+//				err = UNKNOWN_FLAG;
 //				break;
 //			}
 //		}
 //	}
 //
-//	if (err == 1) {
+//	if (err == NOT_ENOUGHT_ARGS) {
 //		printf("Not enough arguments");
 //	}
-//	else if (err == 2) {
+//	else if (err == UNKNOWN_FLAG) {
 //		printf("Unknown flag");
 //	}
-//	else if (err == 3) {
+//	else if (err == TOO_MANY_ARGS) {
 //		printf("Too many arguments");
 //	}
 //
@@ -126,7 +127,7 @@
 //		l = str[i];
 //		r = str[c - i - 1];
 //		str[i] = r;
-//		str[c - i - 1] = l;
+//		str[c - i - 1] = l; 
 //	}
 //	
 //	return str;
