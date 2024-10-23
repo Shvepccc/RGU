@@ -1,3 +1,5 @@
-﻿  1.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\1.c(54,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+﻿  4.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(71,6): warning C4133: '=': incompatible types - from 'void ***' to 'int ***'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(63,18): warning C4101: 'index': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(64,7): warning C4101: 'sptr': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
