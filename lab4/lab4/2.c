@@ -2,7 +2,7 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <ctype.h>
-//#include "error.h"
+//#include "../../libs/error.h"
 //
 //int str_len(char* str);
 //char* str_rev(char* str);

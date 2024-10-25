@@ -1,0 +1,11 @@
+#ifndef ERROR_H
+	#define ERROR_H
+
+	#define INCORRECT_BASE 101
+	#define MEMORY_ALLOCATE_ERROR 102
+	#define UNKNOWN_FLAG 103
+	#define TOO_MANY_ARGS 104
+	#define NOT_ENOUGHT_ARGS 105
+	#define OPEN_FILE_ERROR 106
+
+#endif 
