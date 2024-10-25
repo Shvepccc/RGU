@@ -1,5 +1,4 @@
-﻿  4.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(71,6): warning C4133: '=': incompatible types - from 'void ***' to 'int ***'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(63,18): warning C4101: 'index': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\4.c(64,7): warning C4101: 'sptr': unreferenced local variable
+﻿  5.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(30,15): warning C4101: 'y': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(30,12): warning C4101: 'x': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
