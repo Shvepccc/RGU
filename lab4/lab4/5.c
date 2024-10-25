@@ -12,8 +12,9 @@
 //
 //	switch (err)
 //	{
-//		case NOT_ENOUGHT_ARGS:
-//			printf("Not enougt arguments");
+//		case NOT_ENOUGH_ARGS:
+//			printf("Not enough arguments");
+//			break;
 //		default:{
 //			if (err == 1) {
 //				printf("The polygon is convex");
@@ -31,7 +32,7 @@
 //	int data[3][2] = { {0,0} ,{0,0}, {0,0} };
 //
 //	if (n < 3) {
-//		return NOT_ENOUGHT_ARGS;
+//		return NOT_ENOUGH_ARGS;
 //	}
 //
 //	va_list args;
@@ -60,8 +61,12 @@
 //			data[j][0] = data[j+1][0];
 //			data[j][1] = data[j+1][1];
 //		}
-//		data[2][0] = va_arg(args, int);
-//		data[2][1] = va_arg(args, int);
+//		if ((data[2][0] = va_arg(args, int) == NULL)) {
+//			return NOT_ENOUGH_ARGS;
+//		}
+//		else {
+//			data[2][1] = va_arg(args, int);
+//		}
 //	}
 //	return 1;
 //}

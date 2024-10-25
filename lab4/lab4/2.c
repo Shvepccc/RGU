@@ -12,7 +12,7 @@
 //	int err = 0;
 //	int len = 0;
 //	char f;
-//	if (argc < 3) { err = NOT_ENOUGHT_ARGS;  }
+//	if (argc < 3) { err = NOT_ENOUGH_ARGS;  }
 //	else if (argc > 3 && argv[1][1] != 'c') { err = TOO_MANY_ARGS; }
 //	else {
 //		f = argv[1][1];
@@ -90,7 +90,7 @@
 //		}
 //	}
 //
-//	if (err == NOT_ENOUGHT_ARGS) {
+//	if (err == NOT_ENOUGH_ARGS) {
 //		printf("Not enough arguments");
 //	}
 //	else if (err == UNKNOWN_FLAG) {

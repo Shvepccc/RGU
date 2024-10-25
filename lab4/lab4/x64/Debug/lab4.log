@@ -1,4 +1,5 @@
-﻿  5.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(30,15): warning C4101: 'y': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(30,12): warning C4101: 'x': unreferenced local variable
+﻿  6.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\6.c(36,8): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\6.c(39,12): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\6.c(39,34): warning C4047: '==': 'int' differs in levels of indirection from 'void *'
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
