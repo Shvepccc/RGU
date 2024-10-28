@@ -2,23 +2,28 @@
 //
 //#define ARRAY_SIZE 10
 //
-//void print_array(double* arr);
+//void print_array(double* arr, int t);
 //int contain(double* arr, double t);
 //
 //int main() {
-//	double arr1 [ARRAY_SIZE] = { 25.3, 16.8, 42.6, 18.0, 5.9, 25.3, 16.8, 98.7, 76.35, 53.48 };
+//	double arr1 [ARRAY_SIZE] = { 25.3, 16.8, 42.6, 18.0, 5.9, 25.3, 16.8, 98.7, 76.35, 18.0 };
 //	double arr2 [ARRAY_SIZE];
-//
+//	int t = 0;
 //	for (int i = 0; i < ARRAY_SIZE; ++i) {
-//		arr2[i] = contain(arr2, arr1[i]) ? 0 : arr1[i];
+//		if (!contain(arr2, arr1[i])) {
+//			arr2[t] = arr1[i];
+//			t++;
+//		}
 //	}
 //
-//	print_array(arr2);
+//	printf("Start array: ");
+//	print_array(arr1, ARRAY_SIZE);
+//	printf("Array      : ");
+//	print_array(arr2, t);
 //}
 //
-//void print_array(double* arr) {
-//	printf("Array: ");
-//	for (int i = 0; i < ARRAY_SIZE; ++i) {
+//void print_array(double* arr, int t) {
+//	for (int i = 0; i < t; ++i) {
 //		printf("%.2f ", arr[i]);
 //	}
 //	printf("\n");

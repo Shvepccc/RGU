@@ -10,7 +10,7 @@
 //	int change_value = 0;
 //	for (int i = 0; i < ARRAY_SIZE-1; ++i) {
 //		int t = 0;
-//		for (int t = 0; t < ARRAY_SIZE-1-i; ++t) {
+//		for (t = 0; t < ARRAY_SIZE-1-i; ++t) {
 //			if (arr[0+t] > arr[0 + 1+t]) {
 //				change_value = arr[0+t];
 //				arr[0+t] = arr[0 + 1+t];
