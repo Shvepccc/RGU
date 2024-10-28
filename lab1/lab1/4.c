@@ -18,6 +18,7 @@
 //}
 //
 //void generate_array(int *arr) {
+//	srand(time(NULL));
 //	for (int i = 0; i < ARRAY_SIZE; ++i) {
 //		arr[i] = (rand() % (MAX_RANGE - MIN_RANGE + 1)) + MIN_RANGE;
 //	}
@@ -36,7 +37,7 @@
 //	int min_index = 0;
 //	int max = -100000;
 //	int max_index = 0;
-//
+//	
 //	for (int i = 0; i < ARRAY_SIZE; ++i) {
 //		if (arr[i] > max) {
 //			max = arr[i];

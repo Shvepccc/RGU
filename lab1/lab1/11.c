@@ -1,3 +1,4 @@
+//#define _CRT_SECURE_NO_WARNINGS
 //#include <stdio.h>
 //
 //int my_strlen(char* str) {
@@ -7,6 +8,7 @@
 //		++str;
 //		++count;
 //	}
+//
 //	return count;
 //}
 //
