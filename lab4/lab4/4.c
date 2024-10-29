@@ -77,6 +77,7 @@
 //
 //		fptr = fopen(ptr, "r");
 //		if (fptr == NULL) {
+//			va_end(args);
 //			return OPEN_FILE_ERROR;
 //		}
 //		
@@ -115,5 +116,6 @@
 //	}
 //	(*res)[total_count][1] = -2;
 //	total_count++;
+//  va_end(args);
 //	return 0;
 //}

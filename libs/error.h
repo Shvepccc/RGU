@@ -7,5 +7,6 @@
 	#define TOO_MANY_ARGS 104
 	#define NOT_ENOUGH_ARGS 105
 	#define OPEN_FILE_ERROR 106
+	#define INCORRECT_ARG 107
 
 #endif 

@@ -54,6 +54,7 @@
 //			}
 //			else if (sign != current_sign)
 //			{
+//				va_end(args);
 //				return 0;
 //			}
 //		}
@@ -62,12 +63,14 @@
 //			data[j][1] = data[j+1][1];
 //		}
 //		if ((data[2][0] = va_arg(args, int) == NULL)) {
+//			va_end(args);
 //			return NOT_ENOUGH_ARGS;
 //		}
 //		else {
 //			data[2][1] = va_arg(args, int);
 //		}
 //	}
+//  va_end(args);
 //	return 1;
 //}
 //

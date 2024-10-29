@@ -2,7 +2,7 @@
 //#include <stdio.h>
 //#include <math.h>
 //#include <stdlib.h>
-//#include "error.h"
+//#include "../../libs/error.h"
 //
 //int convert_FROM_decimal_bin(int n, int r, char** str);
 //
