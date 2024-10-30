@@ -1,7 +1,10 @@
 #!/bin/bash
 
 function print_help {
-    echo "help text"
+    echo "For the list of transferred files, the function creates hard links with the same name, but with the added extension ".1""
+    echo "If such links already exist, the extension is increased by 1: ".2"" 
+    echo "If there are all files with the extension up to and including ".9", then new links are not created" 
+    echo "The -r key removes all hard links to files with permissions from ".1" to ".9""
 }
 
 function delete_files {
@@ -33,8 +36,6 @@ while getopts "re:h" opt; do
             ;;
     esac
 done
-
-#shift $((OPTIND - 1))
 
 if [ -n "$error_file" ]; then
     exec 2>>"$error_file"
