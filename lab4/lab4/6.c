@@ -20,6 +20,7 @@
 //			printf("Result: %.2f", err);
 //			break;
 //	}
+//  return 0;
 //}
 //
 //double calculate_polynomial(double x, int pow, ...) {

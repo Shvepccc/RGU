@@ -25,6 +25,7 @@
 //		break;
 //		}
 //	}
+//  return 0;
 //}
 //
 //int is_convex_polygon(int n, ...) {
