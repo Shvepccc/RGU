@@ -1,20 +1,16 @@
 #!/bin/bash
 
 function print_help {
-    echo "This function outputs all subdirectories in the specified directory by sorting them by the size occupied by their files."
+    echo "HELP TEXT"
     echo "Flags:
     -d specifying the start directory of the search (default: current directory)"
     echo ""
 }
 
 error_file=""
-search_directory=""
 
-while getopts "d:e:h" opt; do
+while getopts "e:h" opt; do
     case $opt in
-        d)
-            search_directory="$OPTARG";
-            ;;
         e)
             error_file="$OPTARG";
             echo "error_file: $error_file"
@@ -34,8 +30,12 @@ if [ -n "$error_file" ]; then
     exec 2>>"$error_file"
 fi
 
-if [[ -d "$search_directory" ]]; then
-    du -h -d 1 "$search_directory" | sort -h
-else 
-    echo "Error: $search_directory not found"
+if [[ -n "$1" ]]; then
+    while read -r line; do
+        line="${line/#\~/$HOME}"
+        echo "Deleting: $line"
+        rm $line
+    done < $1
+else
+    echo "You must specify the file"
 fi
