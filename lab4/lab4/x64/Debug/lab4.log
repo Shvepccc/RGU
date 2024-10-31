@@ -1,17 +1,8 @@
-﻿  7.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(64,12): warning C4133: '=': incompatible types - from 'void ***' to 'char ***'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(68,15): warning C4047: '=': 'char **' differs in levels of indirection from 'char *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(78,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(84,9): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(110,23): warning C4047: 'function': 'void **' differs in levels of indirection from 'char ****'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(110,23): warning C4022: 'cust_realloc': pointer mismatch for actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(54,8): warning C4101: 'dest': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(52,11): warning C4101: 'goal': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(53,6): warning C4101: 'res': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(138,11): warning C4047: '==': 'int' differs in levels of indirection from 'char [2]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(143,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(145,11): warning C4047: '==': 'int' differs in levels of indirection from 'char [2]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(149,37): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(152,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\7.c(175,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+﻿  8.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(68,34): warning C4047: 'function': 'char *' differs in levels of indirection from 'char **'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(68,34): warning C4024: 'sum_base': different types for formal and actual parameter 4
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(98,55): warning C4028: formal parameter 4 different from declaration
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(99,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(100,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\8.c(47,1): warning C5082: second argument to 'va_start' is not the last named parameter
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

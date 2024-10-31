@@ -17,6 +17,7 @@
 //
 //	free_resources('f', f_ptr, 'm', A_ptr, NULL);
 //	printf("Resources were free secsessfully");
+//  return 0;
 //}
 //
 //void free_resources(char flag, ...) {
