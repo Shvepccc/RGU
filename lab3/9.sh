@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function print_help {
-    echo "HELP TEXT"
+    echo "This function deletes all files according to the list of files located in the specified file."
     echo "Flags:
     -d specifying the start directory of the search (default: current directory)"
     echo ""
