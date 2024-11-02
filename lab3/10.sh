@@ -101,6 +101,7 @@ if [[ -n "$1" && -n "$2" ]]; then
         if [[ $CUSTOM_GROUP == "" || $automaticly -eq 1 ]]; then
             CUSTOM_GROUP=$(ls -l $file | awk '{print $4}')
         fi
+        file="${file#.}"
         CUSTOM_DIR="$CUSTOM_DIR$file"
         echo "$CUSTOM_DIR : $CUSTOM_RIGHTS : $CUSTOM_USERNAME : $CUSTOM_GROUP" | tee -a $config_file
     done
