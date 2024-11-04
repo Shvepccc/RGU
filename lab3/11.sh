@@ -8,8 +8,8 @@ function print_help {
     echo "   *for the user and the group — the current values."
     echo ""
     echo "Flags:
-    -h help output
-    -e redirecting the error stream to the specified file
+    -h — help output
+    -e — redirecting the error stream to the specified file
     -m — change the default access rights to the one specified after the key
     -M — change all access rights to the one specified after the key
     -u — change the default user to the one specified after the key
