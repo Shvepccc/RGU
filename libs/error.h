@@ -8,5 +8,6 @@
 	#define NOT_ENOUGH_ARGS 105
 	#define OPEN_FILE_ERROR 106
 	#define INCORRECT_ARG 107
+	#define NULL_POINTER 108
 
 #endif 
