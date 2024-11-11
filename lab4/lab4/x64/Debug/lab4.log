@@ -1,25 +1,4 @@
-﻿  9.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(63,20): warning C4047: 'function': 'char *' differs in levels of indirection from 'char *[512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(63,20): warning C4024: 'oversprintf': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(70,10): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'char **'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(123,19): warning C4101: 'str_ans_cpy': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(190,25): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(200,26): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(373,30): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(398,30): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(423,30): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(448,30): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(149,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(147,7): warning C4101: 'num_ptr': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(492,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(529,12): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(534,14): warning C4047: '!=': 'int' differs in levels of indirection from 'void *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(627,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(670,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(676,37): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(679,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(705,22): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(705,37): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(544,1): warning C4715: 'find_zeckendorf': not all control paths return a value
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\9.c(512,1): warning C4715: 'le_fib': not all control paths return a value
+﻿  2.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(56,5): warning C4013: 'memcpy' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(155,5): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

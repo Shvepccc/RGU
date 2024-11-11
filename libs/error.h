@@ -1,6 +1,7 @@
 #ifndef ERROR_H
 	#define ERROR_H
 
+	#define OK 0
 	#define INCORRECT_BASE 101
 	#define MEMORY_ALLOCATE_ERROR 102
 	#define UNKNOWN_FLAG 103
