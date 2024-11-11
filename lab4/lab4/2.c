@@ -2,6 +2,7 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <ctype.h>
+//#include <math.h>
 //#include "../../libs/error.h"
 //
 //int str_len(char* str);
@@ -12,6 +13,12 @@
 //	int err = 0;
 //	int len = 0;
 //	char f;
+//	int i = 0, t = 0, seed;
+//	char* ptr;
+//	int left, right = 0;
+//	char change_value;
+//	char* str;
+//
 //	if (argc < 3) { err = NOT_ENOUGH_ARGS;  }
 //	else if (argc > 3 && argv[1][1] != 'c') { err = TOO_MANY_ARGS; }
 //	else {
@@ -26,8 +33,7 @@
 //				break;
 //			}
 //			case 'u': {
-//				char* ptr = argv[2];
-//				int i, len;
+//				ptr = argv[2];
 //				len = str_len(argv[2]);
 //
 //				for (i = 0; i < len; ++i) {
@@ -41,16 +47,13 @@
 //				break;
 //			}
 //			case 'n': {
-//				int len = str_len(argv[2]);
+//				len = str_len(argv[2]);
 //
 //				char* str = (char*)malloc(len + 1 * sizeof(char));
 //				if (str == NULL) {
 //					printf("Memory not allocated =(\n");
 //				}
-//				memcpy(str, argv[2], len + 1);
-//				int i, t = 0;
-//				int left, right = 0;
-//				char change_value;
+//				memcpy(str, argv[2], len + 1);				
 //
 //				for (i = 0; i < len; i++) {
 //					t = 0;
@@ -76,10 +79,20 @@
 //				break;
 //			}
 //			case 'c': {
-//				char* str = argv[2];
-//				for (int i = 0; i < argc - 3; i++) {
+//				if (argc < 4) {
+//					printf("Not enough arguments\n");
+//					return 1;
+//				}
+//
+//				//seed = atoi(argv[2]);
+//				//srand(seed);
+//
+//				str = argv[3];
+//				for (i = 1; i < argc - 3; i++) {
+//					char* str2 = argv[3 + i];
 //					str_cat(str, argv[3 + i]);
 //				}
+//
 //				printf("Concatenated string: %s", str);
 //				break;
 //			}

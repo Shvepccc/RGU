@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\libs\src\memory.c" />
     <ClCompile Include="1.c" />
+    <ClCompile Include="10.c" />
     <ClCompile Include="9.c" />
     <ClCompile Include="2.c" />
     <ClCompile Include="3.c" />
