@@ -1,4 +1,5 @@
-﻿  2.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(56,5): warning C4013: 'memcpy' undefined; assuming extern returning int
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\2.c(155,5): warning C4047: 'return': 'char *' differs in levels of indirection from 'char'
+﻿  11.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(17,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(29,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(41,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
