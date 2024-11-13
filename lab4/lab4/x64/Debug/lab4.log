@@ -1,5 +1,6 @@
-﻿  11.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(17,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(29,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\11.c(41,24): warning C4113: 'int (__cdecl *)(char)' differs in parameter lists from 'int (__cdecl *)(int)'
+﻿  12.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(118,23): warning C4312: 'type cast': conversion from 'int' to 'int **' of greater size
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(124,24): warning C4312: 'type cast': conversion from 'int' to 'char **' of greater size
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(156,21): warning C4312: 'type cast': conversion from 'int' to 'int *' of greater size
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(72,9): warning C4101: 'err': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

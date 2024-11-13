@@ -1,10 +1,13 @@
 //#include <stdio.h>
 //#include <stdlib.h>
-//#include "../../libs/error.h"
 //#include "../../libs/memory.h"
+//
+//#define MEMORY_ALLOCATE_ERROR 5
 //
 //int tokenize(char* initial, int (*detector)(int), int accept_empty_lexems, char*** lexems, size_t* lexems_count);
 //int detector(char symbol);
+//
+//char* processing_error(int err);
 //
 //int main() {
 //	int err, i;
@@ -15,41 +18,47 @@
 //
 //	printf("Result of processing string without empty lexems:\n");
 //	err = tokenize(str_1, detector, 0, &lexems, &lexems_count);
-//	if (err) { 
-//		printf("MEMORY_ALLOCATE_ERROR!");
+//	if (err) {
+//		printf("%s", processing_error(err));
 //	}
-//	for (i = 0; i < lexems_count; i++) {
-//		printf("*%s*, ", lexems[i]);
-//		free(lexems[i]);
+//	else {
+//		for (i = 0; i < lexems_count; i++) {
+//			printf("'%s', ", lexems[i]);
+//			free(lexems[i]);
+//		}
+//		free(lexems);
 //	}
-//	free(lexems);
 //
 //	printf("\n\nResult of processing string with empty lexems and accept_empty_lexems = 1:\n");
 //	lexems_count = 0;
 //	err = tokenize(str_2, detector, 1, &lexems, &lexems_count);
 //	if (err) {
-//		printf("MEMORY_ALLOCATE_ERROR!");
+//		printf("%s", processing_error(err));
 //	}
-//	for (i = 0; i < lexems_count; i++) {
-//		printf("*%s*, ", lexems[i]);
-//		free(lexems[i]);
+//	else {
+//		for (i = 0; i < lexems_count; i++) {
+//			printf("'%s', ", lexems[i]);
+//			free(lexems[i]);
+//		}
+//		free(lexems);
 //	}
-//	free(lexems);
 //
 //	printf("\n\nResult of processing string with empty lexems and accept_empty_lexems = 0:\n");
 //	lexems_count = 0;
 //	err = tokenize(str_2, detector, 0, &lexems, &lexems_count);
 //	if (err) {
-//		printf("MEMORY_ALLOCATE_ERROR!");
+//		printf("%s", processing_error(err));
 //	}
-//	for (i = 0; i < lexems_count; i++) {
-//		printf("*%s*, ", lexems[i]);
-//		free(lexems[i]);
+//	else {
+//		for (i = 0; i < lexems_count; i++) {
+//			printf("'%s', ", lexems[i]);
+//			free(lexems[i]);
+//		}
+//		free(lexems);
 //	}
-//	free(lexems);
 //
 //	printf("\n\n");
-//	return OK;
+//	return 0;
 //}
 //
 //int detector(char symbol) {
@@ -64,6 +73,11 @@
 //	char* ptr = initial;
 //	char* temp_char, *temp_char_2;
 //	char last_char =0;
+//
+//	if (initial == NULL) { return 1; }
+//	if (detector == NULL) { return 2; }
+//	if (lexems == NULL) { return 3; }
+//	if (lexems_count == NULL) { return 4; }
 //
 //	*lexems = (char**)malloc(size * sizeof(char*));
 //	if (*lexems == NULL) {
@@ -138,6 +152,23 @@
 //		free(temp_char);
 //	}
 //
-//	return OK;
-//	
+//	return 0;
+//}
+//
+//char* processing_error(int err) {
+//	switch (err)
+//	{
+//		case 1:
+//			return "Parametr 'initial' is NULL";
+//		case 2:
+//			return "Parametr 'detector' is NULL";
+//		case 3:
+//			return "Parametr 'lexems' is NULL";
+//		case 4:
+//			return "Parametr 'lexems_count' is NULL";
+//		case MEMORY_ALLOCATE_ERROR:
+//			return "MEMORY_ALLOCATE_ERROR";
+//		default:
+//			return "Unknown error";
+//	}
 //}
