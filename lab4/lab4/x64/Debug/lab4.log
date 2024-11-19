@@ -1,6 +1,4 @@
-﻿  12.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(118,23): warning C4312: 'type cast': conversion from 'int' to 'int **' of greater size
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(124,24): warning C4312: 'type cast': conversion from 'int' to 'char **' of greater size
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(156,21): warning C4312: 'type cast': conversion from 'int' to 'int *' of greater size
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\12.c(72,9): warning C4101: 'err': unreferenced local variable
+﻿  int_vector.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\int_vector.c(32,2): warning C4098: 'int_vector_free': 'void' function returning a value
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\int_vector.c(35,33): warning C4028: formal parameter 1 different from declaration
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
