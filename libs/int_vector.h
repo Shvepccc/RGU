@@ -1,10 +1,10 @@
-#ifndef INT_VECTOR
-#define INT_VECTOR
+#ifndef INT_VECTOR_H_
+#define INT_VECTOR_H_
 
 #include <stdlib.h>
 
 #define INT_VECTOR_INITIAL_CAPACITY 16
-#define GROWTH_FACTOR 2
+#define INT_VECTOR_GROWTH_FACTOR 2
 
 typedef struct int_vec_metadata_t {
 	size_t size;

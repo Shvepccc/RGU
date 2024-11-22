@@ -1,4 +1,5 @@
-﻿  int_vector.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\int_vector.c(32,2): warning C4098: 'int_vector_free': 'void' function returning a value
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\int_vector.c(35,33): warning C4028: formal parameter 1 different from declaration
+﻿  13.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(11,8): warning C4013: 'decompositions' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(28,6): warning C4101: 'decompositions_count_local': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(57,9): warning C4101: 'j': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

@@ -133,6 +133,9 @@
     <ClCompile Include="10.c" />
     <ClCompile Include="11.c" />
     <ClCompile Include="12.c" />
+    <ClCompile Include="13.c" />
+    <ClCompile Include="14.c" />
+    <ClCompile Include="15.c" />
     <ClCompile Include="9.c" />
     <ClCompile Include="2.c" />
     <ClCompile Include="3.c" />
@@ -142,11 +145,13 @@
     <ClCompile Include="7.c" />
     <ClCompile Include="8.c" />
     <ClCompile Include="test.c" />
+    <ClCompile Include="u_list.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h" />
     <ClInclude Include="..\..\libs\int_vector.h" />
     <ClInclude Include="..\..\libs\memory.h" />
+    <ClInclude Include="u_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
