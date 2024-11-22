@@ -194,3 +194,17 @@
 //	int_vector_free(vec);
 //	return 0;
 //}
+
+//#include <stdio.h>
+//#include "u_list.h"
+//int main() {
+//	int i = 0;
+//	u_list list = u_list_init(NULL);
+//	for (i = 0; i < 10; i++) {
+//		u_list_insert(&list, &i, 0);
+//	}
+//	i = 15;
+//	printf("%d", *(int*)(list.first_node->data));
+//	u_list_free(&list);
+//	return 0;
+//}

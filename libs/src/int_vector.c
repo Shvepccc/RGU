@@ -10,7 +10,7 @@ int_vector int_vector_init() {
 	if (vec == NULL) {
 		return NULL;
 	}
-	vec->size = INT_VECTOR_INITIAL_CAPACITY;
+	vec->size = 0;
 	vec->capacity = INT_VECTOR_INITIAL_CAPACITY;
 	return __int_vector_base_to_vec(vec);
 }
@@ -29,7 +29,7 @@ int_vector int_vector_from(int* arr, size_t len) {
 
 void int_vector_free(int_vector vec) {
 	free(__int_vector_vec_to_base(vec));
-	return 0;
+	return;
 }
 
 int int_vector_grow(int_vector* vec_ptr, size_t new_size) {
@@ -63,7 +63,7 @@ int int_vector_insert(int_vector* vec_ptr, int element, size_t index_to_insert) 
 	}
 
 	if (int_vector_size(*vec_ptr) == int_vector_cap(*vec_ptr)) {
-		err = int_vector_grow(vec_ptr, int_vector_cap(*vec_ptr) * GROWTH_FACTOR);
+		err = int_vector_grow(vec_ptr, int_vector_cap(*vec_ptr) * INT_VECTOR_GROWTH_FACTOR);
 		if (err) {
 			return err;
 		}
@@ -85,14 +85,14 @@ int int_vector_push_back(int_vector* vec_ptr, int element) {
 	if (vec_ptr == NULL || *vec_ptr == NULL) {
 		return NULL_POINTER;
 	}
-
+	index_to_insert = int_vector_size(*vec_ptr);
 	if (int_vector_size(*vec_ptr) == int_vector_cap(*vec_ptr)) {
-		err = int_vector_grow(vec_ptr, int_vector_cap(*vec_ptr) * GROWTH_FACTOR);
+		err = int_vector_grow(vec_ptr, int_vector_cap(*vec_ptr) * INT_VECTOR_GROWTH_FACTOR);
 		if (err) {
 			return err;
 		}
 	}
-	index_to_insert = int_vector_size(*vec_ptr);
+	
 	memcpy((*vec_ptr) + index_to_insert + 1, (*vec_ptr) + index_to_insert,
 		sizeof(int) * (int_vector_size(*vec_ptr) - index_to_insert));
 
@@ -124,8 +124,13 @@ int int_vector_pop_back(int_vector* vec_ptr, int* element) {
 		return NULL_POINTER;
 	}
 
-	*element = *((*vec_ptr) + int_vector_size(*vec_ptr) - 1);
-	__int_vector_vec_to_base(*vec_ptr)->size--;
+	if (int_vector_size(*vec_ptr) - 1 < 0) {
+		*element = *((*vec_ptr) + int_vector_size(*vec_ptr) - 1);
+		__int_vector_vec_to_base(*vec_ptr)->size--;
+	}
+	else {
+		return 1;
+	}
 
 	return OK;
 }
