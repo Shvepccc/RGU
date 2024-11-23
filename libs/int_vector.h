@@ -29,4 +29,7 @@ int int_vector_push_back(int_vector* vec_ptr, int element);
 int int_vector_pop(int_vector* vec_ptr, int* element, size_t pos);
 int int_vector_pop_back(int_vector* vec_ptr, int* element);
 
+int int_vector_get_back(int_vector* vec_ptr, int* element);
+
+
 #endif

@@ -7,20 +7,31 @@
 //		tvalue const*), int is_comparison_is_strict);
 //
 //int comparer_function(tvalue const*, tvalue const*);
-//
+//char* error_processing(int err);
 //
 //int main() {
+//	int err;
 //	size_t start_index, length;
 //	tvalue arr[ARRAY_SIZE] = { 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 7, 12, 11, 13, 12, 14, 13, 15, 14, 16 };
 //	
-//	find_the_longest_sawtooth_subsequence(arr, &start_index, &length, comparer_function, 0);
-//	printf("Result of processing array with parametr is_comparison_is_strict = 0\n");
-//	printf("Start index: %d, length: %d \n\n", start_index, length);
+//	err = find_the_longest_sawtooth_subsequence(arr, &start_index, &length, comparer_function, 0);
+//	if (err) {
+//		printf(error_processing(err));
+//	}
+//	else {
+//		printf("Result of processing array with parametr is_comparison_is_strict = 0\n");
+//		printf("Start index: %d, length: %d \n\n", start_index, length);
+//	}
 //
 //	start_index = 0; length = 0;
-//	find_the_longest_sawtooth_subsequence(arr, &start_index, &length, comparer_function, 1);
-//	printf("Result of processing array with parametr is_comparison_is_strict = 1\n");
-//	printf("Start index: %d, length: %d \n", start_index, length);
+//	err = find_the_longest_sawtooth_subsequence(arr, &start_index, &length, comparer_function, 1);
+//	if (err) {
+//		printf(error_processing(err));
+//	}
+//	else {
+//		printf("Result of processing array with parametr is_comparison_is_strict = 1\n");
+//		printf("Start index: %d, length: %d \n\n", start_index, length);
+//	}
 //}
 //
 //int comparer_function(tvalue const* a, tvalue const* b) {
@@ -86,4 +97,20 @@
 //	}
 //
 //	return 0;
+//}
+//
+//char* error_processing(int err) {
+//	switch (err)
+//	{
+//		case 1:
+//			return "sequence pointer is NULL";
+//		case 2:
+//			return "subsequence_start_index_storage pointer is NULL";
+//		case 3:
+//			return "subsequence_length_storage pointer is NULL";
+//		case 4:
+//			return "Memory allocate error";
+//		default:
+//			return "Unknown error";
+//	}
 //}

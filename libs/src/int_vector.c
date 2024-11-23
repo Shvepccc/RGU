@@ -124,12 +124,29 @@ int int_vector_pop_back(int_vector* vec_ptr, int* element) {
 		return NULL_POINTER;
 	}
 
-	if (int_vector_size(*vec_ptr) - 1 < 0) {
+	if (int_vector_size(*vec_ptr) - 1 >= 0) {
 		*element = *((*vec_ptr) + int_vector_size(*vec_ptr) - 1);
 		__int_vector_vec_to_base(*vec_ptr)->size--;
 	}
 	else {
-		return 1;
+		*element = NULL;
+		return -1;
+	}
+
+	return OK;
+}
+
+int int_vector_get_back(int_vector* vec_ptr, int* element) {
+	if (vec_ptr == NULL || *vec_ptr == NULL) {
+		return NULL_POINTER;
+	}
+	int size = int_vector_size(*vec_ptr);
+	if (size > 0) {
+		*element = *((*vec_ptr) + int_vector_size(*vec_ptr) - 1);
+	}
+	else {
+		*element = NULL;
+		return -1;
 	}
 
 	return OK;
