@@ -10,9 +10,10 @@
 //    int is_comparison_is_strict);
 //
 //int comparer_function(tvalue const* a, tvalue const* b);
+//char* error_processing(int err);
 //
 //int main() {
-//    int i, j;
+//    int i, j, err;
 //    size_t count_saddle_points = 0;
 //    tvalue matrix_data[SIZE][SIZE] = {
 //        {15,  2,  30,  40,  50,  6,  70,  80,  90,  100},
@@ -41,18 +42,28 @@
 //    }
 //    size_t** result;
 //
-//    find_saddle_points(matrix, SIZE, SIZE, &result, &count_saddle_points, comparer_function, 0);
-//    printf("Result of processing matrix with parametr is_comparison_is_strict = 0\n");
-//    for (i = 0; i < count_saddle_points; i++) {
-//        printf("Saddle point at (%d, %d)\n", result[i][0], result[i][1]);
+//    err = find_saddle_points(matrix, SIZE, SIZE, &result, &count_saddle_points, comparer_function, 0);
+//    if (err) {
+//        printf(error_processing(err));
+//    }
+//    else {
+//        printf("Result of processing matrix with parametr is_comparison_is_strict = 0\n");
+//        for (i = 0; i < count_saddle_points; i++) {
+//            printf("Saddle point at (%d, %d)\n", result[i][0], result[i][1]);
+//        }
 //    }
 //    printf("\n");
 //
 //    count_saddle_points = 0;
-//    find_saddle_points(matrix, SIZE, SIZE, &result, &count_saddle_points, comparer_function, 1);
-//    printf("Result of processing matrix with parametr is_comparison_is_strict = 1\n");
-//    for (i = 0; i < count_saddle_points; i++) {
-//        printf("Saddle point at (%d, %d)\n", result[i][0], result[i][1]);
+//    err = find_saddle_points(matrix, SIZE, SIZE, &result, &count_saddle_points, comparer_function, 1);
+//    if (err) {
+//        printf(error_processing(err));
+//    }
+//    else {
+//        printf("Result of processing matrix with parametr is_comparison_is_strict = 1\n");
+//        for (i = 0; i < count_saddle_points; i++) {
+//            printf("Saddle point at (%d, %d)\n", result[i][0], result[i][1]);
+//        }
 //    }
 //}
 //
@@ -145,4 +156,20 @@
 //        }
 //    }
 //	return 0;
+//}
+//
+//char* error_processing(int err) {
+//	switch (err)
+//	{
+//		case 1:
+//			return "sequence pointer is NULL";
+//		case 2:
+//			return "subsequence_start_index_storage pointer is NULL";
+//		case 3:
+//			return "subsequence_length_storage pointer is NULL";
+//		case 4:
+//			return "Memory allocate error";
+//		default:
+//			return "Unknown error";
+//	}
 //}

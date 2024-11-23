@@ -172,9 +172,9 @@
 //	return 0;
 //}
 
-//#include <stdio.h>
-//#include "../../libs/int_vector.h"
-//
+#include <stdio.h>
+#include "../../libs/int_vector.h"
+
 //int main() {
 //	int element = 0;
 //	int i;
@@ -192,6 +192,10 @@
 //	}
 //	
 //	int_vector_free(vec);
+//
+//	int_vector vec2 = int_vector_init();
+//	int_vector_get_back(&vec2, &i);
+//	printf("Back data; %d", i);
 //	return 0;
 //}
 
