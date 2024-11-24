@@ -1,7 +1,7 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <string.h>
-//#define MEMORRY_ALLOCATE_ERROR 5
+//#define MEMORY_ALLOCATE_ERROR 5
 //#define NULL_POINTER 7
 //#define GOOD_JOB 0
 //
@@ -38,7 +38,7 @@
 //			printf("Permutation:\n");
 //			for (i = 0; i < result_permutations_count; ++i)
 //			{
-//				printf("%d: [ ", i + 1);
+//				printf("%d:%s [ ", i, i <= 9 ? " " : "");
 //
 //				for (j = 0; j < items_count; ++j)
 //				{
@@ -63,11 +63,11 @@
 //		case 4:
 //			printf("equality_comparer pointer is NULL");
 //			break;
-//		case MEMORRY_ALLOCATE_ERROR:
+//		case MEMORY_ALLOCATE_ERROR:
 //			printf("Memory allocate error");
 //			break;
 //		case 6:
-//			printf("Two identical values were found. Restart the program.");
+//			printf("Two identical values were found. Change values and restart the program.");
 //			break;
 //		case 7:
 //			printf("A NULL pointer has been detected in the internal function. Contact the creator of the program...");
@@ -112,19 +112,19 @@
 //	for (i = 0; i < items_count - 1; i++) {
 //		for (j = i + 1; j < items_count; j++) {
 //			if (equality_comparer(items + i, items + j) == 0) {
-//				printf("%d %d %d ", items[i], items[j], equality_comparer(items + i, items + j));
+//				//printf("%d %d %d ", items[i], items[j], equality_comparer(items + i, items + j));
 //				return 6;
 //			}
 //		}
 //	}
 //	
 //	if ((current_permutation = (int*)malloc(sizeof(int) * items_count)) == NULL) {
-//		return MEMORRY_ALLOCATE_ERROR;
+//		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
 //	if ((not_inserted_items = (int*)malloc(sizeof(int) * items_count)) == NULL) {
 //		free(current_permutation);
-//		return MEMORRY_ALLOCATE_ERROR;
+//		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
 //	for (i = 2; i <= items_count; i++) {
@@ -134,7 +134,7 @@
 //	if ((target_permutations = (int**)malloc(sizeof(int*) * permutations_count)) == NULL) {
 //		free(current_permutation);
 //		free(not_inserted_items);
-//		return MEMORRY_ALLOCATE_ERROR;
+//		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
 //	for (i = 0; i < permutations_count; i++) {
@@ -147,7 +147,7 @@
 //			free(target_permutations);
 //			free(not_inserted_items);
 //			free(current_permutation);
-//			return MEMORRY_ALLOCATE_ERROR;
+//			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}
 //	
@@ -183,7 +183,6 @@
 //	int not_inserted_items_index, err;
 //
 //	if (not_inserted_items_count == 0) {
-//		size_t t = *result_index_to_insert_permutation;
 //		memcpy(result[*result_index_to_insert_permutation], current_permutation,
 //			sizeof(int) * items_count);
 //
