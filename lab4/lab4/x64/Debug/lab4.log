@@ -1,3 +1,8 @@
-﻿  16.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\16.c(20,22): warning C4013: 'time' undefined; assuming extern returning int
+﻿  18.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(35,39): warning C4047: 'function': 'int **' differs in levels of indirection from 'int ***'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(35,39): warning C4024: 'combinations': different types for formal and actual parameter 3
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,33): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,71): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,88): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(153,23): warning C4047: '=': 'int *' differs in levels of indirection from 'int **'
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
