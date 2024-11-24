@@ -1,8 +1,9 @@
-﻿  18.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(35,39): warning C4047: 'function': 'int **' differs in levels of indirection from 'int ***'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(35,39): warning C4024: 'combinations': different types for formal and actual parameter 3
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,33): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,71): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(124,88): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\18.c(153,23): warning C4047: '=': 'int *' differs in levels of indirection from 'int **'
+﻿  19.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(19,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(35,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(51,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(67,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(115,16): warning C4047: '==': 'int' differs in levels of indirection from 'void *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(154,68): warning C4133: 'function': incompatible types - from 'size_t *' to 'int *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(127,9): warning C4101: 'j': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe
