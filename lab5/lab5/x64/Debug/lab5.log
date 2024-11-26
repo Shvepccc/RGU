@@ -1,0 +1,10 @@
+﻿  2.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(29,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(29,14): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(30,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(30,14): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(31,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(31,14): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(32,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\2.c(32,14): warning C4024: 'string_free': different types for formal and actual parameter 1
+  lab5.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\x64\Debug\lab5.exe
