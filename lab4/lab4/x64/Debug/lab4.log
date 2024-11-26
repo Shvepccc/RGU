@@ -1,9 +1,4 @@
-﻿  19.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(19,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(35,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(51,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(67,48): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(115,16): warning C4047: '==': 'int' differs in levels of indirection from 'void *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(154,68): warning C4133: 'function': incompatible types - from 'size_t *' to 'int *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\19.c(127,9): warning C4101: 'j': unreferenced local variable
+﻿  5.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(42,15): warning C4101: 'y': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\5.c(42,12): warning C4101: 'x': unreferenced local variable
   lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

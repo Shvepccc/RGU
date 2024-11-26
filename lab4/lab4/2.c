@@ -8,12 +8,14 @@
 //int str_len(char* str);
 //char* str_rev(char* str);
 //char* str_cat(char* str1, char* str2);
+//void swap_str(char** a, char** b);
+//int random_int(int min, int max);
 //
 //int main(int argc, char* argv[]) {
 //	int err = 0;
 //	int len = 0;
 //	char f;
-//	int i = 0, t = 0, seed;
+//	int i = 0, j = 0, t = 0, seed;
 //	char* ptr;
 //	int left, right = 0;
 //	char change_value;
@@ -79,21 +81,44 @@
 //				break;
 //			}
 //			case 'c': {
+//				int len = 0;
 //				if (argc < 4) {
 //					printf("Not enough arguments\n");
 //					return 1;
 //				}
 //
-//				//seed = atoi(argv[2]);
-//				//srand(seed);
+//				seed = atoi(argv[2]);
+//				srand(seed);
 //
-//				str = argv[3];
-//				for (i = 1; i < argc - 3; i++) {
-//					char* str2 = argv[3 + i];
-//					str_cat(str, argv[3 + i]);
+//				char** str_arr = (char**)malloc((argc - 3) * sizeof(char*));
+//				if (str_arr == NULL) {
+//					return MEMORY_ALLOCATE_ERROR;
+//				}
+//				for (i = 0; i < argc-3; i++) {
+//					len += str_len(argv[i + 3]);
+//					str_arr[i] = argv[i + 3];
+//				}
+//
+//				for (i = 0; i < argc - 3; i++) {
+//					j = rand() % (i + 1);
+//					swap_str(&str_arr[i], &str_arr[j]);
+//				}
+//
+//				str = (char*)malloc((len + 1) * sizeof(char));
+//				if (str == NULL) {
+//					free(str_arr);
+//					return MEMORY_ALLOCATE_ERROR;
+//				}
+//
+//				str[0] = '\0';
+//				for (i = 0; i < argc - 3; i++) {
+//					str_cat(str, str_arr[i]);
 //				}
 //
 //				printf("Concatenated string: %s", str);
+//
+//				free(str_arr);
+//				free(str);
 //				break;
 //			}
 //			default: {
@@ -107,7 +132,7 @@
 //		printf("Not enough arguments");
 //	}
 //	else if (err == UNKNOWN_FLAG) {
-//		printf("Unknown flag");
+//		printf("Unknown flag");	
 //	}
 //	else if (err == TOO_MANY_ARGS) {
 //		printf("Too many arguments");
@@ -147,17 +172,28 @@
 //}
 //
 //char* str_cat(char* str1, char* str2) {
-//    int i = 0, j = 0;
+//	int i = 0, j = 0;
 //	char* res = str1;
-//    while (str1[i] != '\0')
-//        i++;
-//    while (str2[j] != '\0')
-//    {
-//        str1[i] = str2[j];
-//        j++;
-//        i++;
-//    }
-//    str1[i] = '\0';
+//	while (str1[i] != '\0')
+//		i++;
+//	while (str2[j] != '\0')
+//	{
+//		str1[i] = str2[j];
+//		j++;
+//		i++;
+//	}
+//	str1[i] = '\0';
 //
-//    return *str1;
+//	return str1;
+//}
+//
+//void swap_str(char** a, char** b) {
+//	char* temp_str = *a;
+//	*a = *b;
+//	*b = temp_str;
+//}
+//
+//int random_int(int min, int max)
+//{
+//	return min + rand() % (max + 1 - min);
 //}
