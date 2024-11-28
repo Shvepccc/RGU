@@ -24,12 +24,30 @@
     <ClCompile Include="..\..\libs\src\cust_string.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\u_list.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\cust_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\u_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

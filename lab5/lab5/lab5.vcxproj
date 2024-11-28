@@ -128,12 +128,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\src\cust_string.c" />
+    <ClCompile Include="..\..\libs\src\u_list.c" />
     <ClCompile Include="1.c" />
     <ClCompile Include="2.c" />
+    <ClCompile Include="3.c" />
+    <ClCompile Include="4.c" />
+    <ClCompile Include="5.c" />
+    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\cust_string.h" />
     <ClInclude Include="..\..\libs\error.h" />
+    <ClInclude Include="..\..\libs\u_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

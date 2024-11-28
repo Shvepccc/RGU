@@ -149,13 +149,11 @@
     <ClCompile Include="7.c" />
     <ClCompile Include="8.c" />
     <ClCompile Include="test.c" />
-    <ClCompile Include="u_list.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h" />
     <ClInclude Include="..\..\libs\int_vector.h" />
     <ClInclude Include="..\..\libs\memory.h" />
-    <ClInclude Include="u_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

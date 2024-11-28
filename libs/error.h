@@ -10,5 +10,6 @@
 	#define OPEN_FILE_ERROR 106
 	#define INCORRECT_ARG 107
 	#define NULL_POINTER 108
+	#define INDEX_OUT_OF_BORDERS 109
 
 #endif 
