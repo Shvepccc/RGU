@@ -26,3 +26,21 @@
 //	u_list_free(&list);
 //	return 0;
 //}
+
+//#include <stdio.h>
+//#include "../../libs/cust_stack.h"
+//
+//int main() {
+//	int i = 0, t = 0;
+//	stack st = stack_init(NULL, sizeof(int));
+//	for (i = 1; i < 6; i++) {
+//		stack_push_back(&st, &i);
+//	}
+//	for (i = 0; i < 6; i++) {
+//		stack_pop(&st, &t);
+//		printf("%d\n", t);
+//	}
+//
+//	stack_free(&st);
+//	return 0;
+//}

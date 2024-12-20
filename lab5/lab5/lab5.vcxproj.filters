@@ -39,6 +39,12 @@
     <ClCompile Include="test.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\src\cust_stack.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h">
@@ -48,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\u_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\cust_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

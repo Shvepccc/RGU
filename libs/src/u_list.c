@@ -3,6 +3,8 @@
 #include "../../libs/u_list.h"
 #include "../../libs/error.h"
 
+#include <stdio.h>
+
 u_list u_list_init(void (*destructor)(void*), size_t size_of_element) {
 	u_list list;
 	list.first_node = NULL;
@@ -19,8 +21,8 @@ void u_list_free(u_list* list_ptr) {
 	}
 	if (list_ptr->destructor != NULL) { mode = 1; }
 	item = list_ptr->first_node;
-	while (item) {
-		if (mode) {
+	while (item->next_node != NULL) {
+		if (mode && item->data != NULL) {
 			list_ptr->destructor(item->data);
 		}
 		temp_item = item;
@@ -125,7 +127,7 @@ int u_list_push_back(u_list* list_ptr, void* element) {
 int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_delete) {
 	u_list_node* new_node, * temp_ptr, *item;
 	int i, mode = 0;
-	if (list_ptr == NULL || element == NULL) {
+	if (list_ptr == NULL) {
 		return NULL_POINTER;
 	}
 
@@ -133,8 +135,11 @@ int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_dele
 		temp_ptr = list_ptr->first_node->next_node;
 
 		if (list_ptr->destructor != NULL) { mode = 1; }
+		if (element != NULL) {
+			memcpy(element, list_ptr->first_node->data, list_ptr->size_of_element);
+		}
 		if (mode) {
-			list_ptr->destructor(list_ptr->first_node);
+			list_ptr->destructor(list_ptr->first_node->data);
 		}
 		else {
 			free(list_ptr->first_node);
@@ -155,6 +160,9 @@ int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_dele
 		item = temp_ptr->next_node;
 		temp_ptr->next_node = temp_ptr->next_node->next_node;
 		if (list_ptr->destructor != NULL) { mode = 1; }
+		if (element != NULL) {
+			memcpy(element, item->data, list_ptr->size_of_element);
+		}
 		if (mode) {
 			list_ptr->destructor(item);
 		}
@@ -193,5 +201,62 @@ int u_list_traverse(u_list* list_ptr, int (*traverce_function)(u_list_node const
 		traverce_function(temp_ptr);
 		temp_ptr = temp_ptr->next_node;
 	}
+	return 0;
+}
+
+u_list_node* __sortedMerge(u_list_node* a, u_list_node* b, int (*comparator)(u_list_node*, u_list_node*)) {
+	if (!a) return b;
+	if (!b) return a;
+
+	u_list_node* result = NULL;
+
+	if (comparator(a, b) <= 0) {
+		result = a;
+		result->next_node = __sortedMerge(a->next_node, b, comparator);
+	}
+	else {
+		result = b;
+		result->next_node = __sortedMerge(a, b->next_node, comparator);
+	}
+
+	return result;
+}
+
+void __splitList(u_list_node* source, u_list_node** frontRef, u_list_node** backRef) {
+	u_list_node* slow = source;
+	u_list_node* fast = source->next_node;
+
+	while (fast) {
+		fast = fast->next_node;
+		if (fast) {
+			slow = slow->next_node;
+			fast = fast->next_node;
+		}
+	}
+
+	*frontRef = source;
+	*backRef = slow->next_node;
+	slow->next_node = NULL;
+}
+
+void __mergeSort(u_list_node** headRef, int (*comparator)(u_list_node*, u_list_node*)) {
+	u_list_node* head = *headRef;
+	if (!head || !head->next_node) {
+		return;
+	}
+
+	u_list_node* a;
+	u_list_node* b;
+
+	__splitList(head, &a, &b);
+
+	__mergeSort(&a, comparator);
+	__mergeSort(&b, comparator);
+
+	*headRef = __sortedMerge(a, b, comparator);
+}
+
+int u_list_mergeSort(u_list* list_ptr, int (*comparator)(u_list_node*, u_list_node*)) {
+	__mergeSort(&(list_ptr->first_node), comparator);
 	return 0;
 }

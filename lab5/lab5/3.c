@@ -43,6 +43,7 @@
 //	FILE* file;
 //	int action, i = 0, stop_flag = 0, temp_int;
 //	char temp_str[BUFSIZ];
+//	char temp_str_2[BUFSIZ];
 //	int mail_array_size = 0, mail_array_capacity = 16;
 //	mail* temp_mail_arr;
 //	string temp_string;
@@ -86,7 +87,6 @@
 //		printf("Enter number (-1 to print instruction): ");
 //		scanf("%d", &action);
 //		printf("\n");
-//		//printf("\033[0d\033[2J");
 //		system("cls");
 //		switch (action)
 //		{
@@ -171,11 +171,15 @@
 //					}
 //
 //					printf("Enter creation time [dd:MM:yyyy hh:mm:ss]: ");
-//					scanf("%s", temp_str);
+//					scanf("%s %s", temp_str, temp_str_2);
+//					strcat(temp_str, " ");
+//					strcat(temp_str, temp_str_2);
 //					main_post->mail_array[mail_array_size].creation_time = string_from(temp_str, strlen(temp_str));
 //
 //					printf("Enter delivery time [dd:MM:yyyy hh:mm:ss]: ");
-//					scanf("%s", temp_str);
+//					scanf("%s %s", temp_str, temp_str_2);
+//					strcat(temp_str, " ");
+//					strcat(temp_str, temp_str_2);
 //					main_post->mail_array[mail_array_size].delivery_time = string_from(temp_str, strlen(temp_str));
 //				}
 //				else {
@@ -218,10 +222,14 @@
 //						err = fscanf(file, "%s", &temp_str);
 //						main_post->mail_array[mail_array_size].post_id = string_from(temp_str, strlen(temp_str));
 //
-//						err = fscanf(file, "%s", temp_str);
+//						err = fscanf(file, "%s %s", temp_str, temp_str_2);
+//						strcat(temp_str, " ");
+//						strcat(temp_str, temp_str_2);
 //						main_post->mail_array[mail_array_size].creation_time = string_from(temp_str, strlen(temp_str));
 //
-//						err = fscanf(file, "%s", temp_str);
+//						err = fscanf(file, "%s %s", temp_str, temp_str_2);
+//						strcat(temp_str, " ");
+//						strcat(temp_str, temp_str_2);
 //						main_post->mail_array[mail_array_size].delivery_time = string_from(temp_str, strlen(temp_str));
 //
 //						mail_array_size++;

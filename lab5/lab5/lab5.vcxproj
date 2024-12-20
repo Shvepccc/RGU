@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\libs\src\cust_stack.c" />
     <ClCompile Include="..\..\libs\src\cust_string.c" />
     <ClCompile Include="..\..\libs\src\u_list.c" />
     <ClCompile Include="1.c" />
@@ -134,9 +135,11 @@
     <ClCompile Include="3.c" />
     <ClCompile Include="4.c" />
     <ClCompile Include="5.c" />
+    <ClCompile Include="6.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\libs\cust_stack.h" />
     <ClInclude Include="..\..\libs\cust_string.h" />
     <ClInclude Include="..\..\libs\error.h" />
     <ClInclude Include="..\..\libs\u_list.h" />
