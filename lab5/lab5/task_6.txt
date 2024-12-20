@@ -1,0 +1,6 @@
+Add(2x^2-x+2,-x^2+3x-1); % add the given polynomials
+Div(x^5,x^2-1); % add the given polynomials and divide the completely given polynomials
+[ Multi
+-line comment ]
+Mult(x^2+3x-1,2x+x^3); % multiply two polynomials by each other, save the result to the adder and display it on the screen
+Add(4x-8); % the value from the adder will be taken as the first argument, and the result will be entered into the adder
