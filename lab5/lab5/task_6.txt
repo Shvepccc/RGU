@@ -1,6 +1,9 @@
-Add(2x^2-x+2,-x^2+3x-1); % add the given polynomials
-Div(x^5,x^2-1); % add the given polynomials and divide the completely given polynomials
-[ Multi
--line comment ]
-Mult(x^2+3x-1,2x+x^3); % multiply two polynomials by each other, save the result to the adder and display it on the screen
-Add(4x-8); % the value from the adder will be taken as the first argument, and the result will be entered into the adder
+Add(4x^3+12x^2+2x+5, 3x-2);
+Sub(4x^3+12x^2+5x+3, 3x-2);
+Mult(4x^3+12x^2+2x+5, 2);
+Mult(3x-2);
+Div(24x^4+56x^3-36x^2+22x-20, 3x-2);
+Eval(13);
+Diff(8x^3+24x^2+4x+10)
+Cmps(24x^2+48x+4, 3x-2);
+Mod(216x^2-144x+4, 3x-2);

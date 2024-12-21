@@ -21,7 +21,7 @@ void u_list_free(u_list* list_ptr) {
 	}
 	if (list_ptr->destructor != NULL) { mode = 1; }
 	item = list_ptr->first_node;
-	while (item->next_node != NULL) {
+	while (item != NULL) {
 		if (mode && item->data != NULL) {
 			list_ptr->destructor(item->data);
 		}
