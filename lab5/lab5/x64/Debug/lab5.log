@@ -1,42 +1,39 @@
 ﻿  6.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(59,39): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(97,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(97,20): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(102,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(102,20): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(126,58): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(126,58): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(130,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(130,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(134,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(134,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(138,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(138,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(142,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(142,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(144,7): warning C4013: 'polynomial_mod' undefined; assuming extern returning int
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(146,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(146,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(158,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(158,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(60,39): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(98,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(98,20): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(103,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(103,20): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(129,58): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(129,58): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(133,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(133,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(137,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(137,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(141,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(141,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(145,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(145,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(147,7): warning C4013: 'polynomial_mod' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(149,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(149,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
 C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(162,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
 C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(162,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(178,18): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(178,18): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(188,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(188,20): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(193,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(193,20): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(211,19): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(211,19): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(232,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(232,20): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(265,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'char [512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(265,14): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(43,8): warning C4101: 'symbol': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(535,16): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(522,29): warning C4101: 'temp_ptr_2': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(765,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(771,37): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(774,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(171,63): warning C4047: 'function': 'char *const ' differs in levels of indirection from 'char (*)[10]'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(171,63): warning C4024: 'string_flexographic_compare_char': different types for formal and actual parameter 2
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(189,18): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(189,18): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(203,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(203,20): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(208,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(208,20): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(226,19): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(226,19): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(247,20): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(247,20): warning C4024: 'string_free': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(44,8): warning C4101: 'symbol': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(558,16): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(788,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(794,37): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\6.c(797,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   lab5.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\x64\Debug\lab5.exe

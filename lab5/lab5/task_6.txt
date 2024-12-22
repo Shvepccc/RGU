@@ -1,9 +1,17 @@
-Add(4x^3+12x^2+2x+5, 3x-2);
-Sub(4x^3+12x^2+5x+3, 3x-2);
-Mult(4x^3+12x^2+2x+5, 2);
+[ This is a multi-line comment that describes the purpose of this file.
+The file contains all possible operations for polynomials given by a single variable. More details about each are described below. ]
+
+Add(4x^3+12x^2+2x+5, 3x-2); % And this is a one-line comment =) Two polynomials are added in this line.
+Sub(4x^3+12x^2+5x+3, 3x-2); % But here, another polynomial is subtracted from one.
+Mult(4x^3+12x^2+2x+5, 2); % Multiplication of polynomials
 Mult(3x-2);
-Div(24x^4+56x^3-36x^2+22x-20, 3x-2);
-Eval(13);
-Diff(8x^3+24x^2+4x+10)
-Cmps(24x^2+48x+4, 3x-2);
-Mod(216x^2-144x+4, 3x-2);
+[ Oh, and here's something interesting._.
+One of the polynomials is missing, but it doesn't matter, the value of the second one will be taken from memory. The second polynomial will be the result of the previous calculations, if there was nothing before, then it will be 0 ]
+
+Div(24x^4+56x^3-36x^2+22x-20, 3x-2); % All we do is divide one polynomial by another
+Eval(13); 
+[ Calculate the value of the polynomial at a given point (x = 13). The polynomial will be taken from the adder as the result of previous calculations, but it can also be specified, for example: Eval(8x^3+24x^2+4x+10, 13); ]
+
+Diff(8x^3+24x^2+4x+10); % Differentiating the polynomial
+Cmps(24x^2+48x+4, 3x-2); %Composition of two polynomials
+Mod(216x^2-144x+4, 3x-2); % And finally, the search for the remainder of the division of a polynomial by a polynomial

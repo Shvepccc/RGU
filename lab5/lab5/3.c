@@ -189,7 +189,6 @@
 //						return OPEN_FILE_ERROR;
 //					}
 //
-//					//for (i = 0; i < 20; i++) {
 //					while (err != -1) {
 //
 //						if (mail_array_size == mail_array_capacity) {
@@ -201,33 +200,44 @@
 //							mail_array_capacity *= 2;
 //						}
 //
-//						err = fscanf(file, "%s", temp_str);
+//						err = fscanf(file, "%s", temp_str); 
+//						if (err == -1) break;
 //						//printf("%s\n", temp_str);
-//						main_post->mail_array[mail_array_size].mail_adress.city = string_from(temp_str, strlen(temp_str));
+//						main_post->mail_array[mail_array_size].mail_adress.city = string_from(temp_str, strlen(temp_str)); 
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%s", temp_str);
-//						main_post->mail_array[mail_array_size].mail_adress.street = string_from(temp_str, strlen(temp_str));
+//						main_post->mail_array[mail_array_size].mail_adress.street = string_from(temp_str, strlen(temp_str)); 
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%d", &(main_post->mail_array[mail_array_size].mail_adress.house_number));
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%s", temp_str);
 //						main_post->mail_array[mail_array_size].mail_adress.corpus = string_from(temp_str, strlen(temp_str));
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%d", &(main_post->mail_array[mail_array_size].mail_adress.apartment_number));
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%d", &(main_post->mail_array[mail_array_size].mail_adress.index));
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%lf", &(main_post->mail_array[mail_array_size].weight));
+//						if (err == -1) break;
 //
 //						err = fscanf(file, "%s", &temp_str);
+//						if (err == -1) break;
 //						main_post->mail_array[mail_array_size].post_id = string_from(temp_str, strlen(temp_str));
 //
 //						err = fscanf(file, "%s %s", temp_str, temp_str_2);
+//						if (err == -1) break;
 //						strcat(temp_str, " ");
 //						strcat(temp_str, temp_str_2);
 //						main_post->mail_array[mail_array_size].creation_time = string_from(temp_str, strlen(temp_str));
 //
 //						err = fscanf(file, "%s %s", temp_str, temp_str_2);
+//						if (err == -1) break;
 //						strcat(temp_str, " ");
 //						strcat(temp_str, temp_str_2);
 //						main_post->mail_array[mail_array_size].delivery_time = string_from(temp_str, strlen(temp_str));
@@ -236,6 +246,11 @@
 //					}
 //					fclose(file);
 //					mail_array_size--;
+//					if (mail_array_size <= 0) {
+//						printf("File is empty. Programm stopped.");
+//						free(mail_arr);
+//						return EMPTY_FILE;
+//					}
 //					printf("Reading successfully ended )\n\n");
 //				}
 //				if (!READ_FILE || action == 11) {

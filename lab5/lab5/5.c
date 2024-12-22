@@ -46,7 +46,7 @@
 //	time_t time_2;
 //	double temp_double;
 //	u_list_node* temp_ptr, * last_ptr = NULL, * temp_citizen_ptr, * last_temp_citizen_ptr = NULL;
-//	int stop_flag = 0, action, flag = 0, i, N = 0;
+//	int stop_flag = 0, action, flag = 0, i, N = 0, read_flag = 0;
 //	citizen* temp_citizen, * temp_citizen_2 = NULL;
 //	char temp_str[BUFSIZ];
 //	FILE* data_file;
@@ -101,8 +101,16 @@
 //		}
 //
 //		u_list_insert(&citizen_array, temp_citizen, i);
+//		read_flag = 1;
 //	}
 //	fclose(data_file);
+//	if (read_flag == 0) {
+//		printf("File is empty. Programm stopped.");
+//		stack_free(&memory_stack);
+//		u_list_free(&citizen_array);
+//		return EMPTY_FILE;
+//	}
+//
 //
 //	while (1) {
 //		printf("1 - search citizen by key\n");
