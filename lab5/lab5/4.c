@@ -83,6 +83,10 @@
 //		student_array_size++;
 //	}
 //	fclose(file);
+//	if (student_array_size == 0) {
+//		printf("File is empty. Programm stopped.");
+//		return EMPTY_FILE;
+//	}
 //	student_array_grades_average = student_array_grades_sum / student_array_grades_count;
 //
 //	while (1) {

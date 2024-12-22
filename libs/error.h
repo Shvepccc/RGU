@@ -12,5 +12,6 @@
 	#define NULL_POINTER 108
 	#define INDEX_OUT_OF_BORDERS 109
 	#define BAD_DIVISION 110
+	#define EMPTY_FILE 111
 
 #endif 

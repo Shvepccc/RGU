@@ -62,6 +62,12 @@
 //	}
 //	fclose(input_file);
 //
+//	if (employee_arr_size == 0) {
+//		printf("File is empty. Programm stopped.");
+//		free(employee_arr);
+//		return EMPTY_FILE;
+//	}
+//
 //	if (argv[2][1] == 'a') {
 //		qsort(employee_arr, employee_arr_size, sizeof(employee), funccmp);
 //	}
