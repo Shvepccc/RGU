@@ -44,3 +44,36 @@
 //	stack_free(&st);
 //	return 0;
 //}
+
+//#include <stdio.h>
+//#include <string.h>
+//#include "../../libs/cust_string.h"
+//#include "../../libs/binary_searsh_tree.h"
+//
+//int int_cmp(int a, int b) {
+//	return a - b;
+//}
+//
+//void print_tree(int* data) {
+//	printf("%d\n", *data);
+//}
+//
+//int main() {
+	//string str;
+	//int k;
+	//binary_search_tree tree;
+	//initialize_bst(&tree, strcmp, 0);
+
+	//k = 1;
+	//str = string_from("hello", strlen("hello"));
+	//insert_into_bst(&tree, str, &k);
+
+	//k = 2;
+	//str = string_from("goodbye", strlen("goodbye"));
+	//insert_into_bst(&tree, str, &k);
+
+	//bst_prefix_traversion(&tree, print_tree);
+
+	//deinitialize_bst(&tree);
+	//return 0;
+//}

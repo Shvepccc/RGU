@@ -13,5 +13,7 @@
 	#define INDEX_OUT_OF_BORDERS 109
 	#define BAD_DIVISION 110
 	#define EMPTY_FILE 111
+	#define KEY_NOT_FOUND 112
+	#define VALUE_ALREADY_EXISTS 113
 
 #endif 
