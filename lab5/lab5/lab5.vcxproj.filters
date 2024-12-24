@@ -45,6 +45,15 @@
     <ClCompile Include="6.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\src\binary_search_tree.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\int_vector.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h">
@@ -57,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\cust_stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\binary_searsh_tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\int_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
