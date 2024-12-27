@@ -29,6 +29,8 @@
 //			int_vector_free(arr[i]);
 //			printf("\n"); 
 //		}
+//		int_vector_free(arr);
+//		arr = NULL;
 //		printf("\n");
 //	}
 //	count = 0;
@@ -45,6 +47,8 @@
 //			int_vector_free(arr[i]);
 //			printf("\n");
 //		}
+//		int_vector_free(arr);
+//		arr = NULL;
 //		printf("\n");
 //	}
 //	count = 0;
@@ -61,6 +65,8 @@
 //			int_vector_free(arr[i]);
 //			printf("\n");
 //		}
+//		int_vector_free(arr);
+//		arr = NULL;
 //		printf("\n");
 //	}
 //	count = 0;
@@ -77,6 +83,8 @@
 //			int_vector_free(arr[i]);
 //			printf("\n");
 //		}
+//		int_vector_free(arr);
+//		arr = NULL;
 //		printf("\n");
 //	}
 //
@@ -84,11 +92,10 @@
 //}
 //
 //int __towers_construction_inner(int_vector** arr, int* decompositions_capacity, int* decompositions_count, int n, int_vector* temp_vec, int allowed_equal_sum_components) {
-//	int i = 0, j = 0, temp_int = 0, err;
+//	int i = 0, j = 0, temp_int = 0, err, t;
 //	if (n == 0) {
 //		if (*decompositions_capacity < *decompositions_count)
 //		{
-//			
 //			*arr = realloc(*arr, sizeof(int_vector) * (*decompositions_capacity) * INT_VECTOR_GROWTH_FACTOR);
 //			if ((*arr) == NULL) {
 //				return MEMORY_ALLOCATE_ERROR;
@@ -96,6 +103,11 @@
 //			for (i = *decompositions_capacity; i < (*decompositions_capacity) * 2; i++) {
 //				(*arr)[i] = int_vector_init();
 //				if ((*arr)[i] == NULL) {
+//					for (t = 0; t < i; t++) {
+//						free((*arr)[t]);
+//					}
+//					free(*arr);
+//					*arr = NULL;
 //					return MEMORY_ALLOCATE_ERROR;
 //				}
 //			}
@@ -124,7 +136,7 @@
 //
 //int towers_construction(int blocks_count, int_vector** result_towers, size_t* result_towers_count, int
 //	allowed_partial_blocks_usage, int allowed_adjacent_layers_blocks_equal_count) {
-//	int i, j, err;
+//	int i, j, err, t;
 //	int main_capacity = INT_VECTOR_INITIAL_CAPACITY;
 //	int_vector temp_vec;
 //
@@ -145,6 +157,11 @@
 //	for (i = 0; i < main_capacity; i++) {
 //		(*result_towers)[i] = int_vector_init();
 //		if ((*result_towers)[i] == NULL) {
+//			for (t = 0; t < i; t++) {
+//				free((*result_towers)[t]);
+//			}
+//			free(*result_towers);
+//			*result_towers = NULL;
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}

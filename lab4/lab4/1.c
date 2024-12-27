@@ -18,16 +18,16 @@
 //	err = convert_FROM_decimal_bin(n, r, &ans);
 //	switch (err)
 //	{
-//		case 0:
-//			printf("Result: %s", ans);
-//			break;
-//		case INCORRECT_BASE: 
-//			printf("Incorrect base \n");
-//			break;
-//		case MEMORY_ALLOCATE_ERROR:
-//			printf("Memory not allocated \n");
-//		default:
-//			break;
+//	case 0:
+//		printf("Result: %s", ans);
+//		break;
+//	case INCORRECT_BASE: 
+//		printf("Incorrect base \n");
+//		break;
+//	case MEMORY_ALLOCATE_ERROR:
+//		printf("Memory not allocated \n");
+//	default:
+//		break;
 //	}
 //	free(ans);
 //
@@ -45,7 +45,7 @@
 //	}
 //
 //	if (n == 0) {
-//		*str = (char*)malloc(2 * sizeof(char));
+//		*str = (char*)malloc(sizeof(char) << 1);
 //		if (*str == NULL) { return MEMORY_ALLOCATE_ERROR; }
 //		(*str)[0] = '0';
 //		(*str)[1] = '\0';

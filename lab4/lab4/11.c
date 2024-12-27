@@ -27,6 +27,7 @@
 //			free(lexems[i]);
 //		}
 //		free(lexems);
+//		lexems = NULL;
 //	}
 //
 //	printf("\n\nResult of processing string with empty lexems and accept_empty_lexems = 1:\n");
@@ -41,6 +42,7 @@
 //			free(lexems[i]);
 //		}
 //		free(lexems);
+//		lexems = NULL;
 //	}
 //
 //	printf("\n\nResult of processing string with empty lexems and accept_empty_lexems = 0:\n");
@@ -55,6 +57,7 @@
 //			free(lexems[i]);
 //		}
 //		free(lexems);
+//		lexems = NULL;
 //	}
 //
 //	printf("\n\n");
@@ -87,6 +90,8 @@
 //
 //	temp_char = (char*)malloc(size * sizeof(char));
 //	if (temp_char == NULL) {
+//		free(*lexems);
+//		*lexems = NULL;
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //	current_lexeme_size = size;
@@ -104,6 +109,9 @@
 //			if (*ptr == last_char && accept_empty_lexems != 0) {
 //				temp_char_2 = (char*)malloc(sizeof(char)); 
 //				if (temp_char_2 == NULL) {
+//					free(*lexems);
+//					free(*temp_char);
+//					*lexems = NULL;
 //					return MEMORY_ALLOCATE_ERROR;
 //				}
 //				temp_char_2 = '\0';
@@ -123,6 +131,8 @@
 //
 //			temp_char = (char*)malloc(size * sizeof(char));
 //			if (temp_char == NULL) {
+//				free(*lexems);
+//				*lexems = NULL;
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
 //			current_lexeme_size = size;
@@ -131,6 +141,8 @@
 //			if (current_lexeme_index >= current_lexeme_size) {
 //				err = cust_realloc((void**)temp_char, current_lexeme_size * 2 * sizeof(char));
 //				if (err) {
+//					free(*lexems);
+//					*lexems = NULL;
 //					return MEMORY_ALLOCATE_ERROR;
 //				}
 //				current_lexeme_size *= 2;

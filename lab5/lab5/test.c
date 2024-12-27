@@ -77,3 +77,64 @@
 	//deinitialize_bst(&tree);
 	//return 0;
 //}
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#include <stdio.h>
+#include <string.h>
+#include "../../libs/hash_table.h"
+#include "../../libs/error.h"
+
+#include "../../libs/cust_string.h"
+
+#define HASHSIZE 128
+
+unsigned long hash_function(char* str) {
+	unsigned long i = 0;
+	for (int j = 0; str[j]; j++)
+		i += str[j];
+	//printf("*** hash function result - %s = %d\n", str, i % HASHSIZE);
+	return i % HASHSIZE;
+}
+
+void print_search(hash_table* table, char* key) {
+	char* val = (char*)malloc(50);
+
+	
+	if (ht_search(table, key, val) == KEY_NOT_FOUND) {
+		printf("Key: %s does not exist\n", key);
+	}
+	else {
+		printf("Key: %s, Value: %s\n", key, val);
+	}
+	free(val);
+}
+
+int main() {
+	hash_table* ht = ht_init(128, sizeof(char)*10, sizeof(char)*50, hash_function, NULL, strcmp);
+
+	ht_insert(ht, "1", "First address");
+	ht_insert(ht, "2", "Second address");
+	ht_insert(ht, "Hel", "Third address");
+	ht_insert(ht, "Cau", "Fourth address");
+
+	print_search(ht, "1");
+	print_search(ht, "2");
+	print_search(ht, "3");
+	print_search(ht, "Hel");
+	print_search(ht, "Cau");  // Collision!
+
+	ht_print(ht);
+
+	ht_delete(ht, "1");
+	ht_delete(ht, "Cau");
+
+	ht_print(ht);
+	ht_free(ht);
+
+	_CrtDumpMemoryLeaks();
+
+	return 0;
+}

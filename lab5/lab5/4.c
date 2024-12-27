@@ -21,6 +21,14 @@
 //
 //int save_data_to_file(FILE* file, const student st, int argc);
 //
+//int free_student(student* student_ptr) {
+//	string_free(student_ptr->name);
+//	string_free(student_ptr->surname);
+//	string_free(student_ptr->group);
+//	free(student_ptr->score);
+//	return 0;
+//}
+//
 //int main(int argc, char* argv[]) {
 //	int i, j, err = 0, action, flag = 0, stop_flag = 0;
 //	int student_array_grades_sum = 0, student_array_grades_count = 0;
@@ -58,6 +66,10 @@
 //	if (argc == 3) {
 //		if ((tracing_file = fopen(argv[2], "w")) == NULL) {
 //			fclose(file);
+//			for (j = 0; j < student_array_capacity; j++) {
+//				free(student_array[i].score);
+//			}
+//			free(student_array);
 //			return OPEN_FILE_ERROR;
 //		}
 //	}
@@ -233,6 +245,11 @@
 //		}
 //	}
 //	fclose(tracing_file);
+//	for (j = 0; j < student_array_capacity; j++) {
+//		//free(student_array[i].score);
+//		free_student(&student_array[i]);
+//	}
+//	free(student_array);
 //	return OK;
 //}
 //

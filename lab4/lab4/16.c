@@ -50,6 +50,7 @@
 //				free(result_permutations[i]);
 //			}
 //			free(result_permutations);
+//			result_permutations = NULL;
 //			break;
 //		case 1:
 //			printf("items pointer is NULL");
@@ -78,7 +79,7 @@
 //	}
 //
 //	free(arr);
-//
+//	arr = NULL;
 //	return 0;
 //}
 //
@@ -124,6 +125,7 @@
 //
 //	if ((not_inserted_items = (int*)malloc(sizeof(int) * items_count)) == NULL) {
 //		free(current_permutation);
+//		current_permutation = NULL;
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
@@ -134,6 +136,8 @@
 //	if ((target_permutations = (int**)malloc(sizeof(int*) * permutations_count)) == NULL) {
 //		free(current_permutation);
 //		free(not_inserted_items);
+//		current_permutation = NULL;
+//		not_inserted_items = NULL;
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
@@ -147,6 +151,9 @@
 //			free(target_permutations);
 //			free(not_inserted_items);
 //			free(current_permutation);
+//			current_permutation = NULL;
+//			not_inserted_items = NULL;
+//			target_permutations = NULL;
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}
@@ -162,6 +169,8 @@
 //
 //	free(current_permutation);
 //	free(not_inserted_items);
+//	current_permutation = NULL;
+//	not_inserted_items = NULL;
 //
 //	*result = target_permutations;
 //	*result_count = permutations_count;

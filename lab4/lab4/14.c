@@ -32,6 +32,7 @@
 //		printf("Result of processing array with parametr is_comparison_is_strict = 1\n");
 //		printf("Start index: %d, length: %d \n\n", start_index, length);
 //	}
+//	return 0;
 //}
 //
 //int comparer_function(tvalue const* a, tvalue const* b) {

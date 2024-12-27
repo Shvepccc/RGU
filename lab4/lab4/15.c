@@ -13,7 +13,7 @@
 //char* error_processing(int err);
 //
 //int main() {
-//    int i, j, err;
+//    int i, j, err, t;
 //    size_t count_saddle_points = 0;
 //    tvalue matrix_data[SIZE][SIZE] = {
 //        {15,  2,  30,  40,  50,  6,  70,  80,  90,  100},
@@ -34,6 +34,9 @@
 //    for (i = 0; i < SIZE; i++) {
 //        matrix[i] = (int*)malloc(sizeof(int) * SIZE);
 //        if (matrix[i] == NULL) {
+//            for (t = 0; t < i; t++) {
+//                free(matrix[i]);
+//            }
 //            return MEMORY_ALLOCATE_ERROR;
 //        }
 //        for (j = 0; j < SIZE; j++) {
@@ -63,8 +66,12 @@
 //        printf("Result of processing matrix with parametr is_comparison_is_strict = 1\n");
 //        for (i = 0; i < count_saddle_points; i++) {
 //            printf("Saddle point at (%d, %d)\n", result[i][0], result[i][1]);
+//            free(result[i]);
 //        }
+//        free(result);
+//        result = NULL;
 //    }
+//    return 0;
 //}
 //
 //int comparer_function(tvalue const* a, tvalue const* b) {
@@ -79,7 +86,7 @@
 //	* found_saddle_points_count_storage, int (*comparer)(tvalue const*, tvalue const*), 
 //    int is_comparison_is_strict) {
 //	
-//    int i, j, k, isSaddle;
+//    int i, j, k, t, isSaddle;
 //    int size = 0, capacity = 16;
 //
 //    if (matrix == NULL) {
@@ -109,6 +116,11 @@
 //    for (i = 0; i < capacity; i++) {
 //        (*found_saddle_points_storage)[i] = (size_t*)malloc(sizeof(size_t) * 2);
 //        if ((*found_saddle_points_storage)[i] == NULL) {
+//            for (t = 0; t < i; t++) {
+//                free(*found_saddle_points_storage[t]);
+//            }
+//            free(*found_saddle_points_storage);
+//            *found_saddle_points_storage = NULL;
 //            return MEMORY_ALLOCATE_ERROR;
 //        }
 //    }
@@ -144,6 +156,11 @@
 //                    for (i = 0; i < capacity; i++) {
 //                        (*found_saddle_points_storage)[i] = (size_t*)malloc(sizeof(size_t) * 2);
 //                        if ((*found_saddle_points_storage)[i] == NULL) {
+//                            for (t = 0; t < i; t++) {
+//                                free(*found_saddle_points_storage[t]);
+//                            }
+//                            free(*found_saddle_points_storage);
+//                            *found_saddle_points_storage = NULL;
 //                            return MEMORY_ALLOCATE_ERROR;
 //                        }
 //                    }

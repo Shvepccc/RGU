@@ -439,7 +439,7 @@
 //		case NULL_POINTER:
 //			return "NULL_POINTER";
 //		default:
-//			return "Uncknown error";
+//			return "Unknown error";
 //	}
 //}
 //

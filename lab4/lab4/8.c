@@ -30,6 +30,7 @@
 //			break;
 //	}
 //	free(result);
+//	result = NULL;
 //	return 0;
 //}
 //
@@ -104,13 +105,14 @@
 //	if (((*result) = (char*)malloc((max_len+2))) == NULL) {
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
-//	// Заполняем результат нулями и завершаем его нулевым символом
-//	//memset(result, 0, MAX_LEN);
+//	
 //	for (i = 0; i < max_len || carry; i++) {
 //		int digit1, digit2, data;
 //
 //		if (i < len1) {
 //			if ((data = charToDigit(num1[len1 - i - 1], base)) == -1) {
+//				free(*result);
+//				(*result) = NULL;
 //				return INCORRECT_ARG;
 //			}
 //			digit1 = data;
@@ -119,6 +121,8 @@
 //
 //		if (i < len2) {
 //			if ((data = charToDigit(num2[len2 - i - 1], base)) == -1) {
+//				free(*result);
+//				(*result) = NULL;
 //				return INCORRECT_ARG;
 //			}
 //			digit2 = data;

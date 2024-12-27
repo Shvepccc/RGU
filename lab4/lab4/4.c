@@ -24,6 +24,7 @@
 //					free(ans[k]);
 //				}
 //				free(ans);
+//				ans = NULL;
 //				printf("Memory not allocated \n");
 //			}
 //		}
@@ -35,6 +36,11 @@
 //	{
 //		case OPEN_FILE_ERROR:
 //			printf("File can't be opened \n");
+//			for (int k = 0; k < BUFSIZ; k++) {
+//				free(ans[k]);
+//			}
+//			free(ans);
+//			ans = NULL;
 //			break;
 //		default: {
 //			while (ans[i][1] != -2){
@@ -55,7 +61,8 @@
 //		free(ans[k]);
 //	}
 //	free(ans);
-//  return 0;
+//	ans = NULL;
+//	return 0;
 //}
 //
 //int hren(char* str, ...) {
