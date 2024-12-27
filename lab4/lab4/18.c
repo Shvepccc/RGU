@@ -51,6 +51,7 @@
 //			free(result_subsets[i]);
 //		}
 //		free(result_subsets);
+//		result_subsets = NULL;
 //		break;
 //	case 1:
 //		printf("items pointer is NULL");
@@ -79,7 +80,7 @@
 //	}
 //
 //	free(arr);
-//
+//	arr = NULL;
 //	return OK;
 //}
 //
@@ -125,6 +126,7 @@
 //
 //	if ((target_combinations = (int**)malloc(sizeof(int*) * combinations_count)) == NULL) {
 //		free(current_combination);
+//		current_combination = NULL;
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
@@ -137,6 +139,8 @@
 //
 //			free(target_combinations);
 //			free(current_combination);
+//			target_combinations = NULL;
+//			current_combination = NULL;
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}
@@ -149,6 +153,7 @@
 //	}
 //
 //	free(current_combination);
+//	current_combination = NULL;
 //
 //	*result_combinations = target_combinations;
 //	*result_combinations_count = combinations_count;

@@ -14,8 +14,8 @@
 //	int err, i, j;
 //	int count = 0;
 //	int_vector* arr;
-//
-//	err = sums_decomposition(7, &arr, &count, 1);
+//	int const value = 10;
+//	err = sums_decomposition(value, &arr, &count, 1);
 //	if (err) {
 //		printf(error_processing(err));
 //	}
@@ -28,9 +28,11 @@
 //			int_vector_free(arr[i]);
 //			printf("\n");
 //		}
+//		free(arr);
+//		arr = NULL;
 //	}
 //	count = 0;
-//	err = sums_decomposition(7, &arr, &count, 0);
+//	err = sums_decomposition(value, &arr, &count, 0);
 //	if (err) {
 //		printf(error_processing(err));
 //	}
@@ -43,8 +45,10 @@
 //			int_vector_free(arr[i]);
 //			printf("\n");
 //		}
+//		free(arr);
+//		arr = NULL;
 //	}
-//	
+//	return 0;
 //}
 //
 //int __decompositions_inner(int_vector** arr, int* decompositions_capacity, int* decompositions_count, int n, int_vector* temp_vec, int allowed_equal_sum_components) {
@@ -52,7 +56,7 @@
 //	if (n == 0) {
 //		if (*decompositions_capacity < *decompositions_count)
 //		{
-//			*arr = realloc(*arr, sizeof(int_vector) * (*decompositions_capacity) * INT_VECTOR_GROWTH_FACTOR);
+//			*arr = (int_vector*)realloc(*arr, sizeof(int_vector) * (*decompositions_capacity) * INT_VECTOR_GROWTH_FACTOR);
 //			if ((*arr) == NULL) {
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
@@ -107,6 +111,10 @@
 //	for (i = 0; i < main_capacity; i++) {
 //		(*result_decompositions)[i] = int_vector_init();
 //		if ((*result_decompositions)[i] == NULL) {
+//			for (j = 0; j < i; j++) {
+//				free((*result_decompositions)[j]);
+//			}
+//			free(*result_decompositions);
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}

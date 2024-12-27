@@ -13,11 +13,11 @@ typedef struct string_metadata_t {
 
 typedef char* string;
 
-#define __string_str_to_base(str) (&((string_metadata_t *)(str))[-1])
-#define __string_base_to_str(str) ((char*)&((string_metadata_t *)(str))[1])
+#define __string_str_to_base(str) ((((string_metadata_t *)((str))) -1))
+#define __string_base_to_str(str) ((char*)(((string_metadata_t *)((str))) + 1))
 
-#define string_size(str) (str ? __string_str_to_base(str)->size : 0)
-#define string_cap(str) (str ? __string_str_to_base(str)->capacity : 0)
+#define string_size(str) ((str) ? __string_str_to_base((str))->size : 0)
+#define string_cap(str) ((str) ? __string_str_to_base((str))->capacity : 0)
 
 string string_init();
 string string_from(const char*, int len);

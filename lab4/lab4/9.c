@@ -68,7 +68,6 @@
 //		printf("Data was written to array successfully! :D\n");
 //		printf("Result:\n%s", arr);
 //	}
-//
 //	return 0;
 //}
 //
@@ -89,6 +88,7 @@
 //	}
 //
 //	free(str_ans);
+//	str_ans = NULL;
 //	va_end(args);
 //	return err;
 //}
@@ -113,6 +113,7 @@
 //	}
 //
 //	free(str_ans);
+//	str_ans = NULL;
 //	va_end(args);
 //	return err;
 //}
@@ -133,6 +134,7 @@
 //
 //	strcpy(buf, str_ans);
 //	free(str_ans);
+//	str_ans = NULL;
 //	va_end(args);
 //	return err;
 //}
@@ -375,6 +377,7 @@
 //						_update_data_in_preprocessing_print_data(1, 3, &current_ans_index, &current_format_index, &proc_str, &temp_str, &format);
 //					}
 //					else {
+//						free(temp_str);
 //						return UNKNOWN_FLAG;
 //					}
 //					break;
@@ -395,6 +398,7 @@
 //								memcpy(proc_str + current_ans_index, temp_str, strlen(temp_str));
 //								current_ans_index += strlen(temp_str);
 //								free(temp_str);
+//								temp_str = NULL;
 //
 //								if (i != sizeof(int)-1) {
 //									proc_str[current_ans_index] = ' ';
@@ -420,6 +424,7 @@
 //								memcpy(proc_str + current_ans_index, temp_str, strlen(temp_str));
 //								current_ans_index += strlen(temp_str);
 //								free(temp_str);
+//								temp_str = NULL;
 //
 //								if (i != sizeof(int) - 1) {
 //									proc_str[current_ans_index] = ' ';
@@ -445,6 +450,7 @@
 //								memcpy(proc_str + current_ans_index, temp_str, strlen(temp_str));
 //								current_ans_index += strlen(temp_str);
 //								free(temp_str);
+//								temp_str = NULL;
 //
 //								if (i != sizeof(double) - 1) {
 //									proc_str[current_ans_index] = ' ';
@@ -470,6 +476,7 @@
 //								memcpy(proc_str + current_ans_index, temp_str, strlen(temp_str));
 //								current_ans_index += strlen(temp_str);
 //								free(temp_str);
+//								temp_str = NULL;
 //
 //								if (i != sizeof(float) - 1) {
 //									proc_str[current_ans_index] = ' ';
@@ -644,7 +651,7 @@
 //	if (*ans == NULL) { return MEMORY_ALLOCATE_ERROR; }
 //	res = *ans;
 //
-//	if (n < 0) { *res = '-'; }
+//	if (sign) { *res = '-'; }
 //
 //	res += len - sign;
 //	*res-- = 0;

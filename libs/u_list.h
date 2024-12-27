@@ -19,7 +19,7 @@ void u_list_free(u_list* list_ptr);
 
 int u_list_insert(u_list* list_ptr, void* element, size_t index_to_insert);
 int u_list_push_back(u_list* list_ptr, void* element);
-int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_insert);
+int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_delete);
 int u_list_get_by_index(u_list* list_ptr, void* element, size_t index_to_insert);
 //int u_list_get_by_value(u_list* list_ptr, int(*copare_elements_function)(void const* a, void const* b));
 

@@ -25,7 +25,8 @@ int swap(
 int initialize_bst(
     p_bst bst_ptr,
     comparer keys_comparer,
-    binary_search_tree_disposal_strategy disposal_strategy)
+    binary_search_tree_disposal_strategy disposal_strategy,
+    void(*destructor)(TKey*, TValue*))
 {
     if (bst_ptr == NULL || keys_comparer == NULL)
     {
@@ -35,6 +36,7 @@ int initialize_bst(
     bst_ptr->root = NULL;
     bst_ptr->keys_comparer = keys_comparer;
     bst_ptr->disposal_strategy = disposal_strategy;
+    bst_ptr->destructor = destructor;
     
     return 0;
 }
@@ -59,7 +61,7 @@ int deinitialize_bst(
     if (bst_ptr == NULL)
         return NULL_POINTER;
 
-    bst_deinitialize_inner(bst_ptr->root);
+    bst_deinitialize_inner(bst_ptr->root, bst_ptr->destructor);
     bst_ptr->root = NULL;
     return OK;
 }
@@ -68,6 +70,7 @@ int insert_into_bst(
     p_bst bst_ptr,
     TKey bst_key,
     TValue const* value_to_insert_ptr) {
+
     int comparer_result;
 
     if (bst_ptr == NULL || value_to_insert_ptr == NULL) {
@@ -95,8 +98,11 @@ int insert_into_bst(
 
     (*iterator)->left_subtree = NULL;
     (*iterator)->right_subtree = NULL;
-    memcpy(&((*iterator)->key), &bst_key, sizeof(TKey));
+
+    //memcpy(&((*iterator)->key), &bst_key, sizeof(TKey));
+    (*iterator)->key = string_cpy_new(bst_key);
     memcpy(&((*iterator)->value), value_to_insert_ptr, sizeof(TValue));
+
     return  0;
 }
 
@@ -250,12 +256,16 @@ int bst_postfix_traversion(
     return 0;
 }
 
-void bst_deinitialize_inner(p_bst_item subtree) {
+void bst_deinitialize_inner(p_bst_item subtree, void(*destructor)(TKey*, TValue*)) {
     if (subtree == NULL)
         return;
 
-    bst_deinitialize_inner(subtree->left_subtree);
-    bst_deinitialize_inner(subtree->right_subtree);
+    bst_deinitialize_inner(subtree->left_subtree, destructor);
+    bst_deinitialize_inner(subtree->right_subtree, destructor);
+
+    if (destructor != NULL) {
+        destructor(&subtree->key, &subtree->value);
+    }
     free(subtree);
 }
 
@@ -328,7 +338,9 @@ int bst_load_from_txt(char* filename, bst* bst_ptr) {
         temp_string = string_from(temp_read_str, strlen(temp_read_str));
 
         insert_into_bst(bst_ptr, temp_string, &temp_read_int);
+        string_free(temp_string);
     }
+    fclose(file);
 }
 
 void print_beautiful_bst_inner(p_bst_item node, int level, char* prefix) {

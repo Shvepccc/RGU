@@ -38,6 +38,8 @@
 //					printf("%d, ", positions[i][j]);
 //				}
 //			}
+//			free(results[i]);
+//			free(positions[i]);
 //			printf("\n\n");
 //		}
 //	}
@@ -61,23 +63,26 @@
 //					printf("%d, ", positions[i][j]);
 //				}
 //			}
+//			free(results[i]);
+//			free(positions[i]);
 //			printf("\n\n");
 //		}
 //	}
-//	
+//	free(results);
+//	free(positions);
 //	return 0;
 //}
 //
 //int substr(char* to_find, int case_sensitive, char*** results, int*** positions, size_t* results_count, ...) {
-//	int i, err;
+//	int i, err, j;
 //	char* str_ptr;
 //	char* find_ptr;
 //	int k = 0, pos = -1;
 //	int size = 10;
-//	int** temp_int_ptr_ptr;
-//	char** temp_char_ptr_ptr;
-//	int* temp_int_ptr;
-//	char* temp_str_ptr;
+//	int** temp_int_ptr_ptr = NULL;
+//	char** temp_char_ptr_ptr = NULL;
+//	int* temp_int_ptr = NULL;
+//	char* temp_str_ptr = NULL;
 //	int current_ans_index = 0, current_ans_size = 0;
 //	int current_position_str_index = 1, current_position_str_size = 0;
 //
@@ -93,6 +98,7 @@
 //
 //	(*positions) = (int**)malloc(size * sizeof(int*));
 //	if ((*positions) == NULL) {
+//		free(*results);
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //	current_ans_size = size;
@@ -100,6 +106,11 @@
 //	for (i = 0; i < current_ans_size; i++) {
 //		(*positions)[i] = (int*)malloc(size * sizeof(int));
 //		if ((*positions)[i] == NULL) {
+//			for (j = 0; j < i; j++) {
+//				free((*positions)[j]);
+//			}
+//			free(*results);
+//			free(*positions);
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //		(*positions)[i][0] = 0;
@@ -117,12 +128,23 @@
 //		if (current_ans_index >= current_ans_size) {
 //			temp_int_ptr_ptr = (int**)cust_realloc((void**)positions, current_ans_size * 2 * sizeof(int*));
 //			if (temp_int_ptr_ptr == NULL) {
+//				for (j = 0; j < current_ans_size; j++) {
+//					free((*positions)[j]);
+//				}
+//				free(*results);
+//				free(*positions);
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
 //			(*positions) = temp_int_ptr_ptr;
 //
 //			temp_char_ptr_ptr = (char**)cust_realloc((void**)results, current_ans_size * 2 * sizeof(char*));
 //			if (temp_char_ptr_ptr == NULL) {
+//				for (j = 0; j < current_ans_size; j++) {
+//					free((*positions)[j]);
+//				}
+//				free(*results);
+//				free(*positions);
+//				free(temp_int_ptr_ptr);
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
 //			(*results) = temp_char_ptr_ptr;
@@ -130,6 +152,13 @@
 //			for (i = current_ans_size; i < current_ans_size*2; i++) {
 //				(*positions)[i] = (int*)malloc(size * sizeof(int));
 //				if ((*positions)[i] == NULL) {
+//					for (j = 0; j < i; j++) {
+//						free((*positions)[j]);
+//					}
+//					free(*results);
+//					free(*positions);
+//					free(temp_int_ptr_ptr);
+//					free(temp_char_ptr_ptr);
 //					return MEMORY_ALLOCATE_ERROR;
 //				}
 //				(*positions)[i][0] = 0;
@@ -155,6 +184,12 @@
 //				if (current_position_str_index >= current_position_str_size) {
 //					temp_int_ptr = (int*)cust_realloc((void**)(*positions)[current_ans_index], current_position_str_size * 2 * sizeof(int));
 //					if (temp_int_ptr == NULL) {
+//						for (j = 0; j < i; j++) {
+//							free((*positions)[j]);
+//						}
+//						free(*results);
+//						free(temp_int_ptr_ptr);
+//						free(temp_char_ptr_ptr);
 //						return MEMORY_ALLOCATE_ERROR;
 //					}
 //					current_position_str_size *= 2;
@@ -181,7 +216,9 @@
 //			(*results_count)++;
 //		}
 //	}
-//
+//	free(temp_char_ptr_ptr);
+//	free(temp_int_ptr_ptr);
+//	free(temp_int_ptr);
 //	va_end(args);
 //	return 0;
 //}

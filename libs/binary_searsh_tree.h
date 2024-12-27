@@ -24,12 +24,14 @@ typedef struct binary_search_tree {
     p_bst_item root;
     comparer keys_comparer;
     binary_search_tree_disposal_strategy disposal_strategy;
+    void(*destructor)(TKey*, TValue*);
 } binary_search_tree, bst, * p_bst;
 
 int initialize_bst(
     p_bst bst_ptr,
     comparer keys_comparer,
-    binary_search_tree_disposal_strategy disposal_strategy);
+    binary_search_tree_disposal_strategy disposal_strategy,
+    void(*destructor)(TKey*, TValue*));
 
 int set_disposal_strategy(
     p_bst bst_ptr,
@@ -64,7 +66,7 @@ int bst_postfix_traversion(
     bst const* bst_ptr,
     value_handle_callback callback);
 
-void bst_deinitialize_inner(p_bst_item);
+void bst_deinitialize_inner(p_bst_item, void(*destructor)(TKey*, TValue*));
 
 int bst_get_depth(bst const* bst_ptr);
 

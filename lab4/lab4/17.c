@@ -48,6 +48,7 @@
 //			free(result_subsets[i]);
 //		}
 //		free(result_subsets);
+//		result_subsets = NULL;
 //		break;
 //	case 1:
 //		printf("items pointer is NULL");
@@ -76,7 +77,7 @@
 //	}
 //
 //	free(arr);
-//
+//	arr = NULL;
 //	return OK;
 //}
 //
@@ -125,6 +126,7 @@
 //
 //	if ((target_subsets = (int**)malloc(sizeof(int*) * subsets_count)) == NULL) {
 //		free(current_subset);
+//		current_subset = NULL;
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
@@ -137,6 +139,8 @@
 //
 //			free(target_subsets);
 //			free(current_subset);
+//			current_subset = NULL;
+//			target_subsets = NULL;
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //	}
@@ -147,6 +151,7 @@
 //	}
 //
 //	free(current_subset);
+//	current_subset = NULL;
 //
 //	*result_subsets = target_subsets;
 //	*result_subsets_count = subsets_count;

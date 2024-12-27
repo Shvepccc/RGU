@@ -27,8 +27,8 @@ string string_from(const char* str_src, int len) {
 	__string_base_to_str(str)[len] = '\0';
 	return __string_base_to_str(str);
 }
-void string_free(string* str) {
-	free(__string_str_to_base(str));
+void string_free(string* str) { 
+	free(__string_str_to_base(*str));
 	return;
 }
 

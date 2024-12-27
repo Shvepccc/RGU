@@ -54,6 +54,12 @@
     <ClCompile Include="..\..\libs\src\int_vector.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\hash_table.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h">
@@ -72,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\int_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\hash_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

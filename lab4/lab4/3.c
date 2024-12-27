@@ -17,7 +17,7 @@
 //
 //	free_resources('f', f_ptr, 'm', A_ptr, NULL);
 //	printf("Resources were free secsessfully");
-//  return 0;
+//    return 0;
 //}
 //
 //void free_resources(char flag, ...) {
@@ -35,6 +35,7 @@
 //		else if (flag == 'm') {
 //			ptr = va_arg(args, void*);
 //			free(ptr);
+//			ptr = NULL;
 //		}
 //		else if (flag == NULL) {
 //			break;

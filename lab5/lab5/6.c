@@ -37,13 +37,17 @@
 //	int i, comment_flag = 0, is_expression = 0, res = 0;
 //	int polynomial_flag = 0, ratio_flag = 0, pow_flag = 0, line = 0, read_flag = 0, is_eval = 0;
 //	FILE* data_file;
-//	string str = string_init();
 //	string temp_string, action_string, number_str;
+//	temp_string = string_init();
 //	char temp_str[BUFSIZ];
 //	char actions[][10] = {"Add\0", "Sub\0", "Mult\0", "Div\0", "Mod\0", "Eval\0", "Diff\0", "Cmps\0"};
 //	char* symbol;
 //	u_list list_summator = u_list_init(NULL, sizeof(node));
 //	node* _node = (node*)malloc(sizeof(node));
+//	if (_node = NULL) {
+//		string_free(temp_string);
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //	_node->pow = 0;
 //	_node->ratio = 0;
 //	u_list list_1 = u_list_init(NULL, sizeof(node));
@@ -182,8 +186,9 @@
 //					}
 //					printf("--------------------------------- \n");
 //
-//					u_list_free(&list_1);
-//					u_list_free(&list_2);
+//					if (list_1.first_node != NULL) u_list_free(&list_1);
+//					if (action_string[2] != 'f') u_list_free(&list_2);
+//
 //					list_1 = u_list_init(NULL, sizeof(node));
 //					list_2 = u_list_init(NULL, sizeof(node));
 //					string_free(action_string);
@@ -279,11 +284,14 @@
 //		return EMPTY_FILE;
 //	}
 //	else {
-//		//u_list_free(&list_1);
-//		//u_list_free(&list_2);
-//		//u_list_free(&list_summator);
-//		//string_free(temp_str);
+//		string_free(temp_string);
 //	}
+//	fclose(data_file);
+//	u_list_free(&list_1);
+//	u_list_free(&list_2);
+//	u_list_free(&list_summator);
+//	string_free(action_string);
+//	string_free(number_str);
 //	return 0;
 //}
 //
@@ -301,6 +309,9 @@
 //	standart_appearance(list_ptr_2);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	temp_ptr_2 = list_ptr_2->first_node;
@@ -353,6 +364,9 @@
 //	}
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	temp_ptr_2 = list_ptr_2->first_node;
@@ -422,6 +436,9 @@
 //	standart_appearance(list_ptr_2);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	while (temp_ptr_1 != NULL) {
@@ -459,6 +476,9 @@
 //	standart_appearance(list_ptr_2);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //	
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	temp_ptr_2 = list_ptr_2->first_node;
@@ -497,7 +517,6 @@
 //	u_list temp_list_result = u_list_init(NULL, sizeof(node));
 //	u_list temp_list_multiplier = u_list_init(NULL, sizeof(node));
 //	node* n1 = NULL, * n2 = NULL, * temp_node;
-//	int first_division_flag = 0;
 //
 //	if (list_ptr_1 == NULL || list_ptr_2 == NULL || result_ptr == NULL) {
 //		return NULL_POINTER;
@@ -507,6 +526,9 @@
 //	standart_appearance(list_ptr_2);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	temp_ptr_2 = list_ptr_2->first_node;
@@ -518,15 +540,20 @@
 //			break;
 //		}
 //		if (n1->pow < n2->pow) {
-//			*result_ptr = *list_ptr_1;
+//			u_list_free(result_ptr);
+//			*result_ptr = u_list_init(NULL, sizeof(node));
+//			temp_ptr_1 = list_ptr_1->first_node;
+//			while (temp_ptr_1 != NULL) {
+//				u_list_push_back(result_ptr, temp_ptr_1);
+//				temp_ptr_1 = temp_ptr_1->next_node;
+//			}
 //			free(temp_node);
-//			return BAD_DIVISION;
+//			return 0;
 //		}
 //
 //		temp_node->pow = n1->pow - n2->pow;
 //		temp_node->ratio = n1->ratio / n2->ratio;
 //
-//		u_list_push_back(&temp_list_result, temp_node);
 //		u_list_push_back(&temp_list_multiplier, temp_node);
 //
 //		polynomial_mult(&temp_list_multiplier, list_ptr_2, &temp_list_multiplier);
@@ -535,11 +562,14 @@
 //		temp_ptr_1 = list_ptr_1->first_node;
 //		temp_ptr_2 = list_ptr_2->first_node;
 //		u_list_free(&temp_list_multiplier);
-//		first_division_flag = 1;
 //	}
-//	*result_ptr = *list_ptr_1;
-//	printf("***\n");
-//	print_polynomial(list_ptr_1);
+//	u_list_free(result_ptr);
+//	*result_ptr = u_list_init(NULL, sizeof(node));
+//	temp_ptr_1 = list_ptr_1->first_node;
+//	while (temp_ptr_1 != NULL) {
+//		u_list_push_back(result_ptr, temp_ptr_1);
+//		temp_ptr_1 = temp_ptr_1->next_node;
+//	}
 //	free(temp_node);
 //	return 0;
 //}
@@ -573,6 +603,9 @@
 //	standart_appearance(list_ptr_1);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	while (temp_ptr_1 != NULL) {
@@ -613,6 +646,9 @@
 //	standart_appearance(list_ptr_2);
 //
 //	temp_node = (node*)malloc(sizeof(node));
+//	if (temp_node == NULL) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //
 //	temp_ptr_1 = list_ptr_1->first_node;
 //	while (temp_ptr_1 != NULL) {
@@ -667,7 +703,9 @@
 //	u_list destination_ptr = u_list_init(NULL, sizeof(node));
 //
 //	last_data = (node*)malloc(sizeof(node));
-//	if (!last_data) return MEMORY_ALLOCATE_ERROR;
+//	if (!last_data) {
+//		return MEMORY_ALLOCATE_ERROR;
+//	}
 //	last_data->pow = INT_MIN;
 //	last_data->ratio = 0;    
 //
@@ -704,6 +742,10 @@
 //	u_list_node* temp_ptr;
 //	node* N;
 //	int i = 0;
+//
+//	if (list_ptr == NULL) {
+//		return NULL_POINTER;
+//	}
 //
 //	temp_ptr = list_ptr->first_node;
 //	while (temp_ptr != NULL) {
@@ -776,6 +818,10 @@
 //
 //int convert_TO_decimal(char* n, int base, int* ans) {
 //	int len = 0, j = 0, sign = 0;
+//
+//	if (n == NULL) {
+//		return NULL_POINTER;
+//	}
 //
 //	if (base < 2 || base > 36) {
 //		return INCORRECT_BASE;

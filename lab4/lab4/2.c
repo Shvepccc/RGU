@@ -78,6 +78,7 @@
 //				}
 //				printf("Changed string: %s", str);
 //				free(str);
+//				str = NULL;
 //				break;
 //			}
 //			case 'c': {
@@ -107,6 +108,7 @@
 //				str = (char*)malloc((len + 1) * sizeof(char));
 //				if (str == NULL) {
 //					free(str_arr);
+//					str_arr = NULL;
 //					return MEMORY_ALLOCATE_ERROR;
 //				}
 //
@@ -119,6 +121,9 @@
 //
 //				free(str_arr);
 //				free(str);
+//
+//				str_arr = NULL;
+//				str = NULL;
 //				break;
 //			}
 //			default: {

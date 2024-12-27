@@ -386,6 +386,8 @@
 //
 //				if (strlen(temp_str) == 1) {
 //					if ((result_file = fopen("task_5_res.txt", "w")) == NULL) {
+//						stack_free(&memory_stack);
+//						u_list_free(&citizen_array);
 //						free(temp_citizen);
 //						free(temp_citizen_2);
 //						u_list_free(&citizen_array);
@@ -394,6 +396,8 @@
 //				}
 //				else {
 //					if ((result_file = fopen(temp_str, "w")) == NULL) {
+//						stack_free(&memory_stack);
+//						u_list_free(&citizen_array);
 //						free(temp_citizen);
 //						free(temp_citizen_2);
 //						u_list_free(&citizen_array);
@@ -414,7 +418,7 @@
 //					temp_ptr = temp_ptr->next_node;
 //				}
 //				fclose(result_file);
-//				printf("Citiizen data saved succesfully\n\n");
+//				printf("Citizen data saved succesfully\n\n");
 //				break;
 //			case 7:
 //				temp_memory_node = (memory_node*)malloc(sizeof(memory_node));
@@ -508,6 +512,9 @@
 //}
 //
 //int print_citizen_data(u_list_node const* list_node) {
+//	if (list_node == NULL) {
+//		return NULL_POINTER;
+//	}
 //	citizen* temp_citizen = list_node->data;
 //	printf("Surname: %s \nName: %s \nLastname: %s \nDate of birth: %s \nGender: %c \nMonthly income: %.2lf\n\n", 
 //		temp_citizen->surname, 
@@ -535,11 +542,14 @@
 //	}
 //	char* temp_char = (char*)malloc(sizeof(char) * 5);
 //	if (temp_char == NULL) {
+//		free(data);
 //		return NULL;
 //	}
 //
 //	struct tm* mail_time = (struct tm*)malloc(sizeof(struct tm));
 //	if (mail_time == NULL) {
+//		free(data);
+//		free(temp_char);
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
@@ -589,6 +599,10 @@
 //}
 //
 //int convert_TO_decimal(char* n, int base, int* ans) {
+//	if (n == NULL) {
+//		return NULL_POINTER;
+//	}
+//
 //	int len = 0, j = 0, sign = 0;
 //
 //	if (base < 2 || base > 36) {

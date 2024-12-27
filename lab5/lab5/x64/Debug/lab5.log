@@ -1,20 +1,21 @@
-﻿  7.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(28,24): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(63,27): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(77,43): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(87,37): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(93,42): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(116,41): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(135,17): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(135,17): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(136,17): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(136,17): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(144,28): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(144,28): warning C4024: 'bst_save_to_txt': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(152,27): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(154,23): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(154,23): warning C4024: 'bst_load_from_txt': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(172,14): warning C4047: 'function': 'string *' differs in levels of indirection from 'string'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(172,14): warning C4024: 'string_free': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(206,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  hash_table.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(8,3): warning C4098: 'handle_collision': 'void' function returning a value
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(23,20): warning C4047: 'function': 'u_list *' differs in levels of indirection from 'u_list **'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(23,20): warning C4024: 'u_list_push_back': different types for formal and actual parameter 1
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(30,3): warning C4047: 'return': 'u_list **' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(41,3): warning C4098: 'free_overflow_buckets': 'void' function returning a value
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(53,9): warning C4028: formal parameter 5 different from declaration
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(57,3): warning C4047: 'return': 'hash_table *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(63,3): warning C4047: 'return': 'hash_table *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(73,15): warning C4047: '=': 'hash_table_item **' differs in levels of indirection from 'hash_table_item *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(113,3): warning C4047: 'return': 'hash_table_item *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(118,3): warning C4047: 'return': 'hash_table_item *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(124,3): warning C4047: 'return': 'hash_table_item *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(131,3): warning C4047: 'return': 'hash_table_item *' differs in levels of indirection from 'int'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(203,19): warning C4101: 'current_item': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(250,3): warning C4098: 'ht_print': 'void' function returning a value
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(256,11): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'void *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(256,11): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 3 has type 'void *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(263,13): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\hash_table.c(263,13): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 2 has type 'void *'
   lab5.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\x64\Debug\lab5.exe

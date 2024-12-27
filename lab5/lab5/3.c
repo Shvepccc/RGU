@@ -36,6 +36,21 @@
 //time_t time_from_str(char const* str);
 //int convert_TO_decimal(char* n, int base, int* ans);
 //
+//int free_adress(adress* adress_ptr) {
+//	string_free(adress_ptr->city);
+//	string_free(adress_ptr->street);
+//	string_free(adress_ptr->corpus);
+//	return 0;
+//}
+//
+//int free_mail(mail* mail_ptr) {
+//	free_adress(&mail_ptr->mail_adress);
+//	string_free(mail_ptr->post_id);
+//	string_free(mail_ptr->creation_time);
+//	string_free(mail_ptr->delivery_time);
+//	return 0;
+//}
+//
 //int main() {
 //	int flag = 0;
 //	int err = 1;
@@ -56,17 +71,23 @@
 //
 //	post* main_post = (post*)malloc(sizeof(post));
 //	if (main_post == NULL) {
+//		free(current_time);
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //
 //	mail* mail_arr = (mail*)malloc(sizeof(mail) * mail_array_capacity);
 //	if (mail_arr == NULL) {
+//		free(current_time);
+//		free(main_post);
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //	main_post->mail_array = mail_arr;
 //
 //	adress* post_adr = (adress*)malloc(sizeof(adress));
 //	if (post_adr == NULL) {
+//		free(current_time);
+//		free(main_post);
+//		free(mail_arr);
 //		return MEMORY_ALLOCATE_ERROR;
 //	}
 //	main_post->post_adress = post_adr;
@@ -109,6 +130,9 @@
 //				if (mail_array_size == mail_array_capacity) {
 //					temp_mail_arr = (mail*)realloc(main_post->mail_array, sizeof(mail) * mail_array_capacity * 2);
 //					if (temp_mail_arr == NULL) {
+//						free(current_time);
+//						free(main_post);
+//						free(mail_arr);
 //						return MEMORY_ALLOCATE_ERROR;
 //					}
 //					mail_array_capacity *= 2;
@@ -186,6 +210,9 @@
 //					printf("Read data from file ...\n");
 //
 //					if ((file = fopen("task_3.txt", "r")) == NULL) {
+//						free(current_time);
+//						free(main_post);
+//						free(mail_arr);
 //						return OPEN_FILE_ERROR;
 //					}
 //
@@ -249,6 +276,8 @@
 //					if (mail_array_size <= 0) {
 //						printf("File is empty. Programm stopped.");
 //						free(mail_arr);
+//						free(current_time);
+//						free(main_post);
 //						return EMPTY_FILE;
 //					}
 //					printf("Reading successfully ended )\n\n");
@@ -361,7 +390,13 @@
 //			break;
 //		}
 //	}
-//
+//	for (i = 0; i < mail_array_size; i++) {
+//		free_mail((main_post->mail_array)+i);
+//	}
+//	free(mail_arr);
+//	free(current_time);
+//	free_adress(main_post->post_adress);
+//	free(main_post);
 //	return 0;
 //}
 //

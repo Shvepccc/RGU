@@ -1,0 +1,34 @@
+Action: read
+var: A, base: 10
+Enter value: 5
+
+Action: read
+var: B, base: 10
+Enter value: 3
+
+Action: write
+var: A, base: 10
+Variable: A, value: 5
+
+Action: write
+var: A, base: 2
+Variable: A, value: 101
+
+Action: C := \A
+
+Action: write
+var: C, base: 10
+Variable: C, value: -6
+
+Action: write
+var: C, base: 2
+Variable: C, value: -110
+
+Action: C := A + B
+
+Action: write
+var: C, base: 10
+Variable: C, value: 7
+
+Action: D := A * B
+Line 11 - Unknown operator (*)

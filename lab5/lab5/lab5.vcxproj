@@ -130,6 +130,7 @@
     <ClCompile Include="..\..\libs\src\binary_search_tree.c" />
     <ClCompile Include="..\..\libs\src\cust_stack.c" />
     <ClCompile Include="..\..\libs\src\cust_string.c" />
+    <ClCompile Include="..\..\libs\src\hash_table.c" />
     <ClCompile Include="..\..\libs\src\int_vector.c" />
     <ClCompile Include="..\..\libs\src\u_list.c" />
     <ClCompile Include="1.c" />
@@ -139,6 +140,7 @@
     <ClCompile Include="5.c" />
     <ClCompile Include="6.c" />
     <ClCompile Include="7.c" />
+    <ClCompile Include="8.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +148,7 @@
     <ClInclude Include="..\..\libs\cust_stack.h" />
     <ClInclude Include="..\..\libs\cust_string.h" />
     <ClInclude Include="..\..\libs\error.h" />
+    <ClInclude Include="..\..\libs\hash_table.h" />
     <ClInclude Include="..\..\libs\int_vector.h" />
     <ClInclude Include="..\..\libs\u_list.h" />
   </ItemGroup>

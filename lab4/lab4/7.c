@@ -42,6 +42,7 @@
 //		}
 //	}
 //	free(data);
+//	data = NULL;
 //	return 0;
 //}
 //
@@ -87,6 +88,9 @@
 //		decimal = pow(decimal, 2.0);
 //
 //		if (convert_FROM_decimal(decimal, base, &ans) == MEMORY_ALLOCATE_ERROR) {
+//			free(data);
+//			data = NULL;
+//			va_end(args);
 //			return MEMORY_ALLOCATE_ERROR;
 //		}
 //
@@ -96,6 +100,8 @@
 //
 //			l_str = NULL;
 //			if ((l_str = (char*)malloc((len*2+1) * sizeof(char))) == NULL) {
+//				free(data);
+//				data = NULL;
 //				va_end(args);
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
@@ -105,7 +111,10 @@
 //			
 //			r_str = NULL;
 //			if ((r_str = (char*)malloc((len-i+1) * sizeof(char))) == NULL) {
+//				free(data);
 //				free(l_str);
+//				data = NULL;
+//				l_str = NULL;
 //				va_end(args);
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
@@ -114,6 +123,12 @@
 //			convert_TO_decimal(r_str, base, &r);
 //			
 //			if ((convert_FROM_decimal(r + l, base, &prom_res)) == MEMORY_ALLOCATE_ERROR) {
+//				free(r_str);
+//				free(l_str);
+//				free(data);
+//				data = NULL;
+//				l_str = NULL;
+//				r_str = NULL;
 //				va_end(args);
 //				return MEMORY_ALLOCATE_ERROR;
 //			}
@@ -122,6 +137,10 @@
 //					if (cust_realloc(&data, size * 2 * sizeof(int))) {
 //						free(l_str);
 //						free(r_str);
+//						free(data);
+//						data = NULL;
+//						l_str = NULL;
+//						r_str = NULL;
 //						va_end(args);
 //						return MEMORY_ALLOCATE_ERROR;
 //					}
@@ -134,8 +153,11 @@
 //			}
 //			free(l_str);
 //			free(r_str);
+//			l_str = NULL;
+//			r_str = NULL;
 //		}
 //		free(ans);
+//		ans = NULL;
 //	}
 //	(*data)[total_count] = NULL;
 //	va_end(args);
