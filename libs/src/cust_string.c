@@ -29,6 +29,7 @@ string string_from(const char* str_src, int len) {
 }
 void string_free(string* str) { 
 	free(__string_str_to_base(*str));
+	*str = NULL;
 	return;
 }
 

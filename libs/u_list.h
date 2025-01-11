@@ -12,6 +12,7 @@ typedef struct u_list {
 	u_list_node* first_node;
 	void (*destructor)(void*);
 	size_t size_of_element;
+	size_t size;
 } u_list;
 
 u_list u_list_init(void (*destructor)(void*), size_t size_of_element);

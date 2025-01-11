@@ -60,6 +60,12 @@
     <ClCompile Include="..\..\libs\src\hash_table.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="9.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\error.h">

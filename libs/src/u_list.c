@@ -10,11 +10,12 @@ u_list u_list_init(void (*destructor)(void*), size_t size_of_element) {
 	list.first_node = NULL;
 	list.destructor = destructor;
 	list.size_of_element = size_of_element;
+	list.size = 0;
 	return list;
 }
 
 void u_list_free(u_list* list_ptr) {
-	u_list_node *item, *temp_item;
+	u_list_node *item, *next = NULL;
 	int mode = 0;
 	if (list_ptr == NULL) {
 		return;
@@ -25,11 +26,13 @@ void u_list_free(u_list* list_ptr) {
 		if (mode && item->data != NULL) {
 			list_ptr->destructor(item->data);
 		}
-		temp_item = item;
-		item = item->next_node;
-		free(temp_item);
+		next = item->next_node;
+		free(item);
+		item = next;
 	}
 	list_ptr->first_node = NULL;
+	free(list_ptr);
+	list_ptr = NULL;
 }
 
 int u_list_insert(u_list* list_ptr, void* element, size_t index_to_insert) {
@@ -39,34 +42,24 @@ int u_list_insert(u_list* list_ptr, void* element, size_t index_to_insert) {
 		return NULL_POINTER;
 	}
 
-	if (index_to_insert == 0) {
-		new_node = (u_list_node*)malloc(sizeof(u_list_node));
-		if (new_node == NULL) {
-			return MEMORY_ALLOCATE_ERROR;
-		}
-		new_node->data = malloc(list_ptr->size_of_element);
-		if (new_node->data == NULL) {
-			free(new_node); 
-			return MEMORY_ALLOCATE_ERROR;
-		}
-		memcpy(new_node->data, element, list_ptr->size_of_element);
+	new_node = (u_list_node*)malloc(sizeof(u_list_node));
+	if (new_node == NULL) {
+		return MEMORY_ALLOCATE_ERROR;
+	}
 
+	new_node->data = malloc(list_ptr->size_of_element);
+	if (new_node->data == NULL) {
+		free(new_node);
+		return MEMORY_ALLOCATE_ERROR;
+	}
+	memcpy(new_node->data, element, list_ptr->size_of_element);
+
+	if (index_to_insert == 0) {
 		temp_ptr = list_ptr->first_node;
 		list_ptr->first_node = new_node;
 		new_node->next_node = temp_ptr;
 	}
 	else {
-		new_node = (u_list_node*)malloc(sizeof(u_list_node));
-		if (new_node == NULL) {
-			return MEMORY_ALLOCATE_ERROR;
-		}
-		new_node->data = malloc(list_ptr->size_of_element);
-		if (new_node->data == NULL) {
-			free(new_node);
-			return MEMORY_ALLOCATE_ERROR;
-		}
-		memcpy(new_node->data, element, list_ptr->size_of_element);
-
 		temp_ptr = list_ptr->first_node;
 		for (i = 0; i < index_to_insert-1; i++) {
 			temp_ptr = temp_ptr->next_node;
@@ -86,7 +79,7 @@ int u_list_insert(u_list* list_ptr, void* element, size_t index_to_insert) {
 		new_node->next_node = temp_ptr->next_node;
 		temp_ptr->next_node = new_node;
 	}
-
+	list_ptr->size++;
 	return OK;
 }
 
@@ -101,7 +94,7 @@ int u_list_push_back(u_list* list_ptr, void* element) {
 	if (new_node == NULL) {
 		return MEMORY_ALLOCATE_ERROR;
 	}
-	new_node->data = malloc(list_ptr->size_of_element);
+	new_node->data = (void *)malloc(list_ptr->size_of_element);
 	if (new_node->data == NULL) {
 		free(new_node);
 		return MEMORY_ALLOCATE_ERROR;
@@ -121,6 +114,7 @@ int u_list_push_back(u_list* list_ptr, void* element) {
 		new_node->next_node = temp_ptr->next_node;
 		temp_ptr->next_node = new_node;
 	}
+	list_ptr->size++;
 	return OK;
 }
 
@@ -140,6 +134,7 @@ int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_dele
 		}
 		if (mode) {
 			list_ptr->destructor(list_ptr->first_node->data);
+			free(list_ptr->first_node);
 		}
 		else {
 			free(list_ptr->first_node);
@@ -164,13 +159,14 @@ int u_list_delete_by_index(u_list* list_ptr, void* element, size_t index_to_dele
 			memcpy(element, item->data, list_ptr->size_of_element);
 		}
 		if (mode) {
-			list_ptr->destructor(item);
+			list_ptr->destructor(item->data);
+			free(item);
 		}
 		else {
 			free(item);
 		}
 	}
-
+	list_ptr->size--;
 	return OK;
 }
 

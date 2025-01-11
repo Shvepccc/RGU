@@ -134,6 +134,7 @@
     <ClCompile Include="..\..\libs\src\int_vector.c" />
     <ClCompile Include="..\..\libs\src\u_list.c" />
     <ClCompile Include="1.c" />
+    <ClCompile Include="10.c" />
     <ClCompile Include="2.c" />
     <ClCompile Include="3.c" />
     <ClCompile Include="4.c" />
@@ -141,6 +142,7 @@
     <ClCompile Include="6.c" />
     <ClCompile Include="7.c" />
     <ClCompile Include="8.c" />
+    <ClCompile Include="9.c" />
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
