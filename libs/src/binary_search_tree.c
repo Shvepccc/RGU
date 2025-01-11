@@ -325,7 +325,7 @@ int bst_load_from_txt(char* filename, bst* bst_ptr) {
     FILE* file;
     char temp_str[BUFSIZ];
     char temp_read_str[BUFSIZ];
-    int temp_read_int = 0;
+    int temp_read_int = 0, read_flag = 0;
     string temp_string;
 
     if ((file = fopen(filename, "r")) == NULL) {
@@ -333,14 +333,19 @@ int bst_load_from_txt(char* filename, bst* bst_ptr) {
     }
 
     while ((fgets(temp_str, BUFSIZ, file)) != NULL) {
+        read_flag = 1;
         sscanf(temp_str, "%s %d", temp_read_str, &temp_read_int);
 
         temp_string = string_from(temp_read_str, strlen(temp_read_str));
 
         insert_into_bst(bst_ptr, temp_string, &temp_read_int);
-        string_free(temp_string);
+        string_free(&temp_string);
     }
     fclose(file);
+    if (!read_flag) {
+        return EMPTY_FILE;
+    }
+    return 0;
 }
 
 void print_beautiful_bst_inner(p_bst_item node, int level, char* prefix) {

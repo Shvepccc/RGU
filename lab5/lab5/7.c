@@ -27,7 +27,7 @@
 //	size_t n,
 //	int (*items_comparer)(const void*, const void*));
 //
-//void free_tree(TKey* key, TValue* value) {
+//void free_tree_item(TKey* key, TValue* value) {
 //	string_free(key);
 //}
 //
@@ -50,14 +50,14 @@
 //	FILE* data_file;
 //	char symbol;
 //	char temp_str[BUFSIZ];
-//	int j, t, i = 0, lexeme_flag = 0, k = 1, read_flag = 0, action = 0, exit_flag = 0, temp_int = 0;
+//	int j, t, i = 0, lexeme_flag = 0, k = 1, read_flag = 0, action = 0, exit_flag = 0, temp_int = 0, err, read_in_file_flag = 0;
 //	int min_len = INT_MAX, max_len = -1;
 //	int* value;
 //	string temp_string = NULL;
 //	string min_word, max_word;
 //	int_vector bad_chars_vector = int_vector_init();
 //	binary_search_tree tree;
-//	initialize_bst(&tree, string_comparer, 0, free_tree);
+//	initialize_bst(&tree, string_comparer, 0, free_tree_item);
 //
 //	if (argc < 3) {
 //		printf("Not enough arguments");
@@ -83,7 +83,12 @@
 //		printf("6 - Load tree from file\n");
 //		printf("Another value to exit\n");
 //		printf("Enter value: ");
-//		scanf("%d", &action);
+//		if (scanf("%d", &action) != 1) {
+//			system("cls");
+//			printf("Bad input (9\n");
+//			scanf("%s", temp_str);
+//			continue;
+//		}
 //		system("cls");
 //
 //		if (read_flag == 1 || action == 0 || action == 6 || action > 6) {
@@ -91,8 +96,9 @@
 //			{
 //			case 0:
 //				deinitialize_bst(&tree);
-//				initialize_bst(&tree, string_comparer, 0, free_tree);
+//				initialize_bst(&tree, string_comparer, 0, free_tree_item);
 //				if ((data_file = fopen(argv[1], "r")) == NULL) {
+//					deinitialize_bst(&tree);
 //					return OPEN_FILE_ERROR;
 //				}
 //
@@ -115,10 +121,11 @@
 //						i = 0;
 //						lexeme_flag = 0;
 //						read_flag = 1;
+//						temp_str[0] = 0;
 //						string_free(&temp_string);
 //					}
 //				}
-//				if (strlen(temp_str) != 0) {
+//				if (temp_str[0] != 0) {
 //					//printf("That's not all!!!\n");
 //					temp_str[i++] = 0;
 //					temp_string = string_from(temp_str, strlen(temp_str));
@@ -129,6 +136,7 @@
 //						insert_into_bst(&tree, temp_string, &k);
 //					}
 //					string_free(&temp_string);
+//					read_flag = 1;
 //				}
 //				if (read_flag == 0) {
 //					printf("File is empty. Programm stopped.");
@@ -211,11 +219,19 @@
 //				printf("Enter name of file to load tree: ");
 //				scanf("%s", &temp_str);
 //				deinitialize_bst(&tree);
-//				initialize_bst(&tree, string_comparer, 0, free_tree);
+//				initialize_bst(&tree, string_comparer, 0, free_tree_item);
 //
-//				bst_load_from_txt(&temp_str, &tree);
-//				bst_print_bautiful(&tree);
-//				printf("Tree load successfully!\n");
+//				err = bst_load_from_txt(&temp_str, &tree);
+//				if (err == EMPTY_FILE) {
+//					printf("File is empty =(\n");
+//				}
+//				else if (err == OPEN_FILE_ERROR) {
+//					printf("Open file error\n");
+//				}
+//				else {
+//					bst_print_bautiful(&tree);
+//					printf("Tree load successfully!\n");
+//				}
 //				break;
 //			default:
 //				exit_flag = 1;
