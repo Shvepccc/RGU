@@ -150,6 +150,16 @@ int string_flexographic_compare_char(string const str1, char* const str2) {
 	return 0;
 }
 
+int string_flexographic_compare_char_char(char* const str1, char* const str2) {
+	int i;
+	for (i = 0; i < (strlen(str1) < strlen(str2) ? strlen(str1) : strlen(str2)); i++) {
+		if (str1[i] != str2[i]) {
+			return str1[i] - str2[i];
+		}
+	}
+	return 0;
+}
+
 int string_compare(string const str1, string const str2) {
 	int i;
 	if (string_size(str1) != string_size(str2)) {

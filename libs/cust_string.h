@@ -32,6 +32,7 @@ int string_pop_back(string* str);
 
 int string_flexographic_compare(string const str1, string const str2);
 int string_flexographic_compare_char(string const str1, char* const str2);
+int string_flexographic_compare_char_char(char* const str1, char* const str2);
 int string_compare(string const str1, string const str2);
 
 #endif // !STRING_H_
