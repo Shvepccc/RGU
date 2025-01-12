@@ -1,16 +1,7 @@
-﻿  7.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(60,24): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(99,27): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(114,43): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(131,42): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(157,41): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(215,28): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(215,28): warning C4024: 'bst_save_to_txt': different types for formal and actual parameter 2
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(222,27): warning C4113: 'int (__cdecl *)(string *,string *)' differs in parameter lists from 'comparer'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(224,29): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[512]'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(224,29): warning C4024: 'bst_load_from_txt': different types for formal and actual parameter 1
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(286,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(288,14): warning C4090: 'function': different 'const' qualifiers
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(292,14): warning C4090: 'function': different 'const' qualifiers
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\7.c(312,14): warning C4090: 'function': different 'const' qualifiers
+﻿  10.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\10.c(65,61): warning C4113: 'int (__cdecl *)(int)' differs in parameter lists from 'int (__cdecl *)(char)'
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\10.c(47,12): warning C4101: 'j': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\10.c(123,10): warning C4101: 'name_of_file': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\10.c(124,9): warning C4101: 'len_of_name': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\lab5\10.c(124,22): warning C4101: 'j': unreferenced local variable
   lab5.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab5\x64\Debug\lab5.exe

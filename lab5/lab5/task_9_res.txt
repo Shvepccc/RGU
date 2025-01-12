@@ -1,3 +1,2 @@
-#define
-k
-#define everyone! This is my blog. Today puck i will tell you about dinosaurs.
+#define puck srenjk
+This is my blog. Today puck i will tell you about dinosaurs. 

@@ -8,6 +8,7 @@ stack stack_init(void (*destructor)(void*), size_t size_of_element) {
 	list.first_node = NULL;
 	list.destructor = destructor;
 	list.size_of_element = size_of_element;
+	list.size = 0;
 	return list;
 }
 
@@ -19,14 +20,18 @@ void stack_free(stack* stack_ptr) {
 	}
 	if (stack_ptr->destructor != NULL) { mode = 1; }
 	item = stack_ptr->first_node;
-	while (item) {
+	while (item != NULL) {
 		if (mode) {
 			stack_ptr->destructor(item->data);
+		}
+		else {
+			free(item->data);
 		}
 		temp_item = item;
 		item = item->next_node;
 		free(temp_item);
 	}
+	stack_ptr->size = 0;
 	stack_ptr->first_node = NULL;
 }
 
@@ -61,6 +66,7 @@ int stack_push_back(stack* stack_ptr, void* element) {
 		new_node->next_node = temp_ptr->next_node;
 		temp_ptr->next_node = new_node;
 	}
+	stack_ptr->size++;
 	return OK;
 }
 
@@ -74,11 +80,11 @@ int stack_pop(stack* stack_ptr, void* element) {
 	temp_ptr = stack_ptr->first_node;
 	if (stack_ptr->first_node == NULL) {
 		element = NULL;
-		return 0;
+		return OBJECT_IS_EMPTY;
 	}
 	else if (temp_ptr->next_node == NULL) {
 		item = temp_ptr;
-		stack_ptr->first_node->next_node = temp_ptr->next_node;
+		stack_ptr->first_node = temp_ptr->next_node;
 
 		if (stack_ptr->destructor != NULL) { mode = 1; }
 		if (element != NULL) {
@@ -88,6 +94,7 @@ int stack_pop(stack* stack_ptr, void* element) {
 			stack_ptr->destructor(item);
 		}
 		else {
+			free(item->data);
 			free(item);
 		}
 	}
@@ -108,9 +115,11 @@ int stack_pop(stack* stack_ptr, void* element) {
 			stack_ptr->destructor(item);
 		}
 		else {
+			free(item->data);
 			free(item);
 		}
 	}
+	stack_ptr->size--;
 	return OK;
 }
 

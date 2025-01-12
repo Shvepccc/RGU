@@ -12,6 +12,7 @@ typedef struct stack {
 	stack_node* first_node;
 	void (*destructor)(void*);
 	size_t size_of_element;
+	int size;
 } stack;
 
 stack stack_init(void (*destructor)(void*), size_t size_of_element);

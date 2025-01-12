@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\libs\src\arithmetic_expressions.c" />
     <ClCompile Include="..\..\libs\src\binary_search_tree.c" />
     <ClCompile Include="..\..\libs\src\cust_stack.c" />
     <ClCompile Include="..\..\libs\src\cust_string.c" />
+    <ClCompile Include="..\..\libs\src\dynamic_array_of_char.c" />
     <ClCompile Include="..\..\libs\src\hash_table.c" />
     <ClCompile Include="..\..\libs\src\int_vector.c" />
     <ClCompile Include="..\..\libs\src\u_list.c" />
@@ -146,6 +148,7 @@
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\libs\arithmetic_expressions.h" />
     <ClInclude Include="..\..\libs\binary_searsh_tree.h" />
     <ClInclude Include="..\..\libs\cust_stack.h" />
     <ClInclude Include="..\..\libs\cust_string.h" />

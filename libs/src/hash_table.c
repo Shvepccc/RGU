@@ -244,7 +244,7 @@ int ht_print(hash_table* hash_table, void(*print_function)(int index, void* key,
 	u_list* list;
 	u_list_node* temp_ptr;
 
-	printf("\nHash Table\n-------------------\n");
+	printf("\n\nHash Table\n-------------------\n");
 	for (int i = 0; i < hash_table->size; i++) {
 		list = hash_table->overflow_buckets[i];
 		if (list != NULL) {
