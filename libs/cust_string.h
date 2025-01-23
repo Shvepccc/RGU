@@ -21,6 +21,7 @@ typedef char* string;
 
 string string_init();
 string string_from(const char*, int len);
+string string_from_l(const char* str_src);
 void string_free(string* str);
 
 int string_cpy(string* src_str, string* dest_str);

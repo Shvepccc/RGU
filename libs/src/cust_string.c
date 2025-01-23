@@ -27,7 +27,22 @@ string string_from(const char* str_src, int len) {
 	__string_base_to_str(str)[len] = '\0';
 	return __string_base_to_str(str);
 }
-void string_free(string* str) { 
+
+string string_from_l(const char* str_src) {
+	int len = strlen(str_src);
+	string_metadata_t* str = NULL;
+	str = (string_metadata_t*)malloc((sizeof(string_metadata_t)) + (sizeof(char) * (len + 1)));
+	if (str == NULL) {
+		return NULL;
+	}
+	memcpy(__string_base_to_str(str), str_src, len * sizeof(char));
+	str->size = len;
+	str->capacity = len + 1;
+	__string_base_to_str(str)[len] = '\0';
+	return __string_base_to_str(str);
+}
+void string_free(string* str) {
+	if (*str == NULL) return;
 	free(__string_str_to_base(*str));
 	*str = NULL;
 	return;

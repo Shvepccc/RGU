@@ -49,7 +49,9 @@ int main(int argc, char* argv[]) {
     char temp_str[BUFSIZ];
     char* postfix_expression;
 
-	for (i = 1; i < argc-1; i++) {
+    char* binary_expression = "a & b";
+
+	/*for (i = 1; i < argc-1; i++) {
 		if (string_flexographic_compare_char_char(argv[i + 1], "--calculate") == 0) {
 
             if ((data_file = fopen(argv[i], "r")) == NULL) {
@@ -89,7 +91,7 @@ int main(int argc, char* argv[]) {
 		else {
 			printf("ERROR: Invalid flag: %s\n", argv[i+1]);
 		}
-	}
+	}*/
 
     _CrtDumpMemoryLeaks();
 
@@ -137,5 +139,17 @@ int arithmetic_errors_to_file(int err, int line, char* temp_str, char* src_file_
         fprintf(error_file, "ERROR with code: %d\n", err);
     }
     fclose(error_file);
+    return OK;
+}
+
+int get_truth_table(char* expression, int*** result_matrix) {
+    
+
+    if (expression == NULL || result_matrix == NULL) {
+        return NULL_POINTER;
+    }
+
+
+
     return OK;
 }
