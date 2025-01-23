@@ -1,0 +1,11 @@
+﻿  parse_config.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\parse_config.c(20,7): warning C4013: 'isdigit' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\parse_config.c(21,12): warning C4013: 'isupper' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\parse_config.c(22,12): warning C4013: 'islower' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\parse_config.c(185,9): warning C4013: 'ht_swap_key_with_value_ordo' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\parse_config.c(218,10): warning C4013: 'convert_TO_decimal' undefined; assuming extern returning int
+  main.c
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\ordo\ordo\main.c(20,15): warning C4101: 'i': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\ordo\ordo\main.c(21,6): warning C4101: 'temp_int': unreferenced local variable
+  Generating Code...
+  ordo.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\ordo\x64\Debug\ordo.exe

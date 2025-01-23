@@ -8,9 +8,6 @@
 #include <malloc.h>
 #include <stdarg.h>
 
-#define BINARY_SEARCH_FOUND 0
-#define BINARY_SEARCH_NOT_FOUND 1
-
 int gorner(
     char const* str,
     int base,
@@ -37,7 +34,7 @@ int gorner(
     }
 
     while (*str) {
-        if (!isalnum(*str)) { // TODO: remake this!!1!1
+        if (!isalnum(*str)) {
             return 1;
         }
 
@@ -59,56 +56,6 @@ int gorner(
 int compare_operators(void const* first, void const* second) {
     return (*((oper **)first))->representation - (*((oper **)second))->representation;
 }
-
-//int binary_search_inner(
-//    void const* values,
-//    void const* value_to_find,
-//    size_t value_size,
-//    size_t left_bound_inclusive,
-//    size_t right_bound_exclusive,
-//    int (*comparer)(void const*, void const*),
-//    void** result_placement)
-//{
-//    size_t mediant_index;
-//    int comparison_result;
-//
-//    if (left_bound_inclusive >= right_bound_exclusive)
-//    {
-//        return BINARY_SEARCH_NOT_FOUND;
-//    }
-//
-//    mediant_index = (left_bound_inclusive + right_bound_exclusive) >> 1;
-//    comparison_result = comparer(value_to_find, (unsigned char*)values + (mediant_index * value_size));
-//
-//    if (comparison_result == 0)
-//    {
-//        *result_placement = values + mediant_index;
-//        return BINARY_SEARCH_FOUND;
-//    }
-//    else if (comparison_result < 0)
-//    {
-//        right_bound_exclusive = mediant_index;
-//    }
-//    else
-//    {
-//        left_bound_inclusive = mediant_index + 1;
-//    }
-//
-//    return binary_search_inner(values, value_to_find, value_size, left_bound_inclusive, right_bound_exclusive, comparer, result_placement);
-//}
-//
-//int binary_search(
-//    void const* values,
-//    void const* value_to_find,
-//    size_t count,
-//    size_t value_size,
-//    int (*comparer)(void const*, void const*),
-//    void** result_placement)
-//{
-//    // TODO: validate args ._.
-//
-//    return binary_search_inner(values, value_to_find, value_size, 0, count, comparer, result_placement);
-//}
 
 int convert_to_postfix_notation(
     char const* infix_expression,

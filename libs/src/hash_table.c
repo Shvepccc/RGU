@@ -64,41 +64,6 @@ int ht_free(hash_table* hash_table) {
 	return OK;
 }
 
-//int ht_create_item(hash_table* hash_table, void* key, void* value, hash_table_item** created_item) {
-//
-//	if (hash_table == NULL || key == NULL || value == NULL) {
-//		return NULL_POINTER;
-//	}
-//
-//	hash_table_item* item;
-//
-//	(*created_item) = (hash_table_item*)malloc(sizeof(hash_table_item));
-//	if ((*created_item) == NULL) {
-//		return MEMORY_ALLOCATE_ERROR;
-//	}
-//	item = (*created_item);
-//	item->key = (void*)malloc(hash_table->size_of_key);
-//	if (item->key == NULL) {
-//		free(item);
-//		return MEMORY_ALLOCATE_ERROR;
-//	}
-//
-//	item->value = (void*)malloc(hash_table->size_of_value);
-//	if (item->value == NULL) {
-//		free(item->key);
-//		free(item);
-//		return MEMORY_ALLOCATE_ERROR;
-//	}
-//
-//	//memcpy(item->key, key, hash_table->size_of_key);
-//	//memcpy(item->value, value, hash_table->size_of_value);
-//	*(string*)item->key = string_cpy_new(*(string*)key);
-//	*(string*)item->value = string_cpy_new(*(string*)value);
-//
-//	//*created_item = item;
-//	return OK;
-//}
-
 int ht_create_item_2(hash_table* hash_table, void* key, void* value, hash_table_item* item) {
 
 	if (hash_table == NULL || key == NULL || value == NULL) {
@@ -174,7 +139,7 @@ int ht_search(hash_table* hash_table, void* key, void* result) {
 	hash_table_item* item;
 	u_list_node* temp_ptr = NULL;
 
-	if (hash_table == NULL || key == NULL || result == NULL) {
+	if (hash_table == NULL || key == NULL) {
 		return NULL_POINTER;
 	}
 
@@ -187,7 +152,7 @@ int ht_search(hash_table* hash_table, void* key, void* result) {
 	while (temp_ptr != NULL) {
 		item = temp_ptr->data;
 		if (hash_table->keys_comparer(item->key, key) == 0) {
-			memcpy(result, item->value, hash_table->size_of_value);
+			if (result != NULL) memcpy(result, item->value, hash_table->size_of_value);
 			return OK;
 		}
 		temp_ptr = temp_ptr->next_node;
@@ -257,4 +222,5 @@ int ht_print(hash_table* hash_table, void(*print_function)(int index, void* key,
 		}
 	}
 	printf("-------------------\n");
+	return OK;
 }
