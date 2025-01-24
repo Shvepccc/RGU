@@ -33,13 +33,16 @@
     <ClCompile Include="..\..\libs\src\parse_config.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\src\convert_notations.c">
+    <ClCompile Include="..\..\libs\src\process_notation.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\src\cust_stack.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\src\dynamic_array_of_char.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\execute_instruction.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,13 +65,16 @@
     <ClInclude Include="..\..\libs\parse_config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\convert_notations.h">
+    <ClInclude Include="..\..\libs\process_notation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\cust_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\dynamic_array_of_char.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\execute_instruction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,9 +27,11 @@ int convert_TO_decimal(char* n, int base, int* ans) {
 
 	for (int i = sign; i < len; i++) {
 		if (isdigit(n[i])) {
+			if ((int)((int)n[i] - '0') > base) { *ans = 0; return INCORRECT_ARG; }
 			(*ans) += (int)((int)n[i] - '0') * pow((double)base, len - i - 1);
 		}
 		else if (isalpha(n[i])) {
+			if ((int)((int)toupper(n[i]) - 'A' + 10) > base) { *ans = 0; return INCORRECT_ARG; }
 			(*ans) += (int)((int)toupper(n[i]) - 'A' + 10) * pow((double)base, len - i - 1);
 		}
 	}

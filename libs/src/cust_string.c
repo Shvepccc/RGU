@@ -140,7 +140,7 @@ int string_pop_back(string* str) {
 		return NULL_POINTER;
 	}
 
-	(*str)[string_size(*str)] = '\0';
+	(*str)[string_size(*str)-1] = '\0';
 	__string_str_to_base(*str)->size -= 1;
 	return OK;
 }

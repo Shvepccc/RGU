@@ -2,10 +2,22 @@
 #input(var_4);
 #print(var_4);
 
-#var_35 = ((var_6, (var_4, var_5)div)mult, var_7)mult;
+var_1 = 10;
+var_2 = 7;
+var_3 = 3;
+# BREAKPOINT
 
-var_2 = mult(      var_2, 4);
-var_1    =      1F4; 
+# infix notation
+var_4 = (((2 * var_3) * 7) div var_2 sub 1) rem 4;
+print(var_4);
+
+# postfix notation
+[var_35 = ((var_3, (20, var_1)div)mult, var_1)mult;
+print(var_35);]
+
+# trash bin -----------------------------------------
+[var_2 = mult(      var_2, 4);
+var_1    =      not(1F4); 
 
 [var_1 = var_2 mult var_3;
 var_1 = var_2 mult var_2 mult var_3;]
@@ -16,4 +28,4 @@ Var3 = add(div(var_2
 [multi-line
 comment
 ]
-print(Var_3); #Hello, I'm one-line comment
+print(Var_3); #Hello, I'm one-line comment]
