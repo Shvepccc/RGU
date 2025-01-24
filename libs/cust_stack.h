@@ -19,7 +19,11 @@ stack stack_init(void (*destructor)(void*), size_t size_of_element);
 void stack_free(stack* stack_ptr);
 
 int stack_push_back(stack* list_ptr, void* element);
+int stack_push_back_cust_cpy(stack* stack_ptr, void* element,
+	int(*cust_cpy)(void* dst, void* src));
 int stack_pop(stack* stack_ptr, void* element);
+int stack_pop_cust_cpy(stack* stack_ptr, void* element, 
+	int(*cust_cpy)(void* dst, void* src));
 int stack_get(stack* stack_ptr, void* element);
 
 #endif

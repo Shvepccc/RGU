@@ -1,0 +1,19 @@
+#input(var_4);
+#input(var_4);
+#print(var_4);
+
+#var_35 = ((var_6, (var_4, var_5)div)mult, var_7)mult;
+
+var_2 = mult(      var_2, 4);
+var_1    =      1F4; 
+
+[var_1 = var_2 mult var_3;
+var_1 = var_2 mult var_2 mult var_3;]
+
+Var3 = add(div(var_2
+, 5) , rem(var_1, 2));
+
+[multi-line
+comment
+]
+print(Var_3); #Hello, I'm one-line comment

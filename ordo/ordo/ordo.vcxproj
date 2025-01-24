@@ -128,7 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\src\convertors.c" />
+    <ClCompile Include="..\..\libs\src\convert_notations.c" />
+    <ClCompile Include="..\..\libs\src\cust_stack.c" />
     <ClCompile Include="..\..\libs\src\cust_string.c" />
+    <ClCompile Include="..\..\libs\src\dynamic_array_of_char.c" />
     <ClCompile Include="..\..\libs\src\hash_table.c" />
     <ClCompile Include="..\..\libs\src\parse_config.c" />
     <ClCompile Include="..\..\libs\src\u_list.c" />
@@ -136,7 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\convertors.h" />
+    <ClInclude Include="..\..\libs\convert_notations.h" />
+    <ClInclude Include="..\..\libs\cust_stack.h" />
     <ClInclude Include="..\..\libs\cust_string.h" />
+    <ClInclude Include="..\..\libs\dynamic_array_of_char.h" />
     <ClInclude Include="..\..\libs\error.h" />
     <ClInclude Include="..\..\libs\hash_table.h" />
     <ClInclude Include="..\..\libs\parse_config.h" />

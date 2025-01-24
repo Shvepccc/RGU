@@ -1,0 +1,13 @@
+left=
+op()
+# comment
+#and
+
+or ||
+and &
+[multi-line
+comment]
+and &&
+#hhh #programm will return error at this line if uncomment it
+[right=]
+output print

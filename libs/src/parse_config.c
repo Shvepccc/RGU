@@ -6,23 +6,16 @@
 #include "../../libs/hash_table.h"
 #include "../../libs/cust_string.h"
 #include "../../libs/parse_config.h"
+#include "../../libs/convertors.h"
 
-int hash_function_ordo(const string* str) {
-	//TODO: change hash function
-	long int res = 0, value = 0, i;
-	char c = 0;
+int hash_function_ordo(string* str) {
+	int hash = 5381;
+	int len = strlen(*str);
 
-	if (str == NULL) { return NULL_POINTER; }
-
-	for (i = 0; i < string_size(*str); i++) {
-		c = (*str)[i];
-		value = 0;
-		if (isdigit(c)) { value = c - '0'; }
-		else if (isupper(c)) { value = c - 'A' + 10; }
-		else if (islower(c)) { value = c - 'a' + 36; }
-		res = res * 62 + value;
+	for (int i = 0; i < len; i++) {
+		hash = ((hash << 2) + hash) + (*str)[i]*2;
 	}
-	return res;
+	return hash;
 }
 
 void ht_print_function_ordo(int i, void const* key, void const* value) {
@@ -52,12 +45,12 @@ int cust_string_cpm_ordo(const string* a, const string* b) {
 
 
 
-int set_instructions(char* file_name, hash_table** ht_ptr, int_settings* settings_ptr) {
+int set_configuration(char* file_name, hash_table** ht_ptr, int_settings* settings_ptr) {
 	FILE* settings_file;
 	char symbol;
 	int one_line_comment = 0, multi_line_comment = 0, first_part_is_done = 0, last_exit = 0, parenthesis_balacne = 0;
 	int i, err = 0, line = 0;
-	string first_part, second_part, operator;
+	string first_part, second_part, operator, temp_string;
 	char* key_operators_array[] = { "add", "mult", "sub", "pow", "div", "rem", "xor", "and", "or", "=", "not", "input", "output" };
 
 	if (file_name == NULL) {
@@ -72,6 +65,7 @@ int set_instructions(char* file_name, hash_table** ht_ptr, int_settings* setting
 		hash_function_ordo, ht_destructor_ordo, cust_string_cpm_ordo, cust_cpy_ordo);
 	first_part = string_init();
 	second_part = string_init();
+
 	for (i = 0; i < (sizeof(key_operators_array) / sizeof(key_operators_array[0])); i++) {
 		operator = string_from_l(key_operators_array[i]);
 		ht_insert(*ht_ptr, &operator, &operator);
@@ -147,7 +141,7 @@ int set_instructions(char* file_name, hash_table** ht_ptr, int_settings* setting
 					settings_ptr->operator_type = 3;
 				}
 				else if (ht_search(*ht_ptr, &first_part, NULL) != OK) {
-					printf("ERROR: unknown instruction - %s in line %d\n", first_part, line);
+					//printf("ERROR: unknown instruction - %s in line %d\n", first_part, line);
 					err = UNKNOWN_FLAG;
 				}
 
@@ -159,6 +153,10 @@ int set_instructions(char* file_name, hash_table** ht_ptr, int_settings* setting
 			else {
 				ht_delete(*ht_ptr, &first_part);
 				ht_insert(*ht_ptr, &first_part, &second_part);
+
+				if (first_part[0] == '=') {
+					settings_ptr->equal_mark_str = string_cpy_new(second_part);
+				}
 
 				string_free(&first_part);
 				string_free(&second_part);
@@ -198,7 +196,7 @@ int set_instructions(char* file_name, hash_table** ht_ptr, int_settings* setting
 
 int process_argv(int argc, char* argv[], int_settings* main_settings) {
 	int err, i;
-	int temp_int;
+	int temp_int = 0;
 
 	if (main_settings == NULL) {
 		return NULL_POINTER;
@@ -212,6 +210,7 @@ int process_argv(int argc, char* argv[], int_settings* main_settings) {
 	main_settings->operator_type = 1;
 	main_settings->instructions_file_name = NULL;
 	main_settings->settings_file_name = NULL;
+	main_settings->equal_mark_str = string_from_l("=");
 
 	for (i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "base_input") == 0) {
@@ -251,6 +250,7 @@ int process_argv(int argc, char* argv[], int_settings* main_settings) {
 		else {
 			return UNKNOWN_FLAG;
 		}
+		temp_int = 0;
 	}
 	return OK;
 }
@@ -266,10 +266,11 @@ void print_int_settings(int_settings* main_settings)
 
 	printf("operator_type: %d\n", main_settings->operator_type);
 	printf("assignment_type: %c\n", main_settings->assignment_type);
+	printf("equal_mark_str: %s\n", main_settings->equal_mark_str);
 
 	printf("settings_file_name: %s\n", main_settings->settings_file_name);
 	printf("instructions_file_name: %s\n", main_settings->instructions_file_name);
-	printf("-------------------\n");
+	printf("-------------------\n\n");
 }
 
 
@@ -291,7 +292,6 @@ int ht_swap_key_with_value_ordo(hash_table** ht_ptr) {
 			temp_ptr = list->first_node;
 			while (temp_ptr != NULL) {
 				item = temp_ptr->data;
-				//print_function(i, item->key, item->value);
 				err = ht_insert(new_ht, item->value, item->key);
 				if (err) {
 					ht_free(*ht_ptr);

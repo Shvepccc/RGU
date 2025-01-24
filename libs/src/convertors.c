@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h> 
 #include <ctype.h>
 #include "../../libs/error.h"
+#include <math.h>
 
 
 int convert_TO_decimal(char* n, int base, int* ans) {
