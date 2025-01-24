@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
     char* binary_expression = "a & b";
 
-	/*for (i = 1; i < argc-1; i++) {
+	for (i = 1; i < argc-1; i++) {
 		if (string_flexographic_compare_char_char(argv[i + 1], "--calculate") == 0) {
 
             if ((data_file = fopen(argv[i], "r")) == NULL) {
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 		else {
 			printf("ERROR: Invalid flag: %s\n", argv[i+1]);
 		}
-	}*/
+	}
 
     _CrtDumpMemoryLeaks();
 

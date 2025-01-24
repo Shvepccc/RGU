@@ -34,6 +34,8 @@ int ht_free(hash_table* hash_table);
 
 int ht_insert(hash_table* hash_table, void* key, void* value);
 int ht_search(hash_table* hash_table, void* key, void* result);
+int ht_search_cust_cpy(hash_table* hash_table, void* key, void* result,
+	int(*cust_cpy_function)(void*, void*));
 int ht_delete(hash_table* hash_table, void* key);
 
 //void ht_print(hash_table* hash_table);

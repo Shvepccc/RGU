@@ -93,11 +93,12 @@ int ht_create_item_2(hash_table* hash_table, void* key, void* value, hash_table_
 }
 
 int ht_insert(hash_table* hash_table, void* key, void* value) {
-	int index;
+	int index, err = 0;
 	hash_table_item item;
 	hash_table_item* item_ptr;
 	u_list* list, new_list;
-	int err = 0;
+	//hash_table_item* item_ptr;
+	u_list_node* temp_ptr = NULL;
 
 	if (hash_table == NULL || key == NULL || value == NULL) {
 		return NULL_POINTER;
@@ -128,6 +129,16 @@ int ht_insert(hash_table* hash_table, void* key, void* value) {
 
 	}
 	else {
+		temp_ptr = list->first_node;
+		while (temp_ptr != NULL) {
+			item_ptr = temp_ptr->data;
+			if (hash_table->keys_comparer(item_ptr->key, key) == 0) {
+				memcpy(item_ptr->value, item.value, hash_table->size_of_value);
+				return OK;
+			}
+			temp_ptr = temp_ptr->next_node;
+		}
+
 		u_list_push_back(list, &item);
 	}
 	
@@ -153,6 +164,35 @@ int ht_search(hash_table* hash_table, void* key, void* result) {
 		item = temp_ptr->data;
 		if (hash_table->keys_comparer(item->key, key) == 0) {
 			if (result != NULL) memcpy(result, item->value, hash_table->size_of_value);
+			return OK;
+		}
+		temp_ptr = temp_ptr->next_node;
+	}
+	return KEY_NOT_FOUND;
+}
+
+int ht_search_cust_cpy(hash_table* hash_table, void* key, void* result,
+	int(*cust_cpy_function)(void*, void*)) {
+	int index;
+	hash_table_item* item;
+	u_list_node* temp_ptr = NULL;
+
+	if (hash_table == NULL || key == NULL) {
+		return NULL_POINTER;
+	}
+
+	index = hash_table->hash_function(key) % hash_table->size;
+
+	u_list* list = hash_table->overflow_buckets[index];
+	if (list == NULL) return KEY_NOT_FOUND;
+
+	temp_ptr = list->first_node;
+	while (temp_ptr != NULL) {
+		item = temp_ptr->data;
+		if (hash_table->keys_comparer(item->key, key) == 0) {
+			if (result != NULL && cust_cpy_function != NULL) {
+				cust_cpy_function(result, item->value);
+			}
 			return OK;
 		}
 		temp_ptr = temp_ptr->next_node;
