@@ -14,6 +14,15 @@ typedef struct oper {
     int (*func)(int, int);
 } oper;
 
+int prefix_to_postfix_notation_border(
+    char const* src_expression,
+    int (*lexem_character_selector)(char c),
+    int (*lexems_ignore_selector)(char c),
+    int (*priority_mapper)(char* c),
+    char** postfix_expression,
+    hash_table** operators_ht_ptr,
+    int_settings* main_settings);
+
 int infix_to_postfix_notation_border(
     char const* src_expression,
     int (*lexem_character_selector)(char c),
@@ -22,6 +31,16 @@ int infix_to_postfix_notation_border(
     char** postfix_expression,
     hash_table** operators_ht_ptr,
     int_settings* main_settings);
+
+int postfix_to_postfix_notation_border(
+    char const* src_expression,
+    int (*lexem_character_selector)(char c),
+    int (*lexems_ignore_selector)(char c),
+    int (*priority_mapper)(char* c),
+    char** postfix_expression,
+    hash_table** operators_ht_ptr,
+    int_settings* main_settings);
+
 
 int calculate_postfix_expression_border(
     char const* postfix_expression,

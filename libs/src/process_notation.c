@@ -32,6 +32,133 @@ int cust_cpy_stack_int_ordo(void* dst, void* src) {
     return OK;
 }
 
+int prefix_to_postfix_notation_border(
+    char const* src_expression,
+    int (*lexem_character_selector)(char c),
+    int (*lexems_ignore_selector)(char c),
+    int (*priority_mapper)(char* c),
+    char** postfix_expression,
+    hash_table** operators_ht_ptr,
+    int_settings* main_settings)
+{
+    stack operators;
+    size_t result_size = 16;
+    int symbol_count = 0, err = 0, parenthesis_balance = 0, bracket_flag = 0, collect_all_flag = 0, f = 0;
+    char* se = src_expression, prev = 'a', for_dynamic_array_interaction;
+    string temp_string, temp_string_2, for_stack_interaction, result_string;
+
+    if (src_expression == NULL || lexem_character_selector == NULL) {
+        return NULL_POINTER;
+    }
+
+    temp_string = string_init();
+    temp_string_2 = string_init();
+    for_stack_interaction = string_from_l("(");
+    result_string = string_init();
+
+    operators = stack_init(NULL, sizeof(string));
+    stack_push_back_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+    
+    while (1) {
+        if (lexems_ignore_selector(*se)) {
+            se++;
+            continue;
+        }
+
+        if (lexem_character_selector(*se)) {
+            if (*se != '\0') {
+                string_push_back(&temp_string, *se);
+            }
+            se++;
+        }
+        else {
+            int j = 0;
+            while (*se && !lexem_character_selector(*se) && !lexems_ignore_selector(*se)) {
+                string_push_back(&temp_string, *se);
+                se++;
+            }
+        }
+
+        //printf("*** (%2.d) '%s'\n", string_size(temp_string), temp_string);
+
+        if (temp_string[0] == '(') {
+            for_stack_interaction = string_from_l("(");
+            stack_push_back_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+            parenthesis_balance++;
+            string_free(&for_stack_interaction);
+        }
+        else if (temp_string[0] == ')' || temp_string[0] == '\0') {
+
+            if (temp_string[0] == ')') parenthesis_balance--;
+            if (parenthesis_balance < 0) {
+                err = BALANCE_OF_PARENTHESIS_IS_BROKEN;
+                break;
+            }
+
+            f = 0;
+            while (1) {
+                stack_pop_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+                if (f == 1) {
+                    string_cat(&result_string, &for_stack_interaction);
+                    string_push_back(&result_string, ' ');
+                    break;
+                }
+                if (for_stack_interaction[0] == '(') {
+                    f++;
+                    if (operators.size == 0) break;
+                }
+                string_free(&for_stack_interaction);
+            }
+        }
+        else if (ht_search_cust_cpy(*operators_ht_ptr, &temp_string, &temp_string_2, cust_cpy_for_search_ordo_2) == OK) {
+            while (1) {
+                stack_get(&operators, &for_stack_interaction);
+
+                if (priority_mapper(for_stack_interaction) < priority_mapper(temp_string)) {
+                    break;
+                }
+
+                stack_pop_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+
+                string_cat(&result_string, &for_stack_interaction);
+                string_push_back(&result_string, ' ');
+                string_free(&for_stack_interaction);
+            }
+            stack_push_back_cust_cpy(&operators, &temp_string, cust_cpy_for_search_ordo_2);
+            string_free(&temp_string_2);
+        }
+        else {
+            string_cat(&result_string, &temp_string);
+            string_push_back(&result_string, ' ');
+        }
+
+        string_free(&temp_string);
+        temp_string = string_init();
+
+        if (!*se || err != 0) {
+            if (operators.size != 0 && err == 0) {
+                collect_all_flag = 1;
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    result_string[string_size(result_string) - 1] = '\0';
+    *postfix_expression = result_string;
+
+    if (parenthesis_balance != 0 && err == 0) {
+        err = BALANCE_OF_PARENTHESIS_IS_BROKEN;
+    }
+
+    if (err) {
+        stack_free(&operators);
+        return err;
+    }
+    return OK;
+}
+
 int infix_to_postfix_notation_border(
     char const* src_expression,
     int (*lexem_character_selector)(char c),
@@ -143,6 +270,143 @@ int infix_to_postfix_notation_border(
     }
 
     result_string[string_size(result_string) - 1] = '\0';
+    *postfix_expression = result_string;
+
+    if (parenthesis_balance != 0 && err == 0) {
+        err = BALANCE_OF_PARENTHESIS_IS_BROKEN;
+    }
+
+    if (err) {
+        stack_free(&operators);
+        return err;
+    }
+    return OK;
+}
+
+int postfix_to_postfix_notation_border(
+    char const* src_expression,
+    int (*lexem_character_selector)(char c),
+    int (*lexems_ignore_selector)(char c),
+    int (*priority_mapper)(char* c),
+    char** postfix_expression,
+    hash_table** operators_ht_ptr,
+    int_settings* main_settings)
+{
+    stack operators;
+    size_t result_size = 16;
+    int symbol_count = 0, err = 0, parenthesis_balance = 0, bracket_flag = 0, collect_all_flag = 0, f = 0;
+    char* se, prev = 'a', for_dynamic_array_interaction;
+    string temp_string, temp_string_2, for_stack_interaction, result_string;
+
+    if (src_expression == NULL || lexem_character_selector == NULL) {
+        return NULL_POINTER;
+    }
+
+    temp_string = string_init();
+    temp_string_2 = string_init();
+    for_stack_interaction = string_from_l(")");
+    result_string = string_init();
+
+    operators = stack_init(NULL, sizeof(string));
+    stack_push_back_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+
+    string_reverce(src_expression);
+    se = src_expression;
+    printf("(reverce) '%s'\n", src_expression);
+
+    while (1) {
+        if (lexems_ignore_selector(*se)) {
+            se++;
+            continue;
+        }
+
+        if (lexem_character_selector(*se)) {
+            if (*se != '\0') {
+                string_push_back(&temp_string, *se);
+            }
+            se++;
+        }
+        else {
+            int j = 0;
+            while (*se && !lexem_character_selector(*se) && !lexems_ignore_selector(*se)) {
+                string_push_back(&temp_string, *se);
+                se++;
+            }
+        }
+
+        string_reverce(temp_string);
+        printf("*** (%2.d) '%s'\n", string_size(temp_string), temp_string);
+        //20 var_1 div var_3 * var_1 *
+
+        if (temp_string[0] == ')') {
+            for_stack_interaction = string_from_l(")");
+            stack_push_back_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+            parenthesis_balance++;
+            string_free(&for_stack_interaction);
+        }
+        else if (temp_string[0] == '(' || temp_string[0] == '\0') {
+
+            if (temp_string[0] == '(') parenthesis_balance--;
+            if (parenthesis_balance < 0) {
+                err = BALANCE_OF_PARENTHESIS_IS_BROKEN;
+                break;
+            }
+
+            f = 0;
+            while (1) {
+                stack_pop_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+                if (f == 1) {
+                    //string_reverce(for_stack_interaction);
+                    string_cat(&result_string, &for_stack_interaction);
+                    string_push_back(&result_string, ' ');
+                    break;
+                }
+                if (for_stack_interaction[0] == ')') {
+                    f++;
+                    if (operators.size == 0) break;
+                }
+                string_free(&for_stack_interaction);
+            }
+        }
+        else if (ht_search_cust_cpy(*operators_ht_ptr, &temp_string, &temp_string_2, cust_cpy_for_search_ordo_2) == OK) {
+            while (1) {
+                stack_get(&operators, &for_stack_interaction);
+
+                if (priority_mapper(for_stack_interaction) < priority_mapper(temp_string)) {
+                    break;
+                }
+
+                stack_pop_cust_cpy(&operators, &for_stack_interaction, cust_cpy_for_search_ordo_2);
+
+                //string_reverce(for_stack_interaction);
+                string_cat(&result_string, &for_stack_interaction);
+                string_push_back(&result_string, ' ');
+                string_free(&for_stack_interaction);
+            }
+            stack_push_back_cust_cpy(&operators, &temp_string, cust_cpy_for_search_ordo_2);
+            string_free(&temp_string_2);
+        }
+        else {
+            //string_reverce(temp_string);
+            string_cat(&result_string, &temp_string);
+            string_push_back(&result_string, ' ');
+        }
+
+        string_free(&temp_string);
+        temp_string = string_init();
+
+        if (!*se || err != 0) {
+            if (operators.size != 0 && err == 0) {
+                collect_all_flag = 1;
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    result_string[string_size(result_string) - 1] = '\0';
+    //string_reverce(result_string);
     *postfix_expression = result_string;
 
     if (parenthesis_balance != 0 && err == 0) {

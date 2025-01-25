@@ -22,4 +22,4 @@ void print_int_settings(int_settings* main_settings);
 int hash_function_ordo(string* str);
 int cust_string_cpm_ordo(const string* a, const string* b);
 
-#endif 
+#endif

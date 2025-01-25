@@ -7,12 +7,17 @@ var_2 = 7;
 var_3 = 3;
 # BREAKPOINT
 
+# prefix notation
+var_7 = add(var_3, *(2, 7));
+#var_7 = add(*(2, 7), var_3);
+print(var_7);
+
 # infix notation
-var_4 = (((2 * var_3) * 7) div var_2 sub 1) rem 4;
-print(var_4);
+[var_4 = (((2 * var_3) * 7) div var_2 sub 1) rem 4;
+print(var_4);]
 
 # postfix notation
-[var_35 = ((var_3, (20, var_1)div)mult, var_1)mult;
+[var_35 = ((var_3, (20, var_1)div)*, var_1)*;
 print(var_35);]
 
 # trash bin -----------------------------------------

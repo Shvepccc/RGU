@@ -189,3 +189,13 @@ int string_compare(string const str1, string const str2) {
 		return string_flexographic_compare(str1, str2);
 	}
 }
+
+void string_reverce(char* str) {
+	int i; char temp;
+	int length = strlen(str);
+	for (i = 0; i < length / 2; i++) {
+		temp = str[i];
+		str[i] = str[length - i - 1];
+		str[length - i - 1] = temp;
+	}
+}
