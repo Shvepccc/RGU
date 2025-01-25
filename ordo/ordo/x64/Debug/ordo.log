@@ -1,7 +1,7 @@
 ﻿  execute_instruction.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(51,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(144,12): warning C4013: 'unary_operations' undefined; assuming extern returning int
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(148,13): warning C4013: 'binary_operations' undefined; assuming extern returning int
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(330,29): warning C4101: 'oper_type': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(293,1): warning C4715: 'priorities': not all control paths return a value
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(240,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(341,12): warning C4013: 'unary_operations' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(345,13): warning C4013: 'binary_operations' undefined; assuming extern returning int
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(529,29): warning C4101: 'oper_type': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\libs\src\execute_instruction.c(492,1): warning C4715: 'priorities': not all control paths return a value
   ordo.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\ordo\x64\Debug\ordo.exe

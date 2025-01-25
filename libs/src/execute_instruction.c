@@ -12,6 +12,7 @@
 #include "../../libs/process_notation.h"
 #include "../../libs/execute_instruction.h"
 
+
 void ht_destructor_ordo_variables(hash_table_item* item) {
 	if (item == NULL) return;
 	string_free((string*)item->key);
@@ -33,11 +34,199 @@ void ht_print_function_variables_ordo(int i, void const* key, void const* value)
 	printf("Index: %4.d Key: %-8s Value: %-4.d\n", i, *(string const*)key, *(int const*)value);
 }
 
+void ht_print_function_variables_ordo_debuger(int i, void const* key, void const* value) {
+	if (key == NULL || value == NULL) return;
+	printf("Name: %-8s Value: %-4.d\n", *(string const*)key, *(int const*)value);
+}
+
+
+/* DEBUG */
+
+void debug_menu_print() {
+	printf("\nWhat do you want? =)\n");
+	printf("1 - print some variable [base 16]\n");
+	printf("2 - print all variables\n");
+	printf("3 - change variable value [base 16]\n");
+	printf("4 - declare variable [Zeckendorf or Roman]\n");
+	printf("5 - cancel declare variable\n");
+	printf("6 - close debug\n");
+	printf("7 - stop programm; close interpreter\n");
+	printf("enter '-e' to exit from any menu\n");
+}
+
+int get_debug_action() {
+	int err = 0, action;
+	while (err != 1) {
+		printf("\nEnter value (0 - help): ");
+		err = scanf("%d", &action);
+		if (err != 1) {
+			printf("Invalid value. Try again...\n");
+		}
+	}
+	return action;
+}
+
+
+int debug_run(int* stop_flag, hash_table** vars_ht_ptr) {
+	int err, action, temp_int = 0, exit_flag = 0;
+	char temp_str[BUFSIZ];
+	char* ans;
+	string temp_string;
+
+	if (vars_ht_ptr == NULL) {
+		return NULL_POINTER;
+	}
+
+	debug_menu_print();
+	while (1) {
+
+		temp_int = 0;
+		action = get_debug_action();
+
+		switch (action)
+		{
+		case 0:
+			debug_menu_print();
+			break;
+		case 1:
+			while (1) {
+				temp_int = 0;
+				printf("Enter variable's name: ");
+				scanf("%s", temp_str);
+				if (strcmp(temp_str, "-e") == 0) {
+					break;
+				}
+				else {
+					temp_string = string_from_l(temp_str);
+					err = ht_search(*vars_ht_ptr, &temp_string, &temp_int);
+					if (err) {
+						printf("WARNING: Variable does not exist; Try again...\n");
+					}
+					else {
+						convert_FROM_decimal(temp_int, 16, &ans);
+						printf("%s = %s\n", temp_str, ans);
+						//TODO: print memory dump
+						break;
+					}
+					string_free(&temp_string);
+				}
+			}
+			break;
+		case 2:
+			ht_print(*vars_ht_ptr, ht_print_function_variables_ordo_debuger);
+			break;
+		case 3:
+			while (1) {
+				printf("Enter variable's name: ");
+				scanf("%s", temp_str);
+				if (strcmp(temp_str, "-e") == 0) {
+					break;
+				}
+				else {
+					temp_string = string_from_l(temp_str);
+					err = ht_search(*vars_ht_ptr, &temp_string, &temp_int);
+					if (err) {
+						printf("WARNING: Variable does not exist; Try again...\n");
+					}
+					else {
+						printf("Enter new variable value [base 16]: ");
+						scanf("%s", temp_str);
+						temp_int = 0;
+						err = convert_TO_decimal(temp_str, 16, &temp_int);
+						if (err) {
+							printf("WARNING: invalid value; Try again...\n");
+						}
+						else {
+							ht_insert(*vars_ht_ptr, &temp_string, &temp_int);
+							string_free(&temp_string);
+							break;
+						}
+					}
+					string_free(&temp_string);
+				}
+			}
+			break;
+		case 4:
+			break;
+			//TODO: write it!!
+			while (1) {
+				printf("Enter variable's name: ");
+				scanf("%s", temp_str);
+				if (strcmp(temp_str, "-e") == 0) {
+					break;
+				}
+				else {
+					temp_string = string_from_l(temp_str);
+
+					err = ht_search(*vars_ht_ptr, &temp_string, &temp_int);
+					if (err == OK) {
+						printf("WARNING: Variable already exist; Try again...\n");
+					}
+					else {
+						printf("Enter new variable value [base 16]: ");
+						scanf("%s", temp_str);
+						temp_int = 0;
+						err = convert_TO_decimal(temp_str, 16, &temp_int);
+						if (err) {
+							printf("WARNING: invalid value; Try again...\n");
+						}
+						else {
+							ht_insert(*vars_ht_ptr, &temp_string, &temp_int);
+							string_free(&temp_string);
+							break;
+						}
+					}
+					string_free(&temp_string);
+				}
+			}
+			break;
+		case 5:
+			while (1) {
+				printf("Enter variable's name: ");
+				scanf("%s", temp_str);
+				if (strcmp(temp_str, "-e") == 0) {
+					break;
+				}
+				else {
+					temp_string = string_from_l(temp_str);
+
+					err = ht_search(*vars_ht_ptr, &temp_string, &temp_int);
+					if (err) {
+						printf("WARNING: Variable does not exist; Try again...\n");
+					}
+					else {
+						ht_delete(*vars_ht_ptr, &temp_string);
+						string_free(&temp_string);
+						break;
+					}
+					string_free(&temp_string);
+				}
+			}
+			break;
+		case 6:
+			exit_flag = 1;
+			break;
+		case 7:
+			*stop_flag = 1;
+			break;
+		}
+		
+		if (exit_flag == 1 || *stop_flag == 1) {
+			break;
+		}
+	}
+	return OK;
+}
+
+/* END DEBUG */
+
+
+
 int run_instruction(hash_table** operators_ht_ptr, int_settings* main_settings) {
 	char symbol = 0, last_symbol;
 	FILE* istructions_file;
 	int last_exit = 0, line = 0, part_number = 0, multi_line_comment = 0, parenthesis_balacne = 0, one_line_comment = 0;
-	int equal_mark_index = 0, equal_mark_len, is_unary = 0, read_file_flag = 0, debug_flag = 0;
+	int equal_mark_index = 0, equal_mark_len, is_unary = 0, read_file_flag = 0, debug_flag = 0, stop_flag = 0;
 	int err = 0;
 	string first_part, second_part, temp_string;
 
@@ -55,12 +244,20 @@ int run_instruction(hash_table** operators_ht_ptr, int_settings* main_settings) 
 
 	while (1) {
 
-		if (debug_flag) {
-			//TODO: debug functions
-			printf("\nBREAKPOINT\n------------------------------------\n");
+		if (debug_flag && main_settings->debug_mode == 1) {
+			printf("\nBREAKPOINT\n*****************************************\n");
+
+			err = debug_run(&stop_flag, &variables_ht);
+			if (err) break;
+
 			string_free(&temp_string);
 			temp_string = string_init();
 			debug_flag = 0;
+			printf("*****************************************\n");
+
+			if (stop_flag == 1) {
+				break;
+			}
 		}
 
 		last_symbol = symbol;
@@ -178,6 +375,7 @@ int run_instruction(hash_table** operators_ht_ptr, int_settings* main_settings) 
 	fclose(istructions_file);
 	string_free(&first_part);
 	string_free(&second_part);
+	string_free(&temp_string);
 
 	if (!read_file_flag) {
 		return EMPTY_FILE;
@@ -286,7 +484,8 @@ int priorities(char* operator) {
 	else if (strcmp(operator, "not") == 0) {
 		return 6;
 	}
-	else if (strcmp(operator, "(") == 0)
+	else if (strcmp(operator, "(") == 0 ||
+		strcmp(operator, ")") == 0)
 	{
 		return INT_MIN;
 	}
@@ -349,14 +548,19 @@ int binary_operations(hash_table** operators_ht_ptr,
 	string_push_back(second_part, '\0');
 
 	if (main_settings->operator_type == 1) {
-		//TODO: prefix to postfix
+		// ()op
+		err = postfix_to_postfix_notation_border(*second_part, lexem_character_selector_ordo, ignore_lexems, priorities,
+			&postfix_expression, operators_ht_ptr, main_settings);
 	}
 	else if (main_settings->operator_type == 2) {
+		// (op)
 		err = infix_to_postfix_notation_border(*second_part, lexem_character_selector_ordo, ignore_lexems, priorities,
 			&postfix_expression, operators_ht_ptr, main_settings);
 	}
-	else if (main_settings->operator_type == 3) {
-		//TODO: postfix to postfix
+	else if (main_settings->operator_type == 3) {		
+		// op()
+		err = prefix_to_postfix_notation_border(*second_part, lexem_character_selector_ordo, ignore_lexems, priorities,
+			&postfix_expression, operators_ht_ptr, main_settings);
 	}
 
 	if (err) return err;

@@ -133,7 +133,7 @@ int ht_insert(hash_table* hash_table, void* key, void* value) {
 		while (temp_ptr != NULL) {
 			item_ptr = temp_ptr->data;
 			if (hash_table->keys_comparer(item_ptr->key, key) == 0) {
-				memcpy(item_ptr->value, item.value, hash_table->size_of_value);
+				memcpy(item_ptr->value, value, hash_table->size_of_value);
 				return OK;
 			}
 			temp_ptr = temp_ptr->next_node;
