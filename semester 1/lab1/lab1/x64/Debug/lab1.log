@@ -1,0 +1,7 @@
+﻿  1.c
+  20.c
+  Generating Code...
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab1\lab1\20.c(52,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab1\lab1\20.c(48,1): warning C4172: returning address of local variable or temporary : res
+  LINK : C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab1\x64\Debug\lab1.exe not found or not built by the last incremental link; performing full link
+  lab1.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab1\x64\Debug\lab1.exe

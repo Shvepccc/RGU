@@ -1,0 +1,5 @@
+﻿  11_a.c
+  11_b.c
+D:\Stepan Orlov\programming university\RGU\lab2\lab2\11_b.c(9,10): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  lab2.vcxproj -> D:\Stepan Orlov\programming university\RGU\lab2\x64\Debug\lab2.exe

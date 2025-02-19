@@ -1,0 +1,12 @@
+read(A, 10); % set value to A variable
+read(B, 10); % set value to B variable
+{ Multi-line comment.
+I don't know what to write )}
+write(A, 10);
+write(A, 2);
+C := \A;
+write(C, 10);
+write(C, 2);
+C := A + B;
+write(C, 10);
+D := A * B;

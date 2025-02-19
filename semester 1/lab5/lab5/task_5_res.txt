@@ -1,0 +1,70 @@
+Surname: fif 
+Name: fif2 
+Lastname: fif3 
+Date of birth: 20.12.1900 
+Gender: F 
+Monthly income: 1000.00
+
+Surname: Norris 
+Name: Albert 
+Lastname: Josmith 
+Date of birth: 08.11.2001 
+Gender: F 
+Monthly income: 42.00
+
+Surname: Barber 
+Name: Cynthia 
+Lastname: PatRoss 
+Date of birth: 22.01.2000 
+Gender: M 
+Monthly income: 27.00
+
+Surname: Berry 
+Name: Charles 
+Lastname: Antkson 
+Date of birth: 03.09.1999 
+Gender: M 
+Monthly income: 27.70
+
+Surname: Torres 
+Name: Tracy 
+Lastname: Chrnder 
+Date of birth: 05.08.1996 
+Gender: M 
+Monthly income: 85.00
+
+Surname: Schwartz 
+Name: Mitchell 
+Lastname: Andharp 
+Date of birth: 12.03.1995 
+Gender: M 
+Monthly income: 100.00
+
+Surname: Wilson 
+Name: Amy 
+Lastname: Barbard 
+Date of birth: 07.06.1992 
+Gender: M 
+Monthly income: 48.50
+
+Surname: Smith 
+Name: Joseph 
+Lastname: RobNash 
+Date of birth: 25.07.1988 
+Gender: M 
+Monthly income: 12.50
+
+Surname: Davis 
+Name: Fred 
+Lastname: Graayes 
+Date of birth: 14.02.1985 
+Gender: M 
+Monthly income: 76.00
+
+Surname: Garcia2 
+Name: Victor2 
+Lastname: Gerrgan2 
+Date of birth: 30.10.1979 
+Gender: F 
+Monthly income: 35.00
+

@@ -1,6 +1,0 @@
-﻿  13.c
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(18,40): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(35,40): warning C4133: 'function': incompatible types - from 'int *' to 'size_t *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(82,16): warning C4047: '==': 'int' differs in levels of indirection from 'void *'
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\lab4\13.c(122,70): warning C4133: 'function': incompatible types - from 'size_t *' to 'int *'
-  lab4.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\lab4\x64\Debug\lab4.exe

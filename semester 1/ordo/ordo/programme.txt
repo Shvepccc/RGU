@@ -1,0 +1,36 @@
+#input(var_4);
+#input(var_4);
+#print(var_4);
+
+var_1 = 10;
+var_2 = 7;
+var_3 = 3;
+# BREAKPOINT
+
+# prefix notation
+var_7 = add(var_3, *(2, 7));
+#var_7 = add(*(2, 7), var_3);
+print(var_7);
+
+# infix notation
+[var_4 = (((2 * var_3) * 7) div var_2 sub 1) rem 4;
+print(var_4);]
+
+# postfix notation
+[var_35 = ((var_3, (20, var_1)div)*, var_1)*;
+print(var_35);]
+
+# trash bin -----------------------------------------
+[var_2 = mult(      var_2, 4);
+var_1    =      not(1F4); 
+
+[var_1 = var_2 mult var_3;
+var_1 = var_2 mult var_2 mult var_3;]
+
+Var3 = add(div(var_2
+, 5) , rem(var_1, 2));
+
+[multi-line
+comment
+]
+print(Var_3); #Hello, I'm one-line comment]
