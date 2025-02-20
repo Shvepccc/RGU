@@ -13,12 +13,12 @@ public:
 		std::cout << _value << std::endl;
 	}
 
-	static int equals(logical_values_array const& arg_1, logical_values_array const & arg_2)
+	static bool equals(logical_values_array const& arg_1, logical_values_array const & arg_2)
 	{
-		return arg_1._value - arg_2._value;
+		return arg_1._value == arg_2._value;
 	}
 
-	int get_bit(int n) 
+	int get_bit(int n) const
 	{
 		if (n < 0 || n >(sizeof(unsigned int) * 8)) 
 		{
@@ -27,9 +27,9 @@ public:
 		return (_value >> n) & 1;
 	}
 
-	int operator [](int i) { return get_bit(i); }
+	int operator [](int i) const { return get_bit(i); }
 
-	void get_binary(char* str) 
+	void get_binary(char* str) const
 	{
 		if (str == nullptr)
 		{
@@ -40,8 +40,8 @@ public:
 		int size = (8 * sizeof(unsigned int));
 		unsigned int temp_uint = _value;
 		for (i = 0; i < size; ++i) {
-			str[size - i-1] = (temp_uint & 1) == 1 ? '1' : '0';
-			temp_uint = (temp_uint >> 1);
+			str[size - i-1] = (temp_uint & 1) + '0';
+			temp_uint = temp_uint >> 1;
 		}
 		str[size] = 0;
 	}
@@ -70,11 +70,10 @@ public:
 		return logical_values_array{ ~_value | arg._value };
 	}
 
-	//TODO: is it right???
 	//coimplication
 	logical_values_array lva_coimp(logical_values_array const& arg) const
 	{
-		return logical_values_array{ ~(~_value | arg._value) };
+		return logical_values_array{ _value | ~arg._value };
 	}
 
 	//xor
@@ -84,9 +83,9 @@ public:
 	}
 
 	//equivalence
-	bool lva_equl(logical_values_array const& arg) const
+	logical_values_array lva_equl(logical_values_array const& arg) const
 	{
-		return  _value == arg._value;
+		return ~(_value ^ arg._value);
 	}
 
 	//arrow of the Pier
@@ -116,9 +115,6 @@ int program_2_main(int argc, char* argv[])
 
 	std::cout << "Result of expression: ";
 	res.print_value();
-
-	std::cout << "Equals between a(1) and b(0) = " << a.lva_equl(b) << "\n";
-	std::cout << "Equals between a(1) and c(1) = " << a.lva_equl(c) << "\n";
 
 	try
 	{
