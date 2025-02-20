@@ -7,30 +7,21 @@ class encoder
 {
 private:
 	unsigned char* s;
+
+	void KSA(unsigned char const* key, size_t size_of_key);
+	void swap(unsigned char& a, unsigned char& b)
+	{
+		unsigned char temp_char = a;
+		a = b;
+		b = temp_char;
+	}
+
 public:
 	encoder (unsigned char const * key, size_t size_of_key);
 	~encoder ();
 	void mutator(unsigned char const* key, size_t size_of_key);
 	void encode(char const* input_file_name, char const* output_file_name, bool mode);
-
-	void KSA(unsigned char const* key, size_t size_of_key);
-
-	void print_s() {
-		for (int i = 0; i < 256; ++i) 
-		{
-			std::cout << (unsigned int)s[i] << " ";
-		}
-		std::cout << "\n" << std::endl;
-	}
-
 };
-
-void swap(unsigned char &a, unsigned char &b) 
-{
-	unsigned char temp_char = a;
-	a = b;
-	b = temp_char;
-}
 
 void encoder::KSA(unsigned char const* key, size_t size_of_key) 
 {
@@ -39,7 +30,6 @@ void encoder::KSA(unsigned char const* key, size_t size_of_key)
 	{
 		throw std::invalid_argument("Null pointer");
 	}
-	//std::cout << "KSA is run... (key = " << key << ")\n";
 	
 	// initialaize S-block
 	for (i = 0; i < 256; i++) 
@@ -58,10 +48,6 @@ void encoder::KSA(unsigned char const* key, size_t size_of_key)
 encoder::encoder (unsigned char const* key, size_t size_of_key) 
 {
 	s = new unsigned char[256];
-	if (s == nullptr) 
-	{
-		throw std::bad_alloc();
-	}
 	KSA(key, size_of_key);
 }
 
@@ -82,7 +68,7 @@ void encoder::encode(char const* input_file_name, char const* output_file_name, 
 	std::ifstream input_file(input_file_name, std::ios::binary);
 	std::ofstream output_file(output_file_name, std::ios::binary);
 
-	if ((!input_file) || (!output_file)) 
+	if (!(input_file.is_open() && output_file.is_open()))
 	{
 		throw std::runtime_error("Open file error");
 	}
@@ -93,9 +79,7 @@ void encoder::encode(char const* input_file_name, char const* output_file_name, 
 		i = (i + 1) % 256;
 		j = (j + s[i]) % 256;
 		swap(s[i], s[j]);
-		unsigned char t = (s[i] + s[j]) % 256;
-		unsigned char k = s[t];
-		char resbyte = (byte ^ k);
+		char resbyte = (byte ^ s[(s[i] + s[j]) % 256]);
 		output_file.write(&resbyte, sizeof(unsigned char));
 	}
 
