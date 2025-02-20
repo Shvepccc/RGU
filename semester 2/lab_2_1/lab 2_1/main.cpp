@@ -1,7 +1,7 @@
 #include <iostream>
 #include "programs.h" 
 
-#define START_PROGRAM 1;
+#define START_PROGRAM 2;
 
 int main(int argc, char* argv[]) {
     int prog_count = 2;
