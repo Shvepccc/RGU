@@ -1,12 +1,18 @@
 #include <iostream>
 #include "programs.h" 
 
-#define START_PROGRAM 2;
+#define START_PROGRAM 3;
 
 int main(int argc, char* argv[]) {
-    int prog_count = 2;
+    int prog_count = 3;
     int choice = START_PROGRAM;
-    int (*programs[])(int argc, char* argv[]) = { nullptr, program_1_main, program_2_main};
+    int (*programs[])(int argc, char* argv[]) = 
+        { 
+        nullptr, 
+        program_1_main, 
+        program_2_main,
+        program_3_main
+        };
 
     while (true) {
         if (!(choice >= 1 && choice <= prog_count)) {
