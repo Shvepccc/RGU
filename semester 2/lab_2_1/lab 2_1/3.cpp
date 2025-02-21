@@ -83,30 +83,11 @@ public:
 
 	double get_arg() const
 	{
-		if (this->_real_part > 0 && this->_imaginary_part >= 0) 
+		if (this->_real_part == 0) 
 		{
-			return atan(this->_imaginary_part/this->_real_part);
+			return 0.0;
 		}
-		else if (this->_real_part < 0 && this->_imaginary_part >= 0)
-		{
-			return M_PI - atan(abs(this->_imaginary_part / this->_real_part));
-		}
-		else if (this->_real_part < 0 && this->_imaginary_part < 0)
-		{
-			return M_PI + atan(abs(this->_imaginary_part / this->_real_part));
-		}
-		else if (this->_real_part > 0 && this->_imaginary_part < 0)
-		{
-			return 2*M_PI - atan(abs(this->_imaginary_part / this->_real_part));
-		}
-		else if (this->_real_part == 0 && this->_imaginary_part > 0)
-		{
-			return M_PI_2;
-		}
-		else if (this->_real_part == 0 && this->_imaginary_part < 0)
-		{
-			return (3*M_PI)/2;
-		}
+		return atan2(this->_imaginary_part, this->_real_part);		
 	}
 
 	friend std::ostream& operator <<(std::ostream& os, complex_number const& arg) 
@@ -123,7 +104,6 @@ public:
 
 int program_3_main(int argc, char* argv[])
 {
-
 	complex_number a(1.0, 2.0);
 	complex_number b(3.0, 4.0);
 	complex_number d(1.0, -1.0);
