@@ -5,109 +5,105 @@
 class complex_number
 {
 private:
-	double _integer_part;
+	double _real_part;
 	double _imaginary_part;
 
 public:
 	complex_number(double integer_part = 0.0, double imaginary_part = 0.0) 
 	{ 
-		_integer_part = integer_part;
+		_real_part = integer_part;
 		_imaginary_part = imaginary_part;
 	};
 
-	complex_number operator +(complex_number const& arg) const
+	complex_number& operator +=(complex_number const& arg)
 	{
-		return complex_number(this->_integer_part + arg._integer_part, 
-			this->_imaginary_part + arg._imaginary_part);
-	}
-
-	complex_number operator -(complex_number const& arg) const
-	{
-		return complex_number(this->_integer_part - arg._integer_part,
-			this->_imaginary_part - arg._imaginary_part);
-	}
-
-	
-	complex_number operator *(complex_number const& arg) const
-	{
-		return complex_number((this->_integer_part * arg._integer_part) + ((this->_imaginary_part * arg._imaginary_part) * -1),
-			(this->_integer_part * arg._imaginary_part) + (this->_imaginary_part * arg._integer_part));
-	}
-
-	complex_number operator /(complex_number const& arg) const
-	{
-		double temp_integer_part = (this->_integer_part * arg._integer_part + this->_imaginary_part * arg._imaginary_part) /
-			(arg._integer_part * arg._integer_part + arg._imaginary_part * arg._imaginary_part);
-
-		double temp_imaginary_part = (arg._integer_part * this->_imaginary_part - this->_integer_part * arg._imaginary_part) / 
-			(arg._integer_part * arg._integer_part + arg._imaginary_part * arg._imaginary_part);
-
-		return complex_number(temp_integer_part, temp_imaginary_part);
-	}
-
-	complex_number operator +=(complex_number const& arg)
-	{
-		this->_integer_part += arg._integer_part;
+		this->_real_part += arg._real_part;
 		this->_imaginary_part += arg._imaginary_part;
 		return *this;
 	}
 
-	complex_number operator -=(complex_number const& arg)
+	complex_number& operator -=(complex_number const& arg)
 	{
-		this->_integer_part -= arg._integer_part;
+		this->_real_part -= arg._real_part;
 		this->_imaginary_part -= arg._imaginary_part;
 		return *this;
 	}
 
-	complex_number operator *=(complex_number const& arg)
+	complex_number& operator *=(complex_number const& arg)
 	{
-		this->_integer_part = (this->_integer_part * arg._integer_part) + ((this->_imaginary_part * arg._imaginary_part) * -1);
-		this->_imaginary_part = (this->_integer_part * arg._imaginary_part) + (this->_imaginary_part * arg._integer_part);
+		double temp_real_part = (this->_real_part * arg._real_part) + ((this->_imaginary_part * arg._imaginary_part) * -1);
+		double temp_imaginary_part = (this->_real_part * arg._imaginary_part) + (this->_imaginary_part * arg._real_part);
+		this->_real_part = temp_real_part;
+		this->_imaginary_part = temp_imaginary_part;
 		return *this;
 	}
 
-	complex_number operator /=(complex_number const& arg)
+	complex_number& operator /=(complex_number const& arg)
 	{
-		double temp_integer_part = (this->_integer_part * arg._integer_part + this->_imaginary_part * arg._imaginary_part) /
-			(arg._integer_part * arg._integer_part + arg._imaginary_part * arg._imaginary_part);
+		double temp_real_part = (this->_real_part * arg._real_part + this->_imaginary_part * arg._imaginary_part) /
+			(arg._real_part * arg._real_part + arg._imaginary_part * arg._imaginary_part);
 
-		double temp_imaginary_part = (arg._integer_part * this->_imaginary_part - this->_integer_part * arg._imaginary_part) /
-			(arg._integer_part * arg._integer_part + arg._imaginary_part * arg._imaginary_part);
+		double temp_imaginary_part = (arg._real_part * this->_imaginary_part - this->_real_part * arg._imaginary_part) /
+			(arg._real_part * arg._real_part + arg._imaginary_part * arg._imaginary_part);
 
-		this->_integer_part = temp_integer_part;
+		this->_real_part = temp_real_part;
 		this->_imaginary_part = temp_imaginary_part;
 
 		return *this;
 	}
 
+	complex_number operator +(complex_number const& arg) const
+	{
+		complex_number copy(this->_real_part, this->_imaginary_part);
+		return copy += arg;
+	} 
+
+	complex_number operator -(complex_number const& arg) const
+	{
+		complex_number copy(this->_real_part, this->_imaginary_part);
+		return copy -= arg;
+	}
+
+	complex_number operator *(complex_number const& arg) const
+	{
+		complex_number copy(this->_real_part, this->_imaginary_part);
+		return copy *= arg;
+	}
+
+	complex_number operator /(complex_number const& arg) const
+	{
+		complex_number copy(this->_real_part, this->_imaginary_part);
+		return copy /= arg;
+	}
+
 	double get_mod() const
 	{
-		return sqrt(pow(this->_integer_part, 2.0) + pow(this->_imaginary_part, 2.0));
+		return sqrt(pow(this->_real_part, 2.0) + pow(this->_imaginary_part, 2.0));
 	}
 
 	double get_arg() const
 	{
-		if (this->_integer_part > 0 && this->_imaginary_part >= 0) 
+		if (this->_real_part > 0 && this->_imaginary_part >= 0) 
 		{
-			return atan(this->_imaginary_part/this->_integer_part);
+			return atan(this->_imaginary_part/this->_real_part);
 		}
-		else if (this->_integer_part < 0 && this->_imaginary_part >= 0)
+		else if (this->_real_part < 0 && this->_imaginary_part >= 0)
 		{
-			return M_PI - atan(abs(this->_imaginary_part / this->_integer_part));
+			return M_PI - atan(abs(this->_imaginary_part / this->_real_part));
 		}
-		else if (this->_integer_part < 0 && this->_imaginary_part < 0)
+		else if (this->_real_part < 0 && this->_imaginary_part < 0)
 		{
-			return M_PI + atan(abs(this->_imaginary_part / this->_integer_part));
+			return M_PI + atan(abs(this->_imaginary_part / this->_real_part));
 		}
-		else if (this->_integer_part > 0 && this->_imaginary_part < 0)
+		else if (this->_real_part > 0 && this->_imaginary_part < 0)
 		{
-			return 2*M_PI - atan(abs(this->_imaginary_part / this->_integer_part));
+			return 2*M_PI - atan(abs(this->_imaginary_part / this->_real_part));
 		}
-		else if (this->_integer_part == 0 && this->_imaginary_part > 0)
+		else if (this->_real_part == 0 && this->_imaginary_part > 0)
 		{
 			return M_PI_2;
 		}
-		else if (this->_integer_part == 0 && this->_imaginary_part < 0)
+		else if (this->_real_part == 0 && this->_imaginary_part < 0)
 		{
 			return (3*M_PI)/2;
 		}
@@ -115,12 +111,12 @@ public:
 
 	friend std::ostream& operator <<(std::ostream& os, complex_number const& arg) 
 	{
-		return os << arg._integer_part << (arg._imaginary_part < 0 ? "" : "+") << arg._imaginary_part << 'i';
+		return os << arg._real_part << (arg._imaginary_part < 0 ? "" : "+") << arg._imaginary_part << 'i';
 	}
 
 	friend std::istream& operator >>(std::istream& os, complex_number & arg)
 	{
-		return os >> arg._integer_part >> arg._imaginary_part;
+		return os >> arg._real_part >> arg._imaginary_part;
 	}
 
 };
