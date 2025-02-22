@@ -27,9 +27,18 @@
     <ClCompile Include="3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\matrix.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="programs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
