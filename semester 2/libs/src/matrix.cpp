@@ -38,20 +38,25 @@ matrix::~matrix()
 	clear_data(*this);
 }
 
-matrix::matrix(const matrix& arg)
+void deep_copy(matrix& arg_1, const matrix& arg_2) 
 {
 	int i, j;
-	data = new double* [arg._rows_count];
-	for (i = 0; i < arg._columns_count; ++i)
+	arg_1.data = new double* [arg_2._rows_count];
+	for (i = 0; i < arg_2._columns_count; ++i)
 	{
-		data[i] = new double[arg._columns_count];
-		for (j = 0; j < arg._columns_count; j++)
+		arg_1.data[i] = new double[arg_2._columns_count];
+		for (j = 0; j < arg_2._columns_count; j++)
 		{
-			data[i][j] = arg.data[i][j];
+			arg_1.data[i][j] = arg_2.data[i][j];
 		}
 	}
-	_rows_count = arg._rows_count;
-	_columns_count = arg._columns_count;
+	arg_1._rows_count = arg_2._rows_count;
+	arg_1._columns_count = arg_2._columns_count;
+}
+
+matrix::matrix(const matrix& arg)
+{
+	deep_copy(*this, arg);
 }
 
 matrix& matrix::operator = (matrix const& arg)
@@ -66,17 +71,7 @@ matrix& matrix::operator = (matrix const& arg)
 	clear_data(*this);
 
 	//set new data
-	data = new double* [arg._rows_count];
-	for (i = 0; i < arg._columns_count; ++i)
-	{
-		data[i] = new double[arg._columns_count];
-		for (j = 0; j < arg._columns_count; j++)
-		{
-			data[i][j] = arg.data[i][j];
-		}
-	}
-	_rows_count = arg._rows_count;
-	_columns_count = arg._columns_count;
+	deep_copy(*this, arg);
 
 	return *this;
 }
@@ -232,22 +227,6 @@ void set_identity_matrix(matrix& arg, int size)
 	}
 }
 
-void set_identity_matrix(double**& arg, int size)
-{
-	int i, j;
-	for (i = 0; i < size; i++)
-	{
-		for (j = 0; j < size; j++)
-		{
-			if (i == j)
-				arg[i][j] = 1.0;
-			else
-				arg[i][j] = 0.0;
-
-		}
-	}
-}
-
 void find_triangular_matrix(matrix& A, matrix& L, matrix& U, int size)
 {
 	int i, j, k;
@@ -329,7 +308,7 @@ matrix matrix::transp()
 	return res_matrix;
 }
 
-matrix& matrix::reverse()
+matrix matrix::reverse()
 {
 	if (this->_rows_count != this->_columns_count)
 	{
@@ -341,10 +320,8 @@ matrix& matrix::reverse()
 		int i, j, k = 0;
 		int size = this->_columns_count;
 
-		// create temporary array
-		double** res = nullptr;
-		create_2D_double_arr(res, size, size);
-		set_identity_matrix(res, size);
+		matrix inverse(size, size);
+		set_identity_matrix(inverse, size);
 		
 		for (k = 0; k < size; k++) 
 		{
@@ -359,7 +336,7 @@ matrix& matrix::reverse()
 		    for (j = 0; j < size; j++) 
 			{
 				(*this)[k][j] /= support_element;
-		        res[k][j] /= support_element;
+		        inverse[k][j] /= support_element;
 		    }
 		
 		    //Set zero under main diagonal
@@ -369,7 +346,7 @@ matrix& matrix::reverse()
 		        for (j = 0; j < size; j++) 
 				{
 					(*this)[i][j] -= support_element * (*this)[k][j];
-		            res[i][j] -= support_element * res[k][j];
+		            inverse[i][j] -= support_element * inverse[k][j];
 		        }
 		    }
 		}
@@ -383,12 +360,10 @@ matrix& matrix::reverse()
 		        for (j = 0; j < size; j++) 
 				{
 					(*this)[i][j] -= support_element * (*this)[k][j];
-		            res[i][j] -= support_element * res[k][j];
+		            inverse[i][j] -= support_element * inverse[k][j];
 		        }
 		    }
 		}
-		clear_data(*this);
-		this->data = res;
-		return *this;
+		return inverse;
 	}
 }
