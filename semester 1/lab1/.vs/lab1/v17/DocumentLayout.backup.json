@@ -1,49 +1,61 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\",
+  "WorkspaceRootPath": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\20.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\19.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\19.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\18.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\18.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\6.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\6.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\20.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\20.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\13.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\13.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\13.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\10.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\10.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\10.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\9.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\9.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\9.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\8.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\8.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\8.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\7.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\7.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\7.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\4.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\4.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\4.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\3.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\11.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\11.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\11.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8E80A8A-7114-4634-9B4E-0B6789B3D593}|lab1\\lab1.vcxproj|solutionrelative:lab1\\1.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -63,23 +75,62 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "19.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\19.c",
+              "RelativeDocumentMoniker": "lab1\\19.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\19.c",
+              "RelativeToolTip": "lab1\\19.c",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAcwE8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-02-22T16:45:12.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "18.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\18.c",
+              "RelativeDocumentMoniker": "lab1\\18.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\18.c",
+              "RelativeToolTip": "lab1\\18.c",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAD4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-02-22T16:32:42.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "6.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\6.c",
+              "RelativeDocumentMoniker": "lab1\\6.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\6.c",
+              "RelativeToolTip": "lab1\\6.c",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACcAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-02-22T15:42:54.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "20.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\20.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\20.c",
               "RelativeDocumentMoniker": "lab1\\20.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\20.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\20.c",
               "RelativeToolTip": "lab1\\20.c",
-              "ViewState": "AgIAABsAAAAAAAAAAAAIwDwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-09-27T12:07:58.752Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "10.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\10.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\10.c",
               "RelativeDocumentMoniker": "lab1\\10.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\10.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\10.c",
               "RelativeToolTip": "lab1\\10.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -87,11 +138,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "9.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\9.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\9.c",
               "RelativeDocumentMoniker": "lab1\\9.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\9.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\9.c",
               "RelativeToolTip": "lab1\\9.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -99,11 +150,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "7.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\7.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\7.c",
               "RelativeDocumentMoniker": "lab1\\7.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\7.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\7.c",
               "RelativeToolTip": "lab1\\7.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -111,11 +162,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "4.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\4.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\4.c",
               "RelativeDocumentMoniker": "lab1\\4.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\4.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\4.c",
               "RelativeToolTip": "lab1\\4.c",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -123,11 +174,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "3.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\3.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\3.c",
               "RelativeDocumentMoniker": "lab1\\3.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\3.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\3.c",
               "RelativeToolTip": "lab1\\3.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -135,11 +186,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "2.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\2.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\2.c",
               "RelativeDocumentMoniker": "lab1\\2.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\2.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\2.c",
               "RelativeToolTip": "lab1\\2.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -147,11 +198,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "11.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\11.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\11.c",
               "RelativeDocumentMoniker": "lab1\\11.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\11.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\11.c",
               "RelativeToolTip": "lab1\\11.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -159,11 +210,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "13.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\13.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\13.c",
               "RelativeDocumentMoniker": "lab1\\13.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\13.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\13.c",
               "RelativeToolTip": "lab1\\13.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -171,11 +222,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "8.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\8.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\8.c",
               "RelativeDocumentMoniker": "lab1\\8.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\8.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\8.c",
               "RelativeToolTip": "lab1\\8.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
@@ -183,11 +234,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "1.c",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\1.c",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\1.c",
               "RelativeDocumentMoniker": "lab1\\1.c",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\lab1\\lab1\\1.c",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 1\\lab1\\lab1\\1.c",
               "RelativeToolTip": "lab1\\1.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",

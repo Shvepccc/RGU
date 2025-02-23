@@ -1,29 +1,41 @@
 #include "../../libs/matrix.h"
 
-matrix::matrix(size_t rows_count, size_t columns_count, double initial_value = 0.0)
+void create_2D_double_arr(double**& arr, 
+	size_t rows_count, size_t columns_count, 
+	double initial_value = 0.0)
 {
 	int i, j;
-	data = new double* [rows_count];
+	arr = new double* [rows_count];
 	for (i = 0; i < columns_count; ++i)
 	{
-		data[i] = new double[columns_count];
+		arr[i] = new double[columns_count];
 		for (j = 0; j < columns_count; j++)
 		{
-			data[i][j] = initial_value;
+			arr[i][j] = initial_value;
 		}
 	}
+}
+
+matrix::matrix(size_t rows_count, size_t columns_count, double initial_value = 0.0)
+{
+	create_2D_double_arr(data, rows_count, columns_count, initial_value);
 	_rows_count = rows_count;
 	_columns_count = columns_count;
 }
 
+void matrix::clear_data(matrix& arg)
+{
+	for (int i = 0; i < arg._columns_count; ++i)
+	{
+		delete[] arg.data[i];
+	}
+	delete[] arg.data;
+	arg.data = nullptr;
+}
+
 matrix::~matrix()
 {
-	for (int i = 0; i < _columns_count; ++i)
-	{
-		delete[] data[i];
-	}
-	delete[] data;
-	data = nullptr;
+	clear_data(*this);
 }
 
 matrix::matrix(const matrix& arg)
@@ -51,12 +63,7 @@ matrix& matrix::operator = (matrix const& arg)
 		return *this;
 
 	//clear old data
-	for (int i = 0; i < _columns_count; ++i)
-	{
-		delete[] data[i];
-	}
-	delete[] data;
-	data = nullptr;
+	clear_data(*this);
 
 	//set new data
 	data = new double* [arg._rows_count];
@@ -137,7 +144,12 @@ matrix& matrix::operator -=(matrix const& arg)
 matrix& matrix::operator *=(matrix const& arg)
 {
 	int i, j, k;
-	matrix res(this->_rows_count, arg._columns_count);
+
+	// create temporary array
+	double** res = nullptr;
+	create_2D_double_arr(res, this->_rows_count, arg._columns_count);
+
+	// calculate data in temp arr
 	if (this->_columns_count == arg._rows_count)
 	{
 		for (i = 0; i < this->_rows_count; ++i)
@@ -146,16 +158,18 @@ matrix& matrix::operator *=(matrix const& arg)
 			{
 				for (k = 0; k < this->_columns_count; ++k)
 				{
-					res.data[i][j] += this->data[i][k] * arg.data[k][j];
+					res[i][j] += this->data[i][k] * arg.data[k][j];
 				}
 			}
 		}
+		clear_data(*this);
+		this->data = res;
+		this->_columns_count = arg._columns_count;
 	}
 	else
 	{
 		throw std::invalid_argument("Matrix with different size in '+='");
 	}
-	*this = res;
 	return *this;
 }
 
@@ -188,7 +202,7 @@ matrix matrix::operator -(matrix const& arg) const
 matrix matrix::operator *(matrix const& arg) const
 {
 	matrix copy = *this;
-	return copy += arg;
+	return copy *= arg;
 }
 
 matrix matrix::operator *(double const& arg) const
@@ -202,22 +216,42 @@ matrix operator *(double const& val, matrix const& arg)
 	return arg * val;
 }
 
+void set_identity_matrix(matrix& arg, int size)
+{
+	int i, j;
+	for (i = 0; i < size; i++)
+	{
+		for (j = 0; j < size; j++)
+		{
+			if (i == j)
+				arg[i][j] = 1.0;
+			else
+				arg[i][j] = 0.0;
+
+		}
+	}
+}
+
+void set_identity_matrix(double**& arg, int size)
+{
+	int i, j;
+	for (i = 0; i < size; i++)
+	{
+		for (j = 0; j < size; j++)
+		{
+			if (i == j)
+				arg[i][j] = 1.0;
+			else
+				arg[i][j] = 0.0;
+
+		}
+	}
+}
+
 void find_triangular_matrix(matrix& A, matrix& L, matrix& U, int size)
 {
 	int i, j, k;
-
-	for (i = 0; i < size; i++) 
-	{
-		for (j = 0; j < size; j++) 
-		{
-			if (i == j)
-				L[i][j] = 1.0;
-			else
-				L[i][j] = 0.0;
-
-			U[i][j] = 0.0;
-		}
-	}
+	set_identity_matrix(L, size);
 
 	for (i = 0; i < size; i++) 
 	{
@@ -280,7 +314,7 @@ double matrix::det()
 	return 0.0;
 }
 
-matrix& matrix::transp()
+matrix matrix::transp()
 {
 	int x, y;
 	matrix res_matrix(this->_columns_count, this->_rows_count);
@@ -292,8 +326,7 @@ matrix& matrix::transp()
 			res_matrix[y][x] = (*this)[x][y];
 		}
 	}
-	*this = res_matrix;
-	return *this;
+	return res_matrix;
 }
 
 matrix& matrix::reverse()
@@ -308,23 +341,13 @@ matrix& matrix::reverse()
 		int i, j, k = 0;
 		int size = this->_columns_count;
 
-		matrix inverse(size, size);
-		
-		for (i = 0; i < size; i++) 
-		{
-		    for (j = 0; j < size; j++) 
-			{
-		        if (i == j)
-		            inverse[i][j] = 1.0;
-		        else
-		            inverse[i][j] = 0.0;
-		
-		    }
-		}
+		// create temporary array
+		double** res = nullptr;
+		create_2D_double_arr(res, size, size);
+		set_identity_matrix(res, size);
 		
 		for (k = 0; k < size; k++) 
 		{
-		
 		    //Check for divizion by zero
 			if ((*this)[k][k] == 0) 
 			{
@@ -336,7 +359,7 @@ matrix& matrix::reverse()
 		    for (j = 0; j < size; j++) 
 			{
 				(*this)[k][j] /= support_element;
-		        inverse[k][j] /= support_element;
+		        res[k][j] /= support_element;
 		    }
 		
 		    //Set zero under main diagonal
@@ -346,7 +369,7 @@ matrix& matrix::reverse()
 		        for (j = 0; j < size; j++) 
 				{
 					(*this)[i][j] -= support_element * (*this)[k][j];
-		            inverse[i][j] -= support_element * inverse[k][j];
+		            res[i][j] -= support_element * res[k][j];
 		        }
 		    }
 		}
@@ -360,11 +383,12 @@ matrix& matrix::reverse()
 		        for (j = 0; j < size; j++) 
 				{
 					(*this)[i][j] -= support_element * (*this)[k][j];
-		            inverse[i][j] -= support_element * inverse[k][j];
+		            res[i][j] -= support_element * res[k][j];
 		        }
 		    }
 		}
-		*this = inverse;
+		clear_data(*this);
+		this->data = res;
 		return *this;
 	}
 }
