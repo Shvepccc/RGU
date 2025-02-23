@@ -9,6 +9,7 @@ private:
 	size_t _rows_count, _columns_count;
 	void clear_data(matrix& arg);
 public:
+	friend void deep_copy(matrix& arg_1, const matrix& arg_2);
 	matrix(size_t rows_count, size_t columns_count, double initial_value);
 
 	~matrix();
@@ -18,7 +19,7 @@ public:
 	void print() const;
 	double det();
 	matrix transp();
-	matrix& reverse();
+	matrix reverse();
 
 
 	class RowProxy {
