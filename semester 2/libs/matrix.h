@@ -7,7 +7,7 @@ class matrix
 private:
 	double** data;
 	size_t _rows_count, _columns_count;
-
+	void clear_data(matrix& arg);
 public:
 	matrix(size_t rows_count, size_t columns_count, double initial_value);
 
@@ -16,9 +16,8 @@ public:
 	matrix& operator = (matrix const& arg);
 
 	void print() const;
-
 	double det();
-	matrix& transp();
+	matrix transp();
 	matrix& reverse();
 
 
