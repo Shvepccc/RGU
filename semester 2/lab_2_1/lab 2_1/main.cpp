@@ -1,10 +1,10 @@
 #include <iostream>
 #include "programs.h" 
 
-#define START_PROGRAM 4;
+#define START_PROGRAM 0;
 
 int main(int argc, char* argv[]) {
-    int prog_count = 4;
+    int prog_count = 5;
     int choice = START_PROGRAM;
     int (*programs[])(int argc, char* argv[]) = 
         { 
@@ -12,12 +12,13 @@ int main(int argc, char* argv[]) {
         program_1_main, 
         program_2_main,
         program_3_main,
-        program_4_main
+        program_4_main,
+        program_6_main
         };
 
     while (true) {
         if (!(choice >= 1 && choice <= prog_count)) {
-            std::cout << "Enter program number (exit - 0): ";
+            std::cout << "Enter program number [1 - " << prog_count << "] (exit - 0): ";
             std::cin >> choice;
         }
 
