@@ -12,7 +12,7 @@ public:
 	friend void deep_copy(matrix& arg_1, const matrix& arg_2);
 	matrix(size_t rows_count, size_t columns_count, double initial_value);
 
-	~matrix();
+	virtual ~matrix();
 	matrix(const matrix& arg);
 	matrix& operator = (matrix const& arg);
 

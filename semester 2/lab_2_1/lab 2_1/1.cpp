@@ -3,7 +3,7 @@
 
 enum encoder_mode {code, decode};
 
-class encoder 
+class encoder final
 {
 private:
 	unsigned char* s;

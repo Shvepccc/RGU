@@ -1,6 +1,6 @@
 #include <iostream>
 
-class  logical_values_array
+class  logical_values_array final
 {
 private:
 	unsigned int _value;
