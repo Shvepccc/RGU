@@ -15,7 +15,10 @@ struct binominal_node
 	binominal_node* next;
 
 	binominal_node(int k, int deg, char* d, binominal_node* p, binominal_node* c, binominal_node* n)
-		: key(k), degree(deg), data(d), parent(p), child(c), next(n) {
+		: key(k), degree(deg), parent(p), child(c), next(n) 
+	{
+		data = new char[std::strlen(d) + 1];
+		std::strcpy(data, d);
 	}
 
 };
@@ -34,20 +37,20 @@ private:
 
 public:
 	binominal_queue() : _head(nullptr) {};
-	//TODO: write destructor
+	//TODO: write destructor, copy constructoe, operator =
 	~binominal_queue() = default;
 
 	void insert(const char* data, int key) override;
 	char* find_max() override;
 	char* remove_max() override;
-	void merge_2(binominal_queue& q);
 
-	//priority_queue& merge(priority_queue& q) { return new binominal_queue; };
+	priority_queue* merge(priority_queue* q) override;
 
 	void printHeap()
 	{
 		binominal_node* current = _head;
-		while (current != nullptr) {
+		while (current != nullptr) 
+		{
 			std::cout << "B" << current->degree << " ";
 			printTree(current);
 			std::cout << std::endl;
@@ -60,7 +63,8 @@ private:
 	{
 		std::cout << root->data << " ";
 		binominal_node* child = root->child;
-		while (child != nullptr) {
+		while (child != nullptr) 
+		{
 			printTree(child);
 			child = child->next;
 		}
