@@ -9,7 +9,7 @@ void binominal_queue::swap(binominal_node& a, binominal_node& b) {
 binominal_node* binominal_queue::merge_trees(binominal_node* b1, binominal_node* b2)
 {
 	// Ensure b1 has the smaller key
-	if (b1->key > b2->key)
+	if (b1->key < b2->key)
 		swap(*b1, *b2);
 	// Make b1 the parent of b2
 	b2->parent = b1;
@@ -48,19 +48,30 @@ void binominal_queue::merge_trees_heap()
 
 	for (int i = 0; i < MAX_DEGREE_OF_QUEUE; ++i)
 	{
-		if (trees[i] != nullptr) {
-			trees[i]->next = _head;
-			_head = trees[i];
+		if (trees[i] != nullptr)
+		{
+			if (_head == nullptr || trees[i]->key > _head->key)
+			{
+				trees[i]->next = _head;
+				_head = trees[i];
+			}
+			else
+			{
+				trees[i]->next = _head->next;
+				_head->next = trees[i];
+			}
 		}
 	}
 }
 
-void binominal_queue::merge_2(binominal_queue& q)
+priority_queue* binominal_queue::merge(priority_queue* q)
 {
+	binominal_queue* cast_q = dynamic_cast<binominal_queue*>(q);
+
 	binominal_node* new_head = nullptr;
 	binominal_node** current_node = &new_head;
 	binominal_node* h1 = _head;
-	binominal_node* h2 = q._head;
+	binominal_node* h2 = cast_q->_head;
 
 	while (h1 != nullptr && h2 != nullptr)
 	{
@@ -87,7 +98,8 @@ void binominal_queue::merge_2(binominal_queue& q)
 
 	merge_trees_heap();
 
-	q._head = nullptr;
+	cast_q->_head;
+	return this;
 }
 
 void binominal_queue::insert(const char* data, int key)
@@ -95,30 +107,14 @@ void binominal_queue::insert(const char* data, int key)
 	binominal_queue new_queue;
 	binominal_node* new_node = new binominal_node(key, 0, const_cast<char*>(data), nullptr, nullptr, nullptr);
 	new_queue._head = new_node;
-
-	merge_2(new_queue);
+	merge(&new_queue);
 }
 
 char* binominal_queue::find_max()
 {
 	if (_head == nullptr)
 		throw std::runtime_error("Queue is empty");
-
-	binominal_node* max_priority_node = _head;
-	binominal_node* prevMin = nullptr;
-	binominal_node* current_node = _head->next;
-	binominal_node* prev = _head;
-
-	while (current_node != nullptr) {
-		if (current_node->key < max_priority_node->key) {
-			max_priority_node = current_node;
-			prevMin = prev;
-		}
-		prev = current_node;
-		current_node = current_node->next;
-	}
-
-	return max_priority_node->data;
+	return _head->data;
 }
 
 char* binominal_queue::remove_max()
@@ -127,29 +123,13 @@ char* binominal_queue::remove_max()
 		throw std::runtime_error("Queue is empty");
 
 	binominal_node* max_priority_node = _head;
-	binominal_node* prevMin = nullptr;
-	binominal_node* current_node = _head->next;
-	binominal_node* prev = _head;
-
-	//find max priority element
-	while (current_node != nullptr) {
-		if (current_node->key < max_priority_node->key) {
-			max_priority_node = current_node;
-			prevMin = prev;
-		}
-		prev = current_node;
-		current_node = current_node->next;
-	}
-
-	if (prevMin == nullptr)
-		_head = _head->next;
-	else
-		prevMin->next = max_priority_node->next;
+	_head = _head->next;
 
 	// delete node from queue
 	binominal_queue newHeap;
 	binominal_node* child = max_priority_node->child;
-	while (child != nullptr) {
+	while (child != nullptr) 
+	{
 		binominal_node* next = child->next;
 		child->parent = nullptr;
 		child->next = newHeap._head;
@@ -158,9 +138,13 @@ char* binominal_queue::remove_max()
 	}
 
 	char* result = max_priority_node->data;
+	char* data_copy = new char[std::strlen(result) + 1];
+	std::strcpy(data_copy, result);
+	delete[] result;
 	delete max_priority_node;
-	merge_2(newHeap);
 
-	return result;
+	merge(&newHeap);
+
+	return data_copy;
 }
 
