@@ -44,6 +44,9 @@ int program_7_main(int argc, char* argv[])
     heap.merge(&otherHeap);
     std::cout << "\nBinomial Heap after merging:" << std::endl;
     heap.printHeap();
+
+    binominal_queue hp = heap;
+    hp.printHeap();
     
     return 0;
 }

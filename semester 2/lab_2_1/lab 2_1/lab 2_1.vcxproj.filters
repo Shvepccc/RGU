@@ -45,6 +45,12 @@
     <ClCompile Include="..\..\libs\src\binominal_queue.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\src\fibonacci_queue.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="programs.h">
@@ -60,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\binominal_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\fibonacci_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
