@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\libs\src\binary_queue.cpp" />
     <ClCompile Include="..\..\libs\src\binominal_queue.cpp" />
+    <ClCompile Include="..\..\libs\src\fibonacci_queue.cpp" />
     <ClCompile Include="..\..\libs\src\matrix.cpp" />
     <ClCompile Include="1.cpp" />
     <ClCompile Include="2.cpp" />
@@ -137,11 +138,13 @@
     <ClCompile Include="4.cpp" />
     <ClCompile Include="6.cpp" />
     <ClCompile Include="7.cpp" />
+    <ClCompile Include="8.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\binary_queue.h" />
     <ClInclude Include="..\..\libs\binominal_queue.h" />
+    <ClInclude Include="..\..\libs\fibonacci_queue.h" />
     <ClInclude Include="..\..\libs\matrix.h" />
     <ClInclude Include="..\..\libs\priority_queue.h" />
     <ClInclude Include="programs.h" />

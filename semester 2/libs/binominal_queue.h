@@ -23,27 +23,28 @@ struct binominal_node
 
 };
 
-class binominal_queue : public priority_queue
+class binominal_queue final: public priority_queue
 {
 private:
 	binominal_node* _head;
 
-	binominal_queue& create_node(const char* data, int key);
-
 	void swap(binominal_node& a, binominal_node& b);
 	binominal_node* merge_trees(binominal_node* b1, binominal_node* b2);
 	void merge_trees_heap();
+	void delete_tree(binominal_node* node);
+	binominal_node* deep_copy(const binominal_node* arg);
 
 
 public:
 	binominal_queue() : _head(nullptr) {};
-	//TODO: write destructor, copy constructoe, operator =
-	~binominal_queue() = default;
+	~binominal_queue();
+	binominal_queue& operator= (const binominal_queue& arg);
+	binominal_queue(const binominal_queue& arg);
+
 
 	void insert(const char* data, int key) override;
 	char* find_max() override;
 	char* remove_max() override;
-
 	priority_queue* merge(priority_queue* q) override;
 
 	void printHeap()
@@ -63,7 +64,7 @@ private:
 	{
 		std::cout << root->data << " ";
 		binominal_node* child = root->child;
-		while (child != nullptr) 
+		while (child != nullptr)
 		{
 			printTree(child);
 			child = child->next;

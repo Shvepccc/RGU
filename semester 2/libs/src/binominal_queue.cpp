@@ -98,7 +98,7 @@ priority_queue* binominal_queue::merge(priority_queue* q)
 
 	merge_trees_heap();
 
-	cast_q->_head;
+	cast_q->_head = nullptr;
 	return this;
 }
 
@@ -125,7 +125,6 @@ char* binominal_queue::remove_max()
 	binominal_node* max_priority_node = _head;
 	_head = _head->next;
 
-	// delete node from queue
 	binominal_queue newHeap;
 	binominal_node* child = max_priority_node->child;
 	while (child != nullptr) 
@@ -148,3 +147,48 @@ char* binominal_queue::remove_max()
 	return data_copy;
 }
 
+void binominal_queue::delete_tree(binominal_node* node) {
+	if (node == nullptr) return;
+	delete_tree(node->child);
+	delete_tree(node->next);
+	delete node;
+}
+
+binominal_queue::~binominal_queue() {
+	delete_tree(_head);
+	_head = nullptr;
+}
+
+binominal_queue& binominal_queue::operator= (const binominal_queue& arg)
+{
+	if (this != &arg) { 
+		delete_tree(_head);
+		_head = deep_copy(arg._head);
+	}
+	return *this;
+}
+
+binominal_queue::binominal_queue(const binominal_queue& arg)
+{
+	_head = deep_copy(arg._head);
+}
+
+binominal_node* binominal_queue::deep_copy(const binominal_node* arg)
+{
+	if (arg == nullptr) nullptr;
+
+	binominal_node* new_arg = new binominal_node(
+		arg->key,
+		arg->degree,
+		arg->data,
+		nullptr,
+		deep_copy(arg->child),
+		deep_copy(arg->next)  
+	);
+
+	if (new_arg->child != nullptr) {
+		new_arg->child->parent = new_arg;
+	}
+
+	return new_arg;
+}

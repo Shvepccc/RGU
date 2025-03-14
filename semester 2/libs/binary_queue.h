@@ -3,7 +3,7 @@
 
 #include "priority_queue.h"
 
-class binary_queue : public priority_queue
+class binary_queue final: public priority_queue
 {
 	typedef struct priority_queue_node
 	{
