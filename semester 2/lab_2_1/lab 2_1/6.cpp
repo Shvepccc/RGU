@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../libs/binary_queue.h"
+#include "../libs_1/binary_queue.h"
 
 int program_6_main(int argc, char* argv[])
 {

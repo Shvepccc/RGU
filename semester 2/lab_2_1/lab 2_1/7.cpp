@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../libs/binominal_queue.h"
+#include "../libs_1/binominal_queue.h"
 #include <string>
 
 int program_7_main(int argc, char* argv[])

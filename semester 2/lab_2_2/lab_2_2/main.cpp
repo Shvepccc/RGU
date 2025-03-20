@@ -1,10 +1,10 @@
 #define START_PROGRAM 0;
 
 #include <iostream>
-#include "programs.h" 
+#include "programms.h"
 
 int main(int argc, char* argv[]) {
-    int prog_count = 7;
+    int prog_count = 1;
     int choice = START_PROGRAM;
     int (*programs[])(int argc, char* argv[]) =
     {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
             std::cin >> choice;
         }
 
-        if (choice >= 1 && choice <= prog_count && choice != 5) {
+        if (choice >= 1 && choice <= prog_count) {
             std::cout << "Running program " << choice << "...\n" << std::endl;
             programs[choice](argc, argv);
             return 0;

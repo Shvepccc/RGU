@@ -30,45 +30,60 @@
     <ClCompile Include="4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\src\matrix.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="6.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\src\binary_queue.cpp">
-      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="7.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\src\binominal_queue.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\src\fibonacci_queue.cpp">
+    <ClCompile Include="9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\binary_queue.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\binominal_queue.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\fibonacci_queue.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\matrix.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\skew_queue.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs_1\src\left_queue.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="programs.h">
+    <ClInclude Include="..\libs_1\binary_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\matrix.h">
+    <ClInclude Include="..\libs_1\binominal_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\binary_queue.h">
+    <ClInclude Include="..\libs_1\fibonacci_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\priority_queue.h">
+    <ClInclude Include="..\libs_1\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\binominal_queue.h">
+    <ClInclude Include="..\libs_1\priority_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\fibonacci_queue.h">
+    <ClInclude Include="..\libs_1\skew_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs_1\left_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
