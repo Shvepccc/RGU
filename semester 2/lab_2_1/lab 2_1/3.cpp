@@ -40,6 +40,12 @@ public:
 
 	complex_number& operator /=(complex_number const& arg)
 	{
+		if ((arg._real_part * arg._real_part + arg._imaginary_part * arg._imaginary_part) == 0 ||
+			(arg._real_part * arg._real_part + arg._imaginary_part * arg._imaginary_part) == 0)
+		{
+			throw std::overflow_error("Division by zero exception");
+		}
+
 		double temp_real_part = (this->_real_part * arg._real_part + this->_imaginary_part * arg._imaginary_part) /
 			(arg._real_part * arg._real_part + arg._imaginary_part * arg._imaginary_part);
 
@@ -81,9 +87,14 @@ public:
 		return sqrt(pow(this->_real_part, 2.0) + pow(this->_imaginary_part, 2.0));
 	}
 
-	double get_arg() const
+	double get_arg(double eps = 1e-10) const
 	{
-		if (this->_real_part == 0) 
+		if (eps < 0) 
+		{
+			throw std::invalid_argument("Epsilon must be bigger than 0");
+		}
+
+		if (this->_real_part < eps) 
 		{
 			return 0.0;
 		}

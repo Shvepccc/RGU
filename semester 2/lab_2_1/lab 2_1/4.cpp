@@ -3,7 +3,7 @@
 #include <crtdbg.h>
 
 #include <iostream>
-#include "../libs_1/matrix.h"
+#include "../libs/matrix.h"
 
 
 

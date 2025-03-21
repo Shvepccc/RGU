@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../libs_1/skew_queue.h"
+#include "../libs/skew_queue.h"
 
 int program_10_main(int argc, char* argv[])
 {
