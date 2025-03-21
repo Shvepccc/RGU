@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "../libs/left_queue.h"
+#include "../libs/decart_queue.h"
 
-int program_9_main(int argc, char* argv[])
+int program_11_main(int argc, char* argv[])
 {
-   left_queue q1;
+    decart_queue q1;
     for (int i = 1; i < 11; ++i)
     {
         char str[5];
@@ -13,7 +13,7 @@ int program_9_main(int argc, char* argv[])
         q1.insert(str, i);
     }
 
-    left_queue q2;
+    decart_queue q2;
     for (int i = 11; i < 21; ++i)
     {
         char str[5];
@@ -33,7 +33,7 @@ int program_9_main(int argc, char* argv[])
         std::cout << "\nDeleting max priority element ( " << str << " )\n";
     }
 
-    left_queue q3;
+    decart_queue q3;
     q3.insert("*10", 10);
     q3.insert("*20", 20);
     q3.insert("*5 ", 5);
@@ -49,5 +49,7 @@ int program_9_main(int argc, char* argv[])
         char* str = q3.remove_max();
         std::cout << "\nDeleting max priority element ( " << str << " )\n";
     }
+
+
     return 0;
 }

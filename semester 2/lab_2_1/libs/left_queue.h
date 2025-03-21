@@ -12,7 +12,6 @@ protected:
 		int rank;
 
 		node(int k, const char* d, int ra, node* l, node* r);
-
 	};
 
 	int get_rank(node* n);
@@ -20,6 +19,7 @@ protected:
 
 public:
 	priority_queue* merge(priority_queue* q) override;
+	void insert(const char* data, int key) override;
 };
 
 #endif

@@ -1,10 +1,10 @@
-#define START_PROGRAM 9;
+#define START_PROGRAM 11;
 
 #include <iostream>
 #include "programs.h" 
 
 int main(int argc, char* argv[]) {
-    int prog_count = 10;
+    int prog_count = 11;
     int choice = START_PROGRAM;
     int (*programs[])(int argc, char* argv[]) = 
         { 
@@ -17,7 +17,8 @@ int main(int argc, char* argv[]) {
         program_7_main,
         program_8_main,
         program_9_main,
-        program_10_main
+        program_10_main,
+        program_11_main
         };
 
     while (true) {

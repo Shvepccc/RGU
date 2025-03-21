@@ -44,7 +44,7 @@ public:
 	int get_size() { return _size; };
 
 
-	void insert(const char* data, int key) override;
+	virtual void insert(const char* data, int key) override;
 	char* find_max() override;
 	char* remove_max() override;
 	priority_queue* merge(priority_queue* q) override;

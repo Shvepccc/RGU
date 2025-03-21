@@ -18,9 +18,9 @@ public:
 		return arg_1._value == arg_2._value;
 	}
 
-	int get_bit(int n) const
+	int get_bit(unsigned int n) const
 	{
-		if (n < 0 || n >(sizeof(unsigned int) * 8)) 
+		if (n >= (sizeof(unsigned int) * 8)) 
 		{
 			throw std::invalid_argument("The bit number in 'get_bit' function or in '[]' is too large");
 		}

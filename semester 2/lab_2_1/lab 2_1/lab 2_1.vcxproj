@@ -128,14 +128,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\libs_1\src\binary_queue.cpp" />
-    <ClCompile Include="..\libs_1\src\binominal_queue.cpp" />
-    <ClCompile Include="..\libs_1\src\fibonacci_queue.cpp" />
-    <ClCompile Include="..\libs_1\src\left_queue.cpp" />
-    <ClCompile Include="..\libs_1\src\matrix.cpp" />
-    <ClCompile Include="..\libs_1\src\skew_queue.cpp" />
+    <ClCompile Include="..\libs\src\binary_queue.cpp" />
+    <ClCompile Include="..\libs\src\binominal_queue.cpp" />
+    <ClCompile Include="..\libs\src\decart_queue.cpp" />
+    <ClCompile Include="..\libs\src\fibonacci_queue.cpp" />
+    <ClCompile Include="..\libs\src\left_queue.cpp" />
+    <ClCompile Include="..\libs\src\matrix.cpp" />
+    <ClCompile Include="..\libs\src\skew_queue.cpp" />
     <ClCompile Include="1.cpp" />
     <ClCompile Include="10.cpp" />
+    <ClCompile Include="11.cpp" />
     <ClCompile Include="2.cpp" />
     <ClCompile Include="3.cpp" />
     <ClCompile Include="4.cpp" />
@@ -146,13 +148,15 @@
     <ClCompile Include="9.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libs_1\binary_queue.h" />
-    <ClInclude Include="..\libs_1\binominal_queue.h" />
-    <ClInclude Include="..\libs_1\fibonacci_queue.h" />
-    <ClInclude Include="..\libs_1\left_queue.h" />
-    <ClInclude Include="..\libs_1\matrix.h" />
-    <ClInclude Include="..\libs_1\priority_queue.h" />
-    <ClInclude Include="..\libs_1\skew_queue.h" />
+    <ClInclude Include="..\libs\binary_queue.h" />
+    <ClInclude Include="..\libs\binominal_queue.h" />
+    <ClInclude Include="..\libs\decart_queue.h" />
+    <ClInclude Include="..\libs\fibonacci_queue.h" />
+    <ClInclude Include="..\libs\left_queue.h" />
+    <ClInclude Include="..\libs\matrix.h" />
+    <ClInclude Include="..\libs\priority_queue.h" />
+    <ClInclude Include="..\libs\skew_queue.h" />
+    <ClInclude Include="programs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
