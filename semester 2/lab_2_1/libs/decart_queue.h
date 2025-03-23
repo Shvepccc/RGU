@@ -32,13 +32,11 @@ private:
 	void left_rotation(node*& subtree_root, bool validate);
 	void right_rotation(node*& subtree_root, bool validate);
 
-	enum removal_status
-	{
-		bst_find,
-		heap_sift_down
-	};
-
-	node* remove_max_inner(node* current_node, char*& result_str);
+	node* remove_max_inner(
+		node* current_node, 
+		char*& result_str, 
+		int& result_priority, 
+		bool delete_or_no);
 
 	bool insert_inner(
 		const char* key,
@@ -46,7 +44,6 @@ private:
 		int randomized_priority,
 		node*& current_node);
 
-	node* merge_inner(node* a, node* b);
 
 public:
 	bool is_live() { return _head != nullptr; };
@@ -63,6 +60,7 @@ public:
 	virtual void insert(const char* data, int key) override;
 	char* find_max() override;
 	char* remove_max() override;
+	char* remove_max(int& result_priority);
 	priority_queue* merge(priority_queue* q) override;
 
 	void print() {

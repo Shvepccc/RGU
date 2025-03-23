@@ -181,48 +181,67 @@ char* decart_queue::find_max()
     if (_head == nullptr)
         throw std::runtime_error("Queue is empty");
 
-    node* temp_ndoe = _head;
-    while (temp_ndoe->right_subtree != nullptr)
-    {
-        temp_ndoe = temp_ndoe->right_subtree;
-    }
-    return temp_ndoe->data;
+    char* result_str = nullptr;
+    int priority = 0;
+    remove_max_inner(_head, result_str, priority, false);
+    return result_str;
+
 }
 
-char* decart_queue::remove_max() {
+char* decart_queue::remove_max() 
+{
     if (_head == nullptr)
         throw std::runtime_error("Queue is empty");
 
     char* result_str = nullptr;
-    _head = remove_max_inner(_head, result_str);
+    int priority = 0;
+    _head = remove_max_inner(_head, result_str, priority, true);
     --_size;
     return result_str;
 }
 
-decart_queue::node* decart_queue::remove_max_inner(node* current_node, char*& result_str) {
-    if (current_node->right_subtree == nullptr) {
+char* decart_queue::remove_max(int& result_priority)
+{
+    if (_head == nullptr)
+        throw std::runtime_error("Queue is empty");
+
+    char* result_str = nullptr;
+    _head = remove_max_inner(_head, result_str, result_priority, true);
+    --_size;
+    return result_str;
+}
+
+decart_queue::node* decart_queue::remove_max_inner(node* current_node, char*& result_str, int& result_priority, bool delete_or_no) 
+{
+    if (current_node->right_subtree == nullptr) 
+    {
         result_str = new char[std::strlen(current_node->data) + 1];
         std::strcpy(result_str, current_node->data);
+        result_priority = current_node->priority;
 
-        node* temp = current_node;
-        current_node = current_node->left_subtree;
-        delete[] temp->data;
-        delete temp;
+        if (delete_or_no)
+        {
+            node* temp = current_node;
+            current_node = current_node->left_subtree;
+            delete[] temp->data;
+            delete temp;
+        }
 
-        return current_node;  // Возвращаем новый корень
+        return current_node;
     }
 
-    current_node->right_subtree = remove_max_inner(current_node->right_subtree, result_str);
+    current_node->right_subtree = remove_max_inner(current_node->right_subtree, result_str, result_priority, delete_or_no);
 
-    // Балансировка после удаления
-    if (current_node->left_subtree && (!current_node->right_subtree || current_node->left_subtree->r_priority > current_node->right_subtree->r_priority)) {
+    if (current_node->left_subtree && (!current_node->right_subtree || current_node->left_subtree->r_priority > current_node->right_subtree->r_priority)) 
+    {
         right_rotation(current_node);
     }
-    else if (current_node->right_subtree && current_node->right_subtree->r_priority > current_node->r_priority) {
+    else if (current_node->right_subtree && current_node->right_subtree->r_priority > current_node->r_priority) 
+    {
         left_rotation(current_node);
     }
 
-    return current_node;  // Возвращаем обновленный узел
+    return current_node;
 }
 
 
@@ -239,12 +258,11 @@ priority_queue* decart_queue::merge(priority_queue* q)
         throw std::invalid_argument("Invalid queue type in merge");
     }
 
-    this->_head = merge_inner(this->_head, cast_q->_head);
-    this->_size += cast_q->_size;
-    cast_q->_head = nullptr;
+    int priority = 0;
+    while (cast_q->get_size() != 0)
+    {
+        char* str = cast_q->remove_max(priority);
+        insert(str, priority);
+    }
     return this;
-}
-
-decart_queue::node* decart_queue::merge_inner(node* a, node* b) {
-    //TODO: merge inner
 }
