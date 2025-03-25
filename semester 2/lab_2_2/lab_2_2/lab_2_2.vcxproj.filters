@@ -21,7 +21,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\libs_2\src\bigint.cpp">
+    <ClCompile Include="2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\src\bigfloat.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\src\bigint.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +35,10 @@
     <ClInclude Include="programms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\libs_2\bigint.h">
+    <ClInclude Include="..\libs\bigfloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\bigint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
