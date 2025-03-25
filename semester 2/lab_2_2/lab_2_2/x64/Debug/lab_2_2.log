@@ -1,0 +1,60 @@
+﻿  bigfloat.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16): error C2079: 'bigint::division_result::german' uses undefined class 'bigint'
+  (compiling source file '../libs/src/bigfloat.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16): error C2079: 'bigint::division_result::remainder' uses undefined class 'bigint'
+  (compiling source file '../libs/src/bigfloat.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
+  (compiling source file '../libs/src/bigfloat.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2439: 'bigint::division_result::german': member could not be initialized
+  (compiling source file '../libs/src/bigfloat.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16):
+      see declaration of 'bigint::division_result::german'
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
+  (compiling source file '../libs/src/bigfloat.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2439: 'bigint::division_result::remainder': member could not be initialized
+  (compiling source file '../libs/src/bigfloat.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16):
+      see declaration of 'bigint::division_result::remainder'
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigfloat.cpp(3,22): error C2512: 'bigint': no appropriate default constructor available
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(7,7):
+      see declaration of 'bigint'
+  
+  bigint.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16): error C2079: 'bigint::division_result::german' uses undefined class 'bigint'
+  (compiling source file '../libs/src/bigint.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16): error C2079: 'bigint::division_result::remainder' uses undefined class 'bigint'
+  (compiling source file '../libs/src/bigint.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
+  (compiling source file '../libs/src/bigint.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2439: 'bigint::division_result::german': member could not be initialized
+  (compiling source file '../libs/src/bigint.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16):
+      see declaration of 'bigint::division_result::german'
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
+  (compiling source file '../libs/src/bigint.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2439: 'bigint::division_result::remainder': member could not be initialized
+  (compiling source file '../libs/src/bigint.cpp')
+      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16):
+      see declaration of 'bigint::division_result::remainder'
+  
+  main.cpp
+  Generating Code...

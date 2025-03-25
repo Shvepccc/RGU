@@ -4,12 +4,13 @@
 #include "programms.h"
 
 int main(int argc, char* argv[]) {
-    int prog_count = 1;
+    int prog_count = 2;
     int choice = START_PROGRAM;
     int (*programs[])(int argc, char* argv[]) =
     {
     nullptr,
-    program_1_main
+    program_1_main,
+    program_2_main
     };
 
     while (true) {
