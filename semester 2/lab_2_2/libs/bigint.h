@@ -1,5 +1,5 @@
-#ifndef BIGINT_H_
-#define BIGINT_H_
+#ifndef COURSE1_CPP_RGU_bigint_H
+#define COURSE1_CPP_RGU_bigint_H
 
 #include <corecrt.h>
 #include <iostream>
@@ -17,6 +17,8 @@ class bigint final
     }
 
 private:
+
+    static constexpr unsigned int HALF_DIGIT_SHIFT = (sizeof(int) << 2);
 
     static constexpr unsigned int SHIFT = (sizeof(int) << 2);
 
@@ -38,8 +40,38 @@ private:
 
 private:
 
+    static void addition_for_multiplication(
+        bigint& summand,
+        unsigned int* words_multiplication_result_digits,
+        unsigned int this_half_digit,
+        unsigned int multiplier_half_digit,
+        unsigned int shift_in_half_digits)
+    {
+        unsigned int pre_res = 
+            static_cast<unsigned long long>(this_half_digit) * 
+            static_cast<unsigned long long>(multiplier_half_digit);
+
+        words_multiplication_result_digits[0] = static_cast<unsigned int>(pre_res & 0xFFFFFFFF);
+        words_multiplication_result_digits[1] = static_cast<uint32_t>(pre_res >> 32);
+
+        summand += (bigint(reinterpret_cast<int*>(words_multiplication_result_digits), 3) << 
+            (HALF_DIGIT_SHIFT * shift_in_half_digits));
+    }
+
+private:
+
     int _oldest_digit;
     int* _other_digits;
+
+private:
+
+    void dispose();
+
+    void copy_from(
+        bigint const& other);
+
+    void move_from(
+        bigint&& other);
 
 public:
 
@@ -48,10 +80,24 @@ public:
     bigint(
         bigint const& other);
 
+    bigint(
+        bigint&& other) noexcept;
+
     bigint& operator=(
         bigint const& other);
 
+    bigint& operator=(
+        bigint&& other) noexcept;
+
+private:
+
+    bigint& from_array(
+        int const* digits_array,
+        size_t digits_count);
+
 public:
+
+    bigint();
 
     bigint(
         int const* digits,
@@ -60,6 +106,15 @@ public:
     bigint(
         char const* string_representation,
         size_t base);
+
+    bigint(int digit);
+
+private:
+
+    bigint& _raw_positive_increment();
+    bigint& _raw_positive_decrement();
+    bigint& _raw_negative_increment();
+    bigint& _raw_negative_decrement();
 
 private:
 
@@ -70,7 +125,16 @@ private:
     unsigned int operator[](
         size_t index) const noexcept;
 
+    int& operator[](
+        size_t index);
+
     bigint& negate()&;
+
+    bigint& invert()&;
+
+    int compare(bigint const& a, bigint const& b) const;
+
+    void remove_leading_zeros();
 
 public:
 
@@ -119,22 +183,24 @@ public:
     struct division_result
     {
 
-        bigint german;
-        bigint remainder;
-
-        division_result(
-            bigint const& german,
-            bigint const& remainder) :
-            german(german),
-            remainder(remainder)
-        {
-
-        }
+        //bigint german;
+        //bigint remainder;
+//
+        //division_result(
+        //    bigint const &german,
+        //    bigint const &remainder):
+        //    german(german),
+        //    remainder(remainder)
+        //{
+//
+        //}
 
     };
 
     division_result division(
         bigint const& divisor) const;
+
+    bigint abs() const;
 
 public:
 
@@ -181,16 +247,16 @@ public:
         bigint const& other) const;
 
     bigint& operator<<=(
-        bigint const& other)&;
+        size_t shift)&;
 
     bigint operator<<(
-        bigint const& other) const;
+        size_t shift) const;
 
     bigint& operator>>=(
-        bigint const& other)&;
+        size_t shift)&;
 
     bigint operator>>(
-        bigint const& other) const;
+        size_t shift) const;
 
 public:
 
@@ -204,4 +270,4 @@ public:
 
 };
 
-#endif
+#endif //COURSE1_CPP_RGU_bigint_H

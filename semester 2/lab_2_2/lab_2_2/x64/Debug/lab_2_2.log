@@ -1,60 +1,14 @@
-﻿  bigfloat.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16): error C2079: 'bigint::division_result::german' uses undefined class 'bigint'
-  (compiling source file '../libs/src/bigfloat.cpp')
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16): error C2079: 'bigint::division_result::remainder' uses undefined class 'bigint'
-  (compiling source file '../libs/src/bigfloat.cpp')
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
-  (compiling source file '../libs/src/bigfloat.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2439: 'bigint::division_result::german': member could not be initialized
-  (compiling source file '../libs/src/bigfloat.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16):
-      see declaration of 'bigint::division_result::german'
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
-  (compiling source file '../libs/src/bigfloat.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2439: 'bigint::division_result::remainder': member could not be initialized
-  (compiling source file '../libs/src/bigfloat.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16):
-      see declaration of 'bigint::division_result::remainder'
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigfloat.cpp(3,22): error C2512: 'bigint': no appropriate default constructor available
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(7,7):
-      see declaration of 'bigint'
-  
-  bigint.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16): error C2079: 'bigint::division_result::german' uses undefined class 'bigint'
+﻿  bigint.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(55,79): warning C4293: '>>': shift count negative or too big, undefined behavior
   (compiling source file '../libs/src/bigint.cpp')
   
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16): error C2079: 'bigint::division_result::remainder' uses undefined class 'bigint'
-  (compiling source file '../libs/src/bigint.cpp')
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
-  (compiling source file '../libs/src/bigint.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(95,19): error C2439: 'bigint::division_result::german': member could not be initialized
-  (compiling source file '../libs/src/bigint.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(89,16):
-      see declaration of 'bigint::division_result::german'
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2440: 'initializing': cannot convert from 'const bigint' to 'int'
-  (compiling source file '../libs/src/bigint.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(96,22): error C2439: 'bigint::division_result::remainder': member could not be initialized
-  (compiling source file '../libs/src/bigint.cpp')
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(90,16):
-      see declaration of 'bigint::division_result::remainder'
-  
-  main.cpp
-  Generating Code...
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(366,79): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(366,53): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(370,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(493,69): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(496,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(499,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(502,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(659,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(729,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  lab_2_2.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\x64\Debug\lab_2_2.exe

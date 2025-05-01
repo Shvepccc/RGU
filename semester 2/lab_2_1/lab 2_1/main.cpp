@@ -1,4 +1,4 @@
-#define START_PROGRAM 11;
+#define START_PROGRAM 0;
 
 #include <iostream>
 #include "programs.h" 

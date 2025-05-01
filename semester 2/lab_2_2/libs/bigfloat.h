@@ -3,7 +3,7 @@
 class bigfloat
 {
 private:
-	bigint _nominator;
+	bigint _numerator;
 	bigint _denominator;
 
 public:
