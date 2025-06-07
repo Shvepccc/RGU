@@ -1,16 +1,19 @@
-#define START_PROGRAM 1;
+#define START_PROGRAM 2;
 
 #include <iostream>
 #include "programms.h"
 
 int main(int argc, char* argv[]) {
-    int prog_count = 2;
+    int prog_count = 5;
     int choice = START_PROGRAM;
     int (*programs[])(int argc, char* argv[]) =
     {
     nullptr,
     program_1_main,
-    program_2_main
+    program_2_main,
+    program_3_main,
+    program_4_main,
+    program_5_main
     };
 
     while (true) {

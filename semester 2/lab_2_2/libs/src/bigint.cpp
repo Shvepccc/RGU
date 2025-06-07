@@ -1,7 +1,6 @@
 #include "../bigint.h"
 #include <bitset>
-
-//#define BITSET
+#include <cstdint>
 
 #pragma region Supporting functions to Rule of five
 
@@ -127,11 +126,12 @@ bigint& bigint::from_array(
     if (digits_count == 1)
     {
         _oldest_digit = *digits_array;
-
         return *this;
     }
 
-    while (digits_count != 1 && ((digits_array[digits_count - 1] == 0 && digits_array[digits_count - 2] >= 0) || (digits_array[digits_count - 1] == -1 && digits_array[digits_count - 2] < 0)))
+    while (digits_count != 1 && 
+        ((digits_array[digits_count - 1] == 0 && digits_array[digits_count - 2] >= 0) ||
+        (digits_array[digits_count - 1] == -1 && digits_array[digits_count - 2] < 0)))
     {
         --digits_count;
     }
@@ -360,28 +360,40 @@ bigint bigint::abs() const {
 }
 
 bigint& bigint::operator+=(bigint const& other)& {
-    unsigned int (*loword_hiword_function_pointers[])(unsigned int) = 
-        { get_loword, get_hiword };
 
-    unsigned int max_size = get_max(get_digits_count(), other.get_digits_count());
-    int* result = new int[max_size];
-    unsigned int extra_digit = 0;
+    int this_sign = get_sign();
+    int other_sign = other.get_sign();
 
-    for (int i = 0; i < max_size; ++i) {
-        result[i] = 0;
-
-        auto this_digit = static_cast<bigint const*>(this)->operator[](i);
-        auto other_digit = other[i];
-
-        for (int j = 0; j < 2; ++j) {
-            auto this_half_digit = loword_hiword_function_pointers[j](this_digit);
-            auto other_half_digit = loword_hiword_function_pointers[j](other_digit);
-
-            auto digits_sum = this_half_digit + other_half_digit + extra_digit;
-            extra_digit = digits_sum >> SHIFT;
-            result[i] += static_cast<int>((digits_sum & MASK) << (j * SHIFT));
-        }
+    if (this_sign == 0) {
+        return *this = other;
     }
+
+    if (other_sign == 0) {
+        return *this;
+    }
+
+    auto this_size = get_digits_count();
+    auto other_size = other.get_digits_count();
+    unsigned int max_size = get_max(this_size, other_size) + 1;
+
+    int* result = new int[max_size];
+    uint64_t extra_digit = 0;
+
+    for (int i = 0; i < max_size; ++i)
+    {
+        uint64_t this_digit = (i < this_size) ? static_cast<uint64_t>((*this)[i]) : 0;
+        uint64_t other_digit = (i < other_size) ? static_cast<uint64_t>(other[i]) : 0;
+
+        uint64_t res_sum = this_digit + other_digit + extra_digit;
+        extra_digit = res_sum >> 32;
+        result[i] = static_cast<int>(static_cast<uint32_t>(res_sum));
+    }    
+
+    // for (int i = 0; i < max_size; ++i)
+    // {
+    //     std::cout << result[i] << " ";
+    // }
+    // std::cout << std::endl;
 
     from_array(result, max_size);
     delete[] result;
@@ -852,15 +864,19 @@ std::ostream& operator<<(
     std::ostream& stream,
     bigint const& value)
 {
+    bool BITSET = false;
+
     auto digits_count = value.get_digits_count();
     for (auto i = 0; i < digits_count; ++i)
     {
-#ifdef BITSET
-        stream << std::bitset<32>(const_cast<bigint&>(value)[i]) << ' ';
-#else
-        stream << const_cast<bigint&>(value)[i] << ' ';
-#endif // BITSET
-
+        if (BITSET) 
+        {
+            stream << std::bitset<32>(const_cast<bigint&>(value)[i]) << ' ';
+        }
+        else
+        {
+            stream << const_cast<bigint&>(value)[i] << ' ';
+        }
     }
 
     return stream;
@@ -876,3 +892,25 @@ std::istream& operator>>(
 }
 
 #pragma endregion
+
+// unsigned int (*loword_hiword_function_pointers[])(unsigned int) =
+// { get_loword, get_hiword };
+// 
+// int extra_multipier = (this_sign == -1 || other_sign == -1) ? - 1 : 1;
+// 
+// for (int i = 0; i < max_size; ++i) {
+//     result[i] = 0;
+// 
+//     auto this_digit = static_cast<bigint const*>(this)->operator[](i);
+//     auto other_digit = other[i];
+// 
+//     for (int j = 0; j < 2; ++j) {
+//         auto this_half_digit = loword_hiword_function_pointers[j](this_digit);
+//         auto other_half_digit = loword_hiword_function_pointers[j](other_digit);
+// 
+//         auto digits_sum = this_half_digit + other_half_digit + extra_digit;
+//         extra_digit = (digits_sum >> SHIFT) * extra_multipier;
+//         result[i] += static_cast<int>((digits_sum & MASK) << (j * SHIFT));
+//     }
+// }
+// 

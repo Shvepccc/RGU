@@ -1,14 +1,2 @@
-﻿  bigint.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigint.h(55,79): warning C4293: '>>': shift count negative or too big, undefined behavior
-  (compiling source file '../libs/src/bigint.cpp')
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(366,79): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(366,53): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(370,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(493,69): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(496,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(499,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(502,73): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(659,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bigint.cpp(729,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  2.cpp
   lab_2_2.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\x64\Debug\lab_2_2.exe
