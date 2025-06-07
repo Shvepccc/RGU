@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\bigfloat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,13 +55,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "bigfloat.cpp",
               "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp",
               "RelativeDocumentMoniker": "libs\\src\\bigfloat.cpp",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp",
               "RelativeToolTip": "libs\\src\\bigfloat.cpp",
-              "ViewState": "AgIAADgCAAAAAAAAAADwv0gCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUBAAAAAAAAAADwvx0BAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-07T11:23:32.032Z",
               "EditorCaption": ""
@@ -107,13 +107,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "2.cpp",
               "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp",
               "RelativeDocumentMoniker": "lab_2_2\\2.cpp",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp",
               "RelativeToolTip": "lab_2_2\\2.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-06T14:43:22.261Z",
               "EditorCaption": ""
