@@ -48,6 +48,12 @@
     <ClCompile Include="..\libs\src\bf_complex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="programms.h">

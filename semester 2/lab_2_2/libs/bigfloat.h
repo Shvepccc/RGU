@@ -17,7 +17,6 @@ private:
 	void simplify();
 
 public:
-	bigint gcd(bigint a, bigint b);
 
 	bigfloat();
 	~bigfloat();
@@ -98,6 +97,7 @@ public:
 	friend bigfloat log2(bigfloat const& number, bigfloat const& EPS);
 	friend bigfloat ln(bigfloat const& number, bigfloat const& EPS);
 	friend bigfloat log10(bigfloat const& number, bigfloat const& EPS);
+	friend bigfloat sqrt(bigfloat const& number, bigfloat const& eps);
 
 	friend bigfloat atan2(bigfloat const& y, bigfloat const& x, bigfloat const& EPS);
 
@@ -110,6 +110,7 @@ public:
 
 	friend bigint floor_div(bigfloat const& numerator, bigfloat const& denominator);
 	friend double to_double(const bigfloat& value);
+	friend char* bigfloat_to_cstring(const bigfloat& value, size_t precision);
 };
 
 bigfloat bernoulli(int n);
@@ -120,5 +121,13 @@ bigfloat tg(const bigfloat& number, const bigfloat& EPS);
 bigfloat ctg(const bigfloat& number, const bigfloat& EPS);
 bigfloat sec(const bigfloat& number, const bigfloat& EPS);
 bigfloat cosec(const bigfloat& number, const bigfloat& EPS);
+
+bigfloat arcsin(bigfloat const& number, bigfloat const& EPS);
+bigfloat arccos(bigfloat const& number, bigfloat const& EPS);
+bigfloat arctg(bigfloat const& number, bigfloat const& EPS);
+bigfloat arcctg(bigfloat const& number, bigfloat const& EPS);
+
+char* bigfloat_to_cstring(const bigfloat& value, size_t precision = 500000);
+bigfloat sqrt(bigfloat const& number, bigfloat const& eps = bigfloat(1, 1e4));
 
 #endif // BIGFLOAT_H_

@@ -65,7 +65,7 @@ bigfloat& bigfloat::negate()
 
 void bigfloat::simplify()
 {
-	bigint divider = gcd(abs(_numerator), abs(_denominator));
+	bigint divider = boost::multiprecision::gcd(abs(_numerator), abs(_denominator));
 	if (divider == 1) {
 		return;
 	}
@@ -76,29 +76,6 @@ void bigfloat::simplify()
 		_numerator = -_numerator;
 		_denominator = -_denominator;
 	}
-}
-
-bigint bigfloat::gcd(bigint a, bigint b) //TODO: relocate it to bigint.cpp
-{
-	if (a == 0) return b;
-	if (b == 0) return a;
-	
-	int az = ctz(a);
-	int bz = ctz(b);
-	int shift = (az < bz) ? az : bz;
-	a >>= az, b >>= bz;
-	
-	while (a != b) {
-		if (a > b) {
-			a = (a - b) >> ctz(a - b);
-		}
-		else {
-			b = (b - a) >> ctz(b - a);
-		}
-	}
-	
-	return b << shift;
-	return 0;
 }
 
 bool bigfloat::is_zero()
@@ -252,6 +229,7 @@ bigfloat calculate_row(
 	bigfloat(*calc_member_function)(bigfloat const&, unsigned int), 
 	bigfloat const& eps)
 {
+	//std::cout << to_double(value) << std::endl;
 	bigfloat res;
 	bigfloat temp;
 	unsigned int n = 1;
@@ -263,7 +241,7 @@ bigfloat calculate_row(
 		if (abs(temp) < eps) { break; }
 		++n;
 	}
-	//std::cout << " (" << n << ")\n";
+	//std::cout << "(" << n << ") ";
 	return res;
 }
 
@@ -388,101 +366,231 @@ bigfloat arctg_member(bigfloat const& x, unsigned int n)
 	--n;
 	bigfloat num = pow(x, 2 * n + 1);
 	bigfloat denom = 2 * n + 1;
-	return pow(-1, n) * num / denom;
+	//return pow(-1, n) * num / denom;
+	return ((n % 2 == 0) ? 1 : -1) * pow(x, 2 * n + 1) / (2 * n + 1);
 }
+
+//bigfloat pi_member(bigfloat const& x, unsigned int n)
+//{
+//	--n;
+//	if (n == 0)
+//		return bigfloat(1.0);
+//
+//	return bigfloat(((n % 2 == 0) ? 1 : -1), 2 * n + 1);
+//}
 
 bigfloat pi_member(bigfloat const& x, unsigned int n)
 {
 	--n;
-	if (n == 0)
-		return bigfloat(1.0);
+	if (n == 0) return 3;
+	static bigfloat four(4.0);
 
-	return bigfloat(pow(-1, n), 2 * n + 1);
+	bigfloat sign = (n % 2 == 0) ? 1 : -1;
+	bigfloat denom = (2 * n) * (2 * n + 1) * (2 * n + 2);
+	return sign * (four / denom);
 }
 
 bigfloat sin(bigfloat const& number, bigfloat const& EPS)
 {
 	bigfloat two_pi = bigfloat::PI() * 2;
 	bigfloat reduced = number - two_pi * floor_div(number, two_pi);
-	//std::cout << reduced << "\n";
 	return calculate_row(reduced, sin_member, EPS);
 }
 
-bigfloat cos(bigfloat const& number, bigfloat const& EPS) {
-	return calculate_row(number, cos_member, EPS);
+bigfloat cos(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat two_pi = bigfloat::PI() * 2;
+	bigfloat reduced = number - two_pi * floor_div(number, two_pi);
+	return calculate_row(reduced, cos_member, EPS);
 }
 
-bigfloat tg(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.57075))
-		throw std::invalid_argument("Argument of abs(tg) should be less than Pi/2.");
-	return calculate_row(number, tg_member, EPS);
+bigfloat tg(bigfloat const& number, bigfloat const& EPS)
+{
+	//bigfloat pi = bigfloat::PI();
+	//bigfloat reduced = number - pi * floor_div(number, pi) - (pi / 2);
+
+	bigfloat pi = bigfloat::PI();
+	bigfloat two_pi = pi * 2;
+	bool negate = false;
+
+	bigfloat reduced = number - two_pi * floor_div(number + pi, two_pi);
+
+	if (reduced > pi / 2)
+	{
+		reduced = pi - reduced;
+		negate = !negate;
+		reduced.simplify();
+	}		
+	else if (reduced <= -pi / 2)
+	{
+		reduced = -pi - reduced;
+		negate = !negate;
+		reduced.simplify();
+	}
+	else if (reduced < bigfloat(0))
+	{
+		reduced = -reduced;
+		negate = !negate;
+		reduced.simplify();
+	}
+
+	bigfloat err = abs(reduced / (pi / 2));
+	
+	if (err == bigfloat(1.0))
+		throw std::invalid_argument("The tg argument must not be equal to pi/2 or 3*pi/2.");
+
+	bigfloat res = calculate_row(reduced, tg_member, EPS);
+
+	res.simplify();
+	return negate ? -res : res;
 }
 
-bigfloat ctg(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.57075) || abs(number) < 0)
-		throw std::invalid_argument("Argument of ctg should be less than Pi/2 and more than 0.");
-	return bigfloat(1.0) / calculate_row(number, tg_member, EPS);
+bigfloat ctg(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat pi = bigfloat::PI();
+	bigfloat two_pi = pi * 2;
+
+	bigfloat reduced = number - two_pi * floor_div(number, two_pi);
+
+	if (reduced > pi)
+		reduced = two_pi - reduced;
+
+	//std::cout << "reduced: " << to_double(reduced) << "\n";
+	if (reduced == bigfloat(0) || reduced == pi)
+		throw std::invalid_argument("The ctg argument must not be equal to 0 or pi");
+
+	return bigfloat(1.0) / calculate_row(reduced, tg_member, EPS);
 }
 
-bigfloat sec(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.57075))
-		throw std::invalid_argument("Argument of abs(tg) should be less than Pi/2.");
-	return bigfloat(1.0) / cos(number, EPS);
+bigfloat sec(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat pi = bigfloat::PI();
+	bigfloat two_pi = pi * 2;
+
+	bigfloat reduced = number - two_pi * floor_div(number + pi, two_pi);
+	if (reduced > pi / 2)
+		reduced = pi - reduced;
+	else if (reduced < -pi / 2)
+		reduced = -pi - reduced;
+
+	bigfloat err = abs(reduced / (pi / 2));
+
+	if (err == bigfloat(1.0))
+		throw std::invalid_argument("The sec argument must not be equal to pi/2 or 3*pi/2.");
+
+	return bigfloat(1.0) / cos(reduced, EPS);
 }
 
-bigfloat cosec(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.57075) || abs(number) < 0)
-		throw std::invalid_argument("Argument of ctg should be less than Pi/2 and more than 0.");
-	return calculate_row(number, cosec_member, EPS);
+bigfloat cosec(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat pi = bigfloat::PI();
+	bigfloat two_pi = pi * 2;
+
+	bigfloat reduced = number - two_pi * floor_div(number, two_pi);
+
+	if (reduced > pi)
+		reduced = two_pi - reduced;
+
+	if (reduced == bigfloat(0) || reduced == pi)
+		throw std::invalid_argument("The cosec argument must not be equal to 0 or pi");
+
+	return calculate_row(reduced, cosec_member, EPS);
 }
 
-bigfloat arcsin(bigfloat const& number, bigfloat const& EPS) {
+bigfloat arcsin(bigfloat const& number, bigfloat const& EPS)
+{
 	if (abs(number) > bigfloat(1.0))
 		throw std::invalid_argument("Abs of argument of arcsin should be less or equel of 1.");
-	bigfloat inner_eps = (number > bigfloat(8, 10)) ? small_eps : EPS;
+
+	bigfloat inner_eps = (abs(number) > bigfloat(7, 10)) ? small_eps : EPS;
+
 	return calculate_row(number, arcsin_member, inner_eps);
 }
 
-bigfloat arccos(bigfloat const& number, bigfloat const& EPS) {
+bigfloat arccos(bigfloat const& number, bigfloat const& EPS)
+{
 	if (abs(number) > bigfloat(1.0))
 		throw std::invalid_argument("Abs of argument of arccos should be less or equel of 1.");
-	bigfloat inner_eps = (number > bigfloat(8, 10)) ? small_eps : EPS;
+
+	bigfloat inner_eps = (abs(number) > bigfloat(7, 10)) ? small_eps : EPS;
+
 	return  (bigfloat::PI() / 2) - arcsin(number, EPS);
 }
 
-bigfloat arctg(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.0))
-		throw std::invalid_argument("Abs of argument of arctg should be less or equel of 1.");
+bigfloat arctg(bigfloat const& number, bigfloat const& EPS)
+{	
+	bigfloat new_arg = number;
+	bigfloat one(1);
+	bigfloat pi = bigfloat::PI();
+	bigfloat two_pi = pi * 2;
+	bigfloat res;
 
-	bigfloat inner_eps = (number > bigfloat(8, 10)) ? small_eps : EPS;
-	return calculate_row(number, arctg_member, inner_eps);
+	//new_arg = number - two_pi * floor_div(number + pi, two_pi);
+
+	if (new_arg > one)
+	{
+		res = (pi / 2) - calculate_row(one / new_arg, arctg_member, EPS);
+	}
+	else if (new_arg < -one)
+	{
+		res = (-pi / 2) + calculate_row(one / abs(new_arg), arctg_member, EPS);
+	}
+	else if (new_arg > bigfloat(1, 2))
+	{
+		new_arg = (new_arg - one) / (new_arg + one);
+		res = (pi / bigfloat(4)) + calculate_row(new_arg, arctg_member, EPS);
+	}
+	else if (new_arg < -bigfloat(1, 2))
+	{
+		new_arg = (new_arg + one) / (one - new_arg);
+		res = (-pi / 4) + calculate_row(new_arg, arctg_member, EPS);
+	}
+	else
+	{
+		bigfloat inner_eps = (abs(new_arg) > bigfloat(7, 10)) ? small_eps : EPS;
+		res = calculate_row(new_arg, arctg_member, inner_eps);
+	}
+	res.simplify();
+	return res;
 }
 
-bigfloat arcctg(bigfloat const& number, bigfloat const& EPS) {
-	if (abs(number) > bigfloat(1.0))
-		throw std::invalid_argument("Abs of argument of arcctg should be less or equel of 1.");
-	bigfloat inner_eps = (number > bigfloat(8, 10)) ? small_eps : EPS;
+bigfloat arcctg(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat pi = bigfloat::PI();
+	bigfloat inner_eps = (abs(number) > bigfloat(7, 10)) ? small_eps : EPS;
 	return (bigfloat::PI() / 2) - calculate_row(number, arctg_member, inner_eps);
+
+	if (abs(number) > bigfloat(1))
+	{
+		return calculate_row(bigfloat(1) / number, arctg_member, inner_eps);
+	}
+	else
+	{
+		return (bigfloat::PI() / 2) - calculate_row(number, arctg_member, inner_eps);
+	}
 }
 
 bigfloat atan2(bigfloat const& y, bigfloat const& x, bigfloat const& EPS)
 {
-	if (x > 0)
+	bigfloat zero(0);
+	bigfloat pi = bigfloat::PI();
+
+	if (x > zero)
 		return arctg(y / x, EPS);
 
-	if (x < 0 && y >= 0)
-		return arctg(y / x, EPS) + bigfloat::PI();
+	if (x < zero && y >= zero)
+		return arctg(y / x, EPS) + pi;
 
-	if (x < 0 && y < 0)
-		return arctg(y / x, EPS) - bigfloat::PI();
+	if (x < zero && y < zero)
+		return arctg(y / x, EPS) - pi;
 
-	if (x == 0 && y > 0)
+	if (x == zero && y > zero)
 		return (bigfloat::PI() / 2);
 
-	if (x == 0 && y < 0)
-		return -(bigfloat::PI() / 2);
+	if (x == zero && y < zero)
+		return -(pi / 2);
 
-	return bigfloat(0);
+	return bigfloat(zero);
 }
 
 bigfloat pow(bigfloat const& base, int exp)
@@ -519,6 +627,58 @@ bigfloat radical(bigfloat const& radicand, unsigned int const& index, bigfloat c
 	return x;
 }
 
+bigfloat sqrt(bigfloat const& number, bigfloat const& eps)
+{
+	if (number < bigfloat(0))
+	{
+		throw std::invalid_argument("Cannot calculate square root of a negative number");
+	}
+	if (number == bigfloat(0))
+	{
+		return bigfloat(0);
+	}
+
+	double approx_double = (double)(number._numerator).convert_to<double>() / (number._denominator).convert_to<double>();
+	if (approx_double <= 0.0)
+	{
+		throw std::invalid_argument("Cannot calculate square root of non-positive number");
+	}
+	approx_double = std::sqrt(approx_double);
+
+	bigfloat guess(approx_double);
+	if (guess == bigfloat(0)) {
+		guess = bigfloat(1);
+	}
+
+	bigfloat two(2);
+	bigfloat prev_guess;
+	int max_iter = 1000000;
+	int iter = 0;
+
+	do {
+		prev_guess = guess;
+		if (guess == bigfloat(0))
+		{
+			throw std::runtime_error("sqrt: guess became zero, division by zero avoided");
+		}
+		guess = (guess + (number) / guess) / two;
+
+		bigfloat diff = abs(guess - prev_guess);
+		bigfloat rel_diff = diff / abs(guess);
+		if (rel_diff < eps && iter > 0) {
+			break;
+		}
+
+		iter++;
+		if (iter > max_iter)
+		{
+			throw std::runtime_error("sqrt: did not converge within max iterations");
+		}
+	} while (true);
+
+	return guess;
+}
+
 bigfloat ln(bigfloat const& number, bigfloat const& EPS)
 {
 	if (number <= 0) {
@@ -547,71 +707,52 @@ bigfloat log10(bigfloat const& number, bigfloat const& EPS) {
 	return ln(number, EPS) / ln(10, EPS);
 }
 
-bigfloat bigfloat::PI() {
-	static bigfloat pi = 4 * calculate_row(bigfloat(1.0), pi_member, bigfloat(1, 600));
+bigfloat bigfloat::PI()
+{
+	//std::cout << "calculating pi" << std::endl;
+	//static bigfloat pi = calculate_row(bigfloat(1.0), pi_member, bigfloat(1, 1e10));
+	static bigfloat pi(3141592653589793238462643383279502884197.0, 1e39);
 	return pi;
 }
 
 bigint floor_div(bigfloat const& numerator, bigfloat const& denominator)
 {
-	// a/b = (a_n / a_d) / (b_n / b_d) = (a_n * b_d) / (a_d * b_n)
 	bigint a_num = numerator._numerator;
 	bigint a_den = numerator._denominator;
 	bigint b_num = denominator._numerator;
 	bigint b_den = denominator._denominator;
 
-	// Реальное деление дробей: (a_num * b_den) / (a_den * b_num)
 	bigint num = a_num * b_den;
 	bigint den = a_den * b_num;
 
-	// Выполняем целочисленное деление с округлением вниз
 	if ((num >= 0 && den > 0) || (num <= 0 && den < 0)) {
-		// положительный результат — обычное деление
 		return num / den;
 	}
 	else {
-		// отрицательный результат — округляем вниз
 		return (num - den + 1) / den;
 	}
 }
 
-//double to_double(const bigfloat& value)
-//{
-//	double num = value._numerator.convert_to<double>();
-//	double den = value._denominator.convert_to<double>();
-//
-//	return num / den;
-//}
-
 double to_double(const bigfloat& value)
 {
-	// Быстрый выход: если числитель ноль, сразу возвращаем 0.0
 	if (value._numerator == 0) return 0.0;
 
 	using boost::multiprecision::cpp_int;
 
-	// Получаем знак
 	bool negative = value._numerator < 0;
 
 	cpp_int abs_num = abs(value._numerator);
 	cpp_int abs_den = abs(value._denominator);
 
-	// Целая часть от деления
 	cpp_int integer_part = abs_num / abs_den;
 	cpp_int remainder = abs_num % abs_den;
 
-	// Преобразуем целую часть
 	double result = integer_part.convert_to<double>();
 
-	// Если есть остаток — добавим дробную часть
 	if (remainder != 0)
 	{
-		// Для вычисления дробной части нужно ограничить количество точных бит
-		// Преобразуем остаток / знаменатель в double вручную
-
-		// Используем 53 бита (максимальная точность double)
 		const int max_fraction_bits = 53;
-		cpp_int scaled = (remainder << max_fraction_bits); // * 2^53
+		cpp_int scaled = (remainder << max_fraction_bits);
 		cpp_int frac = scaled / abs_den;
 
 		double fraction = frac.convert_to<double>() / (1ULL << max_fraction_bits);
@@ -620,4 +761,71 @@ double to_double(const bigfloat& value)
 	}
 
 	return negative ? -result : result;
+}
+
+char* bigint_to_cstring(const bigint& value)
+{
+	// Считаем количество цифр
+	bigint temp = value;
+	size_t digits = 0;
+	if (temp == 0) digits = 1;
+	else {
+		while (temp != 0) {
+			temp /= 10;
+			++digits;
+		}
+	}
+
+	char* result = new char[digits + 2]; // +1 for sign, +1 for '\0'
+	result[digits] = '\0';
+
+	temp = value;
+	for (size_t i = digits; i > 0; --i) {
+		bigint digit = temp % 10;
+		result[i - 1] = static_cast<char>('0' + static_cast<int>(digit));
+		temp /= 10;
+	}
+
+	return result;
+}
+
+// Главная функция перевода bigfloat -> char*
+char* bigfloat_to_cstring(const bigfloat& value, size_t precision)
+{
+	const bigint& num = value._numerator;
+	const bigint& den = value._denominator;
+
+	bigint int_part = num / den;
+	bigint rem = num % den;
+
+	// Переводим целую часть
+	char* int_str = bigint_to_cstring(int_part);
+
+	// Выделим буфер под целую часть, точку, дробную часть и '\0'
+	size_t int_len = 0;
+	while (int_str[int_len] != '\0') ++int_len;
+
+	size_t total_len = int_len + 1 + precision + 1;
+	char* result = new char[total_len];
+
+	// Копируем целую часть
+	for (size_t i = 0; i < int_len; ++i)
+		result[i] = int_str[i];
+
+	delete[] int_str;
+
+	result[int_len] = '.'; // ставим точку
+
+	// Вычисляем дробную часть
+	bigint r = rem;
+	for (size_t i = 0; i < precision; ++i)
+	{
+		r *= 10;
+		bigint digit = r / den;
+		r %= den;
+		result[int_len + 1 + i] = static_cast<char>('0' + static_cast<int>(digit));
+	}
+
+	result[total_len - 1] = '\0'; // финальный null-terminator
+	return result;
 }

@@ -91,9 +91,6 @@ bigfloat bf_complex::get_arg(bigfloat eps) const
 	if (eps < 0)
 		throw std::invalid_argument("Epsilon must be bigger than 0");
 	
-	if (this->_real_part < eps)
-		return bigfloat(0);
-
 	return atan2(this->_imaginary_part, this->_real_part, eps);
 }
 
