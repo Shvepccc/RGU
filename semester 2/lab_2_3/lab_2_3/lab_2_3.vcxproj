@@ -129,9 +129,12 @@
   <ItemGroup>
     <ClCompile Include="1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="simulate_elevators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common_libs\helpers.h" />
     <ClInclude Include="programms.h" />
+    <ClInclude Include="simulate_elevators.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

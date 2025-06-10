@@ -21,9 +21,18 @@
     <ClCompile Include="1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="simulate_elevators.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="programms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simulate_elevators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common_libs\helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
