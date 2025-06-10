@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:lab_2_2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:lab_2_2\\2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\5.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:lab_2_2\\5.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\bigfloat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:libs\\bigfloat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C17BB907-9997-4955-BA88-FC1625C814B5}|lab_2_2\\lab_2_2.vcxproj|solutionrelative:libs\\src\\bigfloat.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +26,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "5.cpp",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\5.cpp",
+              "RelativeDocumentMoniker": "lab_2_2\\5.cpp",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\5.cpp",
+              "RelativeToolTip": "lab_2_2\\5.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-10T12:30:26.33Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -40,48 +53,35 @@
               "RelativeDocumentMoniker": "lab_2_2\\main.cpp",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\main.cpp",
               "RelativeToolTip": "lab_2_2\\main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-09T15:36:07.571Z",
+              "WhenOpened": "2025-06-10T12:09:42.649Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "bigfloat.h",
               "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\bigfloat.h",
               "RelativeDocumentMoniker": "libs\\bigfloat.h",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\bigfloat.h",
               "RelativeToolTip": "libs\\bigfloat.h",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAmwGUAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-07T11:24:19.897Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "bigfloat.cpp",
               "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp",
               "RelativeDocumentMoniker": "libs\\src\\bigfloat.cpp",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\libs\\src\\bigfloat.cpp",
               "RelativeToolTip": "libs\\src\\bigfloat.cpp",
-              "ViewState": "AgIAACkCAAAAAAAAAAAWwEECAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAALAAAAAAAAAAAIAwwMgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-07T11:23:32.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "2.cpp",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp",
-              "RelativeDocumentMoniker": "lab_2_2\\2.cpp",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2\\lab_2_2\\2.cpp",
-              "RelativeToolTip": "lab_2_2\\2.cpp",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAADYAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-06T14:43:22.261Z",
               "EditorCaption": ""
             }
           ]

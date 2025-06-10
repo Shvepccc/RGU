@@ -225,19 +225,19 @@ int program_9_main(int argc, char* argv[])
 	int count_of_iterations = 500;
 	
 	//way 1
-	my_res = bigfloat_to_cstring(Beily_Boruen_Plaff(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Beily_Boruen_Plaff(count_of_iterations), count_of_numbers);
 	std::cout << "Beily_Boruen_Plaff: " << my_res << "\n\n";
 
 	//way 2
-	my_res = bigfloat_to_cstring(Bellar(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Bellar(count_of_iterations), count_of_numbers);
 	std::cout << "Bellar: " << my_res << "\n\n";
 	
 	//way 3
-	my_res = bigfloat_to_cstring(Chudnovsky(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Chudnovsky(count_of_iterations), count_of_numbers);
 	std::cout << "Chudnovsky: " << my_res << "\n\n";
 
 	//way 4
-	my_res = bigfloat_to_cstring(Ramanudjan(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Ramanudjan(count_of_iterations), count_of_numbers);
 	std::cout << "Ramanudjan: " << my_res << "\n\n";
 
     return 0;

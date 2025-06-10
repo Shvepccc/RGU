@@ -93,7 +93,6 @@ public:
 	friend bigfloat pow(bigfloat const& base, int exp);
 	friend bigfloat radical(bigfloat const& radicand, unsigned int const& index, bigfloat const& EPS);
 
-	//TODO: log, log2 and log10 did't work
 	friend bigfloat log2(bigfloat const& number, bigfloat const& EPS);
 	friend bigfloat ln(bigfloat const& number, bigfloat const& EPS);
 	friend bigfloat log10(bigfloat const& number, bigfloat const& EPS);
@@ -110,7 +109,7 @@ public:
 
 	friend bigint floor_div(bigfloat const& numerator, bigfloat const& denominator);
 	friend double to_double(const bigfloat& value);
-	friend char* bigfloat_to_cstring(const bigfloat& value, size_t precision);
+	friend char* to_cstring(const bigfloat& value, size_t precision);
 };
 
 bigfloat bernoulli(int n);
@@ -127,7 +126,12 @@ bigfloat arccos(bigfloat const& number, bigfloat const& EPS);
 bigfloat arctg(bigfloat const& number, bigfloat const& EPS);
 bigfloat arcctg(bigfloat const& number, bigfloat const& EPS);
 
-char* bigfloat_to_cstring(const bigfloat& value, size_t precision = 500000);
+bigfloat log2(bigfloat const& number, bigfloat const& EPS);
+bigfloat ln(bigfloat const& number, bigfloat const& EPS);
+bigfloat log10(bigfloat const& number, bigfloat const& EPS);
 bigfloat sqrt(bigfloat const& number, bigfloat const& eps = bigfloat(1, 1e4));
+
+char* to_cstring(const bigfloat& value, size_t precision = 500000);
+
 
 #endif // BIGFLOAT_H_

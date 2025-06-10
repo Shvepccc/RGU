@@ -57,27 +57,74 @@ void test_arctg_value(const bigfloat& x, const bigfloat& eps, const std::string&
     std::cout << "delta = " << std::setprecision(20) << ((delta > 1e-8) ? delta : 0) << "\n\n";
 }
 
+void test_log_function(
+    const std::string& name,
+    bigfloat(*log_fn)(const bigfloat&, const bigfloat&),
+    double(*ref_fn)(double),
+    const std::vector<double>& inputs,
+    const bigfloat& eps)
+{
+    std::cout << "Testing: " << name << "\n";
+
+    for (double d : inputs)
+    {
+        if (d <= 0) {
+            std::cout << "  Skipping invalid input: " << d << " (log undefined)\n";
+            continue;
+        }
+
+        bigfloat x(d);
+        bigfloat result = log_fn(x, eps);
+        double reference = ref_fn(d);
+        double approx = to_double(result);
+        double error = std::abs(approx - reference);
+
+        std::cout << std::fixed << std::setprecision(10);
+        std::cout << "  x = " << d
+            << ", log = " << approx
+            << ", expected = " << reference
+            << ", error = " << error << "\n";
+    }
+
+    std::cout << "\n";
+}
+
+
 int program_2_main(int argc, char* argv[])
 {
     try
     {
 
-        //bigfloat eps(1, 10000000000); // 1e-10
-        //
-        //test_arctg_value(bigfloat(0), eps, "Test 1: arctg(0)");
-        //test_arctg_value(bigfloat(1), eps, "Test 2: arctg(1) (should be pi/4)");
-        //test_arctg_value(bigfloat(-1), eps, "Test 3: arctg(-1) (should be -pi/4)");
-        //test_arctg_value(bigfloat(10), eps, "Test 4: arctg(10)");
-        //test_arctg_value(bigfloat(-10), eps, "Test 5: arctg(-10)");
-        //test_arctg_value(bigfloat(0.5), eps, "Test 6: arctg(0.5)");
-        //test_arctg_value(bigfloat(-0.5), eps, "Test 7: arctg(-0.5)");
-        //test_arctg_value(bigfloat(1000000), eps, "Test 8: arctg(1e6) (should be close to pi/2)");
-        //test_arctg_value(bigfloat(-1000000), eps, "Test 9: arctg(-1e6) (should be close to -pi/2)");
-
-        //std::cout << std::fixed << std::setprecision(40) << to_double(bigfloat::PI()) << std::endl;
         const bigfloat defaultEXP(1, 1e10);
+
+#pragma region testing log
+
+        //std::vector<double> test_values = {
+        //    0.0001, 0.01, 0.1,
+        //    0.5, 1.0, 1.5, 2.0, 2.718281828,
+        //    10.0, 100.0, 1024.0, 1e6
+        //};
+        //
+        //test_log_function("ln", ln, std::log, test_values, defaultEXP);
+        //test_log_function("log2", log2, std::log2, test_values, defaultEXP);
+        //test_log_function("log10", log10, std::log10, test_values, defaultEXP);
+
+#pragma endregion
+
+#pragma region testing trigonometry
+
+        //test_arctg_value(bigfloat(0), defaultEXP, "Test 1: arctg(0)");
+        //test_arctg_value(bigfloat(1), defaultEXP, "Test 2: arctg(1) (should be pi/4)");
+        //test_arctg_value(bigfloat(-1), defaultEXP, "Test 3: arctg(-1) (should be -pi/4)");
+        //test_arctg_value(bigfloat(10), defaultEXP, "Test 4: arctg(10)");
+        //test_arctg_value(bigfloat(-10), defaultEXP, "Test 5: arctg(-10)");
+        //test_arctg_value(bigfloat(0.5), defaultEXP, "Test 6: arctg(0.5)");
+        //test_arctg_value(bigfloat(-0.5), defaultEXP, "Test 7: arctg(-0.5)");
+        //test_arctg_value(bigfloat(1000000), defaultEXP, "Test 8: arctg(1e6) (should be close to pi/2)");
+        //test_arctg_value(bigfloat(-1000000), defaultEXP, "Test 9: arctg(-1e6) (should be close to -pi/2)");
+
         //std::cout << "arcsin(1/2) = " << (to_double(arcsin(bigfloat(1, 2), defaultEXP) * bigfloat(6))) << "\n";
-        //std::cout << "sin(1/4) = " << to_double(sin(bigfloat(10000000000, 1), defaultEXP)) << "\n";
+        //std::cout << "sin(1e10) = " << to_double(sin(bigfloat(10000000000, 1), defaultEXP)) << "\n";
 
         //test_trig_func("sin", sin, std::sin);
         //test_trig_func("cos", cos, std::cos);
@@ -90,7 +137,8 @@ int program_2_main(int argc, char* argv[])
         //test_trig_func("arctg", arctg, std::atan);
         //test_trig_func("arcctg", arcctg, [](double x) { return std::atan(1.0 / x); });
 
-        //const bigfloat defaultEXP(1, 1e8);
+#pragma endregion
+
         //bigfloat a(1, 4);
         //bigfloat b(2, 3);
         //bigfloat c(-12, 4);
@@ -142,10 +190,8 @@ int program_2_main(int argc, char* argv[])
         //std::cout << "Another functions:" << std::endl;
         //std::cout << "(2/3)^3 = " << pow(b, 3) << "\n";
         //std::cout << "(2/3)^-1 = " << pow(b, -1) << "\n";
-        //std::cout << "radical(4/9, 2) = " << radical(pow(b, 2), 2, defaultEXP) << "\n";
-        //std::cout << "log2(16/1) = " << log2(bigfloat(16.0), defaultEXP) << "\n"; // don't work
-        //
-        //std::cout << "sin(22/7) = " << sin(bigfloat(1, 2), defaultEXP) << "\n";
+        //std::cout << "radical(4/9, 2) = " << to_double(radical(pow(b, 2), 2, defaultEXP)) << "\n";
+        //std::cout << "log2(16/1) = " << to_double(log2(bigfloat(16.0), defaultEXP)) << "\n"; // don't work
     }
     catch (const std::exception& e)
     {

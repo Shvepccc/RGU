@@ -114,21 +114,24 @@ bigfloat collect_value(std::istream& stream)
 {
 	int flag = 1;
 	bool first_ch_flag = true;
-	bigint temp_bigint_1 = 1, temp_bigint_2 = 1;
+	bigint temp_bigint_1 = 0, temp_bigint_2 = 0;
 	while (true)
 	{
 		char cur_ch = stream.peek();
+		std::cout << cur_ch;
 		if (std::isdigit(cur_ch))
 		{
 			if (flag == 1)
 			{
 				if (!first_ch_flag) temp_bigint_1 *= 10;
-				temp_bigint_1 = cur_ch - '0';
+				temp_bigint_1 += (cur_ch - '0');
+				first_ch_flag = false;
 			}
 			else
 			{
 				if (!first_ch_flag) temp_bigint_2 *= 10;
-				temp_bigint_2 = cur_ch - '0';
+				temp_bigint_2 += (cur_ch - '0');
+				first_ch_flag = false;
 			}
 			stream.get();
 		}
@@ -177,7 +180,8 @@ std::istream& operator>>(
 	}
 
 	// collect first ratio
-	real_part = sign * collect_value(stream);
+	real_part = bigfloat(sign, 1) * collect_value(stream);
+	//std::cout << real_part << " ";
 
 	// skip spaces and check for single ratio
 	if (stream.peek() == 'i') end_line_flag = true;
@@ -210,7 +214,7 @@ std::istream& operator>>(
 
 		// collect second ratio
 		imaginary_part = sign * collect_value(stream);
-		//std::cout << imaginary_part;
+		//std::cout << real_part << " ";
 	}
 	else
 	{

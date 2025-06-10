@@ -607,20 +607,60 @@ bigfloat pow(bigfloat const& base, int exp)
 	return res;
 }
 
-bigfloat radical(bigfloat const& radicand, unsigned int const& index, bigfloat const& EPS) 
+//bigfloat radical(bigfloat const& radicand, unsigned int const& index, bigfloat const& EPS) 
+//{
+//	if (radicand < 0 && index % 2 == 0)
+//		throw std::invalid_argument("Cannot extract even root from negative number.");
+//	if (index == 0)
+//		throw std::invalid_argument("Index can not be zero.");
+//
+//	bigfloat x = radicand;
+//	bigfloat delta;
+//
+//	do {
+//		bigfloat x_prev = x;
+//		x = ((index - 1) * x + radicand / pow(x, index - 1)) / index;
+//		delta = abs(x - x_prev);
+//	} while (delta > EPS);
+//
+//	x.simplify();
+//	return x;
+//}
+
+bigfloat radical(bigfloat const& radicand, unsigned int const& index, bigfloat const& EPS)
 {
 	if (radicand < 0 && index % 2 == 0)
+	{
 		throw std::invalid_argument("Cannot extract even root from negative number.");
+	}
 	if (index == 0)
-		throw std::invalid_argument("Index can not be zero.");
+	{
+		throw std::invalid_argument("Index cannot be zero.");
+	}
 
-	bigfloat x = radicand;
+	bigfloat x = (radicand >= 0) ? 1.0 : -1.0;
 	bigfloat delta;
+	int max_iter = 1000;
+	int iter = 0;
 
 	do {
 		bigfloat x_prev = x;
-		x = ((index - 1) * x + radicand / pow(x, index - 1)) / index;
+		bigfloat power = pow(x, index - 1);
+
+		if (abs(power) < EPS)
+		{
+			x = (radicand >= 0) ? EPS : -EPS;
+			power = pow(x, index - 1);
+		}
+
+		x = ((index - 1) * x + radicand / power) / index;
 		delta = abs(x - x_prev);
+
+		if (++iter > max_iter)
+		{
+			throw std::runtime_error("Max iterations exceeded. No convergence.");
+		}
+
 	} while (delta > EPS);
 
 	x.simplify();
@@ -679,16 +719,52 @@ bigfloat sqrt(bigfloat const& number, bigfloat const& eps)
 	return guess;
 }
 
+//bigfloat ln(bigfloat const& number, bigfloat const& EPS)
+//{
+//	if (number <= 0) {
+//		throw std::invalid_argument("Value must be positive to clculate logarithm");
+//	}
+//
+//	bigfloat result = 0;
+//	bigfloat term = (number - 1) / (number + 1);
+//	bigfloat term_squared = term * term;
+//	bigfloat current_term = term;
+//	bigint n = 1;
+//
+//	while (abs(current_term) > EPS) {
+//		result += current_term / n;
+//		current_term *= term_squared;
+//		n += 2;
+//	}
+//	return 2 * result;
+//}
+
 bigfloat ln(bigfloat const& number, bigfloat const& EPS)
 {
-	if (number <= 0) {
-		throw std::invalid_argument("Value must be positive to clculate logarithm");
+	if (number <= 0)
+		throw std::invalid_argument("Value must be positive to calculate logarithm");
+
+	if (number == bigfloat(1))
+		return bigfloat(0);
+
+	bigfloat x = number;
+	bigfloat log2val = bigfloat(1143, 1649);//ln(2)
+
+	int k = 0;
+
+	while (x > bigfloat(2)) {
+		x /= 2;
+		k++;
+	}
+	while (x < bigfloat(0.5)) {
+		x *= 2;
+		k--;
 	}
 
-	bigfloat result = 0;
-	bigfloat term = (number - 1) / (number + 1);
+	bigfloat term = (x - 1) / (x + 1);
 	bigfloat term_squared = term * term;
 	bigfloat current_term = term;
+	bigfloat result = 0;
 	bigint n = 1;
 
 	while (abs(current_term) > EPS) {
@@ -696,15 +772,26 @@ bigfloat ln(bigfloat const& number, bigfloat const& EPS)
 		current_term *= term_squared;
 		n += 2;
 	}
-	return 2 * result;
+
+	result *= 2;
+	result += k * log2val;
+	result.simplify();
+	return result;
 }
 
-bigfloat log2(bigfloat const& number, bigfloat const& EPS) {
-	return ln(number, EPS) / ln(2, EPS);
+
+bigfloat log2(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat res = ln(number, EPS) / ln(2, EPS);
+	res.simplify();
+	return res;
 }
 
-bigfloat log10(bigfloat const& number, bigfloat const& EPS) {
-	return ln(number, EPS) / ln(10, EPS);
+bigfloat log10(bigfloat const& number, bigfloat const& EPS)
+{
+	bigfloat res = ln(number, EPS) / ln(10, EPS);
+	res.simplify();
+	return res;
 }
 
 bigfloat bigfloat::PI()
@@ -765,7 +852,6 @@ double to_double(const bigfloat& value)
 
 char* bigint_to_cstring(const bigint& value)
 {
-	// Считаем количество цифр
 	bigint temp = value;
 	size_t digits = 0;
 	if (temp == 0) digits = 1;
@@ -776,11 +862,12 @@ char* bigint_to_cstring(const bigint& value)
 		}
 	}
 
-	char* result = new char[digits + 2]; // +1 for sign, +1 for '\0'
+	char* result = new char[digits + 2];
 	result[digits] = '\0';
 
 	temp = value;
-	for (size_t i = digits; i > 0; --i) {
+	for (size_t i = digits; i > 0; --i)
+	{
 		bigint digit = temp % 10;
 		result[i - 1] = static_cast<char>('0' + static_cast<int>(digit));
 		temp /= 10;
@@ -789,8 +876,7 @@ char* bigint_to_cstring(const bigint& value)
 	return result;
 }
 
-// Главная функция перевода bigfloat -> char*
-char* bigfloat_to_cstring(const bigfloat& value, size_t precision)
+char* to_cstring(const bigfloat& value, size_t precision)
 {
 	const bigint& num = value._numerator;
 	const bigint& den = value._denominator;
@@ -798,25 +884,21 @@ char* bigfloat_to_cstring(const bigfloat& value, size_t precision)
 	bigint int_part = num / den;
 	bigint rem = num % den;
 
-	// Переводим целую часть
 	char* int_str = bigint_to_cstring(int_part);
 
-	// Выделим буфер под целую часть, точку, дробную часть и '\0'
 	size_t int_len = 0;
 	while (int_str[int_len] != '\0') ++int_len;
 
 	size_t total_len = int_len + 1 + precision + 1;
 	char* result = new char[total_len];
 
-	// Копируем целую часть
 	for (size_t i = 0; i < int_len; ++i)
 		result[i] = int_str[i];
 
 	delete[] int_str;
 
-	result[int_len] = '.'; // ставим точку
+	result[int_len] = '.';
 
-	// Вычисляем дробную часть
 	bigint r = rem;
 	for (size_t i = 0; i < precision; ++i)
 	{
@@ -826,6 +908,6 @@ char* bigfloat_to_cstring(const bigfloat& value, size_t precision)
 		result[int_len + 1 + i] = static_cast<char>('0' + static_cast<int>(digit));
 	}
 
-	result[total_len - 1] = '\0'; // финальный null-terminator
+	result[total_len - 1] = '\0';
 	return result;
 }

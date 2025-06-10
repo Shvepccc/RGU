@@ -33,7 +33,7 @@ int program_3_main(int argc, char* argv[])
     std::cout << "P1 != P2: " << (p1 != p2 ? "True" : "False") << std::endl;
 
     polynom user_poly;
-    std::cout << "Enter polynom (for example, -2x^3 + 4x - 1): ";
+    std::cout << "Enter polynom without spaces (for example, -2x^3 + 4x - 1): ";
     std::cin >> user_poly;
     std::cout << "You entered: " << user_poly;
 
