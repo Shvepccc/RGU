@@ -24,6 +24,9 @@
     <ClCompile Include="simulate_elevators.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="elevator.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="programms.h">
@@ -33,6 +36,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common_libs\helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="passenger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elevator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

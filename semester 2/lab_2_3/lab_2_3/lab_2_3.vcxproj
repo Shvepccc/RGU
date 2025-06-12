@@ -128,11 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="1.cpp" />
+    <ClCompile Include="elevator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simulate_elevators.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common_libs\helpers.h" />
+    <ClInclude Include="elevator.h" />
+    <ClInclude Include="passenger.h" />
     <ClInclude Include="programms.h" />
     <ClInclude Include="simulate_elevators.h" />
   </ItemGroup>
