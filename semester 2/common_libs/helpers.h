@@ -41,12 +41,12 @@ inline int convert_TO_decimal(const char* n, int base)
     return sign * result;
 }
 
-bool cmp_time(const std::tm& a, const std::tm& b)
+inline bool cmp_time(const std::tm& a, const std::tm& b)
 {
     return a.tm_hour == b.tm_hour && a.tm_min == b.tm_min;
 }
 
-std::tm time_sub(const std::tm& a, const std::tm& b)
+inline std::tm time_sub(const std::tm& a, const std::tm& b)
 {
     std::tm result = a;
 

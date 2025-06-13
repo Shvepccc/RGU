@@ -97,19 +97,13 @@ void print_parse_data(std::vector<passenger> const& passengers,
     int n, int k)
 {
     std::cout << "Count of floors: " << n << "\n";
-    std::cout << "Count of elevators: " << k << "\n";
+    std::cout << "Count of elevators: " << k << "\n\n";
 
     try
     {
         for (const auto& p : passengers)
         {
-            std::cout << "ID: " << p._ID
-                << " Time: "
-                << std::setw(2) << std::setfill('0') << p._appear_time.tm_hour << ":"
-                << std::setw(2) << std::setfill('0') << p._appear_time.tm_min
-                << ", From: " << p._start_floor
-                << ", To: " << p._target_floor
-                << ", Weight: " << p._weight << std::endl;
+            std::cout << p;
         }
 
         std::cout << "Limits: ";
@@ -153,6 +147,14 @@ void print_time(std::tm& t)
 }
 
 
+bool set_elevator_task(passenger& pas, elevator& el)
+{
+    bool set_task_flag;
+    pas._el_id = el.get_id();
+    set_task_flag = el.set_task(pas._start_floor, pas._target_floor);
+    return set_task_flag;
+}
+
 void controller(const char* ifile_path_1, const char* ifile_path_2,
     const char* ofile_path_1, const char* ofile_path_2)
 {
@@ -179,70 +181,84 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
     int total_pas_count = passenger_arr.size();
 
     std::vector<std::vector<passenger>> building_arr = std::vector<std::vector<passenger>>(n);
+    std::vector<passenger> result_passengers_arr;
 
     while (pas_index < total_pas_count)
     {
         //std::cout << "Current time: ";
         //print_time(cur_time);
 
-        if (cmp_time(passenger_arr[pas_index]._appear_time, cur_time))
+        while ((pas_index < total_pas_count) 
+            && cmp_time(passenger_arr[pas_index]._appear_time, cur_time))
         {
             auto pas = passenger_arr[pas_index];
-            std::cout << "---> " << pas << "\n";
-
+            std::cout << "\n---> " << pas << "\n";
+            
             //traverce all elevators to find a suitable one and give it a task
             bool set_task_flag = true;
             for (auto& el : elevator_arr)
             {
                 elevator::el_state el_state_cur = el.get_state();
 
-                el_s pas_direction = (pas._start_floor - pas._target_floor) < 0
+                el_s pas_direction = (pas._start_floor < pas._target_floor)
                     ? el_s::upward_move
                     : el_s::downward_move;
 
+                
                 if (el_state_cur._state == el_s::upward_move
                     && pas_direction == el_s::upward_move
                     && pas._start_floor >= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_task_flag = el.set_task(pas._start_floor, pas._target_floor);
+                    set_elevator_task(pas, el);
                 }
                 else if (el_state_cur._state == el_s::downward_move
                     && pas_direction == el_s::downward_move
                     && pas._start_floor <= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_task_flag = el.set_task(pas._start_floor, pas._target_floor);
+                    set_elevator_task(pas, el);
                 }
                 else if (el_state_cur._state == el_s::doors_closed ||
                     el_state_cur._state == el_s::doors_open)
                 {
                     //set this task to current elevator
-                    set_task_flag = el.set_task(pas._start_floor, pas._target_floor);
+                    set_elevator_task(pas, el);
                 }
 
                 if (set_task_flag)
                 {
-                    passenger_arr[pas_index]._el_id = el.get_id();
                     building_arr[pas._start_floor - 1].push_back(pas);
                     break;
                 }
             }
-
+            
             if (!set_task_flag)
             {
                 //set this task to elevator which one will be released the fastest
                 //TODO: i will make it later)))
 
-                //std::cout << "\nELEVATOR NOT FOUND!!!\n" << std::endl;
+                std::cout << "\nELEVATOR NOT FOUND!!!\n" << std::endl;
             }
+            ++pas_index;
         }
 
         for (auto& el : elevator_arr)
         {
-            el.action(cur_time, building_arr);
+            el.action(cur_time, building_arr, result_passengers_arr);           
         }
 
         add_minutes(cur_time, 1);
+        //std::cout << pas_index << "\n";
+        //std::cout << passenger_arr[pas_index];
     }
+
+    std::cout << "Results:\n-------------------------------------------------------\n";
+
+    for (auto& pas : result_passengers_arr)
+    {
+        std::cout << pas;
+    }
+    // TODO: print elevators info
+
 }

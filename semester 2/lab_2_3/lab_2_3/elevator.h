@@ -68,7 +68,8 @@ private:
     double _max_weight;
     int _exceed_limit_count;
 
-    std::set<int> _floors_queue;
+    //std::set<int> _floors_queue;
+    std::vector<int> _floors_queue;
     int _remainder_sec;
     int _current_weight;
     int _sec_per_floor;
@@ -82,7 +83,8 @@ public:
     int get_limit();
     bool set_task(int start_floor, int target_floor);
     void action(std::tm& current_time,
-        std::vector<std::vector<passenger>>& building_arr);
+        std::vector<std::vector<passenger>>& building_arr,
+        std::vector<passenger>& result_passengers_arr);
 
 private:
     void set_state(elevator_states state);

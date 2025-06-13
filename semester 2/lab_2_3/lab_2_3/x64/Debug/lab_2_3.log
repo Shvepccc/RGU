@@ -1,11 +1,3 @@
-﻿  elevator.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\elevator.cpp(100,38): error C2660: 'time_sub': function does not take 1 arguments
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\common_libs\helpers.h(49,9):
-      see declaration of 'time_sub'
-      C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\elevator.cpp(100,38):
-      while trying to match the argument list '(tm)'
-  
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\elevator.cpp(115,42): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  simulate_elevators.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\simulate_elevators.cpp(179,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+﻿  simulate_elevators.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\simulate_elevators.cpp(181,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  lab_2_3.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\x64\Debug\lab_2_3.exe
