@@ -56,19 +56,20 @@ public:
         downward_move
     };
 
+    std::tm _total_work_time;
+    std::tm _total_waste_time;
+
 private:
     int _ID;
     el_state _state;
     std::vector<el_button> _buttons_arr;
     int _weight_limit;
 
-    std::tm _total_time;
     int _floors_count;
     double _total_weight;
     double _max_weight;
     int _exceed_limit_count;
 
-    //std::set<int> _floors_queue;
     std::vector<int> _floors_queue;
     int _remainder_sec;
     int _current_weight;
@@ -76,20 +77,23 @@ private:
     std::vector<passenger> curr_passengers;
 
 public:
-    //elevator();
+    elevator();
     elevator(int ID, int n, int weight_limit);
-    el_state get_state();
-    int get_id();
-    int get_limit();
+    el_state get_state() const;
+    int get_id() const;
+    int get_floors_queue_size() const;
+
     bool set_task(int start_floor, int target_floor);
     void action(std::tm& current_time,
         std::vector<std::vector<passenger>>& building_arr,
         std::vector<passenger>& result_passengers_arr);
 
+    friend std::ostream& operator<<(
+        std::ostream& os,
+        const elevator& el);
+
 private:
     void set_state(elevator_states state);
-    void close_doors();
-    void open_doors();
     void move_one_floor();
     void calculate_speed();
 };

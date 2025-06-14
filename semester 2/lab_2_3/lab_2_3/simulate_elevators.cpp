@@ -131,13 +131,6 @@ bool compare_by_appear_time(const passenger& a, const passenger& b)
         (b_t->tm_hour * 60 + b_t->tm_min);
 }
 
-void add_minutes(std::tm& t, int minutes)
-{
-    int remainder = (minutes + t.tm_min) / 60;
-    t.tm_hour += remainder;
-    t.tm_min += (minutes)-(60 * remainder);
-}
-
 void print_time(std::tm& t)
 {
     std::cout 
@@ -185,9 +178,6 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
 
     while (pas_index < total_pas_count)
     {
-        //std::cout << "Current time: ";
-        //print_time(cur_time);
-
         while ((pas_index < total_pas_count) 
             && cmp_time(passenger_arr[pas_index]._appear_time, cur_time))
         {
@@ -236,9 +226,18 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
             if (!set_task_flag)
             {
                 //set this task to elevator which one will be released the fastest
-                //TODO: i will make it later)))
-
-                std::cout << "\nELEVATOR NOT FOUND!!!\n" << std::endl;
+                elevator temp_elevator;
+                int min;
+                for (auto& i : elevator_arr)
+                {
+                    int current_flors_queue_size = i.get_floors_queue_size();
+                    if (current_flors_queue_size < min)
+                    {
+                        min = current_flors_queue_size;
+                        temp_elevator = i;
+                    }
+                }
+                set_elevator_task(pas, temp_elevator);
             }
             ++pas_index;
         }
@@ -248,17 +247,24 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
             el.action(cur_time, building_arr, result_passengers_arr);           
         }
 
-        add_minutes(cur_time, 1);
-        //std::cout << pas_index << "\n";
-        //std::cout << passenger_arr[pas_index];
+        add_time(cur_time, 1);
     }
 
-    std::cout << "Results:\n-------------------------------------------------------\n";
+    std::ofstream otput_file_1(ofile_path_1);
+    std::ofstream otput_file_2(ofile_path_2);
 
+    std::cout << "Passengers results:\n-------------------------------------------------------\n";
     for (auto& pas : result_passengers_arr)
     {
         std::cout << pas;
+        otput_file_1 << pas;
     }
-    // TODO: print elevators info
 
+    std::cout << "\nElevators results:\n-------------------------------------------------------\n";
+    for (auto& el : elevator_arr)
+    {
+        el._total_waste_time = time_sub(cur_time, el._total_work_time);
+        std::cout << el;
+        otput_file_2 << el;
+    }
 }

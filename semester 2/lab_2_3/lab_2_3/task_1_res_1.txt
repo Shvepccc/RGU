@@ -1,0 +1,212 @@
+Passenger ID: 52
+Appear time: 00:01:00 Start floor: 5 Target floor: 12 Weight: 94.6 kg Load time: 00:01:12 Total time: 00:00:00
+Exceed limit: No
+Met passengers: [2, 51]
+Passenger ID: 2
+Appear time: 00:01:00 Start floor: 1 Target floor: 15 Weight: 54.9 kg Load time: 00:01:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: [51, 52]
+Passenger ID: 51
+Appear time: 00:01:00 Start floor: 3 Target floor: 18 Weight: 78.9 kg Load time: 00:01:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: [2, 52]
+Passenger ID: 0
+Appear time: 00:02:00 Start floor: 3 Target floor: 5 Weight: 77.3 kg Load time: 00:02:42 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 45
+Appear time: 00:04:00 Start floor: 2 Target floor: 7 Weight: 22.2 kg Load time: 00:04:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 29
+Appear time: 00:22:00 Start floor: 1 Target floor: 17 Weight: 91.2 kg Load time: 00:22:15 Total time: 00:00:45
+Exceed limit: No
+Met passengers: []
+Passenger ID: 5
+Appear time: 01:12:00 Start floor: 10 Target floor: 2 Weight: 52.3 kg Load time: 01:12:18 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 6
+Appear time: 02:26:00 Start floor: 11 Target floor: 16 Weight: 49.9 kg Load time: 02:26:24 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 36
+Appear time: 02:29:00 Start floor: 12 Target floor: 4 Weight: 25 kg Load time: 02:29:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 42
+Appear time: 03:24:00 Start floor: 9 Target floor: 13 Weight: 78.2 kg Load time: 03:24:12 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 22
+Appear time: 03:41:00 Start floor: 1 Target floor: 14 Weight: 44.7 kg Load time: 03:41:33 Total time: 00:00:27
+Exceed limit: No
+Met passengers: []
+Passenger ID: 1
+Appear time: 03:51:00 Start floor: 14 Target floor: 18 Weight: 89.6 kg Load time: 03:51:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 10
+Appear time: 04:30:00 Start floor: 10 Target floor: 2 Weight: 35 kg Load time: 04:30:21 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 38
+Appear time: 04:41:00 Start floor: 17 Target floor: 4 Weight: 88.8 kg Load time: 04:41:42 Total time: 00:00:18
+Exceed limit: No
+Met passengers: []
+Passenger ID: 41
+Appear time: 05:06:00 Start floor: 6 Target floor: 5 Weight: 85.3 kg Load time: 05:06:03 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 32
+Appear time: 06:29:00 Start floor: 5 Target floor: 1 Weight: 38.2 kg Load time: 06:29:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 16
+Appear time: 07:44:00 Start floor: 10 Target floor: 1 Weight: 37.7 kg Load time: 07:44:24 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 47
+Appear time: 08:54:00 Start floor: 3 Target floor: 2 Weight: 43.5 kg Load time: 08:54:03 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 50
+Appear time: 09:02:00 Start floor: 7 Target floor: 3 Weight: 88.5 kg Load time: 09:02:12 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 8
+Appear time: 09:14:00 Start floor: 16 Target floor: 3 Weight: 75.1 kg Load time: 09:14:36 Total time: 00:00:24
+Exceed limit: No
+Met passengers: []
+Passenger ID: 23
+Appear time: 09:29:00 Start floor: 2 Target floor: 16 Weight: 82.3 kg Load time: 09:29:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 39
+Appear time: 09:32:00 Start floor: 16 Target floor: 4 Weight: 89.5 kg Load time: 09:32:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 28
+Appear time: 09:36:00 Start floor: 1 Target floor: 9 Weight: 27.2 kg Load time: 09:36:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 48
+Appear time: 09:43:00 Start floor: 2 Target floor: 14 Weight: 20.9 kg Load time: 09:43:18 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 21
+Appear time: 10:00:00 Start floor: 4 Target floor: 14 Weight: 55.4 kg Load time: 10:00:27 Total time: 00:00:33
+Exceed limit: No
+Met passengers: []
+Passenger ID: 20
+Appear time: 10:05:00 Start floor: 10 Target floor: 18 Weight: 89.2 kg Load time: 10:05:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 15
+Appear time: 10:08:00 Start floor: 15 Target floor: 3 Weight: 50.2 kg Load time: 10:08:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 37
+Appear time: 11:05:00 Start floor: 18 Target floor: 6 Weight: 25.4 kg Load time: 11:05:42 Total time: 00:00:18
+Exceed limit: No
+Met passengers: []
+Passenger ID: 43
+Appear time: 11:32:00 Start floor: 9 Target floor: 4 Weight: 25.7 kg Load time: 11:32:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 11
+Appear time: 11:53:00 Start floor: 3 Target floor: 11 Weight: 98.3 kg Load time: 11:53:00 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 13
+Appear time: 12:11:00 Start floor: 15 Target floor: 12 Weight: 89 kg Load time: 12:11:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 31
+Appear time: 12:12:00 Start floor: 6 Target floor: 1 Weight: 67 kg Load time: 12:12:15 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 18
+Appear time: 12:22:00 Start floor: 4 Target floor: 5 Weight: 37 kg Load time: 12:22:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 35
+Appear time: 12:58:00 Start floor: 12 Target floor: 8 Weight: 99.2 kg Load time: 12:58:18 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 27
+Appear time: 13:38:00 Start floor: 15 Target floor: 12 Weight: 38.5 kg Load time: 13:38:18 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 30
+Appear time: 13:59:00 Start floor: 1 Target floor: 10 Weight: 87 kg Load time: 13:59:30 Total time: 00:00:30
+Exceed limit: No
+Met passengers: []
+Passenger ID: 40
+Appear time: 15:21:00 Start floor: 14 Target floor: 11 Weight: 59.9 kg Load time: 15:21:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 17
+Appear time: 16:37:00 Start floor: 1 Target floor: 7 Weight: 31 kg Load time: 16:37:27 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 4
+Appear time: 16:45:00 Start floor: 17 Target floor: 1 Weight: 97.5 kg Load time: 16:45:27 Total time: 00:00:33
+Exceed limit: No
+Met passengers: []
+Passenger ID: 34
+Appear time: 17:34:00 Start floor: 5 Target floor: 3 Weight: 94.1 kg Load time: 17:34:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 9
+Appear time: 17:41:00 Start floor: 7 Target floor: 10 Weight: 84.3 kg Load time: 17:41:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 25
+Appear time: 18:06:00 Start floor: 7 Target floor: 3 Weight: 44.8 kg Load time: 18:06:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 7
+Appear time: 18:35:00 Start floor: 12 Target floor: 16 Weight: 27.4 kg Load time: 18:35:24 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 3
+Appear time: 20:16:00 Start floor: 18 Target floor: 11 Weight: 31.5 kg Load time: 20:16:03 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 33
+Appear time: 20:44:00 Start floor: 3 Target floor: 18 Weight: 30.9 kg Load time: 20:44:21 Total time: 00:00:39
+Exceed limit: No
+Met passengers: []
+Passenger ID: 12
+Appear time: 21:06:00 Start floor: 6 Target floor: 3 Weight: 62 kg Load time: 21:06:33 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 14
+Appear time: 21:19:00 Start floor: 15 Target floor: 2 Weight: 73.2 kg Load time: 21:19:33 Total time: 00:00:27
+Exceed limit: No
+Met passengers: []
+Passenger ID: 46
+Appear time: 21:19:00 Start floor: 11 Target floor: 5 Weight: 21.9 kg Load time: 21:20:42 Total time: 00:00:18
+Exceed limit: No
+Met passengers: []
+Passenger ID: 19
+Appear time: 21:30:00 Start floor: 1 Target floor: 13 Weight: 45.9 kg Load time: 21:30:09 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 44
+Appear time: 21:33:00 Start floor: 11 Target floor: 15 Weight: 44.3 kg Load time: 21:33:03 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 26
+Appear time: 22:13:00 Start floor: 6 Target floor: 4 Weight: 46.2 kg Load time: 22:13:24 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 24
+Appear time: 23:17:00 Start floor: 1 Target floor: 9 Weight: 75.2 kg Load time: 23:17:06 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []
+Passenger ID: 49
+Appear time: 23:45:00 Start floor: 7 Target floor: 1 Weight: 33.1 kg Load time: 23:45:03 Total time: 00:00:00
+Exceed limit: No
+Met passengers: []

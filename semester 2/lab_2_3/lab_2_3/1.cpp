@@ -12,7 +12,7 @@ int program_1_main(int argc, char* argv[])
     try
     {
         controller("task_1_data_1.txt", "task_1_data_2.txt",
-            "", "");
+            "task_1_res_1.txt", "task_1_res_2.txt");
     }
     catch (const std::exception& e)
     {

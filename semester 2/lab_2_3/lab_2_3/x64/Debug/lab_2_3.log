@@ -1,3 +1,5 @@
-﻿  simulate_elevators.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\simulate_elevators.cpp(181,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  1.cpp
+  simulate_elevators.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\lab_2_3\simulate_elevators.cpp(174,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   lab_2_3.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_3\x64\Debug\lab_2_3.exe

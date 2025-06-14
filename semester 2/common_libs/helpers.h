@@ -48,18 +48,38 @@ inline bool cmp_time(const std::tm& a, const std::tm& b)
 
 inline std::tm time_sub(const std::tm& a, const std::tm& b)
 {
-    std::tm result = a;
+    long total_a = a.tm_hour * 3600 + a.tm_min * 60 + a.tm_sec;
+    long total_b = b.tm_hour * 3600 + b.tm_min * 60 + b.tm_sec;
 
-    if (a.tm_min < b.tm_min)
-    {
-        result.tm_hour -= 1;
-        result.tm_min += 60;
-    }
+    long diff = total_a - total_b;
 
-    result.tm_min -= b.tm_min;
-    result.tm_hour -= b.tm_hour;
+    if (diff < 0) diff = 0;
+
+    std::tm result = { 0 };
+    result.tm_hour = diff / 3600;
+    diff %= 3600;
+    result.tm_min = diff / 60;
+    result.tm_sec = diff % 60;
 
     return result;
+}
+
+inline void add_time(std::tm& t, int minutes, int seconds = 0)
+{
+    int sec_remainder = (seconds + t.tm_sec) / 60;
+    t.tm_min += sec_remainder;
+    t.tm_sec += seconds - (60 * sec_remainder);
+
+    int min_remainder = (minutes + t.tm_min) / 60;
+    t.tm_hour += min_remainder;
+    t.tm_min += minutes - (60 * min_remainder);
+}
+
+inline void print_time(std::ostream& os, const std::tm& time, const std::string& label = "")
+{
+    char buf[80];
+    strftime(buf, sizeof(buf), "%H:%M:%S", &time);
+    os << label << buf;
 }
 
 #endif //HELPERS_H
