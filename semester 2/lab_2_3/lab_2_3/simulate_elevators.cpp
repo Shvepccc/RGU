@@ -140,16 +140,17 @@ void print_time(std::tm& t)
 }
 
 
-bool set_elevator_task(passenger& pas, elevator& el)
+bool set_elevator_task(passenger& pas, elevator& el, double& persent_of_maximum_load)
 {
     bool set_task_flag;
     pas._el_id = el.get_id();
-    set_task_flag = el.set_task(pas._start_floor, pas._target_floor);
+    set_task_flag = el.set_task(pas._start_floor, pas._target_floor, persent_of_maximum_load);
     return set_task_flag;
 }
 
-void controller(const char* ifile_path_1, const char* ifile_path_2,
-    const char* ofile_path_1, const char* ofile_path_2)
+void controller(const std::string& ifile_path_1, const std::string& ifile_path_2,
+    const std::string& ofile_path_1, const std::string& ofile_path_2,
+    int sec_per_step, double persent_of_maximum_load)
 {
     //parse data
     int n, k;
@@ -200,22 +201,22 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
                     && pas._start_floor >= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el);
+                    set_elevator_task(pas, el, persent_of_maximum_load);
                 }
                 else if (el_state_cur._state == el_s::downward_move
                     && pas_direction == el_s::downward_move
                     && pas._start_floor <= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el);
+                    set_elevator_task(pas, el, persent_of_maximum_load);
                 }
                 else if (el_state_cur._state == el_s::doors_closed ||
                     el_state_cur._state == el_s::doors_open)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el);
+                    set_elevator_task(pas, el, persent_of_maximum_load);
                 }
-
+                
                 if (set_task_flag)
                 {
                     building_arr[pas._start_floor - 1].push_back(pas);
@@ -227,7 +228,7 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
             {
                 //set this task to elevator which one will be released the fastest
                 elevator temp_elevator;
-                int min;
+                int min = 1e4;
                 for (auto& i : elevator_arr)
                 {
                     int current_flors_queue_size = i.get_floors_queue_size();
@@ -237,7 +238,7 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
                         temp_elevator = i;
                     }
                 }
-                set_elevator_task(pas, temp_elevator);
+                set_elevator_task(pas, temp_elevator, persent_of_maximum_load);
             }
             ++pas_index;
         }
@@ -247,7 +248,7 @@ void controller(const char* ifile_path_1, const char* ifile_path_2,
             el.action(cur_time, building_arr, result_passengers_arr);           
         }
 
-        add_time(cur_time, 1);
+        add_time(cur_time, 0, sec_per_step);
     }
 
     std::ofstream otput_file_1(ofile_path_1);

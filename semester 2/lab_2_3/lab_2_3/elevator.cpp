@@ -44,9 +44,10 @@ int elevator::get_floors_queue_size() const
     return _floors_queue.size();
 }
 
-bool elevator::set_task(int start_floor, int target_floor)
+bool elevator::set_task(int start_floor, int target_floor,
+    double& persent_of_maximum_load)
 {
-    if (_weight_limit * 0.9 < _current_weight)
+    if (_weight_limit * persent_of_maximum_load < _current_weight)
         return false;
 
     _floors_queue.push_back(start_floor);

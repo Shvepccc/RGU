@@ -83,7 +83,8 @@ public:
     int get_id() const;
     int get_floors_queue_size() const;
 
-    bool set_task(int start_floor, int target_floor);
+    bool set_task(int start_floor, int target_floor,
+        double& persent_of_maximum_load);
     void action(std::tm& current_time,
         std::vector<std::vector<passenger>>& building_arr,
         std::vector<passenger>& result_passengers_arr);
