@@ -1,0 +1,5 @@
+﻿  6.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\vector.h(267,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  (compiling source file '6.cpp')
+  
+  lab_2_2_6.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\x64\Debug\lab_2_2_6.exe
