@@ -306,9 +306,9 @@ matrix matrix::transp()
 	int x, y;
 	matrix res_matrix(this->_columns_count, this->_rows_count);
 
-	for (x = 0; x < this->_columns_count; ++x) 
+	for (x = 0; x < this->_rows_count; ++x) 
 	{
-		for (y = 0; y < this->_rows_count; ++y) 
+		for (y = 0; y < this->_columns_count; ++y)
 		{
 			res_matrix[y][x] = (*this)[x][y];
 		}
