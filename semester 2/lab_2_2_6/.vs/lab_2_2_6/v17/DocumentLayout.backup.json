@@ -7,11 +7,12 @@
       "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:lab_2_2_6\\6.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\vector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\vector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\matrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\matrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\crt\\src\\vcruntime\\delete_scalar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\src\\matrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\src\\matrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -29,15 +30,28 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "matrix.h",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\matrix.h",
+              "RelativeDocumentMoniker": "libs\\matrix.h",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\matrix.h",
+              "RelativeToolTip": "libs\\matrix.h",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-06-26T13:04:18.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "delete_scalar.cpp",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\crt\\src\\vcruntime\\delete_scalar.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\crt\\src\\vcruntime\\delete_scalar.cpp",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\crt\\src\\vcruntime\\delete_scalar.cpp",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\crt\\src\\vcruntime\\delete_scalar.cpp",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwCEAAAAAAAAAAAAAAA==",
+              "Title": "matrix.cpp",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\src\\matrix.cpp",
+              "RelativeDocumentMoniker": "libs\\src\\matrix.cpp",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\src\\matrix.cpp",
+              "RelativeToolTip": "libs\\src\\matrix.cpp",
+              "ViewState": "AgIAAO0BAAAAAAAAAAAjwPsBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-25T22:00:23.073Z",
+              "WhenOpened": "2025-06-26T13:04:19.209Z",
               "EditorCaption": ""
             },
             {
@@ -48,22 +62,9 @@
               "RelativeDocumentMoniker": "lab_2_2_6\\6.cpp",
               "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\lab_2_2_6\\6.cpp",
               "RelativeToolTip": "lab_2_2_6\\6.cpp",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAADMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAADwv3MAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-25T18:27:11.363Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "vector.h",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\vector.h",
-              "RelativeDocumentMoniker": "libs\\vector.h",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\vector.h",
-              "RelativeToolTip": "libs\\vector.h",
-              "ViewState": "AgIAAJ8AAAAAAAAAAIAwwLkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-25T18:37:10.783Z",
               "EditorCaption": ""
             }
           ]

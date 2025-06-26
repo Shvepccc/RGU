@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <initializer_list>
 
 class cvector
 {
@@ -23,6 +24,26 @@ private:
         _capacity = new_capacity;
     }
 
+    void copy_from(const cvector& other)
+    {
+        if (other._size > 0)
+        {
+            data = new double[other._size];
+            for (int i = 0; i < other._size; ++i)
+            {
+                data[i] = other.data[i];
+            }
+            _size = other._size;
+            _capacity = other._size;
+        }
+        else
+        {
+            data = nullptr;
+            _size = 0;
+            _capacity = 0;
+        }
+    }
+
 public:
     cvector() : 
         data(nullptr), _size(0), _capacity(0) 
@@ -31,6 +52,36 @@ public:
     ~cvector()
     {
         delete[] data;
+    }
+
+    cvector(const cvector& other) : 
+        data(nullptr), _size(0), _capacity(0)
+    {
+        copy_from(other);
+    }
+
+    cvector(std::initializer_list<double> init) :
+        data(nullptr), _size(0), _capacity(0)
+    {
+        for (const auto& item : init)
+        {
+            push_back(item);
+        }
+    }
+
+
+    cvector& operator=(const cvector& other)
+    {
+        if (this == &other)
+        {
+            return *this;
+        }
+
+        this->clear();
+
+        this->copy_from(other);
+
+        return *this;
     }
 
     void push_back(const double& value)
@@ -76,20 +127,10 @@ public:
 
     void clear()
     {
+        delete[] data;
+        data = nullptr;
         _size = 0;
-    }
-
-    cvector(const cvector& other) :
-        data(nullptr), _size(other._size), _capacity(other._size)
-    {
-        if (other._size > 0)
-        {
-            data = new double[other._size];
-            for (int i = 0; i < other._size; ++i)
-            {
-                data[i] = other.data[i];
-            }
-        }
+        _capacity = 0;
     }
 
 #pragma region operators

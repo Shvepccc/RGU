@@ -21,16 +21,19 @@
     <ClInclude Include="..\libs\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\libs\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\libs\src\vector.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="6.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\src\matrix.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

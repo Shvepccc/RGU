@@ -123,11 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\libs\matrix.h" />
     <ClInclude Include="..\libs\vector.h" />
     <ClInclude Include="programms.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\libs\src\vector.cpp" />
+    <ClCompile Include="..\libs\src\matrix.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="6.cpp" />
   </ItemGroup>

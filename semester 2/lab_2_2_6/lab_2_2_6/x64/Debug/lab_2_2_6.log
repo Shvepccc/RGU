@@ -1,5 +1,17 @@
-﻿  6.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\vector.h(267,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+﻿  matrix.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\vector.h(308,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  (compiling source file '../libs/src/matrix.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(66,9): warning C4101: 'j': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(66,6): warning C4101: 'i': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(293,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(299,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(329,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(396,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\src\matrix.cpp(471,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  6.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\vector.h(308,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   (compiling source file '6.cpp')
   
+  Generating Code...
   lab_2_2_6.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\x64\Debug\lab_2_2_6.exe
