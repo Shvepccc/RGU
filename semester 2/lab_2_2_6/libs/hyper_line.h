@@ -14,10 +14,8 @@ public:
 		_Q(Q), _A(A)
 	{}
 
-	~hyper_line();	
-
 	friend bool check_points_belong_to_line(
-	cvector line_point_a, cvector line_point_b,
+	cvector& line_point_a, cvector& line_point_b,
 		cvector* points_colection, int points_count)
 	{
 		if (points_colection == nullptr)
@@ -43,7 +41,7 @@ public:
 			{
 				double t = (points_colection[i][j] - line_point_a[j]) / Q[j];
 
-				if (last_t - t > 1e-10)
+				if (last_t - t > 1e-10 && j != 0)
 				{
 					return false;
 				}
@@ -54,12 +52,16 @@ public:
 		return true;
 	}
 
+	friend double distance_from_point_to_plane(
+		hyper_line& line, cvector& point)
+	{
 
+	}
 
 };
 
 bool check_points_belong_to_line(
-	cvector line_point_a, cvector line_point_b,
+	cvector& line_point_a, cvector& line_point_b,
 	cvector* points_colection, int points_count);
 
 #endif

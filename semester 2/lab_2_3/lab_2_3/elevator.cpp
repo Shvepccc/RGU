@@ -23,10 +23,12 @@ elevator::elevator(int ID, int n, int weight_limit)
     _exceed_limit_count = 0;
 
     _remainder_sec = 0;
-    _floors_queue = std::vector<int>{};
+    _floors_queue = std::set<floor_struct>{};
     _current_weight = 0;
     _sec_per_floor = 0;
     curr_passengers = std::vector<passenger>{};
+
+    _next_floor = 0;
 }
 
 elevator::el_state elevator::get_state() const
@@ -45,20 +47,34 @@ int elevator::get_floors_queue_size() const
 }
 
 bool elevator::set_task(int start_floor, int target_floor,
+    double persent_of_maximum_load)
+{
+    if (_weight_limit * persent_of_maximum_load < _current_weight)
+        return false;
+
+    floor_struct a(start_floor, 0);
+    floor_struct b(target_floor, 2);
+
+    _floors_queue.insert(a);
+    _floors_queue.insert(b);
+    
+    return true;
+}
+
+bool elevator::check_set_task(int start_floor, int target_floor,
     double& persent_of_maximum_load)
 {
     if (_weight_limit * persent_of_maximum_load < _current_weight)
         return false;
 
-    _floors_queue.push_back(start_floor);
-    _floors_queue.push_back(target_floor);
-    
     return true;
 }
 
 void elevator::action(std::tm& current_time,
     std::vector<std::vector<passenger>>& building_arr,
-    std::vector<passenger>& result_passengers_arr)
+    std::vector<passenger>& result_passengers_arr,
+    std::vector<passenger>& passengers_array,
+    int& pas_index)
 {
     // check if we have some tasks
     if (_floors_queue.empty())
@@ -70,18 +86,51 @@ void elevator::action(std::tm& current_time,
     // go through one minute with ticks, which size = _sec_per_floor
     int current_remainder = 60 + _remainder_sec;
     int start_size = current_remainder;
+    bool curr_floor_is_target_flag = false;
     while (current_remainder > _sec_per_floor && !_floors_queue.empty())
     {
-        // set state
+        if (_next_floor != 0)
+        {
+            curr_floor_is_target_flag = (_state._curr_floor - _next_floor == 0);
+        }
+        if (_next_floor == 0)
+        {
+            auto tt = *_floors_queue.begin();
+            if (tt._type == 0)
+            {
+                _next_floor = tt._floor;
+            }
+            else
+            {
+                auto tt_2 = *_floors_queue.rbegin();
+                _next_floor = tt_2._floor;
+            }
+            curr_floor_is_target_flag = (_state._curr_floor - _next_floor == 0);
+        }
+        else if (curr_floor_is_target_flag)
+        {   
+            if (_state._state = upward_move)
+            {
+                auto tt = *_floors_queue.begin();
+                _next_floor = tt._floor;
+            }
+            else
+            {
+                auto tt_2 = *_floors_queue.rbegin();
+                _next_floor = tt_2._floor;
+            }
+        }
+
         elevator_states curr_el_state =
-            (_state._curr_floor < *_floors_queue.begin())
+            (_state._curr_floor < _next_floor)
             ? upward_move
             : downward_move;
-        set_state(curr_el_state);
+
+        set_state(curr_floor_is_target_flag ? elevator_states::doors_open : curr_el_state);
 
         // if elevator not on the target needed floor, let's move elevator to one floor
         calculate_speed();
-        if ((_state._curr_floor != *_floors_queue.begin()) || (start_size != current_remainder))
+        if (!curr_floor_is_target_flag && (start_size != current_remainder))
         {
             std::cout << "move from: " << _state._curr_floor;
             _state._curr_floor += (_state._state == upward_move) ? 1 : -1;
@@ -89,25 +138,34 @@ void elevator::action(std::tm& current_time,
             _floors_count += 1;
             add_time(_total_work_time, 0, _sec_per_floor);
         }
-        else if (*_floors_queue.begin() < *std::next(_floors_queue.begin())) //(curr_el_state == upward_move)
-        {
-            std::sort(_floors_queue.begin(), _floors_queue.end());
-        }
-        else if (*_floors_queue.begin() > *std::next(_floors_queue.begin()))
-        {
-            std::sort(_floors_queue.begin(), _floors_queue.end(), std::greater<int>());
-        }
 
         // check if we need to stay there or not
         if ((_state._state == upward_move
-            && *_floors_queue.begin() <= _state._curr_floor)
+            && _next_floor <= _state._curr_floor)
             || (_state._state == downward_move
-            && *_floors_queue.begin() >= _state._curr_floor))
+            && _next_floor >= _state._curr_floor)
+            || curr_floor_is_target_flag)
         {
             // I'm on one of the target floors. Passengers should be loaded and unloaded
             std::cout << "loading and unloading...\n";
 
-            _floors_queue.erase(_floors_queue.begin());
+            if (curr_floor_is_target_flag || true)
+            {
+                int curr_floor = this->get_state()._curr_floor;
+                for (auto it = _floors_queue.begin(); it != _floors_queue.end(); ) {
+                    if (it->_floor == curr_floor) {
+                        it = _floors_queue.erase(it);
+                    }
+                    else {
+                        ++it;
+                    }
+                }
+            }
+            else
+            {
+                _floors_queue.erase(_floors_queue.begin());
+            }
+
             _buttons_arr[_state._curr_floor - 1].set_state(0);
 
             set_state(doors_open);
@@ -123,7 +181,6 @@ void elevator::action(std::tm& current_time,
                     it->total_time = temp_total_time;
 
                     result_passengers_arr.push_back(*it);
-
                     // remove from elevator passengers arr
                     it = curr_passengers.erase(it);
                 }
@@ -166,14 +223,59 @@ void elevator::action(std::tm& current_time,
 
                         _buttons_arr[it->_target_floor - 1].set_state(1); 
 
-                        // remove passenger from main arr
+                        // remove passenger from main building arr
                         it = building_arr[_state._curr_floor - 1].erase(it);
                     }
                     else // Exceeding weight limit
                     {
+                        // change elevator data
                         _exceed_limit_count += 1;
-                        it->exceed_limit = 1;
-                        ++it;
+
+                        int del_1 = it->_start_floor;
+                        int del_2 = it->_target_floor;
+                        bool delete_1 = true;
+                        bool delete_2 = true;
+
+                        for (auto& el_pas : curr_passengers)
+                        {
+                            if (el_pas._start_floor == del_1)
+                                delete_1 = false;
+                            if (el_pas._target_floor == del_2)
+                                delete_2 = false;
+
+                            if (!delete_1 && !delete_2)
+                                break;
+                        }
+                        if (delete_1) {
+                            for (auto it = _floors_queue.begin(); it != _floors_queue.end(); ) {
+                                if (it->_floor == del_1) {
+                                    it = _floors_queue.erase(it);
+                                }
+                                else {
+                                    ++it;
+                                }
+                            }
+                        }
+                        if (delete_2) {
+                            for (auto it = _floors_queue.begin(); it != _floors_queue.end(); ) {
+                                if (it->_floor == del_2) {
+                                    it = _floors_queue.erase(it);
+                                }
+                                else {
+                                    ++it;
+                                }
+                            }
+                        }
+
+                        // change passenger data
+                        passengers_array[it->_order_id]._el_id = 0;
+                        add_time(passengers_array[it->_order_id]._appear_time, 0, current_remainder);
+                        passengers_array[it->_order_id].exceed_limit = 1;
+
+                        --pas_index;
+
+                        // remove passenger from main building arr
+                        it = building_arr[_state._curr_floor - 1].erase(it);
                     }
                 }
                 else
@@ -185,11 +287,18 @@ void elevator::action(std::tm& current_time,
             // update current elevator passengers id
             for (auto& el_pas : curr_passengers)
             {
-                // check if passenger isn't newcomer
                 auto it = std::find(el_pas_id.begin(), el_pas_id.end(), el_pas._ID);
-                if (it != el_pas_id.end())
+
+                if (it != el_pas_id.end()) // last elevator passenger
                 {
                     el_pas.meet_arr.insert(el_pas.meet_arr.end(), newcomers_id.begin(), newcomers_id.end());
+                }
+                else // new elevator passenger
+                {
+                    el_pas.meet_arr.insert(el_pas.meet_arr.end(), newcomers_id.begin(), newcomers_id.end());
+                    auto del_it = std::find(el_pas.meet_arr.begin(), el_pas.meet_arr.end(), el_pas._ID);
+                    el_pas.meet_arr.erase(del_it);
+                    el_pas.meet_arr.insert(el_pas.meet_arr.end(), el_pas_id.begin(), el_pas_id.end());
                 }
             }
         }
@@ -202,16 +311,9 @@ void elevator::action(std::tm& current_time,
     {
         // if we dont have any tasks - set state and wait
         _remainder_sec = 0;
+        _next_floor = 0;
     }
-    else
-    {
-        // otherwise set new remainder and new state
-        _remainder_sec = current_remainder;
-        set_state(
-            (_state._curr_floor < *_floors_queue.begin())
-            ? upward_move
-            : downward_move);
-    }
+    else {}
 }
 
 void elevator::move_one_floor()
@@ -242,7 +344,7 @@ std::ostream& operator<<(std::ostream& os, const elevator& el)
         };
 
     // Print basic elevator info
-    os << "Elevator ID: " << el.get_id() << "\n";
+    os << "\nElevator ID: " << el.get_id() << "\n";
     os << "State: " << el.get_state()._state << " (";
     switch (el.get_state()._state) {
         case elevator::elevator_states::doors_open: os << "doors_open"; break;

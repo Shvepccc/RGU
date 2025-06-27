@@ -88,6 +88,11 @@ std::vector<bool> Shtern_Broko_path(const bigfloat& arg)
     bigfloat a = 0, b = 1; // left start point: 0/1
     bigfloat c = 1, d = 0; // right start point: 1/0
 
+    if (bigfloat(0, 1) == arg || bigfloat(1, 0) == arg)
+    {
+        throw std::invalid_argument("Bad arguments");
+    }
+
     while (true)
     {
         bigfloat x = a + c;
@@ -150,45 +155,50 @@ std::vector<bool> Kalkin_Uilf_path(bigfloat const& arg)
 
 int program_8_main(int argc, char* argv[])
 {
-    std::cout << "---" << std::endl;
+    try {
 
-    //point 1 part 1
-    std::cout << "Coefficients for pi:\n";
-    std::vector<bigint> bigint_vec = calculate_coeff(bigfloat(355, 113));
-    for (auto it = bigint_vec.begin(); it != bigint_vec.end(); ++it) {
-        std::cout << *it << " ";
+        //point 1 part 1
+        std::cout << "Coefficients for pi:\n";
+        std::vector<bigint> bigint_vec = calculate_coeff(bigfloat(355, 113));
+        for (auto it = bigint_vec.begin(); it != bigint_vec.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << "\n" << std::endl;
+
+        //point 1 part 2
+        std::cout << "Collect bigfloat from coefficients of pi:\n";
+        bigfloat calc_pi = calculate_coeff(bigint_vec);
+        std::cout << calc_pi << " (double: " << to_double(calc_pi) << ")\n" << std::endl;
+
+        //point 2
+        std::cout << "Calculate convergents for pi:" << '\n';
+        std::vector<bigfloat> bigfloat_vec = calculate_convergents(bigfloat(355, 113));
+        for (auto it = bigfloat_vec.begin(); it != bigfloat_vec.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << "\n" << std::endl;
+
+        //point 3 and 4
+        bigfloat a(0, 1);
+
+        std::cout << "Shtern_Broko_path:\n";
+        std::vector<bool> vec = Shtern_Broko_path(a);
+        for (auto it = vec.begin(); it != vec.end(); ++it) {
+            std::cout << ((*it) ? "R" : "L") << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "\nKalkin_Uilf_path:\n";
+        vec = Kalkin_Uilf_path(a);
+        for (auto it = vec.begin(); it != vec.end(); ++it) {
+            std::cout << ((*it) ? "R" : "L") << " ";
+        }
+        std::cout << std::endl;
+
     }
-    std::cout << "\n" << std::endl;
-
-    //point 1 part 2
-    std::cout << "Collect bigfloat from coefficients of pi:\n";
-    bigfloat calc_pi = calculate_coeff(bigint_vec);
-    std::cout << calc_pi << " (double: " << to_double(calc_pi) << ")\n" << std::endl;
-
-    //point 2
-    std::cout << "Calculate convergents for pi:" << '\n';
-    std::vector<bigfloat> bigfloat_vec = calculate_convergents(bigfloat(355, 113));
-    for (auto it = bigfloat_vec.begin(); it != bigfloat_vec.end(); ++it) {
-        std::cout << *it << " ";
+    catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
     }
-    std::cout << "\n" << std::endl;
-
-    //point 3 and 4
-    bigfloat a(3, 5);
-
-    std::cout << "Shtern_Broko_path:\n";
-    std::vector<bool> vec = Shtern_Broko_path(a);
-    for (auto it = vec.begin(); it != vec.end(); ++it) {
-        std::cout << ((*it) ? "R" : "L") << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "\nKalkin_Uilf_path:\n";
-    vec = Kalkin_Uilf_path(a);
-    for (auto it = vec.begin(); it != vec.end(); ++it) {
-        std::cout << ((*it) ? "R" : "L") << " ";
-    }
-    std::cout << std::endl;
 
     return 0;
 }

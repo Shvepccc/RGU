@@ -1,4 +1,6 @@
-﻿  bf_complex.cpp
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bf_complex.cpp(86,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\src\bf_complex.cpp(86,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+﻿  9.cpp
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\libs\bigfloat.h(132,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  (compiling source file '9.cpp')
+  
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\lab_2_2\9.cpp(156,38): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   lab_2_2.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2\x64\Debug\lab_2_2.exe

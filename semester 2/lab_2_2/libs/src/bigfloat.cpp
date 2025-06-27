@@ -43,10 +43,14 @@ bigfloat::bigfloat(bigint numerator, bigint denominator) :
 	simplify();
 }
 
-bigfloat::bigfloat(double numerator, double denominator) :
+bigfloat::bigfloat(int numerator, int denominator) :
 	_numerator(static_cast<bigint>(numerator)),
-	_denominator(static_cast<bigint>(denominator))
+	_denominator(static_cast<bigint>(denominator * 1e10))
 {
+	if (denominator == 0)
+	{
+		throw std::invalid_argument("Divizion by zero");
+	}
 	simplify();
 }
 
@@ -794,11 +798,40 @@ bigfloat log10(bigfloat const& number, bigfloat const& EPS)
 	return res;
 }
 
+bigfloat calculate_PI(
+	bigfloat(*calc_member_function)(unsigned int, bigfloat&),
+	int members_count)
+{
+	bigfloat res;
+	bigfloat temp;
+	bigfloat storage;
+	unsigned int n = 0;
+
+	while (n < members_count)
+	{
+		temp = calc_member_function(n, storage);
+		res += temp;
+		++n;
+		if (n % 500 == 0)
+		{
+			std::cout << n << " ";
+		}
+	}
+
+	return res;
+}
+
+bigfloat Beily_Boruen_Plaff_member_2(unsigned int n, bigfloat& storage)
+{
+	return bigfloat(1, bigint(1) << (4 * n)) *
+		(bigfloat(4, 8 * n + 1) - bigfloat(2, 8 * n + 4)
+			- bigfloat(1, 8 * n + 5) - bigfloat(1, 8 * n + 6));
+}
+
 bigfloat bigfloat::PI()
 {
-	//std::cout << "calculating pi" << std::endl;
-	//static bigfloat pi = calculate_row(bigfloat(1.0), pi_member, bigfloat(1, 1e10));
 	static bigfloat pi(3141592653589793238462643383279502884197.0, 1e39);
+	//static bigfloat pi = calculate_PI(Beily_Boruen_Plaff_member_2, 500);
 	return pi;
 }
 

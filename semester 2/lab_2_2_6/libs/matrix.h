@@ -65,6 +65,8 @@ public:
 	friend bool is_vector_in_span(const cvector& vec, cvector** basis_vectors, int basis_count);
 };
 
+matrix solve_gauss(matrix& a, matrix& b);
 int size_of_linear_shell(cvector** vectors, int count);
 bool is_vector_in_span(const cvector& vec, cvector** basis_vectors, int basis_count);
+
 #endif // !_MATRIX_H

@@ -280,12 +280,140 @@ void test_matrix()
     std::cout << "\n=== Matrix Testing Complete ===\n";
 }
 
+// Вспомогательная функция для сравнения векторов с учетом погрешности
+bool vectors_equal(const cvector& v1, const cvector& v2, double epsilon = 1e-6) {
+    if (v1.size() != v2.size()) return false;
+    for (size_t i = 0; i < v1.size(); ++i) {
+        if (fabs(v1[i] - v2[i]) > epsilon) return false;
+    }
+    return true;
+}
+
+void test_hyper_line() {
+    std::cout << "=== Testing hyper_line ===" << std::endl;
+
+    // Тест 1: Проверка принадлежности точек прямой (2D случай)
+    {
+        cvector a({ 1.0, 1.0 });
+        cvector b({ 2.0, 2.0 });
+        std::vector<cvector> points_on_line = {
+            cvector({3.0, 3.0}),
+            cvector({0.5, 0.5}),
+            cvector({1.5, 1.5})
+        };
+
+        bool result = check_points_belong_to_line(a, b, points_on_line.data(), points_on_line.size());
+        std::cout << "Test 1.1 (Points on 2D line): " << (result ? "PASSED" : "FAILED") << std::endl;
+
+        std::vector<cvector> points_not_on_line = {
+            cvector({1.0, 2.0}),
+            cvector({2.0, 1.0})
+        };
+
+        result = check_points_belong_to_line(a, b, points_not_on_line.data(), points_not_on_line.size());
+        std::cout << "Test 1.2 (Points not on 2D line): " << (!result ? "PASSED" : "FAILED") << std::endl;
+    }
+
+    // Тест 2: Проверка принадлежности точек прямой (3D случай)
+    {
+        cvector a({ 1.0, 1.0, 1.0 });
+        cvector b({ 2.0, 2.0, 2.0 });
+        std::vector<cvector> points = {
+            cvector({3.0, 3.0, 3.0}),
+            cvector({1.5, 1.5, 1.5}),
+            cvector({0.0, 0.0, 0.0})
+        };
+
+        bool result = check_points_belong_to_line(a, b, points.data(), points.size());
+        std::cout << "Test 2 (Points on 3D line): " << (result ? "PASSED" : "FAILED") << std::endl;
+    }
+
+    // Тест 3: Проверка обработки исключений
+    {
+        cvector a({ 1.0, 2.0 });
+        cvector b({ 3.0, 4.0, 5.0 }); // Разные размеры
+
+        try {
+            check_points_belong_to_line(a, b, nullptr, 1);
+            std::cout << "Test 3.1 (Exception handling): FAILED (no exception)" << std::endl;
+        }
+        catch (const std::invalid_argument& e) {
+            std::cout << "Test 3.1 (Exception handling): PASSED" << std::endl;
+        }
+
+        std::vector<cvector> points = { cvector({1.0, 2.0}) };
+        try {
+            check_points_belong_to_line(a, b, points.data(), points.size());
+            std::cout << "Test 3.2 (Exception handling): FAILED (no exception)" << std::endl;
+        }
+        catch (const std::invalid_argument& e) {
+            std::cout << "Test 3.2 (Exception handling): PASSED" << std::endl;
+        }
+    }
+}
+
+void test_hyper_plane() {
+    std::cout << "\n=== Testing hyper_plane ===" << std::endl;
+
+    // Тест 4: Пересечение гиперплоскости и гиперпрямой
+    {
+        hyper_plane plane(cvector({ 1.0, 1.0 }), -2.0); // Плоскость x + y = 2
+        hyper_line line(cvector({ 1.0, 1.0 }), cvector({ 0.0, 0.0 })); // Прямая y = x
+
+        cvector cross_point = crossing_hiper_plane_and_hiper_line(line, plane);
+        cvector expected({ 1.0, 1.0 });
+
+        std::cout << "Test 4 (Plane-line crossing): "
+            << (vectors_equal(cross_point, expected) ? "PASSED" : "FAILED") << std::endl;
+    }
+
+    // Тест 5: Пересечение гиперплоскости и линии между двумя точками
+    {
+        hyper_plane plane(cvector({ 0.0, 0.0, 1.0 }), -5.0); // Плоскость z = 5
+        cvector a({ 1.0, 2.0, 4.0 });
+        cvector b({ 3.0, 4.0, 6.0 }); // Линия пересекает плоскость z=5
+
+        cvector cross_point = crossing_hiper_plane_and_two_points(plane, a, b);
+        cvector expected({ 2.0, 3.0, 5.0 });
+
+        std::cout << "Test 5 (Two points-plane crossing): "
+            << (vectors_equal(cross_point, expected) ? "PASSED" : "FAILED") << std::endl;
+
+        // Случай без пересечения
+        cvector c({ 1.0, 2.0, 6.0 });
+        cvector d({ 3.0, 4.0, 7.0 }); // Обе точки выше плоскости z=5
+
+        cross_point = crossing_hiper_plane_and_two_points(plane, c, d);
+        std::cout << "Test 5.2 (No crossing): "
+            << (cross_point.size() == 0 ? "PASSED" : "FAILED") << std::endl;
+    }
+
+    // Тест 6: Расстояние от точки до плоскости
+    {
+        hyper_plane plane(cvector({ 1.0, 0.0 }), -3.0); // Плоскость x = 3
+        cvector point({ 5.0, 2.0 });
+
+        double distance = distance_from_point_to_plane(plane, point);
+        std::cout << "Test 6.1 (2D distance): "
+            << (fabs(distance - 2.0) < 1e-6 ? "PASSED" : "FAILED") << std::endl;
+
+        hyper_plane plane3d(cvector({ 0.0, 0.0, 1.0 }), -4.0); // Плоскость z = 4
+        cvector point3d({ 1.0, 2.0, 6.0 });
+
+        distance = distance_from_point_to_plane(plane3d, point3d);
+        std::cout << "Test 6.2 (3D distance): "
+            << (fabs(distance - 2.0) < 1e-6 ? "PASSED" : "FAILED") << std::endl;
+    }
+}
 
 int program_6_main(int argc, char* argv[])
 {
     test_cvector();
 
     test_matrix();
+
+    test_hyper_line();
+    test_hyper_plane();
 
     return 0;
 }

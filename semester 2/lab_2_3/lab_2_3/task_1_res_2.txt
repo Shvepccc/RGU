@@ -1,6 +1,7 @@
+
 Elevator ID: 1
-State: 1 (doors_closed), Current floor: 1
-Total weight: 3135.9 kg;  Max weight: 226 kg; Exced limits count: 0
-Total operating time: 00:34:06
-Total wasted time: 23:11:54
-Floors count: 682; Exceeded weight limit count: 0; Last speed: 3 sec/floor; 
+State: 1 (doors_closed), Current floor: 4
+Total weight: 451.5 kg;  Max weight: 297 kg; Exced limits count: 2
+Total operating time: 00:00:21
+Total wasted time: 00:03:39
+Floors count: 7; Exceeded weight limit count: 2; Last speed: 3 sec/floor; 

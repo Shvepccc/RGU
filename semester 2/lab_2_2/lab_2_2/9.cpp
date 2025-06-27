@@ -4,7 +4,7 @@
 
 #include "../libs/bigfloat.h"
 
-bigfloat defaultEPS(bigint(1), bigint(1e10));
+bigfloat defaultEPS(bigint(1), bigint(1e100));
 
 bool compare_file_with_cstring(const char* filename, const char* str)
 {
@@ -17,7 +17,6 @@ bool compare_file_with_cstring(const char* filename, const char* str)
 	std::cout << "\nComparing...\n";
 	while (file.get(ch_file))
 	{
-
 		if (str[i] == '\0') return false;
 		if (ch_file != str[i])
 		{
@@ -36,14 +35,14 @@ bool compare_file_with_cstring(const char* filename, const char* str)
 
 bigfloat calculate_row(
 	bigfloat(*calc_member_function)(unsigned int, bigfloat&),
-	int members_count)
+	bigfloat eps)
 {
 	bigfloat res;
 	bigfloat temp;
 	bigfloat storage;
 	unsigned int n = 0;
 	std::cout << "Iteration: ";
-	while (n < members_count)
+	while (temp > eps || n == 0)
 	{
 		temp = calc_member_function(n, storage);
 		res += temp;
@@ -54,7 +53,6 @@ bigfloat calculate_row(
 		}
 	}
 	std::cout << "\n";
-	//std::cout << "\n(" << n << ") ";
 	return res;
 }
 
@@ -67,9 +65,9 @@ bigfloat Beily_Boruen_Plaff_member(unsigned int n, bigfloat& storage)
 		- bigfloat(1, 8 * n + 5) - bigfloat(1, 8 * n + 6));
 }
 
-bigfloat Beily_Boruen_Plaff(int members_count = 500)
+bigfloat Beily_Boruen_Plaff(bigfloat eps = defaultEPS)
 {
-	return calculate_row(Beily_Boruen_Plaff_member, members_count);
+	return calculate_row(Beily_Boruen_Plaff_member, eps) * bigfloat(bigint(1e10), 1);
 }
 
 #pragma endregion
@@ -88,9 +86,9 @@ bigfloat Bellar_member(unsigned int n, bigfloat& storage)
 		+ bigfloat(1, 10 * n + 9));
 }
 
-bigfloat Bellar(int members_count = 500)
+bigfloat Bellar(bigfloat eps = defaultEPS)
 {
-	return bigfloat(1, 64) * calculate_row(Bellar_member, members_count);
+	return bigfloat(1, 64) * calculate_row(Bellar_member, defaultEPS) * bigfloat(bigint(1e20), 1);
 }
 
 #pragma endregion
@@ -135,25 +133,29 @@ bigfloat Chudnovsky_member(Chudnovsky_State& state)
 	return term;
 }
 
-bigfloat Chudnovsky(int members_count = 500)
+bigfloat Chudnovsky(bigfloat eps = defaultEPS)
 {
 	Chudnovsky_State state;
 	bigfloat sum = 0;
 
 	std::cout << "Iteration: ";
-	for (int i = 0; i < members_count; ++i)
+	bigfloat temp;
+	int i = 0;
+	while(temp > eps || i == 0)
 	{
-		sum += Chudnovsky_member(state);
+		temp = Chudnovsky_member(state);
+		sum += temp;
 		if (i % 250 == 0)
 		{
 			std::cout << i << " ";
 		}
+		++i;
 	}
 	std::cout << "\n";
 
 	bigfloat coeff = bigfloat(1, 426880 * sqrt(10005));
 
-	return pow(coeff * sum, -1);
+	return pow(coeff * sum, -1) * bigfloat(1, bigint(1e10));
 }
 
 #pragma endregion
@@ -194,19 +196,22 @@ bigfloat Ramanudjan_member(Ramanudjan_State& state)
 	return term;
 }
 
-bigfloat Ramanudjan(int members_count = 500)
+bigfloat Ramanudjan(bigfloat eps = defaultEPS)
 {
 	Ramanudjan_State state;
 	bigfloat sum = 0;
 
 	std::cout << "Iteration: ";
-	for (int i = 0; i < members_count; ++i)
+	int i = 0;
+	bigfloat temp;
+	while (temp > eps || i == 0)
 	{
 		sum += Ramanudjan_member(state);
 		if (i % 250 == 0)
 		{
 			std::cout << i << " ";
 		}
+		++i;
 	}
 	std::cout << "\n";
 
@@ -222,22 +227,21 @@ int program_9_main(int argc, char* argv[])
 {
 	char* my_res;
 	int count_of_numbers = 200;
-	int count_of_iterations = 500;
 	
 	//way 1
-	my_res = to_cstring(Beily_Boruen_Plaff(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Beily_Boruen_Plaff(), count_of_numbers);
 	std::cout << "Beily_Boruen_Plaff: " << my_res << "\n\n";
 
 	//way 2
-	my_res = to_cstring(Bellar(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Bellar(), count_of_numbers);
 	std::cout << "Bellar: " << my_res << "\n\n";
 	
 	//way 3
-	my_res = to_cstring(Chudnovsky(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Chudnovsky(), count_of_numbers);
 	std::cout << "Chudnovsky: " << my_res << "\n\n";
 
 	//way 4
-	my_res = to_cstring(Ramanudjan(count_of_iterations), count_of_numbers);
+	my_res = to_cstring(Ramanudjan(), count_of_numbers);
 	std::cout << "Ramanudjan: " << my_res << "\n\n";
 
     return 0;

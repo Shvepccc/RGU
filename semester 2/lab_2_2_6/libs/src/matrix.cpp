@@ -385,85 +385,87 @@ void swap_double(double* a, double* b)
 	*b = temp;
 }
 
-matrix solve_gauss(matrix& a, matrix& b)
-{
-	if (a._rows_count != a._columns_count 
-		|| a._rows_count != b._rows_count 
-		|| b._columns_count != 1) {
-		throw std::invalid_argument("Invalid matrix dimensions for Gauss method");
-	}
+//matrix solve_gauss(matrix& a, matrix& b)
+//{
+//	if (a._rows_count != a._columns_count 
+//		|| a._rows_count != b._rows_count 
+//		|| b._columns_count != 1) {
+//		throw std::invalid_argument("Invalid matrix dimensions for Gauss method");
+//	}
+//
+//	int n = a._rows_count;
+//	matrix ab(n, n + 1);
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < n; ++j)
+//		{
+//			ab[i][j] = a[i][j];
+//		}
+//		ab[i][n] = b[i][0];
+//	}
+//
+//	for (int curr_row = 0; curr_row < n; ++curr_row)
+//	{
+//		// Find main element in column
+//		int max_row = curr_row;
+//		for (int i = curr_row + 1; i < n; ++i)
+//		{
+//			if (abs(ab[i][curr_row]) > abs(ab[max_row][curr_row]))
+//			{
+//				max_row = i;
+//			}
+//		}
+//
+//		// change rows
+//		if (max_row != curr_row)
+//		{
+//			for (int j = curr_row; j <= n; ++j)
+//			{
+//				swap_double(&ab[curr_row][j], &ab[max_row][j]);
+//			}
+//		}
+//
+//		if (abs(ab[curr_row][curr_row]) < 1e-10)
+//		{
+//			throw std::runtime_error("Matrix is singular or nearly singular");
+//		}
+//
+//		// Normalize current row
+//		double pivot = ab[curr_row][curr_row];
+//		for (int j = curr_row; j <= n; ++j)
+//		{
+//			ab[curr_row][j] /= pivot;
+//		}
+//
+//		// Excluding a variable from other strings
+//		for (int i = 0; i < n; ++i)
+//		{
+//			if (i != curr_row)
+//			{
+//				double factor = ab[i][curr_row];
+//				for (int j = curr_row; j <= n; ++j)
+//				{
+//					ab[i][j] -= factor * ab[curr_row][j];
+//				}
+//			}
+//		}
+//	}
+//
+//	matrix x(n, 1);
+//	for (int i = n - 1; i >= 0; --i)
+//	{
+//		x[i][0] = ab[i][n];
+//		for (int j = i + 1; j < n; ++j)
+//		{
+//			x[i][0] -= ab[i][j] * x[j][0];
+//		}
+//	}
+//
+//	return x;
+//}
 
-	int n = a._rows_count;
-	matrix ab(n, n + 1);
 
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < n; ++j)
-		{
-			ab[i][j] = a[i][j];
-		}
-		ab[i][n] = b[i][0];
-	}
-
-	for (int curr_row = 0; curr_row < n; ++curr_row)
-	{
-		// Find main element in column
-		int max_row = curr_row;
-		for (int i = curr_row + 1; i < n; ++i)
-		{
-			if (abs(ab[i][curr_row]) > abs(ab[max_row][curr_row]))
-			{
-				max_row = i;
-			}
-		}
-
-		// change rows
-		if (max_row != curr_row)
-		{
-			for (int j = curr_row; j <= n; ++j)
-			{
-				swap_double(&ab[curr_row][j], &ab[max_row][j]);
-			}
-		}
-
-		if (abs(ab[curr_row][curr_row]) < 1e-10)
-		{
-			throw std::runtime_error("Matrix is singular or nearly singular");
-		}
-
-		// Normalize current row
-		double pivot = ab[curr_row][curr_row];
-		for (int j = curr_row; j <= n; ++j)
-		{
-			ab[curr_row][j] /= pivot;
-		}
-
-		// Excluding a variable from other strings
-		for (int i = 0; i < n; ++i)
-		{
-			if (i != curr_row)
-			{
-				double factor = ab[i][curr_row];
-				for (int j = curr_row; j <= n; ++j)
-				{
-					ab[i][j] -= factor * ab[curr_row][j];
-				}
-			}
-		}
-	}
-
-	matrix x(n, 1);
-	for (int i = n - 1; i >= 0; --i)
-	{
-		x[i][0] = ab[i][n];
-		for (int j = i + 1; j < n; ++j)
-		{
-			x[i][0] -= ab[i][j] * x[j][0];
-		}
-	}
-
-	return x;
-}
 
 int matrix::rank() const
 {

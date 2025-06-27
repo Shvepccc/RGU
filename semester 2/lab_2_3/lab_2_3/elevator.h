@@ -36,9 +36,66 @@ public:
     }
 };
 
+//enum point_type
+//{
+//    start_f,
+//    target_f
+//};
+
+class floor_struct
+{
+public:
+    int _floor;
+    int _type;
+
+    //start - 0
+    //start + target - 1
+    //target - 2
+
+    floor_struct() :
+        _floor(0), _type(false)
+    {}
+
+    floor_struct(int floor, int type) :
+        _floor(floor), _type(type)
+    {}
+
+    floor_struct(const floor_struct& other)
+    {
+        _floor = other._floor;
+        _type = other._type;
+    }
+
+    bool operator==(const floor_struct& other) const {
+        return _floor == other._floor && _type == other._type;
+    }
+
+    bool operator!=(const floor_struct& other) const {
+        return !(*this == other);
+    }
+
+    // For sorting
+    bool operator<(const floor_struct& other) const {
+        return _floor < other._floor;
+    }
+
+    bool operator>(const floor_struct& other) const {
+        return _floor > other._floor;
+    }
+
+    floor_struct & operator=(const floor_struct & other) {
+        if (this != &other) {
+            _floor = other._floor;
+            _type = other._type;
+        }
+        return *this;
+    }
+};
+
 class elevator
 {
 public:
+
     struct el_state
     {
         int _curr_floor;
@@ -47,7 +104,6 @@ public:
         el_state() : _curr_floor(1), _state(doors_closed)
         {}
     };
-
     enum elevator_states
     {
         doors_open,
@@ -70,11 +126,13 @@ private:
     double _max_weight;
     int _exceed_limit_count;
 
-    std::vector<int> _floors_queue;
+    std::set<floor_struct> _floors_queue;
     int _remainder_sec;
     int _current_weight;
     int _sec_per_floor;
     std::vector<passenger> curr_passengers;
+
+    int _next_floor;
 
 public:
     elevator();
@@ -84,10 +142,14 @@ public:
     int get_floors_queue_size() const;
 
     bool set_task(int start_floor, int target_floor,
+        double persent_of_maximum_load);
+    bool check_set_task(int start_floor, int target_floor,
         double& persent_of_maximum_load);
     void action(std::tm& current_time,
         std::vector<std::vector<passenger>>& building_arr,
-        std::vector<passenger>& result_passengers_arr);
+        std::vector<passenger>& result_passengers_arr,
+        std::vector<passenger>& passengers_array,
+        int& pas_index);
 
     friend std::ostream& operator<<(
         std::ostream& os,

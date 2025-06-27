@@ -99,99 +99,99 @@ int program_2_main(int argc, char* argv[])
 
 #pragma region testing log
 
-        //std::vector<double> test_values = {
-        //    0.0001, 0.01, 0.1,
-        //    0.5, 1.0, 1.5, 2.0, 2.718281828,
-        //    10.0, 100.0, 1024.0, 1e6
-        //};
-        //
-        //test_log_function("ln", ln, std::log, test_values, defaultEXP);
-        //test_log_function("log2", log2, std::log2, test_values, defaultEXP);
-        //test_log_function("log10", log10, std::log10, test_values, defaultEXP);
+        std::vector<double> test_values = {
+            0.0001, 0.01, 0.1,
+            0.5, 1.0, 1.5, 2.0, 2.718281828,
+            10.0, 100.0, 1024.0, 1e6
+        };
+        
+        test_log_function("ln", ln, std::log, test_values, defaultEXP);
+        test_log_function("log2", log2, std::log2, test_values, defaultEXP);
+        test_log_function("log10", log10, std::log10, test_values, defaultEXP);
 
 #pragma endregion
 
 #pragma region testing trigonometry
 
-        //test_arctg_value(bigfloat(0), defaultEXP, "Test 1: arctg(0)");
-        //test_arctg_value(bigfloat(1), defaultEXP, "Test 2: arctg(1) (should be pi/4)");
-        //test_arctg_value(bigfloat(-1), defaultEXP, "Test 3: arctg(-1) (should be -pi/4)");
-        //test_arctg_value(bigfloat(10), defaultEXP, "Test 4: arctg(10)");
-        //test_arctg_value(bigfloat(-10), defaultEXP, "Test 5: arctg(-10)");
-        //test_arctg_value(bigfloat(0.5), defaultEXP, "Test 6: arctg(0.5)");
-        //test_arctg_value(bigfloat(-0.5), defaultEXP, "Test 7: arctg(-0.5)");
-        //test_arctg_value(bigfloat(1000000), defaultEXP, "Test 8: arctg(1e6) (should be close to pi/2)");
-        //test_arctg_value(bigfloat(-1000000), defaultEXP, "Test 9: arctg(-1e6) (should be close to -pi/2)");
+        test_arctg_value(bigfloat(0), defaultEXP, "Test 1: arctg(0)");
+        test_arctg_value(bigfloat(1), defaultEXP, "Test 2: arctg(1) (should be pi/4)");
+        test_arctg_value(bigfloat(-1), defaultEXP, "Test 3: arctg(-1) (should be -pi/4)");
+        test_arctg_value(bigfloat(10), defaultEXP, "Test 4: arctg(10)");
+        test_arctg_value(bigfloat(-10), defaultEXP, "Test 5: arctg(-10)");
+        test_arctg_value(bigfloat(0.5), defaultEXP, "Test 6: arctg(0.5)");
+        test_arctg_value(bigfloat(-0.5), defaultEXP, "Test 7: arctg(-0.5)");
+        test_arctg_value(bigfloat(1000000), defaultEXP, "Test 8: arctg(1e6) (should be close to pi/2)");
+        test_arctg_value(bigfloat(-1000000), defaultEXP, "Test 9: arctg(-1e6) (should be close to -pi/2)");
 
-        //std::cout << "arcsin(1/2) = " << (to_double(arcsin(bigfloat(1, 2), defaultEXP) * bigfloat(6))) << "\n";
-        //std::cout << "sin(1e10) = " << to_double(sin(bigfloat(10000000000, 1), defaultEXP)) << "\n";
+        std::cout << "arcsin(1/2) = " << (to_double(arcsin(bigfloat(1, 2), defaultEXP) * bigfloat(6))) << "\n";
+        std::cout << "sin(1e10) = " << to_double(sin(bigfloat(10000000000, 1), defaultEXP)) << "\n";
 
-        //test_trig_func("sin", sin, std::sin);
-        //test_trig_func("cos", cos, std::cos);
-        //test_trig_func("tg", tg, std::tan); //TODO: make it better
-        //test_trig_func("ctg", ctg, [](double x) { return 1.0 / std::tan(x); });
-        //test_trig_func("sec", sec, [](double x) { return 1.0 / std::cos(x); });
-        //test_trig_func("cosec", cosec, [](double x) { return 1.0 / std::sin(x); });
-        //test_trig_func("arcsin", arcsin, std::asin);
-        //test_trig_func("arccos", arccos, std::acos);
-        //test_trig_func("arctg", arctg, std::atan);
-        //test_trig_func("arcctg", arcctg, [](double x) { return std::atan(1.0 / x); });
+        test_trig_func("sin", sin, std::sin);
+        test_trig_func("cos", cos, std::cos);
+        test_trig_func("tg", tg, std::tan);
+        test_trig_func("ctg", ctg, [](double x) { return 1.0 / std::tan(x); });
+        test_trig_func("sec", sec, [](double x) { return 1.0 / std::cos(x); });
+        test_trig_func("cosec", cosec, [](double x) { return 1.0 / std::sin(x); });
+        test_trig_func("arcsin", arcsin, std::asin);
+        test_trig_func("arccos", arccos, std::acos);
+        test_trig_func("arctg", arctg, std::atan);
+        test_trig_func("arcctg", arcctg, [](double x) { return std::atan(1.0 / x); });
 
 #pragma endregion
 
-        //bigfloat a(1, 4);
-        //bigfloat b(2, 3);
-        //bigfloat c(-12, 4);
-        //bigfloat d;
-        //bigfloat one(1.0);
-        //
-        //std::cout << "Values" << std::endl;
-        //std::cout << "a = " << a << "\n";
-        //std::cout << "b = " << b << "\n";
-        //std::cout << "c = " << c << "\n\n";
-        //
-        ////std::cout << "Enter value (<sign><numerator>/<denominator>) " << std::endl;
-        ////std::cin >> d;
-        ////std::cout << "Entererd value:" << d << std::endl;
-        //
-        //std::cout << "Main arithmetic" << std::endl;
-        //std::cout << "a + b = " << (a + b) << "\n";
-        //std::cout << "a - b = " << (a - b) << "\n";
-        //std::cout << "a * b = " << (a * b) << "\n";
-        //std::cout << "a * c = " << (a * c) << "\n";
-        //std::cout << "a / b = " << (a / b) << "\n\n";
-        //
-        //std::cout << "Compare functions" << std::endl;
-        //std::cout << "a == b: " << (a == b) << "\n";
-        //std::cout << "a > b: " << (a > b) << "\n";
-        //std::cout << "a <= b: " << (a <= b) << "\n\n";
-        //
-        //std::cout << "Trigonometry functions:" << std::endl;
-        //std::cout << "sin(1/4) = " << sin(a, defaultEXP) << "\n";
-        //std::cout << "cos(1/4) = " << cos(a, defaultEXP) << "\n";
-        //std::cout << "tg(1/4) = " << tg(a, defaultEXP) << "\n";
-        //std::cout << "ctg(1/4) = " << ctg(a, defaultEXP) << "\n";
-        //std::cout << "\n";
-        //std::cout << "sec(1/4) = " << sec(a, defaultEXP) << "\n";
-        //std::cout << "cosec(1/4) = " << cosec(a, defaultEXP) << "\n\n";
-        //
-        //std::cout << "Inverse trigonometric functions:" << std::endl;
-        //std::cout << "arcsin(1/4) = " << arcsin(a, defaultEXP) << "\n";
-        //std::cout << "arccos(1/4) = " << arccos(a, defaultEXP) << "\n";
-        //std::cout << "arctg(1/4) = " << arctg(a, defaultEXP) << "\n";
-        //std::cout << "arcctg(1/4) = " << arcctg(a, defaultEXP) << "\n";
-        //
-        //std::cout <<  "Inverse trigonometric functions (1):" << std::endl;
-        //std::cout << "arcsin(1) = " << arcsin(one, defaultEXP) << "\n"; //Large margin of error (0.14)
-        //std::cout << "arccos(1) = " << arccos(one, defaultEXP) << "\n"; //Large margin of error (0.15)
-        //std::cout << "arctg(1) = " << arctg(one, defaultEXP) << "\n"; //Margin of error (0.0024)
-        //std::cout << "arcctg(1) = " << arcctg(one, defaultEXP) << "\n"; //Margin of error (0.001)
-        //
-        //std::cout << "Another functions:" << std::endl;
-        //std::cout << "(2/3)^3 = " << pow(b, 3) << "\n";
-        //std::cout << "(2/3)^-1 = " << pow(b, -1) << "\n";
-        //std::cout << "radical(4/9, 2) = " << to_double(radical(pow(b, 2), 2, defaultEXP)) << "\n";
-        //std::cout << "log2(16/1) = " << to_double(log2(bigfloat(16.0), defaultEXP)) << "\n"; // don't work
+        bigfloat a(1, 4);
+        bigfloat b(2, 3);
+        bigfloat c(-12, 4);
+        bigfloat d;
+        bigfloat one(1.0);
+        
+        std::cout << "Values" << std::endl;
+        std::cout << "a = " << a << "\n";
+        std::cout << "b = " << b << "\n";
+        std::cout << "c = " << c << "\n\n";
+        
+        //std::cout << "Enter value (<sign><numerator>/<denominator>) " << std::endl;
+        //std::cin >> d;
+        //std::cout << "Entererd value:" << d << std::endl;
+        
+        std::cout << "Main arithmetic" << std::endl;
+        std::cout << "a + b = " << (a + b) << "\n";
+        std::cout << "a - b = " << (a - b) << "\n";
+        std::cout << "a * b = " << (a * b) << "\n";
+        std::cout << "a * c = " << (a * c) << "\n";
+        std::cout << "a / b = " << (a / b) << "\n\n";
+        
+        std::cout << "Compare functions" << std::endl;
+        std::cout << "a == b: " << (a == b) << "\n";
+        std::cout << "a > b: " << (a > b) << "\n";
+        std::cout << "a <= b: " << (a <= b) << "\n\n";
+        
+        std::cout << "Trigonometry functions:" << std::endl;
+        std::cout << "sin(1/4) = " << sin(a, defaultEXP) << "\n";
+        std::cout << "cos(1/4) = " << cos(a, defaultEXP) << "\n";
+        std::cout << "tg(1/4) = " << tg(a, defaultEXP) << "\n";
+        std::cout << "ctg(1/4) = " << ctg(a, defaultEXP) << "\n";
+        std::cout << "\n";
+        std::cout << "sec(1/4) = " << sec(a, defaultEXP) << "\n";
+        std::cout << "cosec(1/4) = " << cosec(a, defaultEXP) << "\n\n";
+        
+        std::cout << "Inverse trigonometric functions:" << std::endl;
+        std::cout << "arcsin(1/4) = " << arcsin(a, defaultEXP) << "\n";
+        std::cout << "arccos(1/4) = " << arccos(a, defaultEXP) << "\n";
+        std::cout << "arctg(1/4) = " << arctg(a, defaultEXP) << "\n";
+        std::cout << "arcctg(1/4) = " << arcctg(a, defaultEXP) << "\n";
+        
+        std::cout <<  "Inverse trigonometric functions (1):" << std::endl;
+        std::cout << "arcsin(1) = " << arcsin(one, defaultEXP) << "\n";
+        std::cout << "arccos(1) = " << arccos(one, defaultEXP) << "\n";
+        std::cout << "arctg(1) = " << arctg(one, defaultEXP) << "\n";  
+        std::cout << "arcctg(1) = " << arcctg(one, defaultEXP) << "\n";
+        
+        std::cout << "Another functions:" << std::endl;
+        std::cout << "(2/3)^3 = " << pow(b, 3) << "\n";
+        std::cout << "(2/3)^-1 = " << pow(b, -1) << "\n";
+        std::cout << "radical(4/9, 2) = " << to_double(radical(pow(b, 2), 2, defaultEXP)) << "\n";
+        std::cout << "log2(16/1) = " << to_double(log2(bigfloat(16.0), defaultEXP)) << "\n"; // don't work
     }
     catch (const std::exception& e)
     {

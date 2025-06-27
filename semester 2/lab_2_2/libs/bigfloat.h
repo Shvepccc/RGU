@@ -24,7 +24,7 @@ public:
 	bigfloat(bigint value);
 
 	bigfloat(bigint numerator, bigint denominator);
-	bigfloat(double numerator, double denominator);
+	bigfloat(int numerator, int denominator);
 
 	bigfloat operator-() const;
 	bigfloat& negate();

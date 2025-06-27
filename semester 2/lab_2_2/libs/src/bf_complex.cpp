@@ -118,7 +118,7 @@ bigfloat collect_value(std::istream& stream)
 	while (true)
 	{
 		char cur_ch = stream.peek();
-		std::cout << cur_ch;
+		//std::cout << cur_ch;
 		if (std::isdigit(cur_ch))
 		{
 			if (flag == 1)

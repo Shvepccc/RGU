@@ -2,8 +2,11 @@
 
 int program_5_main(int argc, char* argv[])
 {
-    bf_complex z1(bigfloat(1, 2), bigfloat(3, 4)); // 1/2 + 3/4i
-    bf_complex z2(2.0, 1.0, -1.0, 2.0);            // 2 + (-1/2)i
+    //bf_complex z1(bigfloat(1, 2), bigfloat(3, 4)); // 1/2 + 3/4i
+    //bf_complex z2(2.0, 1.0, -1.0, 2.0);            // 2 + (-1/2)i
+
+    bf_complex z1(bigfloat(1, 1), bigfloat(1, 1)); // 1/2 + 3/4i
+    bf_complex z2(0.0, 1.0, 1.0, 1.0);            // 2 + (-1/2)i
 
     std::cout << "z1 = " << z1 << "\n";
     std::cout << "z2 = " << z2 << "\n\n";

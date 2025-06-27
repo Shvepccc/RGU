@@ -1,4 +1,4 @@
-#define START_PROGRAM 5;
+#define START_PROGRAM 0;
 
 #include <iostream>
 #include "programms.h"
@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     program_2_main, // Good (kind of like)
     program_3_main, // Good
     program_5_main, // Good
-    program_6_main, 
+    program_6_main,
     program_8_main, // Good
     program_9_main  // Good
     };
@@ -20,14 +20,14 @@ int main(int argc, char* argv[]) {
     while (true) {
         if (!(choice >= 1 && choice <= prog_count))
         {
-            std::cout << "Enter program number [2, 3, 5, 6, 8, 9] (exit - 0): ";
+            std::cout << "Enter program number:\n2 (bigfloat), \n3 (polynom), \n5 (complex value), \n8 (chain fractions), \n9 (calculate pi)\n(exit - 0): ";
             std::cin >> choice;
         }
 
         if (choice > 1 && choice <= prog_count &&
-            (choice != 4 && choice != 7))
+            (choice != 4 && choice != 7 && choice != 6))
         {
-            if (choice == 5 || choice == 6) choice -= 1;
+            if (choice == 5) choice -= 1;
             if (choice >= 8) choice -= 2;
             std::cout << "Running program " << choice << "...\n" << std::endl;
             programs[--choice](argc, argv);

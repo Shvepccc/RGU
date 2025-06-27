@@ -90,6 +90,15 @@ void read_settings_from_file(int& n, int& k, std::vector<int>& limits, const std
     {
         throw std::runtime_error("No limits provided in file: " + file_path);
     }
+
+    if (n <= 1)
+    {
+        throw std::runtime_error("Count of floors must be mroe than 1");
+    }
+    if (k < 1)
+    {
+        throw std::runtime_error("Count of elevators must be mroe than 0");
+    }
 }
 
 void print_parse_data(std::vector<passenger> const& passengers,
@@ -179,16 +188,22 @@ void controller(const std::string& ifile_path_1, const std::string& ifile_path_2
 
     while (pas_index < total_pas_count)
     {
+        //std::sort(passenger_arr.begin(), passenger_arr.end(), compare_by_appear_time);
+
         while ((pas_index < total_pas_count) 
             && cmp_time(passenger_arr[pas_index]._appear_time, cur_time))
         {
+            passenger_arr[pas_index]._order_id = pas_index;
             auto pas = passenger_arr[pas_index];
             std::cout << "\n---> " << pas << "\n";
             
             //traverce all elevators to find a suitable one and give it a task
-            bool set_task_flag = true;
+            std::sort(elevator_arr.begin(), elevator_arr.end(), [](const elevator& a, const elevator& b) 
+                { return a.get_floors_queue_size() < b.get_floors_queue_size(); });
+            bool set_task_flag;
             for (auto& el : elevator_arr)
             {
+                set_task_flag = false;
                 elevator::el_state el_state_cur = el.get_state();
 
                 el_s pas_direction = (pas._start_floor < pas._target_floor)
@@ -201,25 +216,26 @@ void controller(const std::string& ifile_path_1, const std::string& ifile_path_2
                     && pas._start_floor >= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el, persent_of_maximum_load);
+                    set_task_flag = set_elevator_task(pas, el, persent_of_maximum_load);
                 }
                 else if (el_state_cur._state == el_s::downward_move
                     && pas_direction == el_s::downward_move
                     && pas._start_floor <= el_state_cur._curr_floor)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el, persent_of_maximum_load);
+                    set_task_flag = set_elevator_task(pas, el, persent_of_maximum_load);
                 }
                 else if (el_state_cur._state == el_s::doors_closed ||
                     el_state_cur._state == el_s::doors_open)
                 {
                     //set this task to current elevator
-                    set_elevator_task(pas, el, persent_of_maximum_load);
+                    set_task_flag = set_elevator_task(pas, el, persent_of_maximum_load);
                 }
                 
                 if (set_task_flag)
                 {
                     building_arr[pas._start_floor - 1].push_back(pas);
+                    //it = passenger_arr.erase(it);
                     break;
                 }
             }
@@ -245,7 +261,7 @@ void controller(const std::string& ifile_path_1, const std::string& ifile_path_2
 
         for (auto& el : elevator_arr)
         {
-            el.action(cur_time, building_arr, result_passengers_arr);           
+            el.action(cur_time, building_arr, result_passengers_arr, passenger_arr, pas_index);           
         }
 
         add_time(cur_time, 0, sec_per_step);
@@ -262,6 +278,8 @@ void controller(const std::string& ifile_path_1, const std::string& ifile_path_2
     }
 
     std::cout << "\nElevators results:\n-------------------------------------------------------\n";
+    std::sort(elevator_arr.begin(), elevator_arr.end(), [](elevator a, elevator b)
+        { return a.get_id() < b.get_id(); });
     for (auto& el : elevator_arr)
     {
         el._total_waste_time = time_sub(cur_time, el._total_work_time);

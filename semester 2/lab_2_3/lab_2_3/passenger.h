@@ -22,11 +22,13 @@ public:
     int exceed_limit;
 
     int _el_id;
+    int _order_id;
 
     passenger(int ID, std::tm appear_time, int start_floor, int target_floor, double weight) :
         _ID(ID), _appear_time(appear_time), _start_floor(start_floor),
         _target_floor(target_floor), _weight(weight),
-        load_time(std::tm{}), total_time(std::tm{}), meet_arr(std::vector<int>{}), exceed_limit(0)
+        load_time(std::tm{}), total_time(std::tm{}), meet_arr(std::vector<int>{}), exceed_limit(0),
+        _el_id(0), _order_id(0)
     {}
 
     friend std::ostream& operator<<(std::ostream& os, const passenger& p);
