@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\line_2d.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\line_2d.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\lab_2_2_6\\6.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:lab_2_2_6\\6.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_plane.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\hyper_plane.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_line.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DA1E9D0D-FD01-4960-8012-230CE970CFAF}|lab_2_2_6\\lab_2_2_6.vcxproj|solutionrelative:libs\\hyper_line.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,39 +26,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "hyper_line.h",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_line.h",
-              "RelativeDocumentMoniker": "libs\\hyper_line.h",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_line.h",
-              "RelativeToolTip": "libs\\hyper_line.h",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "line_2d.h",
+              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\line_2d.h",
+              "RelativeDocumentMoniker": "libs\\line_2d.h",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\line_2d.h",
+              "RelativeToolTip": "libs\\line_2d.h",
+              "ViewState": "AgIAAIoCAAAAAAAAAAAAAKUCAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-26T20:43:30.854Z",
+              "WhenOpened": "2025-06-28T09:11:07.027Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "hyper_plane.h",
-              "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_plane.h",
-              "RelativeDocumentMoniker": "libs\\hyper_plane.h",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\libs\\hyper_plane.h",
-              "RelativeToolTip": "libs\\hyper_plane.h",
-              "ViewState": "AgIAABUAAAAAAAAAAAAjwD0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-26T20:44:12.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "6.cpp",
               "DocumentMoniker": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\lab_2_2_6\\6.cpp",
               "RelativeDocumentMoniker": "lab_2_2_6\\6.cpp",
-              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\lab_2_2_6\\6.cpp",
-              "RelativeToolTip": "lab_2_2_6\\6.cpp",
-              "ViewState": "AgIAAEsBAAAAAAAAAIAwwF0BAABOAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\rfkfi\\Desktop\\Stepan Orlov\\programming university\\RGU\\semester 2\\lab_2_2_6\\lab_2_2_6\\6.cpp*",
+              "RelativeToolTip": "lab_2_2_6\\6.cpp*",
+              "ViewState": "AgIAAAsDAAAAAAAAAAAMwB0DAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-25T18:27:11.363Z",
               "EditorCaption": ""

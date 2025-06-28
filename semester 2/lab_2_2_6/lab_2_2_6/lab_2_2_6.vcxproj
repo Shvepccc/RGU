@@ -125,7 +125,9 @@
   <ItemGroup>
     <ClInclude Include="..\libs\hyper_line.h" />
     <ClInclude Include="..\libs\hyper_plane.h" />
+    <ClInclude Include="..\libs\line_2d.h" />
     <ClInclude Include="..\libs\matrix.h" />
+    <ClInclude Include="..\libs\plane_2d.h" />
     <ClInclude Include="..\libs\vector.h" />
     <ClInclude Include="programms.h" />
   </ItemGroup>

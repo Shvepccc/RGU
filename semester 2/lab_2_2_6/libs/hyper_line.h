@@ -52,10 +52,19 @@ public:
 		return true;
 	}
 
-	friend double distance_from_point_to_plane(
-		hyper_line& line, cvector& point)
+	friend double distance_from_point_to_line(
+		hyper_line& line, cvector& M)
 	{
+		double q_module = module(line._Q);
+		if (q_module < 1e-10)
+		{
+			throw std::invalid_argument("Direction vector cannot be zero");
+		}
 
+		cvector AM = M - line._A;
+		double a = pow(module(AM), 2);
+		double b = pow(scalar_product(AM, line._Q), 2) / pow(q_module, 2);
+		return sqrt(a - b);
 	}
 
 };

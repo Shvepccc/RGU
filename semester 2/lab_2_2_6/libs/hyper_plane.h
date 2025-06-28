@@ -71,7 +71,7 @@ public:
 		return numerator / denominator;
 	}
 
-	friend void crossing_hyper_planes(
+	friend matrix crossing_hyper_planes(
 		hyper_plane* planes_arr, int planes_count)
 	{
 		int size = planes_arr[0]._C.size();
@@ -92,9 +92,7 @@ public:
 			b[i][0] = -planes_arr[i]._b;
 		}
 
-		solve_gauss(a, b);
-
-
+		return solve_gauss(a, b);
 	}
 };
 

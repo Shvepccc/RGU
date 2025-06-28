@@ -1,13 +1,19 @@
+Ôªø#include <vector>
 #include <iostream>
 #include "../libs/vector.h"
 #include "../libs/matrix.h"
 #include "../libs/hyper_line.h"
 #include "../libs/hyper_plane.h"
-#include <vector>
+#include "../libs/plane_2d.h"
+#include "../libs/line_2d.h"
+
+#include <cmath>
+#include <cassert>
+#include <iomanip>
 
 //void test_gauss_solver() {
 //    try {
-//        // “ÂÒÚ 1: œÓÒÚ‡ˇ ÒËÒÚÂÏ‡ 2x2
+//        // –¢–µ—Å—Ç 1: –ü—Ä–æ—Å—Ç–∞—è —Å–∏—Å—Ç–µ–º–∞ 2x2
 //        std::cout << "\nTest 1: Simple 2x2 system\n";
 //        matrix a1(2, 2);
 //        matrix b1(2, 1);
@@ -21,7 +27,7 @@
 //        matrix x1 = solve_gauss(a1, b1);
 //        std::cout << "Solution:\n" << x1;
 //
-//        // “ÂÒÚ 2: —ËÒÚÂÏ‡ 3x3
+//        // –¢–µ—Å—Ç 2: –°–∏—Å—Ç–µ–º–∞ 3x3
 //        std::cout << "\nTest 2: 3x3 system\n";
 //        matrix A2(3, 3);
 //        matrix b2(3, 1);
@@ -37,7 +43,7 @@
 //        matrix x2 = solve_gauss(A2, b2);
 //        std::cout << "Solution:\n" << x2;
 //
-//        // “ÂÒÚ 3: ¬˚ÓÊ‰ÂÌÌ‡ˇ ÒËÒÚÂÏ‡
+//        // –¢–µ—Å—Ç 3: –í—ã—Ä–æ–∂–¥–µ–Ω–Ω–∞—è —Å–∏—Å—Ç–µ–º–∞
 //        std::cout << "\nTest 3: Singular matrix\n";
 //        matrix A3(2, 2);
 //        matrix b3(2, 1);
@@ -280,7 +286,6 @@ void test_matrix()
     std::cout << "\n=== Matrix Testing Complete ===\n";
 }
 
-// ¬ÒÔÓÏÓ„‡ÚÂÎ¸Ì‡ˇ ÙÛÌÍˆËˇ ‰Îˇ Ò‡‚ÌÂÌËˇ ‚ÂÍÚÓÓ‚ Ò Û˜ÂÚÓÏ ÔÓ„Â¯ÌÓÒÚË
 bool vectors_equal(const cvector& v1, const cvector& v2, double epsilon = 1e-6) {
     if (v1.size() != v2.size()) return false;
     for (size_t i = 0; i < v1.size(); ++i) {
@@ -292,7 +297,7 @@ bool vectors_equal(const cvector& v1, const cvector& v2, double epsilon = 1e-6) 
 void test_hyper_line() {
     std::cout << "=== Testing hyper_line ===" << std::endl;
 
-    // “ÂÒÚ 1: œÓ‚ÂÍ‡ ÔËÌ‡‰ÎÂÊÌÓÒÚË ÚÓ˜ÂÍ ÔˇÏÓÈ (2D ÒÎÛ˜‡È)
+    // –¢–µ—Å—Ç 1: –ü—Ä–æ–≤–µ—Ä–∫–∞ –ø—Ä–∏–Ω–∞–¥–ª–µ–∂–Ω–æ—Å—Ç–∏ —Ç–æ—á–µ–∫ –ø—Ä—è–º–æ–π (2D —Å–ª—É—á–∞–π)
     {
         cvector a({ 1.0, 1.0 });
         cvector b({ 2.0, 2.0 });
@@ -314,7 +319,7 @@ void test_hyper_line() {
         std::cout << "Test 1.2 (Points not on 2D line): " << (!result ? "PASSED" : "FAILED") << std::endl;
     }
 
-    // “ÂÒÚ 2: œÓ‚ÂÍ‡ ÔËÌ‡‰ÎÂÊÌÓÒÚË ÚÓ˜ÂÍ ÔˇÏÓÈ (3D ÒÎÛ˜‡È)
+    // –¢–µ—Å—Ç 2: –ü—Ä–æ–≤–µ—Ä–∫–∞ –ø—Ä–∏–Ω–∞–¥–ª–µ–∂–Ω–æ—Å—Ç–∏ —Ç–æ—á–µ–∫ –ø—Ä—è–º–æ–π (3D —Å–ª—É—á–∞–π)
     {
         cvector a({ 1.0, 1.0, 1.0 });
         cvector b({ 2.0, 2.0, 2.0 });
@@ -328,10 +333,10 @@ void test_hyper_line() {
         std::cout << "Test 2 (Points on 3D line): " << (result ? "PASSED" : "FAILED") << std::endl;
     }
 
-    // “ÂÒÚ 3: œÓ‚ÂÍ‡ Ó·‡·ÓÚÍË ËÒÍÎ˛˜ÂÌËÈ
+    // –¢–µ—Å—Ç 3: –ü—Ä–æ–≤–µ—Ä–∫–∞ –æ–±—Ä–∞–±–æ—Ç–∫–∏ –∏—Å–∫–ª—é—á–µ–Ω–∏–π
     {
         cvector a({ 1.0, 2.0 });
-        cvector b({ 3.0, 4.0, 5.0 }); // –‡ÁÌ˚Â ‡ÁÏÂ˚
+        cvector b({ 3.0, 4.0, 5.0 }); // –†–∞–∑–Ω—ã–µ —Ä–∞–∑–º–µ—Ä—ã
 
         try {
             check_points_belong_to_line(a, b, nullptr, 1);
@@ -350,15 +355,47 @@ void test_hyper_line() {
             std::cout << "Test 3.2 (Exception handling): PASSED" << std::endl;
         }
     }
+
+    {
+        // –¢–µ—Å—Ç 1: –ü—Ä–æ—Å—Ç–æ–π 2D —Å–ª—É—á–∞–π - —Ä–∞—Å—Å—Ç–æ—è–Ω–∏–µ –æ—Ç —Ç–æ—á–∫–∏ (0,1) –¥–æ –æ—Å–∏ X (y=0)
+        hyper_line line(cvector({ 1.0, 0.0 }), cvector({ 0.0, 0.0 })); // –ü—Ä—è–º–∞—è y = 0 (–æ—Å—å X)
+        cvector point({ 0.0, 1.0 }); // –¢–æ—á–∫–∞ (0,1)
+
+        try {
+            double dist = distance_from_point_to_line(line, point);
+            if (fabs(dist - 1.0) < 1e-6) {
+                std::cout << "Test 1 (Basic 2D): PASSED" << std::endl;
+            }
+            else {
+                std::cout << "Test 1 (Basic 2D): FAILED (got " << dist << ", expected 1.0)" << std::endl;
+            }
+        }
+        catch (const std::exception& e) {
+            std::cout << "Test 1 (Basic 2D): FAILED (exception: " << e.what() << ")" << std::endl;
+        }
+
+        // –¢–µ—Å—Ç 2: –ü—Ä–æ–≤–µ—Ä–∫–∞ –æ–±—Ä–∞–±–æ—Ç–∫–∏ –Ω—É–ª–µ–≤–æ–≥–æ –≤–µ–∫—Ç–æ—Ä–∞ –Ω–∞–ø—Ä–∞–≤–ª–µ–Ω–∏—è
+        try {
+            hyper_line zero_line(cvector({ 0.0, 0.0 }), cvector({ 1.0, 1.0 }));
+            distance_from_point_to_line(zero_line, point);
+            std::cout << "Test 2 (Zero vector): FAILED (no exception)" << std::endl;
+        }
+        catch (const std::invalid_argument& e) {
+            std::cout << "Test 2 (Zero vector): PASSED" << std::endl;
+        }
+        catch (...) {
+            std::cout << "Test 2 (Zero vector): FAILED (wrong exception)" << std::endl;
+        }
+    }
 }
 
 void test_hyper_plane() {
     std::cout << "\n=== Testing hyper_plane ===" << std::endl;
 
-    // “ÂÒÚ 4: œÂÂÒÂ˜ÂÌËÂ „ËÔÂÔÎÓÒÍÓÒÚË Ë „ËÔÂÔˇÏÓÈ
+    // –¢–µ—Å—Ç 4: –ü–µ—Ä–µ—Å–µ—á–µ–Ω–∏–µ –≥–∏–ø–µ—Ä–ø–ª–æ—Å–∫–æ—Å—Ç–∏ –∏ –≥–∏–ø–µ—Ä–ø—Ä—è–º–æ–π
     {
-        hyper_plane plane(cvector({ 1.0, 1.0 }), -2.0); // œÎÓÒÍÓÒÚ¸ x + y = 2
-        hyper_line line(cvector({ 1.0, 1.0 }), cvector({ 0.0, 0.0 })); // œˇÏ‡ˇ y = x
+        hyper_plane plane(cvector({ 1.0, 1.0 }), -2.0); // –ü–ª–æ—Å–∫–æ—Å—Ç—å x + y = 2
+        hyper_line line(cvector({ 1.0, 1.0 }), cvector({ 0.0, 0.0 })); // –ü—Ä—è–º–∞—è y = x
 
         cvector cross_point = crossing_hiper_plane_and_hiper_line(line, plane);
         cvector expected({ 1.0, 1.0 });
@@ -367,11 +404,11 @@ void test_hyper_plane() {
             << (vectors_equal(cross_point, expected) ? "PASSED" : "FAILED") << std::endl;
     }
 
-    // “ÂÒÚ 5: œÂÂÒÂ˜ÂÌËÂ „ËÔÂÔÎÓÒÍÓÒÚË Ë ÎËÌËË ÏÂÊ‰Û ‰‚ÛÏˇ ÚÓ˜Í‡ÏË
+    // –¢–µ—Å—Ç 5: –ü–µ—Ä–µ—Å–µ—á–µ–Ω–∏–µ –≥–∏–ø–µ—Ä–ø–ª–æ—Å–∫–æ—Å—Ç–∏ –∏ –ª–∏–Ω–∏–∏ –º–µ–∂–¥—É –¥–≤—É–º—è —Ç–æ—á–∫–∞–º–∏
     {
-        hyper_plane plane(cvector({ 0.0, 0.0, 1.0 }), -5.0); // œÎÓÒÍÓÒÚ¸ z = 5
+        hyper_plane plane(cvector({ 0.0, 0.0, 1.0 }), -5.0); // –ü–ª–æ—Å–∫–æ—Å—Ç—å z = 5
         cvector a({ 1.0, 2.0, 4.0 });
-        cvector b({ 3.0, 4.0, 6.0 }); // ÀËÌËˇ ÔÂÂÒÂÍ‡ÂÚ ÔÎÓÒÍÓÒÚ¸ z=5
+        cvector b({ 3.0, 4.0, 6.0 }); // –õ–∏–Ω–∏—è –ø–µ—Ä–µ—Å–µ–∫–∞–µ—Ç –ø–ª–æ—Å–∫–æ—Å—Ç—å z=5
 
         cvector cross_point = crossing_hiper_plane_and_two_points(plane, a, b);
         cvector expected({ 2.0, 3.0, 5.0 });
@@ -379,25 +416,25 @@ void test_hyper_plane() {
         std::cout << "Test 5 (Two points-plane crossing): "
             << (vectors_equal(cross_point, expected) ? "PASSED" : "FAILED") << std::endl;
 
-        // —ÎÛ˜‡È ·ÂÁ ÔÂÂÒÂ˜ÂÌËˇ
+        // –°–ª—É—á–∞–π –±–µ–∑ –ø–µ—Ä–µ—Å–µ—á–µ–Ω–∏—è
         cvector c({ 1.0, 2.0, 6.0 });
-        cvector d({ 3.0, 4.0, 7.0 }); // Œ·Â ÚÓ˜ÍË ‚˚¯Â ÔÎÓÒÍÓÒÚË z=5
+        cvector d({ 3.0, 4.0, 7.0 }); // –û–±–µ —Ç–æ—á–∫–∏ –≤—ã—à–µ –ø–ª–æ—Å–∫–æ—Å—Ç–∏ z=5
 
         cross_point = crossing_hiper_plane_and_two_points(plane, c, d);
         std::cout << "Test 5.2 (No crossing): "
             << (cross_point.size() == 0 ? "PASSED" : "FAILED") << std::endl;
     }
 
-    // “ÂÒÚ 6: –‡ÒÒÚÓˇÌËÂ ÓÚ ÚÓ˜ÍË ‰Ó ÔÎÓÒÍÓÒÚË
+    // –¢–µ—Å—Ç 6: –†–∞—Å—Å—Ç–æ—è–Ω–∏–µ –æ—Ç —Ç–æ—á–∫–∏ –¥–æ –ø–ª–æ—Å–∫–æ—Å—Ç–∏
     {
-        hyper_plane plane(cvector({ 1.0, 0.0 }), -3.0); // œÎÓÒÍÓÒÚ¸ x = 3
+        hyper_plane plane(cvector({ 1.0, 0.0 }), -3.0); // –ü–ª–æ—Å–∫–æ—Å—Ç—å x = 3
         cvector point({ 5.0, 2.0 });
 
         double distance = distance_from_point_to_plane(plane, point);
         std::cout << "Test 6.1 (2D distance): "
             << (fabs(distance - 2.0) < 1e-6 ? "PASSED" : "FAILED") << std::endl;
 
-        hyper_plane plane3d(cvector({ 0.0, 0.0, 1.0 }), -4.0); // œÎÓÒÍÓÒÚ¸ z = 4
+        hyper_plane plane3d(cvector({ 0.0, 0.0, 1.0 }), -4.0); // –ü–ª–æ—Å–∫–æ—Å—Ç—å z = 4
         cvector point3d({ 1.0, 2.0, 6.0 });
 
         distance = distance_from_point_to_plane(plane3d, point3d);
@@ -405,6 +442,290 @@ void test_hyper_plane() {
             << (fabs(distance - 2.0) < 1e-6 ? "PASSED" : "FAILED") << std::endl;
     }
 }
+
+// Helper function to compare doubles with tolerance
+bool approx_equal(double a, double b, double epsilon = 1e-6) {
+    return fabs(a - b) < epsilon;
+}
+
+// Helper function to print test results
+void print_test_result(const std::string& test_name, bool passed) {
+    std::cout << std::left << std::setw(50) << test_name
+        << (passed ? "PASSED" : "FAILED") << std::endl;
+}
+
+// Test general form conversions
+void test_general_form_conversions() {
+    plane_2d converter;
+
+    // Test point-normal to general
+    {
+        plane_2d_point_normal_form pn(1, 2, 3, 4, 5, 6);
+        auto gf = converter.to_general_form(pn);
+        bool passed = approx_equal(gf.A, 4) && approx_equal(gf.B, 5) &&
+            approx_equal(gf.C, 6) && approx_equal(gf.D, -32);
+        print_test_result("Point-normal to general form", passed);
+    }
+
+    // Test intercept to general
+    {
+        plane_2d_intercept_form intercept(4, 5, 10); // x/4 + y/5 + z/10 = 1
+        auto gf = converter.to_general_form(intercept);
+
+        // –ü—Ä–æ–≤–µ—Ä—è–µ–º —á—Ç–æ —É—Ä–∞–≤–Ω–µ–Ω–∏–µ —Å–æ—Ö—Ä–∞–Ω—è–µ—Ç —Ç–æ—á–∫–∏ –ø–µ—Ä–µ—Å–µ—á–µ–Ω–∏—è
+        bool passed = approx_equal(-gf.D / gf.A, 4) &&  // x-intercept
+            approx_equal(-gf.D / gf.B, 5) &&  // y-intercept
+            approx_equal(-gf.D / gf.C, 10);   // z-intercept
+        print_test_result("Intercept to general (math check)", passed);
+    }
+
+    // Test normal to general
+    {
+        double mag = sqrt(1.0 / 3.0);
+        plane_2d_normal_form nf(mag, mag, mag, 5);
+        auto gf = converter.to_general_form(nf);
+        bool passed = approx_equal(gf.A, mag) && approx_equal(gf.B, mag) &&
+            approx_equal(gf.C, mag) && approx_equal(gf.D, -5);
+        print_test_result("Normal to general form", passed);
+    }
+
+    // Test parametric to general
+    {
+        cvector r0{ 1, 0, 0 };
+        cvector u{ 1, 1, 0 };
+        cvector v{ 0, 1, 1 };
+        plane_2d_parametric_form pf(r0, u, v);
+        auto gf = converter.to_general_form(pf);
+
+        // The normal should be u √ó v = (1, -1, 1)
+        // Plane equation: 1(x-1) -1(y-0) +1(z-0) = 0 => x - y + z = 1
+        bool passed = approx_equal(gf.A, 1) && approx_equal(gf.B, -1) &&
+            approx_equal(gf.C, 1) && approx_equal(gf.D, -1);
+        print_test_result("Parametric to general form", passed);
+    }
+}
+
+// Test point-normal form conversions
+void test_point_normal_conversions() {
+    plane_2d converter;
+
+    // Test general to point-normal
+    {
+        plane_2d_general_form gf(2, 3, 4, 5);
+        auto pn = converter.to_point_normal_form(gf);
+
+        bool passed = approx_equal(pn.A, 2) && approx_equal(pn.B, 3) && approx_equal(pn.C, 4);
+        passed = passed && approx_equal(2 * pn.x1 + 3 * pn.y1 + 4 * pn.z1 + 5, 0);
+        print_test_result("General to point-normal form", passed);
+    }
+
+    // Test intercept to point-normal
+    {
+        plane_2d_intercept_form intercept(2, 3, 4);
+        auto pn = converter.to_point_normal_form(intercept);
+
+        bool passed = approx_equal(pn.A, 1.0 / 2) && approx_equal(pn.B, 1.0 / 3) && approx_equal(pn.C, 1.0 / 4);
+        passed = passed && approx_equal(pn.x1, 2) && approx_equal(pn.y1, 0) && approx_equal(pn.z1, 0);
+        print_test_result("Intercept to point-normal form", passed);
+    }
+
+    // Test normal to point-normal
+    {
+        double mag = sqrt(1.0 / 3.0);
+        plane_2d_normal_form nf(mag, mag, mag, 5);
+        auto pn = converter.to_point_normal_form(nf);
+
+        bool passed = approx_equal(pn.A, mag) && approx_equal(pn.B, mag) && approx_equal(pn.C, mag);
+        passed = passed && approx_equal(pn.x1, 5 * mag) && approx_equal(pn.y1, 5 * mag) && approx_equal(pn.z1, 5 * mag);
+        print_test_result("Normal to point-normal form", passed);
+    }
+
+    // Test parametric to point-normal
+    {
+        cvector r0{ 1, 0, 0 };
+        cvector u{ 1, 1, 0 };
+        cvector v{ 0, 1, 1 };
+        plane_2d_parametric_form pf(r0, u, v);
+        auto pn = converter.to_point_normal_form(pf);
+
+        bool passed = approx_equal(pn.A, 1) && approx_equal(pn.B, -1) && approx_equal(pn.C, 1);
+        passed = passed && approx_equal(pn.x1, 1) && approx_equal(pn.y1, 0) && approx_equal(pn.z1, 0);
+        print_test_result("Parametric to point-normal form", passed);
+    }
+}
+
+// Test intercept form conversions
+void test_intercept_conversions() {
+    plane_2d converter;
+
+    // Test general to intercept
+    {
+        plane_2d_general_form gf(1, 2, 3, -6);
+        auto intercept = converter.to_intercept_form(gf);
+
+        bool passed = approx_equal(intercept.a, 6) && approx_equal(intercept.b, 3) && approx_equal(intercept.c, 2);
+        print_test_result("General to intercept form", passed);
+    }
+
+    // Test point-normal to intercept
+    {
+        plane_2d_point_normal_form pn(1, 1, 1, 1, 2, 3);
+        auto intercept = converter.to_intercept_form(pn);
+
+        bool passed = approx_equal(intercept.a, 6) && approx_equal(intercept.b, 3) && approx_equal(intercept.c, 2);
+        print_test_result("Point-normal to intercept form", passed);
+    }
+
+    // Test normal to intercept (when possible)
+    {
+        double p = 5;
+        double mag = sqrt(1.0 / 3.0);
+        plane_2d_normal_form nf(mag, mag, mag, p);
+        auto intercept = converter.to_intercept_form(nf);
+
+        double expected = p / mag;
+        bool passed = approx_equal(intercept.a, expected) &&
+            approx_equal(intercept.b, expected) &&
+            approx_equal(intercept.c, expected);
+        print_test_result("Normal to intercept form", passed);
+    }
+
+    // Test parametric to intercept
+    {
+        cvector r0{ 1, 0, 0 };
+        cvector u{ 1, 1, 0 };
+        cvector v{ 0, 1, 1 };
+        plane_2d_parametric_form pf(r0, u, v);
+        auto intercept = converter.to_intercept_form(pf);
+
+        bool passed = approx_equal(intercept.a, 1) && approx_equal(intercept.b, -1) && approx_equal(intercept.c, 1);
+        print_test_result("Parametric to intercept form", passed);
+    }
+}
+
+// Test normal form conversions
+void test_normal_form_conversions() {
+    plane_2d converter;
+
+    // Test general to normal
+    {
+        plane_2d_general_form gf(1, 1, 1, -3);
+        auto nf = converter.to_normal_form(gf);
+
+        double mag = sqrt(1.0 / 3.0);
+        bool passed = approx_equal(nf.cos_alpha, mag) &&
+            approx_equal(nf.cos_beta, mag) &&
+            approx_equal(nf.cos_gamma, mag) &&
+            approx_equal(nf.p, sqrt(3));
+        print_test_result("General to normal form", passed);
+    }
+
+    // Test point-normal to normal
+    {
+        plane_2d_point_normal_form pn(0, 0, 0, 0, 0, 1);
+        auto nf = converter.to_normal_form(pn);
+
+        bool passed = approx_equal(nf.cos_alpha, 0) &&
+            approx_equal(nf.cos_beta, 0) &&
+            approx_equal(nf.cos_gamma, 1) &&
+            approx_equal(nf.p, 0);
+        print_test_result("Point-normal to normal (simple XY plane)", passed);
+    }
+
+    // Test intercept to normal
+    {
+        plane_2d_intercept_form intercept(1, 1, 1);
+        auto nf = converter.to_normal_form(intercept);
+
+        double mag = sqrt(1.0 / 3.0);
+        bool passed = approx_equal(nf.cos_alpha, mag) &&
+            approx_equal(nf.cos_beta, mag) &&
+            approx_equal(nf.cos_gamma, mag) &&
+            approx_equal(nf.p, mag);
+        print_test_result("Intercept to normal form", passed);
+    }
+
+    // Test parametric to normal
+    {
+        cvector r0{ 1, 0, 0 };
+        cvector u{ 1, 1, 0 };
+        cvector v{ 0, 1, 1 };
+        plane_2d_parametric_form pf(r0, u, v);
+        auto nf = converter.to_normal_form(pf);
+
+        double mag = sqrt(1.0 / 3.0);
+        bool passed = approx_equal(nf.cos_alpha, mag) &&
+            approx_equal(nf.cos_beta, -mag) &&
+            approx_equal(nf.cos_gamma, mag) &&
+            approx_equal(nf.p, mag);
+        print_test_result("Parametric to normal form", passed);
+    }
+}
+
+// Test parametric form conversions
+void test_parametric_conversions() {
+    plane_2d converter;
+
+    // Test general to parametric
+    {
+        plane_2d_general_form gf(0, 0, 1, -2); // z = 2
+        auto pf = converter.to_parametric_form(gf);
+
+        bool passed = approx_equal(pf.r0[2], 2.0) &&
+            approx_equal(scalar_product(pf.t, { 0,0,1 }), 0) &&
+            approx_equal(scalar_product(pf.s, { 0,0,1 }), 0) &&
+            !vectors_equal(pf.t, pf.s);
+        print_test_result("General to parametric (simple case)", passed);
+    }
+
+    // Test point-normal to parametric
+    {
+        plane_2d_point_normal_form pn(1, 0, 0, 1, -1, 1);
+        auto pf = converter.to_parametric_form(pn);
+
+        cvector normal{ 1, -1, 1 };
+        cvector t = pf.t;
+        cvector s = pf.s;
+
+        bool passed = approx_equal(pf.r0[0], 1) && approx_equal(pf.r0[1], 0) && approx_equal(pf.r0[2], 0);
+        passed = passed && approx_equal(scalar_product(t, normal), 0);
+        passed = passed && approx_equal(scalar_product(s, normal), 0);
+        passed = passed && !vectors_equal(t, s);
+        print_test_result("Point-normal to parametric form", passed);
+    }
+
+    // Test intercept to parametric
+    {
+        plane_2d_intercept_form intercept(1, 1, 1); // x + y + z = 1
+        auto pf = converter.to_parametric_form(intercept);
+
+        cvector normal{ 1, 1, 1 };
+        cvector t = pf.t;
+        cvector s = pf.s;
+
+        bool passed = approx_equal(pf.r0[0], 1) && approx_equal(pf.r0[1], 0) && approx_equal(pf.r0[2], 0);
+        passed = passed && approx_equal(scalar_product(t, normal), 0);
+        passed = passed && approx_equal(scalar_product(s, normal), 0);
+        passed = passed && !vectors_equal(t, s);
+        print_test_result("Intercept to parametric form", passed);
+    }
+
+    // Test normal to parametric
+    {
+        plane_2d_normal_form nf(0, 0, 1, 2);
+        auto pf = converter.to_parametric_form(nf);
+
+        bool passed = approx_equal(pf.r0[2], 2.0) &&
+            approx_equal(pf.r0[0], 0.0) &&
+            approx_equal(pf.r0[1], 0.0) &&
+            approx_equal(pf.t[2], 0.0) &&
+            approx_equal(pf.s[2], 0.0) &&
+            !vectors_equal(pf.t, pf.s);
+
+        print_test_result("Normal to parametric (simple case)", passed);
+    }
+}
+
 
 int program_6_main(int argc, char* argv[])
 {
@@ -414,6 +735,76 @@ int program_6_main(int argc, char* argv[])
 
     test_hyper_line();
     test_hyper_plane();
+
+    std::cout << "\n\nTesting Plane Conversion Functions\n";
+    std::cout << "=================================\n";
+
+    test_general_form_conversions();
+    test_point_normal_conversions();
+    test_intercept_conversions();
+    test_normal_form_conversions();
+    test_parametric_conversions();
+
+    {
+        line_2d line1(line_general_form(2, -1, 3)); 
+        line_2d line2(line_general_form(4, -2, 5)); 
+
+        try {
+            double dist = distance_between_parallel_lines(line1, line2);
+            std::cout << "Distance between parallel lines: " << dist << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+        }
+    }
+
+    {
+        line_2d line(line_general_form(2, 3, -6));
+        double area = line.area_of_axes_triangle();
+        std::cout << "Area of triangle: " << area << std::endl;
+
+        line_2d horizontal(line_general_form(0, 1, -5));
+        std::cout << "Area for horizontal line: "
+            << horizontal.area_of_axes_triangle() << std::endl;
+    }
+
+    {
+        // x - y = 0 (y = x)
+        line_2d line1(line_general_form(1, -1, 0));
+
+        // x + y = 0 (y = -x)
+        line_2d line2(line_general_form(1, 1, 0));
+
+        double angle_rad = line_2d::angle_between_lines(line1, line2);
+        double angle_deg = line_2d::angle_between_lines_deg(line1, line2);
+
+        std::cout << "Angle between lines (radians): " << angle_rad << std::endl; // 1.5708
+        std::cout << "Angle between lines (degrees): " << angle_deg << std::endl; // 90
+    }
+
+    {
+        line_2d line(line_general_form(2, -1, 1));
+
+        segment segment(0, 0, 1, 1);
+
+        double dist = distance_from_line_to_segment(line, segment);
+        std::cout << "Distance from line to segment: " << dist << std::endl; // (0.447214)
+    }
+
+    {
+        segment seg1(0, 0, 3, 3);
+        segment seg2(0, 3, 3, 0);
+
+        auto intersection = find_segments_intersection(seg1, seg2);
+
+        if (!intersection.empty())
+        {
+            std::cout << "Intersection point: (" << intersection[0] << ", " << intersection[1] << ")\n";
+        }
+        else {
+            std::cout << "Segments do not intersect\n";
+        }
+    }
 
     return 0;
 }

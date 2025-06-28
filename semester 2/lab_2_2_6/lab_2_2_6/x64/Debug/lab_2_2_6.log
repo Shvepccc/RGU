@@ -2,15 +2,16 @@
 C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\vector.h(308,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   (compiling source file '6.cpp')
   
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\hyper_plane.h(28,32): warning C4101: 'e': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\libs\hyper_plane.h(29,32): warning C4101: 'e': unreferenced local variable
   (compiling source file '6.cpp')
   
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(287,21): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(287,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(305,99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(313,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(327,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(346,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(340,45): warning C4101: 'e': unreferenced local variable
-C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(349,45): warning C4101: 'e': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(292,21): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(292,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(310,99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(318,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(332,83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(351,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(345,45): warning C4101: 'e': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(354,45): warning C4101: 'e': unreferenced local variable
+C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\lab_2_2_6\6.cpp(383,45): warning C4101: 'e': unreferenced local variable
   lab_2_2_6.vcxproj -> C:\Users\rfkfi\Desktop\Stepan Orlov\programming university\RGU\semester 2\lab_2_2_6\x64\Debug\lab_2_2_6.exe
