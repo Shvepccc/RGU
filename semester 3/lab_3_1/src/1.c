@@ -1,3 +1,4 @@
+//make run TASK=1 ARGS="files/task_1"
 #include <stdio.h>
 #include <string.h>
 
