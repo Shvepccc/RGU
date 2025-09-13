@@ -1,3 +1,5 @@
+*.DS_Store
+
 /semester 1/lab1/.vs/
 /semester 1/lab1/x64/
 /semester 1/lab2/.vs/
@@ -33,3 +35,4 @@
 
 /semester 2.rar
 
+semester 3/lab_3_1/.DS_Store
