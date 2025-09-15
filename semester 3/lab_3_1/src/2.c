@@ -20,23 +20,14 @@ int compare_users(const void* a, const void* b)
     return strcmp(((user_struct*)a)->login, ((user_struct*)b)->login);
 }
 
-// user_struct* find_user(const char* login)
-// {
-//     for(int i = 0; i < user_count; i++)
-//     {
-//         if(strcmp(users[i].login, login) == 0)
-//             return &users[i];
-//     }
-//     return NULL;
-// }
-
 user_struct* find_user(const char* login)
 {
+    int mid, cmp;
     int left = 0, right = user_count - 1;
     while(left <= right)
     {
-        int mid = (left + right) / 2;
-        int cmp = strcmp(login, users[mid].login);
+        mid = (left + right) / 2;
+        cmp = strcmp(login, users[mid].login);
         if(cmp == 0)
             return &users[mid];
         else if(cmp < 0)
@@ -46,62 +37,6 @@ user_struct* find_user(const char* login)
     }
     return NULL;
 }
-
-// int register_user()
-// {
-//     char login[7];
-//     int pin, len;
-//     user_struct* temp;
-//     while(1)
-//     {
-//         printf("Enter new login (1-6 chars): ");
-//         scanf("%s", login);
-//         len = strlen(login);
-//         if(len == 0 || len > 6)
-//         {
-//             printf("Invalid login. Try again.\n");
-//             continue;
-//         }
-//         if(find_user(login))
-//         {
-//             printf("User already exists. Try another login.\n");
-//             continue;
-//         }
-//         break;
-//     }
-//     while(1)
-//     {
-//         printf("Enter PIN (0-999999): ");
-//         if(scanf("%d", &pin) != 1)
-//         {
-//             while(getchar() != '\n');
-//             printf("Invalid input. Enter a number.\n");
-//             continue;
-//         }
-//         if(pin < 0 || pin > 999999)
-//         {
-//             printf("PIN out of range. Try again.\n");
-//             continue;
-//         }
-//         break;
-//     }
-//     if (user_count >= user_capacity || user_count == 0)
-//     {
-//         temp = realloc(users, sizeof(user_struct) * (user_capacity * 2));
-//         if (temp == NULL)
-//         {
-//             return 1;
-//         }
-//         users = temp;
-//         temp = NULL;
-//     }
-//     strcpy(users[user_count].login, login);
-//     users[user_count].pin = pin;
-//     users[user_count].blocked = 0;
-//     user_count++;
-//     printf("Registration successful!\n");
-//     return 0;
-// }
 
 int register_user()
 {
@@ -114,8 +49,7 @@ int register_user()
         printf("Enter new login (1-6 chars): ");
         scanf("%6s", login);
 
-        len = 0;
-        while(login[len] != '\0') len++;
+        len = strlen(login);
         if(len == 0 || len > 6)
         {
             printf("Invalid login. Try again.\n");
@@ -307,7 +241,6 @@ void user_session(user_struct* user)
         break;
         case 'H':
             scanf("%8s %10s %8s %2s", command, data_str, time_str, flag);
-            //printf("data: %s, time: %s, flag: %s", data_str, time_str, flag);
             howmuch(data_str, time_str, flag);
         break;
         case 'L':
