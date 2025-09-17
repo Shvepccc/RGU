@@ -29,7 +29,7 @@ run:
 		exit 1; \
 	fi
 	$(MAKE) $(BUILD_DIR)/$(TASK)
-	$(Q)echo "Running task $(TASK)..."
+	$(Q)echo "Running task $(TASK)...\n"
 	$(Q)./$(BUILD_DIR)/$(TASK) $(ARGS)
 
 pwn:
