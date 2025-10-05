@@ -111,9 +111,15 @@ int u_list_push_back(u_list* list_ptr, void* element) {
 	}
 	else {
 		temp_ptr = list_ptr->first_node;
-		while (temp_ptr->next_node != NULL) {
+		while (temp_ptr != NULL) {
+			if (memcmp(temp_ptr->data, new_node->data, list_ptr->size_of_element) == 0) {
+				return VALUE_ALREADY_EXISTS;
+			}
+			if (temp_ptr->next_node == NULL) {
+				break;
+			}
 			temp_ptr = temp_ptr->next_node;
-		}
+    	}
 
 		new_node->next_node = temp_ptr->next_node;
 		temp_ptr->next_node = new_node;
