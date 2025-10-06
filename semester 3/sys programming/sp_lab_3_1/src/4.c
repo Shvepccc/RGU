@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
         result8 = 0;
         while (fread(&b, 1, 1, f) == 1)
             result8 ^= b;
-        printf("%u\n", result8);
+        printf("%X\n", result8);
     }
     else if (strcmp(argv[2], "xorodd") == 0)
     {
