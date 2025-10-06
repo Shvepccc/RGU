@@ -157,16 +157,17 @@ void howmuch(char* date_str, char* time_str, char* flag)
     struct tm tm_info;
     memset(&tm_info, 0, sizeof(tm_info));
     tm_info.tm_isdst = -1;
+    printf("%s %s %s\n", date_str, time_str, flag);
     if(sscanf(date_str, "%d:%d:%d",
         &tm_info.tm_mday, &tm_info.tm_mon, &tm_info.tm_year) != 3)
     {
-        printf("Invalid date format\n");
+        printf("Invalid date format 1\n");
         return;
     }
     if(sscanf(time_str, "%d:%d:%d",
         &tm_info.tm_hour, &tm_info.tm_min, &tm_info.tm_sec) != 3)
     {
-        printf("Invalid time format\n");
+        printf("Invalid time format 2\n");
         return;
     }
     tm_info.tm_mon -= 1;
@@ -229,7 +230,7 @@ void user_session(user_struct* user)
     while(1)
     {
         printf("\nEnter command: ");
-        scanf("%8s", command);
+        scanf("%9s", command);
 
         switch (command[0])
         {
@@ -240,7 +241,7 @@ void user_session(user_struct* user)
             print_date();
         break;
         case 'H':
-            scanf("%8s %10s %8s %2s", command, data_str, time_str, flag);
+            scanf("%10s %8s %2s", data_str, time_str, flag);
             howmuch(data_str, time_str, flag);
         break;
         case 'L':

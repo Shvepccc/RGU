@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS t01_library;
+
 CREATE DATABASE t01_library;
 
 \c t01_library
@@ -60,4 +62,11 @@ CREATE TABLE public.booking (
     book_id INTEGER NOT NULL REFERENCES public.book(id),
     min_condition book_state_type NOT NULL DEFAULT 'normal',
     booking_datetime TIMESTAMP(2) NOT NULL DEFAULT CURRENT_TIMESTAMP(0)
-);  
+);
+
+CREATE TABLE public.logs (
+    log_id SERIAL PRIMARY KEY,
+    log_datetime TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    log_context VARCHAR(50) NOT NULL,
+    log_content TEXT NOT NULL
+);
