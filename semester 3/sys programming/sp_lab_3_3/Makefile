@@ -43,7 +43,7 @@ debug:
 	$(Q)echo "Compiling with debug flags..."
 	$(MAKE) $(BUILD_DIR)/$(TASK) CFLAGS="$(DEBUG_CFLAGS)"
 	$(Q)echo "\nStarting debug session for task $(TASK)..."
-	$(Q)$(DEBUGGER_CMD) ./$(BUILD_DIR)/$(TASK)
+	$(Q)$(DEBUGGER_CMD) ./$(BUILD_DIR)/$(TASK) $(ARGS)
 
 valgrind:
 	@if [ -z "$(TASK)" ]; then \
