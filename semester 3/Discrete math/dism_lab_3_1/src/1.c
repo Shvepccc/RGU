@@ -11,6 +11,8 @@
 // + изменить вывод размеров в =
 // + проверить =
 
+// равно
+
 void clear_stdin()
 {
     int c;
@@ -233,7 +235,7 @@ int main(int argc, char *argv[])
                 
                 while (temp_ptr_1 != NULL && temp_ptr_2 != NULL)
                 {
-                    cmp = memcmp(temp_ptr_1->data, temp_ptr_2->data, sizeof(char*));
+                    cmp = (*(char*)temp_ptr_1->data) - (*(char*)temp_ptr_2->data);//memcmp(temp_ptr_1->data, temp_ptr_2->data, sizeof(char*));
                     
                     if (cmp == 0)
                     {
@@ -322,6 +324,7 @@ int main(int argc, char *argv[])
                 break;
 
                 case '=':
+                flag = 1;
                 size_t size_a = u_list_size(&sets[a_set - 'A']);
                 size_t size_b = u_list_size(&sets[b_set - 'A']);
                 
