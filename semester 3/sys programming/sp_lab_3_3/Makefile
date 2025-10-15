@@ -24,8 +24,8 @@ $(BUILD_DIR)/%: $(SRC_DIR)/%.c
 	$(Q)echo "Compiling $< -> $@"
 	$(Q)echo "CFLAGS: $(CFLAGS)"
 	$(Q)mkdir -p $(BUILD_DIR)
-	$(Q)$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $<
-
+	$(Q)$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ $< 
+ 
 run:
 	@if [ -z "$(TASK)" ]; then \
 		echo "Error: TASK is not set. Usage: make run TASK=<n>"; \
