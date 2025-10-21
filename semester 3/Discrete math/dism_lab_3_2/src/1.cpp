@@ -1,0 +1,214 @@
+#include <cstdio>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <set>
+#include <map>
+
+int main(int argc, char* argv[])
+{
+    std::string filename;
+    std::ifstream file(filename);
+    std::vector<char> elements;
+    std::vector<std::pair<char, char>> pairs;
+    std::string line;
+    bool reflexive = true;
+    bool irreflexive = true;
+    bool symmetric = true;
+    bool antisymmetric = true;
+    bool asymmetric = true;
+    bool transitive = true;
+    bool connected = true;
+    bool strongly_connected = true;
+
+    if(argc < 2)
+    {
+        return 0;
+    }
+    filename = argv[1];
+    
+    if (std::getline(file, line))
+    {
+        for (char c : line)
+        {
+            if (c != ' ')
+            {
+                elements.push_back(c);
+            }
+        }
+    }
+    
+    while (std::getline(file, line))
+    {
+        if (line.size() >= 3)
+        {
+            pairs.push_back(std::make_pair(line[0], line[2]));
+        }
+    }
+
+    file.close();
+    
+    std::set<char> elementSet(elements.begin(), elements.end());
+    std::set<std::pair<char, char>> relation(pairs.begin(), pairs.end());
+    
+    for (char a : elements)
+    {
+        if (reflexive == true && relation.find(std::make_pair(a, a)) == relation.end())
+        {
+            reflexive = false;
+        }
+        else
+        {
+            irreflexive = false;
+        }
+        
+        for (char b : elements)
+        {
+            if (a != b)
+            {
+                bool ab = relation.find(std::make_pair(a, b)) != relation.end();
+                bool ba = relation.find(std::make_pair(b, a)) != relation.end();
+                
+                if (ab && !ba)
+                {
+                    symmetric = false;
+                }
+                
+                if (ab && ba && a != b)
+                {
+                    antisymmetric = false;
+                }
+                
+                if (ab && ba)
+                {
+                    asymmetric = false;
+                }
+                
+                if (!ab && !ba)
+                {
+                    connected = false;
+                }
+                
+                if (!(ab || ba))
+                {
+                    strongly_connected = false;
+                }
+            }
+        }
+    }
+    
+    for (char a : elements)
+    {
+        for (char b : elements)
+        {
+            for (char c : elements)
+            {
+                bool ab = relation.find(std::make_pair(a, b)) != relation.end();
+                bool bc = relation.find(std::make_pair(b, c)) != relation.end();
+                bool ac = relation.find(std::make_pair(a, c)) != relation.end();
+                
+                if (ab && bc && !ac)
+                {
+                    transitive = false;
+                }
+            }
+        }
+    }
+    
+    std::cout << "Reflexive: " << (reflexive ? "+" : "-") << std::endl;
+    std::cout << "Irreflexive: " << (irreflexive ? "+" : "-") << std::endl;
+    std::cout << "Symmetric: " << (symmetric ? "+" : "-") << std::endl;
+    std::cout << "Antisymmetric: " << (antisymmetric ? "+" : "-") << std::endl;
+    std::cout << "Asymmetric: " << (asymmetric ? "+" : "-") << std::endl;
+    std::cout << "Transitive: " << (transitive ? "+" : "-") << std::endl;
+    std::cout << "Connected: " << (connected ? "+" : "-") << std::endl;
+    std::cout << "Strongly connected: " << (strongly_connected ? "+" : "-") << std::endl << std::endl;
+
+    if (reflexive && symmetric && transitive)
+    {
+        std::map<char, std::set<char>> classes;
+        std::vector<std::set<char>> equivalenceClasses;
+        
+        for (char a : elements)
+        {
+            if (classes.find(a) == classes.end())
+            {
+                std::set<char> newClass;
+                for (char b : elements)
+                {
+                    if (relation.find(std::make_pair(a, b)) != relation.end() && 
+                        relation.find(std::make_pair(b, a)) != relation.end())
+                    {
+                        newClass.insert(b);
+                        classes[b] = newClass;
+                    }
+                }
+                equivalenceClasses.push_back(newClass);
+            }
+        }
+        
+        std::cout << "Equivalence classes:" << std::endl;
+        for (size_t i = 0; i < equivalenceClasses.size(); i++)
+        {
+            std::cout << "Class " << i + 1 << ": ";
+            for (char c : equivalenceClasses[i])
+            {
+                std::cout << c << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << "Partition index: " << equivalenceClasses.size() << std::endl;
+    }
+    
+    if (reflexive && antisymmetric && transitive)
+    {
+        std::vector<char> minimal;
+        std::vector<char> maximal;
+        
+        for (char a : elements)
+        {
+            bool isMinimal = true;
+            bool isMaximal = true;
+            
+            for (char b : elements)
+            {
+                if (a != b)
+                {
+                    if (relation.find(std::make_pair(b, a)) != relation.end())
+                    {
+                        isMinimal = false;
+                    }
+                    if (relation.find(std::make_pair(a, b)) != relation.end())
+                    {
+                        isMaximal = false;
+                    }
+                }
+            }
+            
+            if (isMinimal)
+            {
+                minimal.push_back(a);
+            }
+            if (isMaximal)
+            {
+                maximal.push_back(a);
+            }
+        }
+        
+        std::cout << "Minimal elements: ";
+        for (char c : minimal)
+        {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
+        
+        std::cout << "Maximal elements: ";
+        for (char c : maximal)
+        {
+            std::cout << c << " ";
+        }
+        std::cout << std::endl;
+    }
+    
+    return 0;
+}
