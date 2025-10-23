@@ -50,6 +50,12 @@ int main(int argc, char* argv[])
     
     std::set<char> elementSet(elements.begin(), elements.end());
     std::set<std::pair<char, char>> relation(pairs.begin(), pairs.end());
+
+    if (elementSet.size() == 0 || relation.size() == 0)
+    {
+        printf("Invalid input file =()\n");
+        return 0;
+    }
     
     for (char a : elements)
     {
@@ -63,7 +69,6 @@ int main(int argc, char* argv[])
         }
     }
     
-    // Проверка симметричности, антисимметричности и асимметричности
     for (char a : elements)
     {
         for (char b : elements)
@@ -129,7 +134,7 @@ int main(int argc, char* argv[])
     << "\nAntisymmetric: " << (antisymmetric ? "+" : "-")
     << "\nAsymmetric: " << (asymmetric ? "+" : "-")
     << "\nTransitive: " << (transitive ? "+" : "-")
-    << "\nAtitransivity" << (!transitive ? "+" : "-")
+    << "\nAtitransivity: " << (!transitive ? "+" : "-")
     << "\nConnected: " << (connected ? "+" : "-")
     << std::endl << std::endl;
 
