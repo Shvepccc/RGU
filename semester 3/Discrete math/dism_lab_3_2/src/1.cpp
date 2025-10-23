@@ -8,7 +8,7 @@
 int main(int argc, char* argv[])
 {
     std::string filename;
-    std::ifstream file(filename);
+    
     std::vector<char> elements;
     std::vector<std::pair<char, char>> pairs;
     std::string line;
@@ -19,13 +19,13 @@ int main(int argc, char* argv[])
     bool asymmetric = true;
     bool transitive = true;
     bool connected = true;
-    bool strongly_connected = true;
 
     if(argc < 2)
     {
         return 0;
     }
     filename = argv[1];
+    std::ifstream file(filename);
     
     if (std::getline(file, line))
     {
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     
     for (char a : elements)
     {
-        if (reflexive == true && relation.find(std::make_pair(a, a)) == relation.end())
+        if (relation.find(std::make_pair(a, a)) == relation.end())
         {
             reflexive = false;
         }
@@ -61,38 +61,29 @@ int main(int argc, char* argv[])
         {
             irreflexive = false;
         }
-        
+    }
+    
+    // Проверка симметричности, антисимметричности и асимметричности
+    for (char a : elements)
+    {
         for (char b : elements)
         {
-            if (a != b)
+            bool ab = relation.find(std::make_pair(a, b)) != relation.end();
+            bool ba = relation.find(std::make_pair(b, a)) != relation.end();
+            
+            if (ab && !ba)
             {
-                bool ab = relation.find(std::make_pair(a, b)) != relation.end();
-                bool ba = relation.find(std::make_pair(b, a)) != relation.end();
-                
-                if (ab && !ba)
-                {
-                    symmetric = false;
-                }
-                
-                if (ab && ba && a != b)
-                {
-                    antisymmetric = false;
-                }
-                
-                if (ab && ba)
-                {
-                    asymmetric = false;
-                }
-                
-                if (!ab && !ba)
-                {
-                    connected = false;
-                }
-                
-                if (!(ab || ba))
-                {
-                    strongly_connected = false;
-                }
+                symmetric = false;
+            }
+            
+            if (ab && ba && a != b)
+            {
+                antisymmetric = false;
+            }
+
+            if (ab && ba)
+            {
+                asymmetric = false;
             }
         }
     }
@@ -115,14 +106,32 @@ int main(int argc, char* argv[])
         }
     }
     
-    std::cout << "Reflexive: " << (reflexive ? "+" : "-") << std::endl;
-    std::cout << "Irreflexive: " << (irreflexive ? "+" : "-") << std::endl;
-    std::cout << "Symmetric: " << (symmetric ? "+" : "-") << std::endl;
-    std::cout << "Antisymmetric: " << (antisymmetric ? "+" : "-") << std::endl;
-    std::cout << "Asymmetric: " << (asymmetric ? "+" : "-") << std::endl;
-    std::cout << "Transitive: " << (transitive ? "+" : "-") << std::endl;
-    std::cout << "Connected: " << (connected ? "+" : "-") << std::endl;
-    std::cout << "Strongly connected: " << (strongly_connected ? "+" : "-") << std::endl << std::endl;
+    bool f = false;
+    for (const auto& ab : relation) {
+        char a = ab.first;
+        char b = ab.second;
+        
+        for (char c : elements) {
+            if (relation.find(std::make_pair(b, c)) != relation.end() &&
+                relation.find(std::make_pair(a, c)) == relation.end()) {
+                transitive = false;
+                f = true;
+                break;
+            }
+        }
+        if (f) break;
+    }
+    
+    std::cout 
+    << "Reflexive: " << (reflexive ? "+" : "-")
+    << "\nIrreflexive: " << (irreflexive ? "+" : "-")
+    << "\nSymmetric: " << (symmetric ? "+" : "-")
+    << "\nAntisymmetric: " << (antisymmetric ? "+" : "-")
+    << "\nAsymmetric: " << (asymmetric ? "+" : "-")
+    << "\nTransitive: " << (transitive ? "+" : "-")
+    << "\nAtitransivity" << (!transitive ? "+" : "-")
+    << "\nConnected: " << (connected ? "+" : "-")
+    << std::endl << std::endl;
 
     if (reflexive && symmetric && transitive)
     {
