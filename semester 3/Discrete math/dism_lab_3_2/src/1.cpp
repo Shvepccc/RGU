@@ -8,7 +8,6 @@
 int main(int argc, char* argv[])
 {
     std::string filename;
-    
     std::vector<char> elements;
     std::vector<std::pair<char, char>> pairs;
     std::string line;
@@ -18,6 +17,7 @@ int main(int argc, char* argv[])
     bool antisymmetric = true;
     bool asymmetric = true;
     bool transitive = true;
+    bool antitransitive = true;
     bool connected = true;
 
     if(argc < 2)
@@ -93,38 +93,50 @@ int main(int argc, char* argv[])
         }
     }
     
-    for (char a : elements)
-    {
-        for (char b : elements)
-        {
-            for (char c : elements)
-            {
-                bool ab = relation.find(std::make_pair(a, b)) != relation.end();
-                bool bc = relation.find(std::make_pair(b, c)) != relation.end();
-                bool ac = relation.find(std::make_pair(a, c)) != relation.end();
-                
-                if (ab && bc && !ac)
-                {
-                    transitive = false;
-                }
-            }
-        }
-    }
-    
     bool f = false;
-    for (const auto& ab : relation) {
+
+    for (const auto& ab : relation)
+    {
         char a = ab.first;
         char b = ab.second;
         
-        for (char c : elements) {
-            if (relation.find(std::make_pair(b, c)) != relation.end() &&
-                relation.find(std::make_pair(a, c)) == relation.end()) {
+        for (char c : elements)
+        {
+            bool bc = relation.find(std::make_pair(c, b)) != relation.end();
+            bool ac = relation.find(std::make_pair(a, c)) != relation.end();
+            
+            if (bc && !ac) {
                 transitive = false;
+            }
+            
+            if (bc && ac && a != c) {
+                antitransitive = false;
+            }
+            
+            if ((!transitive && !antitransitive) || transitive) {
                 f = true;
                 break;
             }
         }
+    
         if (f) break;
+    }
+
+    for (char a : elements)
+    {
+        for (char b : elements)
+        {
+            if (a != b)
+            {
+                bool ab = relation.find(std::make_pair(a, b)) != relation.end();
+                bool ba = relation.find(std::make_pair(b, a)) != relation.end();
+                
+                if (!ab && !ba)
+                {
+                    connected = false;
+                }
+            }
+        }
     }
     
     std::cout 
@@ -134,7 +146,7 @@ int main(int argc, char* argv[])
     << "\nAntisymmetric: " << (antisymmetric ? "+" : "-")
     << "\nAsymmetric: " << (asymmetric ? "+" : "-")
     << "\nTransitive: " << (transitive ? "+" : "-")
-    << "\nAtitransivity: " << (!transitive ? "+" : "-")
+    << "\nAtitransivity: " << (antitransitive ? "+" : "-")
     << "\nConnected: " << (connected ? "+" : "-")
     << std::endl << std::endl;
 
