@@ -1,16 +1,21 @@
 a b c d e f
 a a
-a b
+a c
 a d
 a f
+b a
 b b
-c d
+b c
+b d
+b f
 c c
 c d
-c e
-d b
+c f
 d d
-e b
+d f
+e a
+e c
 e d
 e e
+e f
 f f
