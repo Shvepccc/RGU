@@ -94,7 +94,7 @@ public:
         return true;
     }
 
-    void deleteFectiveVariables() {
+    bool deleteFectiveVariables() {
 
         std::vector<size_t> essentialIndices;
         for (size_t i = 0; i < variables.size(); i++) {
@@ -128,16 +128,26 @@ public:
                 newTable.push_back(newRow);
             }
         }
-
+        bool res = newVars.size() < variables.size();
         this->table = newTable;
         this->variables = newVars;
+
+        return res;
     }
 
     std::string getSDNF() const {
         auto variables = getVariables();
         
-        if (variables.empty() || table.empty()) {
-            return "";
+        if (variables.empty()) {
+            if (!table.empty() && table[0].back()) {
+                return "1";
+            } else {
+                return "0";
+            }
+        }
+        
+        if (table.empty()) {
+            return "0";
         }
         
         std::vector<std::string> pieces;
@@ -170,7 +180,17 @@ public:
     std::string getSKNF() const {
         auto variables = getVariables();
         
-        if (variables.empty()) return "";
+        if (variables.empty()) {
+            if (!table.empty() && table[0].back()) {
+                return "1";
+            } else {
+                return "0";
+            }
+        }
+        
+        if (table.empty()) {
+            return "0";
+        }
         
         std::vector<std::string> pieces;
         
@@ -209,7 +229,7 @@ public:
     TruthTable getDualFunction() const {
         auto variables = getVariables();
         
-        if (table.empty() || variables.empty()) {
+        if (table.empty() && variables.empty()) {
             return TruthTable();
         }
         

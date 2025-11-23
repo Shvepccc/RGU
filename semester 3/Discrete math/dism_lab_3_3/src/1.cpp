@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <iostream>
+#include <ostream>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -21,7 +22,9 @@ int main() {
         "{       -([{x_123} & y_2])}",
         "(x_1 & (y_2 + -y_2))",
         "((x_2 > x_1) & (x_2 ! x_2))",
-        "((x_1 > ((x_2 > x_3) > x_4)) ~ ((-x_1) & (x_2 > x_3) & (-x_4)))"
+        "((x_1 > ((x_2 > x_3) > x_4)) ~ ((-x_1) & (x_2 > x_3) & (-x_4)))",
+        "(x_1 + -x_1) & ( y_2+ -y_2) & (z_3 + -z_3)",
+        "(x_1&-x_1)+(y_1&-y_1)+(z_1&-z_1)"
     };
     
     for (const auto& expr : expressions) {
@@ -43,10 +46,15 @@ int main() {
             table.printTruthTable();
 
             std::cout << "Delete Fictive Variables:" << std::endl;
-            table.deleteFectiveVariables();
-            std::cout << std::endl;
-            std::cout << "NEW Truth Table:" << std::endl;
-            table.printTruthTable();
+            if (table.deleteFectiveVariables()) {
+                std::cout << std::endl;
+                std::cout << "NEW Truth Table:" << std::endl;
+                table.printTruthTable();
+            }
+            else {
+                std::cout << "No fective variables" << std::endl;
+            }
+            
             std::cout << "SDNF: " << table.getSDNF() << std::endl;
             std::cout << "SKNF: " << table.getSKNF() << std::endl;
             std::cout << "ANF:  " << table.getANF() << std::endl;
