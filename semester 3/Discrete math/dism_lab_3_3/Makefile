@@ -26,7 +26,7 @@ $(BUILD_DIR)/%: $(SRC_DIR)/%.cpp
 	$(Q)mkdir -p $(BUILD_DIR)
 	$(Q)$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $@ $<
 
-run:
+run: 
 	@if [ -z "$(TASK)" ]; then \
 		echo "Error: TASK is not set. Usage: make run TASK=<n>"; \
 		exit 1; \
@@ -35,7 +35,7 @@ run:
 	$(Q)echo "Running task $(TASK)...\n"
 	$(Q)./$(BUILD_DIR)/$(TASK) $(ARGS)
 
-debug:
+debug: clean
 	@if [ -z "$(TASK)" ]; then \
 		echo "Error: TASK is not set. Usage: make debug TASK=<n>"; \
 		exit 1; \
