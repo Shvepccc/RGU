@@ -4,6 +4,9 @@ CREATE DATABASE t01_library;
 
 \c t01_library
 
+CREATE TYPE book_state_type AS ENUM ('best', 'good', 'normal', 'old', 'lost');
+CREATE TYPE book_status_type AS ENUM ('available', 'issued', 'reserved');
+
 CREATE TABLE public.author (
     id SERIAL PRIMARY KEY,
     last_name VARCHAR(100) NOT NULL,
@@ -34,9 +37,6 @@ CREATE TABLE public.reader (
     gender CHAR(1) NOT NULL,
     registration_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
-
-CREATE TYPE book_state_type AS ENUM ('best', 'good', 'normal', 'old', 'lost');
-CREATE TYPE book_status_type AS ENUM ('available', 'issued', 'reserved');
 
 CREATE TABLE public.book_instance (
     id INT PRIMARY KEY,

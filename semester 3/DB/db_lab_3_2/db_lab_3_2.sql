@@ -10,7 +10,7 @@ TRUNCATE TABLE
     public.logs
 RESTART IDENTITY CASCADE;
 
-/*
+
 -- 18 LOGS
 -- Logs function
 CREATE OR REPLACE FUNCTION public.log_dml_operations()
@@ -76,7 +76,7 @@ CREATE TRIGGER trg_log_issuance
 CREATE TRIGGER trg_log_booking
     AFTER INSERT OR UPDATE OR DELETE ON public.booking
     FOR EACH ROW EXECUTE FUNCTION public.log_dml_operations();
-*/
+
 
 
 INSERT INTO public.author (last_name, first_name) 
@@ -463,7 +463,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT * FROM get_book_locations(p_book_id := 1);
+SELECT * FROM get_book_locations();
 
 SELECT * FROM get_book_locations(p_book_name := 'Война и мир');
 
@@ -528,3 +528,19 @@ WHERE i.actual_return_date IS NULL
 ORDER BY i.issue_datetime ASC;
 
 SELECT * FROM public.overdue_one_year_books_view;
+
+
+
+
+
+
+
+-- Вставка записи о выдаче книги с просрочкой более года
+INSERT INTO public.issuance (reader_card, book_instance_id, issue_datetime, expected_return_date, actual_return_date)
+VALUES 
+    (1001, 5001, CURRENT_TIMESTAMP(0) - INTERVAL '400 days', CURRENT_DATE - INTERVAL '365 days', NULL);
+
+-- Обновление статуса экземпляра книги на "выдана"
+UPDATE public.book_instance
+SET book_status = 'issued'
+WHERE id = 5001;
