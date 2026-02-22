@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include "../include/bit_substitution.hpp"
 
-
 std::vector<uint8_t> bit_substitution::bytes_to_bits(const std::vector<uint8_t>& data)
 {
     std::vector<uint8_t> bits;

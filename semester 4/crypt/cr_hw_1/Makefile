@@ -26,6 +26,21 @@ $(BUILD_DIR)/%: $(SRC_DIR)/%.cpp
 	$(Q)mkdir -p $(BUILD_DIR)
 	$(Q)$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $@ $<
 
+$(BUILD_DIR)/1: $(SRC_DIR)/1.cpp $(SRC_DIR)/bit_permutation.cpp
+	$(Q)echo "Compiling $^ -> $@"
+	$(Q)mkdir -p $(BUILD_DIR)
+	$(Q)$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $@ $^
+
+$(BUILD_DIR)/2: $(SRC_DIR)/2.cpp $(SRC_DIR)/bit_substitution.cpp
+	$(Q)echo "Compiling $^ -> $@"
+	$(Q)mkdir -p $(BUILD_DIR)
+	$(Q)$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $@ $^
+
+$(BUILD_DIR)/3: $(SRC_DIR)/3.cpp $(SRC_DIR)/bit_manipulator.cpp
+	$(Q)echo "Compiling $^ -> $@"
+	$(Q)mkdir -p $(BUILD_DIR)
+	$(Q)$(CXX) $(CXXFLAGS) -I$(INC_DIR) -o $@ $^
+
 run: 
 	@if [ -z "$(TASK)" ]; then \
 		echo "Error: TASK is not set. Usage: make run TASK=<n>"; \

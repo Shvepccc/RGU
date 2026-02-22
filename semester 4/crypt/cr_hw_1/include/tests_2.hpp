@@ -5,12 +5,12 @@
 #include <stdexcept>
 #include "../include/bit_substitution.hpp"
 
-void print_test_result(const std::string& test_name, bool passed)
+inline void print_test_result(const std::string& test_name, bool passed)
 {
     std::cout << "  " << (passed ? "[PASS]" : "[FAIL]") << " " << test_name << "\n";
 }
 
-bool verify_vectors(const std::vector<uint8_t>& actual, const std::vector<uint8_t>& expected)
+inline bool verify_vectors(const std::vector<uint8_t>& actual, const std::vector<uint8_t>& expected)
 {
     if (actual.size() != expected.size()) return false;
     for (size_t i = 0; i < actual.size(); ++i)
@@ -20,7 +20,7 @@ bool verify_vectors(const std::vector<uint8_t>& actual, const std::vector<uint8_
     return true;
 }
 
-void run_unit_tests()
+inline void run_unit_tests()
 {
     std::cout << "========================================\n";
     std::cout << "RUNNING UNIT TESTS FOR bit_substitution\n";
@@ -173,34 +173,11 @@ void run_unit_tests()
     // Test 11: functional object with state (increment per group)
     // -----------------------------------------------------------------
     {
-        std::vector<uint8_t> data = {0x12, 0x34}; // 2 байта = 4 группы по 4 бита
-        // data: 0x12 -> 00010010 -> группы: (2,1) ; 0x34 -> 00110100 -> группы: (4,3)  (LSB first)
-        // Итак группы: 2,1,4,3
+        std::vector<uint8_t> data = {0x12, 0x34};
         int counter = 0;
         auto func = [&counter](uint8_t nibble) -> uint8_t {
             return nibble + counter++;
         };
-        // counter будет увеличиваться после каждого вызова
-        // вызов 1: nibble=2, counter=0 -> результат 2
-        // вызов 2: nibble=1, counter=1 -> результат 2
-        // вызов 3: nibble=4, counter=2 -> результат 6
-        // вызов 4: nibble=3, counter=3 -> результат 6
-        // Итоговые группы: 2,2,6,6
-        // В битах: группа 2 (0010), группа 2 (0010), группа 6 (0110), группа 6 (0110)
-        // Объединяем: 0010 0010 0110 0110 -> биты: младшие первой группы первыми
-        // 2: 0100 (биты: 0,1,0,0) -> 0010
-        // В итоге первые 4 бита (LSB) = 0100? давайте распишем аккуратно:
-        // Группа1 = 2 (двоично: бит0=0, бит1=1, бит2=0, бит3=0) -> 0010 (если читать как число, то бит0 младший)
-        // Группа2 = 2 -> аналогично
-        // Группа3 = 6 (бит0=0, бит1=1, бит2=1, бит3=0) -> 0110
-        // Группа4 = 6
-        // Последовательность битов: сначала группа1 бит0, бит1, бит2, бит3, затем группа2 и т.д.
-        // Байт0: биты 0-7: группа1(4 бита) + группа2(первые 4 бита?) нет, байт собирается по 8 бит подряд.
-        // Первые 8 бит: группа1 (биты 0-3) и группа2 (биты 4-7)
-        // группа1 биты: 0,1,0,0 -> (бит0=0, бит1=1, бит2=0, бит3=0) => если записать как байт (бит0 LSB), то это 0010 = 0x2? нет, число 2 это 00000010 в байте (бит1=1). Но мы формируем байт, устанавливая биты согласно их позициям.
-        // Для байта0: бит0 = группа1 бит0 = 0; бит1 = группа1 бит1 = 1; бит2 = группа1 бит2 = 0; бит3 = группа1 бит3 = 0; бит4 = группа2 бит0 = 0; бит5 = группа2 бит1 = 1; бит6 = группа2 бит2 = 0; бит7 = группа2 бит3 = 0. Получаем байт: биты: 0:0,1:1,2:0,3:0,4:0,5:1,6:0,7:0 => это 0b00100100? Давайте сложим: бит1=1 => 2, бит5=1 => 32, итого 34 = 0x22. На самом деле 2+32=34 = 0x22.
-        // Байт1: группа3 и группа4: группа3 биты: 0,1,1,0; группа4 биты: 0,1,1,0. Тогда байт1: бит0=0, бит1=1, бит2=1, бит3=0, бит4=0, бит5=1, бит6=1, бит7=0 => биты: 0:0,1:1(2),2:1(4),3:0,4:0,5:1(32),6:1(64),7:0 => сумма 2+4+32+64=102 = 0x66.
-        // Итог: {0x22, 0x66}
         std::vector<uint8_t> expected = {0x22, 0x66};
         auto result = sub.substitute(data, func, 4);
         bool ok = verify_vectors(result, expected);
