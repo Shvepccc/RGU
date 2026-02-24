@@ -13,16 +13,9 @@
 #include <string>
 #include <sstream>
 
-// Подключаем тестируемые классы
 #include "crypto_interfaces.hpp"
 
 // ============================================================================
-// Вспомогательные классы для логирования результатов тестов
-// ============================================================================
-
-/**
- * @brief Класс для форматированного вывода результатов тестов
- */
 class test_logger
 {
 private:
@@ -55,7 +48,6 @@ public:
     
     void end_suite()
     {
-        //print_separator();
         output_ << std::endl;
     }
     
@@ -69,11 +61,11 @@ public:
         if (condition)
         {
             passed_tests_++;
-            output_ << "\033[32mПРОЙДЕН\033[0m";  // Зеленый цвет
+            output_ << "\033[32mПРОЙДЕН\033[0m";
         }
         else
         {
-            output_ << "\033[31mПРОВАЛЕН\033[0m";  // Красный цвет
+            output_ << "\033[31mПРОВАЛЕН\033[0m";
         }
         
         if (!details.empty())
@@ -107,14 +99,9 @@ public:
 };
 
 // ============================================================================
-// Вспомогательные функции для работы с данными
-// ============================================================================
 
 namespace test_utils
 {
-    /**
-     * @brief Вывод байтового массива в hex формате
-     */
     inline std::string bytes_to_hex(const std::vector<uint8_t>& data, size_t max_bytes = 0)
     {
         if (data.empty())
@@ -148,9 +135,6 @@ namespace test_utils
         return ss.str();
     }
     
-    /**
-     * @brief Генерация случайных байтов
-     */
     inline std::vector<uint8_t> random_bytes(size_t size, uint32_t seed = 0)
     {
         std::vector<uint8_t> result(size);
@@ -171,9 +155,6 @@ namespace test_utils
         return result;
     }
     
-    /**
-     * @brief Проверка двух массивов на равенство
-     */
     inline bool bytes_equal(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b)
     {
         if (a.size() != b.size())
@@ -192,9 +173,6 @@ namespace test_utils
         return true;
     }
     
-    /**
-     * @brief XOR двух массивов
-     */
     inline std::vector<uint8_t> bytes_xor(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b)
     {
         if (a.size() != b.size())
@@ -211,9 +189,6 @@ namespace test_utils
         return result;
     }
     
-    /**
-     * @brief Подсчет количества отличающихся битов
-     */
     inline size_t count_different_bits(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b)
     {
         if (a.size() != b.size())
@@ -225,7 +200,6 @@ namespace test_utils
         for (size_t i = 0; i < a.size(); ++i)
         {
             uint8_t x = a[i] ^ b[i];
-            // Подсчет единичных битов
             while (x)
             {
                 diff_bits += (x & 1);
@@ -235,10 +209,7 @@ namespace test_utils
         
         return diff_bits;
     }
-    
-    /**
-     * @brief Создание простого ключа из числа
-     */
+
     inline std::vector<uint8_t> key_from_uint(uint64_t value, size_t size)
     {
         std::vector<uint8_t> key(size);
@@ -251,12 +222,7 @@ namespace test_utils
 }
 
 // ============================================================================
-// Моки (заглушки) для интерфейсов
-// ============================================================================
 
-/**
- * @brief Простая реализация расширения ключа (для тестирования)
- */
 class simple_key_expander_mock : public I_key_expander
 {
 private:
@@ -278,7 +244,6 @@ public:
         
         for (size_t round = 0; round < round_keys_count_; ++round)
         {
-            // Простое расширение: каждый раундовый ключ = входной ключ + номер раунда
             std::vector<uint8_t> round_key(round_key_size_);
             for (size_t i = 0; i < round_key_size_; ++i)
             {
@@ -290,31 +255,6 @@ public:
         return round_keys;
     }
 };
-
-/**
- * @brief Простая раундовая функция (XOR с ключом)
- */
-// class simple_xor_round_mock : public I_feistel_round_function
-// {
-// public:
-//     std::vector<uint8_t> feistel_round(
-//         const std::vector<uint8_t>& input_block,
-//         const std::vector<uint8_t>& round_key) const override
-//     {
-//         if (input_block.size() != round_key.size())
-//         {
-//             throw std::invalid_argument("Block and key must have the same size for XOR");
-//         }
-        
-//         std::vector<uint8_t> result(input_block.size());
-//         for (size_t i = 0; i < input_block.size(); ++i)
-//         {
-//             result[i] = input_block[i] ^ round_key[i];
-//         }
-        
-//         return result;
-//     }
-// };
 
 class simple_xor_round_mock : public I_feistel_round_function
 {
@@ -331,28 +271,24 @@ public:
         size_t n = input_block.size();
         std::vector<uint8_t> result(n);
         
-        // Преобразуем блок в 32-битное число для лучшего перемешивания
         uint32_t state = 0;
         for (size_t i = 0; i < n; ++i)
         {
             state = (state << 8) | input_block[i];
         }
         
-        // Добавляем ключ
         uint32_t key_val = 0;
         for (size_t i = 0; i < n; ++i)
         {
             key_val = (key_val << 8) | round_key[i];
         }
         
-        // Псевдо-хэш функция с умножением
         state = state ^ key_val;
-        state = state * 0x9e3779b9;  // Константа золотого сечения
+        state = state * 0x9e3779b9;
         state = state ^ (state >> 16);
         state = state * 0x85ebca6b;
         state = state ^ (state >> 13);
         
-        // Обратно в байты
         for (size_t i = 0; i < n; ++i)
         {
             result[i] = (state >> (8 * (n - 1 - i))) & 0xFF;
@@ -362,9 +298,6 @@ public:
     }
 };
 
-/**
- * @brief Раундовая функция, которая всегда возвращает ноль
- */
 class zero_round_mock : public I_feistel_round_function
 {
 public:
@@ -376,9 +309,6 @@ public:
     }
 };
 
-/**
- * @brief Раундовая функция, которая возвращает константу
- */
 class constant_round_mock : public I_feistel_round_function
 {
 private:
@@ -398,9 +328,6 @@ public:
     }
 };
 
-/**
- * @brief Расширение ключа, которое всегда возвращает одни и те же ключи
- */
 class fixed_key_expander_mock : public I_key_expander
 {
 private:
@@ -419,9 +346,7 @@ public:
     }
 };
 
-/**
- * @brief Счетчик вызовов раундовой функции (для проверки количества раундов)
- */
+
 class counting_round_mock : public I_feistel_round_function
 {
 private:
@@ -475,9 +400,6 @@ public:
     {
     }
     
-    /**
-     * @brief Запуск всех тестов
-     */
     bool run_all_tests()
     {
         bool all_passed = true;
@@ -804,7 +726,6 @@ private:
             
             // Тест 5.2: Проверка что левая и правая половины меняются местами
             {
-                // Создаем специальную раундовую функцию, которая позволяет отследить обмен
                 class tracking_round_mock : public I_feistel_round_function
                 {
                 public:
@@ -812,7 +733,6 @@ private:
                         const std::vector<uint8_t>& input_block,
                         const std::vector<uint8_t>& round_key) const override
                     {
-                        // Возвращаем блок, где все биты установлены в 1
                         return std::vector<uint8_t>(input_block.size(), 0xFF);
                     }
                 };
@@ -823,7 +743,7 @@ private:
                 
                 std::vector<uint8_t> key(8, 0);
                 std::vector<uint8_t> plaintext(8, 0);
-                // Левая половина = все 0, правая половина = все 1
+
                 for (size_t i = 4; i < 8; ++i)
                 {
                     plaintext[i] = 0xFF;
@@ -832,10 +752,6 @@ private:
                 network.setup_round_keys(key);
                 auto ciphertext = network.encrypt_block(plaintext);
                 
-                // После одного раунда с функцией, возвращающей 0xFF:
-                // Новая левая = старая правая = 0xFF
-                // Новая правая = старая левая XOR F(старая правая) = 0 XOR 0xFF = 0xFF
-                // Но в конце раунда правая и левая меняются местами
                 bool left_is_old_right = (ciphertext[4] == 0xFF && ciphertext[5] == 0xFF && 
                                           ciphertext[6] == 0xFF && ciphertext[7] == 0xFF);
                 
@@ -1021,11 +937,11 @@ private:
             std::stringstream ss;
             ss << std::fixed << std::setprecision(2) << avg_time << " мкс/блок";
             
-            logger_.check_result(true, "Измерение производительности", ss.str());
-            all_passed &= true; // Не проваливаем тест из-за производительности
+            all_passed &= logger_.check_result(true, "Измерение производительности", ss.str());
+            //all_passed &= true; // Не проваливаем тест из-за производительности
             
             // Тест 7.2: Проверка что шифрование не слишком медленное
-            bool performance_ok = (avg_time < 1000); // Не больше 1 мс на блок
+            bool performance_ok = (avg_time < 1000);
             all_passed &= logger_.check_result(performance_ok, 
                 "Производительность в допустимых пределах", 
                 std::to_string(avg_time) + " мкс");
@@ -1121,7 +1037,6 @@ private:
                 ss << std::fixed << std::setprecision(2) << avalanche << "% (" 
                    << diff_bits << "/" << total_bits << " бит)";
                 
-                // Хороший лавинный эффект должен быть около 50%
                 bool good_avalanche = (diff_bits > total_bits * 0.3) && 
                                       (diff_bits < total_bits * 0.7);
                 
@@ -1135,7 +1050,6 @@ private:
                 std::vector<uint8_t> key2 = key1;
                 std::vector<uint8_t> plaintext(8, 0xAA);
                 
-                // Меняем один бит в ключе
                 key2[0] ^= 0x01;
                 
                 network.setup_round_keys(key1);
@@ -1169,10 +1083,6 @@ private:
         return all_passed;
     }
 };
-
-// ============================================================================
-// Функция для запуска всех тестов
-// ============================================================================
 
 inline bool run_feistel_network_tests()
 {

@@ -17,12 +17,7 @@ public:
 
     feistel_template(feistel_network* network)
         : feistel_network_(network), is_initialized_(false)
-    {
-        // if (!feistel_network_)
-        // {
-        //     throw std::invalid_argument("feistel_network pointer must not be null");
-        // }
-    }
+    {}
 
     virtual ~feistel_template() = default;
 

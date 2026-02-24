@@ -1,4 +1,3 @@
-// triple_des_algorithm.hpp
 #ifndef TRIPLE_DES_ALGORITHM_H
 #define TRIPLE_DES_ALGORITHM_H
 
@@ -7,12 +6,12 @@
 #include <cstdint>
 #include <stdexcept>
 
-enum class TripleDESMode
+enum class triple_des_mode
 {
-    DES_EEE3,  // Encrypt-Encrypt-Encrypt with three different keys
-    DES_EDE3,  // Encrypt-Decrypt-Encrypt with three different keys
-    DES_EEE2,  // Encrypt-Encrypt-Encrypt with first key repeated as third
-    DES_EDE2   // Encrypt-Decrypt-Encrypt with first key repeated as third
+    DES_EEE3,
+    DES_EDE3,
+    DES_EEE2,
+    DES_EDE2
 };
 
 class triple_des_algorithm : public I_feistel_chipher
@@ -21,28 +20,18 @@ private:
     des_algorithm des1_;
     des_algorithm des2_;
     des_algorithm des3_;
-    TripleDESMode mode_;
+    triple_des_mode mode_;
     bool initialized_ = false;
 
-    std::vector<uint8_t> adjust_key(const std::vector<uint8_t>& key, size_t expected_size) const
-    {
-        if (key.size() == expected_size)
-            return key;
-        if (key.size() < expected_size)
-            throw std::invalid_argument("Key too short for selected 3DES mode");
-
-        return std::vector<uint8_t>(key.begin(), key.begin() + expected_size);
-    }
-
 public:
-    explicit triple_des_algorithm(TripleDESMode mode = TripleDESMode::DES_EDE3)
+    explicit triple_des_algorithm(triple_des_mode mode = triple_des_mode::DES_EDE3)
         : mode_(mode)
     {
     }
 
     void setup_round_keys(const std::vector<uint8_t>& key) override
     {
-        bool is_3key = (mode_ == TripleDESMode::DES_EEE3 || mode_ == TripleDESMode::DES_EDE3);
+        bool is_3key = (mode_ == triple_des_mode::DES_EEE3 || mode_ == triple_des_mode::DES_EDE3);
         
         if (is_3key && key.size() != 24 && key.size() != 16)
             throw std::invalid_argument("3-key mode requires 24 or 16 bytes");
@@ -73,16 +62,16 @@ public:
 
         switch (mode_)
         {
-        case TripleDESMode::DES_EEE3:
-        case TripleDESMode::DES_EEE2:
+        case triple_des_mode::DES_EEE3:
+        case triple_des_mode::DES_EEE2:
             // E(K1, E(K2, E(K3, plaintext)))
             result = des3_.encrypt_block(plaintext);
             result = des2_.encrypt_block(result);
             result = des1_.encrypt_block(result);
             break;
 
-        case TripleDESMode::DES_EDE3:
-        case TripleDESMode::DES_EDE2:
+        case triple_des_mode::DES_EDE3:
+        case triple_des_mode::DES_EDE2:
             // E(K1, D(K2, E(K3, plaintext)))
             result = des3_.encrypt_block(plaintext);
             result = des2_.decrypt_block(result);
@@ -104,16 +93,16 @@ public:
 
         switch (mode_)
         {
-        case TripleDESMode::DES_EEE3:
-        case TripleDESMode::DES_EEE2:
+        case triple_des_mode::DES_EEE3:
+        case triple_des_mode::DES_EEE2:
             // D(K1, D(K2, D(K3, ciphertext)))
             result = des1_.decrypt_block(ciphertext);
             result = des2_.decrypt_block(result);
             result = des3_.decrypt_block(result);
             break;
 
-        case TripleDESMode::DES_EDE3:
-        case TripleDESMode::DES_EDE2:
+        case triple_des_mode::DES_EDE3:
+        case triple_des_mode::DES_EDE2:
             // D(K1, E(K2, D(K3, ciphertext)))
             result = des1_.decrypt_block(ciphertext);
             result = des2_.encrypt_block(result);

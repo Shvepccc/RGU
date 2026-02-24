@@ -1,4 +1,3 @@
-// demo_crypto_processor.cpp - исправленная версия с сохранением в папку results
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -17,10 +16,6 @@
 #include "../include/triple_des_algorithm.hpp"
 
 #define PATH "/Users/stepanorlov/Documents/Stepan Orlov/RGU/semester 4/crypt/cr_hw_2/src/test_paths.txt"
-
-// ============================================================================
-// Вспомогательные функции
-// ============================================================================
 
 bool file_exists(const std::string& path)
 {
@@ -155,7 +150,7 @@ void test_random_data(crypto_processor& processor, const std::string& algo_name,
     std::cout << "    Decrypted : " << bytes_to_hex(decrypted) << "\n";
     
     bool success = (plain == decrypted);
-    std::cout << "    Result    : " << (success ? "✓ PASS" : "✗ FAIL") << "\n";
+    std::cout << "    Result    : " << (success ? "PASS" : "FAIL") << "\n";
 }
 
 void test_file_operation(crypto_processor& processor, const std::string& algo_name, 
@@ -163,7 +158,7 @@ void test_file_operation(crypto_processor& processor, const std::string& algo_na
 {
     if (!file_exists(input_path))
     {
-        std::cout << "  ⚠ File not found: " << input_path << "\n";
+        std::cout << "File not found: " << input_path << "\n";
         return;
     }
     
@@ -172,24 +167,22 @@ void test_file_operation(crypto_processor& processor, const std::string& algo_na
     std::string ext = get_file_extension(filename);
     std::string name_without_ext = filename.substr(0, filename.size() - ext.size());
     
-    // Создаем папку results, если её нет
     std::string results_dir = file_dir + "/results";
     if (!file_exists(results_dir))
     {
         if (!create_directory(results_dir))
         {
-            std::cout << "  ⚠ Cannot create results directory: " << results_dir << "\n";
+            std::cout << "Cannot create results directory: " << results_dir << "\n";
             return;
         }
     }
     
-    // Создаем папку для конкретного файла
     std::string file_results_dir = results_dir + "/" + name_without_ext;
     if (!file_exists(file_results_dir))
     {
         if (!create_directory(file_results_dir))
         {
-            std::cout << "  ⚠ Cannot create file results directory: " << file_results_dir << "\n";
+            std::cout << "Cannot create file results directory: " << file_results_dir << "\n";
             return;
         }
     }
@@ -229,7 +222,7 @@ void test_file_operation(crypto_processor& processor, const std::string& algo_na
     std::vector<uint8_t> dec_data((std::istreambuf_iterator<char>(dec)), {});
     
     bool success = (orig_data == dec_data);
-    std::cout << "    Verification: " << (success ? "✓ PASS" : "✗ FAIL") << "\n";
+    std::cout << "    Verification: " << (success ? "PASS" : "FAIL") << "\n";
     
     if (!success)
     {
@@ -238,8 +231,6 @@ void test_file_operation(crypto_processor& processor, const std::string& algo_na
     }
 }
 
-// ============================================================================
-// Демонстрация всех алгоритмов
 // ============================================================================
 
 void demonstrate_des()
@@ -251,14 +242,11 @@ void demonstrate_des()
     des_algorithm* des = new des_algorithm();
     crypto_processor processor(des, 8);
     
-    // Тестовый ключ
     std::vector<uint8_t> key = {0x13, 0x34, 0x57, 0x79, 0x9B, 0xBC, 0xDF, 0xF1};
     processor.set_key(key);
     
-    // Тест случайных данных
     test_random_data(processor, "DES", 64);
     
-    // Чтение путей к файлам
     auto paths = read_test_paths(PATH);
     
     if (paths.empty())
@@ -275,7 +263,7 @@ void demonstrate_des()
     }
 }
 
-void demonstrate_triple_des(TripleDESMode mode, const std::string& mode_name)
+void demonstrate_triple_des(triple_des_mode mode, const std::string& mode_name)
 {
     std::cout << "\n" << std::string(60, '=') << "\n";
     std::cout << "DEMONSTRATION: 3DES - " << mode_name << "\n";
@@ -284,11 +272,9 @@ void demonstrate_triple_des(TripleDESMode mode, const std::string& mode_name)
     triple_des_algorithm* tdes = new triple_des_algorithm(mode);
     crypto_processor processor(tdes, 8);
     
-    // Генерация ключа в зависимости от режима
     std::vector<uint8_t> key;
-    if (mode == TripleDESMode::DES_EDE3 || mode == TripleDESMode::DES_EEE3)
+    if (mode == triple_des_mode::DES_EDE3 || mode == triple_des_mode::DES_EEE3)
     {
-        // 24-байтовый ключ для 3-ключевых режимов
         key = {
             0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF,
             0xFE, 0xDC, 0xBA, 0x98, 0x76, 0x54, 0x32, 0x10,
@@ -297,7 +283,6 @@ void demonstrate_triple_des(TripleDESMode mode, const std::string& mode_name)
     }
     else
     {
-        // 16-байтовый ключ для 2-ключевых режимов
         key = {
             0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF,
             0xFE, 0xDC, 0xBA, 0x98, 0x76, 0x54, 0x32, 0x10
@@ -306,10 +291,8 @@ void demonstrate_triple_des(TripleDESMode mode, const std::string& mode_name)
     
     processor.set_key(key);
     
-    // Тест случайных данных
     test_random_data(processor, "3DES-" + mode_name, 64);
     
-    // Чтение путей к файлам
     auto paths = read_test_paths(PATH);
     
     if (paths.empty())
@@ -339,8 +322,6 @@ void clean_results_directory(const std::string& base_path)
 }
 
 // ============================================================================
-// Главная функция
-// ============================================================================
 int main()
 {
     std::cout << "\n";
@@ -357,11 +338,11 @@ int main()
         // DES
         demonstrate_des();
         
-        // 3DES - все 4 режима
-        demonstrate_triple_des(TripleDESMode::DES_EDE3, "EDE3");
-        demonstrate_triple_des(TripleDESMode::DES_EEE3, "EEE3");
-        demonstrate_triple_des(TripleDESMode::DES_EDE2, "EDE2");
-        demonstrate_triple_des(TripleDESMode::DES_EEE2, "EEE2");
+        // 3DES
+        demonstrate_triple_des(triple_des_mode::DES_EDE3, "EDE3");
+        demonstrate_triple_des(triple_des_mode::DES_EEE3, "EEE3");
+        demonstrate_triple_des(triple_des_mode::DES_EDE2, "EDE2");
+        demonstrate_triple_des(triple_des_mode::DES_EEE2, "EEE2");
         
         std::cout << "\n" << std::string(60, '=') << "\n";
         std::cout << "DEMONSTRATION COMPLETED SUCCESSFULLY\n";
