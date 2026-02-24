@@ -11,21 +11,14 @@
 #include <string>
 #include <sstream>
 
-// Подключаем тестируемый класс
 #include "triple_des_algorithm.hpp"
-
-// Подключаем существующие утилиты для тестирования (test_logger, test_utils)
 #include "test_feistel.hpp"
 
-// ============================================================================
-// Класс для тестирования triple_des_algorithm
-// ============================================================================
 class triple_des_test
 {
 private:
     test_logger logger_;
     
-    // Вспомогательная функция для генерации ключей разной длины
     std::vector<uint8_t> make_key(size_t length, uint8_t base = 0x11)
     {
         std::vector<uint8_t> key(length);
@@ -50,10 +43,6 @@ public:
         logger_.start_suite("Шифрование/дешифрование для всех режимов");
         all_passed &= test_encrypt_decrypt_all_modes() && all_passed;
         logger_.end_suite();
-        
-        // logger_.start_suite("Совместимость с одинарным DES");
-        // all_passed &= test_des_compatibility() && all_passed;
-        // logger_.end_suite();
         
         logger_.start_suite("Обработка длины ключа");
         all_passed &= test_key_length_handling() && all_passed;
@@ -93,10 +82,10 @@ private:
         
         try
         {
-            triple_des_algorithm tdes_ede3(TripleDESMode::DES_EDE3);
-            triple_des_algorithm tdes_eee3(TripleDESMode::DES_EEE3);
-            triple_des_algorithm tdes_ede2(TripleDESMode::DES_EDE2);
-            triple_des_algorithm tdes_eee2(TripleDESMode::DES_EEE2);
+            triple_des_algorithm tdes_ede3(triple_des_mode::DES_EDE3);
+            triple_des_algorithm tdes_eee3(triple_des_mode::DES_EEE3);
+            triple_des_algorithm tdes_ede2(triple_des_mode::DES_EDE2);
+            triple_des_algorithm tdes_eee2(triple_des_mode::DES_EEE2);
             
             all_passed &= logger_.check_result(true, "Создание объектов для всех режимов");
         }
@@ -116,10 +105,10 @@ private:
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes_ede3(TripleDESMode::DES_EDE3);
-        triple_des_algorithm tdes_eee3(TripleDESMode::DES_EEE3);
-        triple_des_algorithm tdes_ede2(TripleDESMode::DES_EDE2);
-        triple_des_algorithm tdes_eee2(TripleDESMode::DES_EEE2);
+        triple_des_algorithm tdes_ede3(triple_des_mode::DES_EDE3);
+        triple_des_algorithm tdes_eee3(triple_des_mode::DES_EEE3);
+        triple_des_algorithm tdes_ede2(triple_des_mode::DES_EDE2);
+        triple_des_algorithm tdes_eee2(triple_des_mode::DES_EEE2);
         
         // Корректные ключи
         auto key24 = make_key(24, 0x10);
@@ -153,16 +142,16 @@ private:
         
         struct TestMode
         {
-            TripleDESMode mode;
+            triple_des_mode mode;
             std::string name;
             std::vector<uint8_t> key;
         };
         
         std::vector<TestMode> modes = {
-            {TripleDESMode::DES_EDE3, "EDE3", make_key(24, 0x11)},
-            {TripleDESMode::DES_EEE3, "EEE3", make_key(24, 0x22)},
-            {TripleDESMode::DES_EDE2, "EDE2", make_key(16, 0x33)},
-            {TripleDESMode::DES_EEE2, "EEE2", make_key(16, 0x44)}
+            {triple_des_mode::DES_EDE3, "EDE3", make_key(24, 0x11)},
+            {triple_des_mode::DES_EEE3, "EEE3", make_key(24, 0x22)},
+            {triple_des_mode::DES_EDE2, "EDE2", make_key(16, 0x33)},
+            {triple_des_mode::DES_EEE2, "EEE2", make_key(16, 0x44)}
         };
         
         for (const auto& m : modes)
@@ -196,67 +185,16 @@ private:
     }
     
     // ------------------------------------------------------------------------
-    // Тест 4: Совместимость с одинарным DES (для режима EDE3 с тремя одинаковыми ключами)
-    // ------------------------------------------------------------------------
-    // bool test_des_compatibility()
-    // {
-    //     bool all_passed = true;
-        
-    //     // Известный тестовый вектор DES
-    //     std::vector<uint8_t> des_key = test_utils::hex_to_bytes("133457799BBCDFF1");
-    //     std::vector<uint8_t> plain = test_utils::hex_to_bytes("0123456789ABCDEF");
-    //     std::vector<uint8_t> expected_cipher = test_utils::hex_to_bytes("85E813540F0AB405");
-        
-    //     // Собираем 24-байтовый ключ из трёх одинаковых
-    //     std::vector<uint8_t> triple_key;
-    //     triple_key.insert(triple_key.end(), des_key.begin(), des_key.end());
-    //     triple_key.insert(triple_key.end(), des_key.begin(), des_key.end());
-    //     triple_key.insert(triple_key.end(), des_key.begin(), des_key.end());
-        
-    //     try
-    //     {
-    //         // Одинарный DES
-    //         des_algorithm des;
-    //         des.setup_round_keys(des_key);
-    //         auto des_cipher = des.encrypt_block(plain);
-            
-    //         // 3DES EDE3
-    //         triple_des_algorithm tdes(TripleDESMode::DES_EDE3);
-    //         tdes.setup_round_keys(triple_key);
-    //         auto tdes_cipher = tdes.encrypt_block(plain);
-            
-    //         bool match = test_utils::bytes_equal(des_cipher, tdes_cipher) &&
-    //                      test_utils::bytes_equal(tdes_cipher, expected_cipher);
-            
-    //         all_passed &= logger_.check_result(match, "EDE3 с тремя одинаковыми ключами = DES");
-            
-    //         if (!match)
-    //         {
-    //             std::cout << "      DES cipher : " << test_utils::bytes_to_hex(des_cipher) << std::endl;
-    //             std::cout << "      3DES cipher: " << test_utils::bytes_to_hex(tdes_cipher) << std::endl;
-    //             std::cout << "      Expected   : " << test_utils::bytes_to_hex(expected_cipher) << std::endl;
-    //         }
-    //     }
-    //     catch (const std::exception& e)
-    //     {
-    //         logger_.check_result(false, "Исключение в тесте совместимости", e.what());
-    //         all_passed = false;
-    //     }
-        
-    //     return all_passed;
-    // }
-    
-    // ------------------------------------------------------------------------
     // Тест 5: Обработка длины ключа
     // ------------------------------------------------------------------------
     bool test_key_length_handling()
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes_ede3(TripleDESMode::DES_EDE3);
-        triple_des_algorithm tdes_eee3(TripleDESMode::DES_EEE3);
-        triple_des_algorithm tdes_ede2(TripleDESMode::DES_EDE2);
-        triple_des_algorithm tdes_eee2(TripleDESMode::DES_EEE2);
+        triple_des_algorithm tdes_ede3(triple_des_mode::DES_EDE3);
+        triple_des_algorithm tdes_eee3(triple_des_mode::DES_EEE3);
+        triple_des_algorithm tdes_ede2(triple_des_mode::DES_EDE2);
+        triple_des_algorithm tdes_eee2(triple_des_mode::DES_EEE2);
         
         // Корректные длины
         auto key24 = make_key(24);
@@ -267,7 +205,6 @@ private:
         auto key10 = make_key(10);
         auto key32 = make_key(32);
         
-        // Для 3-ключевых режимов должны принимать 24 и 16 (тогда K3=K1)
         bool ok_ede3_24 = true, ok_ede3_16 = true, ok_eee3_24 = true, ok_eee3_16 = true;
         try { tdes_ede3.setup_round_keys(key24); } catch (...) { ok_ede3_24 = false; }
         try { tdes_ede3.setup_round_keys(key16); } catch (...) { ok_ede3_16 = false; }
@@ -279,7 +216,6 @@ private:
         all_passed &= logger_.check_result(ok_eee3_24, "EEE3 принимает 24-байтовый ключ");
         all_passed &= logger_.check_result(ok_eee3_16, "EEE3 принимает 16-байтовый ключ (K3=K1)");
         
-        // Для 2-ключевых режимов должны принимать только 16 байт
         bool ok_ede2_16 = true, ok_ede2_24 = false, ok_eee2_16 = true, ok_eee2_24 = false;
         try { tdes_ede2.setup_round_keys(key16); } catch (...) { ok_ede2_16 = false; }
         try { tdes_ede2.setup_round_keys(key24); ok_ede2_24 = true; } catch (...) { }
@@ -291,11 +227,10 @@ private:
         all_passed &= logger_.check_result(ok_eee2_16, "EEE2 принимает 16-байтовый ключ");
         all_passed &= logger_.check_result(!ok_eee2_24, "EEE2 отвергает 24-байтовый ключ");
         
-        // Все режимы должны отвергать ключи другой длины (8,10,32)
         auto check_invalid = [&](triple_des_algorithm& tdes, const std::vector<uint8_t>& key, const std::string& desc) {
             bool threw = false;
             try { tdes.setup_round_keys(key); } catch (const std::invalid_argument&) { threw = true; }
-            catch (...) { /* другие исключения не ожидаются */ }
+            catch (...) { }
             return logger_.check_result(threw, desc);
         };
         
@@ -316,7 +251,7 @@ private:
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes(triple_des_mode::DES_EDE3);
         auto key = make_key(24);
         std::vector<uint8_t> plain8(8, 0xAA);
         std::vector<uint8_t> bad7(7, 0xBB);
@@ -353,7 +288,7 @@ private:
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes(triple_des_mode::DES_EDE3);
         auto key = make_key(24);
         std::vector<uint8_t> plain = test_utils::random_bytes(8, 999);
         tdes.setup_round_keys(key);
@@ -393,14 +328,13 @@ private:
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes(triple_des_mode::DES_EDE3);
         auto key = make_key(24, 0x55);
         std::vector<uint8_t> plain = test_utils::random_bytes(8, 1234);
         tdes.setup_round_keys(key);
         
-        // Изменение одного бита в plaintext
         auto plain2 = plain;
-        plain2[0] ^= 0x01;  // меняем младший бит первого байта
+        plain2[0] ^= 0x01;
         
         auto c1 = tdes.encrypt_block(plain);
         auto c2 = tdes.encrypt_block(plain2);
@@ -411,15 +345,13 @@ private:
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << avalanche << "% (" << diff_bits << "/64 бит)";
         
-        // Ожидаем около 50% (допустим 30-70%)
         bool good = (diff_bits >= 19 && diff_bits <= 45);
         all_passed &= logger_.check_result(good, "Лавинный эффект при изменении plaintext", ss.str());
         
-        // Изменение одного бита в ключе
         auto key2 = key;
-        key2[5] ^= 0x80;  // меняем старший бит шестого байта
+        key2[5] ^= 0x80;
         
-        triple_des_algorithm tdes2(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes2(triple_des_mode::DES_EDE3);
         tdes2.setup_round_keys(key2);
         auto c3 = tdes2.encrypt_block(plain);
         
@@ -440,7 +372,7 @@ private:
     {
         bool all_passed = true;
         
-        triple_des_algorithm tdes(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes(triple_des_mode::DES_EDE3);
         auto key = make_key(24);
         std::vector<uint8_t> plain(8, 0x42);
         tdes.setup_round_keys(key);
@@ -457,9 +389,8 @@ private:
         
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << avg << " мкс/блок";
-        logger_.check_result(true, "Замер производительности", ss.str());
+        all_passed &= logger_.check_result(true, "Замер производительности", ss.str());
         
-        // Не проваливаем тест из-за производительности, просто информируем
         return all_passed;
     }
     
@@ -473,8 +404,8 @@ private:
         auto key16 = make_key(16, 0x77);
         std::vector<uint8_t> plain = test_utils::random_bytes(8, 5555);
         
-        triple_des_algorithm tdes_ede2(TripleDESMode::DES_EDE2);
-        triple_des_algorithm tdes_eee2(TripleDESMode::DES_EEE2);
+        triple_des_algorithm tdes_ede2(triple_des_mode::DES_EDE2);
+        triple_des_algorithm tdes_eee2(triple_des_mode::DES_EEE2);
         
         tdes_ede2.setup_round_keys(key16);
         tdes_eee2.setup_round_keys(key16);
@@ -485,12 +416,7 @@ private:
         bool different = !test_utils::bytes_equal(c_ede2, c_eee2);
         all_passed &= logger_.check_result(different, "EDE2 и EEE2 дают разные результаты для одного ключа");
         
-        // Проверим, что EDE3 с 16-байтовым ключом (K3=K1) работает так же, как EDE2?
-        // Не обязательно, потому что в EDE3 раундовые ключи для третьего DES генерируются из K1,
-        // а в EDE2 тоже K3=K1, но количество раундов может отличаться? Нет, в обоих 16 раундов.
-        // Но внутренняя реализация DES одинакова. Поэтому результат должен совпадать.
-        // Проверим это свойство.
-        triple_des_algorithm tdes_ede3_16(TripleDESMode::DES_EDE3);
+        triple_des_algorithm tdes_ede3_16(triple_des_mode::DES_EDE3);
         tdes_ede3_16.setup_round_keys(key16);  // key16 интерпретируется как K1||K2, K3=K1
         
         auto c_ede3_16 = tdes_ede3_16.encrypt_block(plain);
@@ -503,9 +429,6 @@ private:
     }
 };
 
-// ============================================================================
-// Функция для запуска всех тестов
-// ============================================================================
 inline bool run_triple_des_tests()
 {
     triple_des_test tester;
