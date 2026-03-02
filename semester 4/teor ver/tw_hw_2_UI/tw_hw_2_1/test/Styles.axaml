@@ -1,0 +1,56 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Styles.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ButtonsColor">#d9dbda</Color>
+            
+            <!-- ЦВЕТА -->
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Success">#4CAF50</Color>
+            <Color x:Key="Error">#F44336</Color>
+        
+            <!-- КИСТИ (используют цвета) -->
+            <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+            <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Success}"/>
+        
+            <!-- РАЗМЕРЫ -->
+            <CornerRadius x:Key="CornerRad">8</CornerRadius>
+            <Thickness x:Key="Padding">15,8</Thickness>
+            <x:Double x:Key="Spacing">10</x:Double>
+        
+            <!-- ЦВЕТА ДЛЯ СТАТУСОВ -->
+            <Color x:Key="Susceptible">#90CAF9</Color>
+            <Color x:Key="Infected">#EF5350</Color>
+            <Color x:Key="Recovered">#66BB6A</Color>
+    
+        </ResourceDictionary>
+    </Styles.Resources>
+    
+    <!-- СТИЛИ ДЛЯ КНОПОК -->
+    <Style Selector="Button.main_btn">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="{StaticResource Padding}"/>
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRad}"/>
+        <Setter Property="Margin" Value="0,5"/>
+    </Style>
+    
+    <Style Selector="Button:pointerover">
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+    
+    <!-- СТИЛИ ДЛЯ ТЕКСТА -->
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,0,0,20"/>
+    </Style>
+    
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+</Styles>

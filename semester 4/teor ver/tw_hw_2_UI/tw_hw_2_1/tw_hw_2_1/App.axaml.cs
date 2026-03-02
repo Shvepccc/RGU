@@ -1,47 +1,77 @@
+// App.axaml.cs
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
-using tw_hw_2_1.ViewModels;
-using tw_hw_2_1.Views;
+using EpidemicSimulator.ViewModels;
+using EpidemicSimulator.Views;
+using System;
 
-namespace tw_hw_2_1;
-
-public partial class App : Application
+namespace tw_hw_2_1
 {
-    public override void Initialize()
+    public partial class App : Application
     {
-        AvaloniaXamlLoader.Load(this);
-    }
-
-    public override void OnFrameworkInitializationCompleted()
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        public override void Initialize()
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-            DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
+            Console.WriteLine("App.Initialize() начат");
+            
+            try
             {
-                DataContext = new MainWindowViewModel(),
-            };
+                AvaloniaXamlLoader.Load(this);
+                Console.WriteLine("XAML загружен успешно");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ОШИБКА в App.Initialize: {ex.Message}");
+                throw;
+            }
+            
+            Console.WriteLine("App.Initialize() успешно завершен");
         }
 
-        base.OnFrameworkInitializationCompleted();
-    }
-
-    private void DisableAvaloniaDataAnnotationValidation()
-    {
-        // Get an array of plugins to remove
-        var dataValidationPluginsToRemove =
-            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
-
-        // remove each entry found
-        foreach (var plugin in dataValidationPluginsToRemove)
+        public override void OnFrameworkInitializationCompleted()
         {
-            BindingPlugins.DataValidators.Remove(plugin);
+            Console.WriteLine("App.OnFrameworkInitializationCompleted начат");
+            
+            try
+            {
+                if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    Console.WriteLine("Обнаружен Desktop ApplicationLifetime");
+                    
+                    Console.WriteLine("Создание MainWindow...");
+                    var mainWindow = new MainWindow();
+                    
+                    Console.WriteLine("Создание MainWindowViewModel...");
+                    var viewModel = new MainWindowViewModel();
+                    
+                    Console.WriteLine("Установка DataContext...");
+                    mainWindow.DataContext = viewModel;
+                    
+                    desktop.MainWindow = mainWindow;
+                    
+                    // ПРИНУДИТЕЛЬНО показываем окно
+                    Console.WriteLine("Показываем окно...");
+                    mainWindow.Show();
+                    
+                    // Активируем окно (выводим на передний план)
+                    mainWindow.Activate();
+                    
+                    Console.WriteLine($"Окно показано. Заголовок: {mainWindow.Title}, Размеры: {mainWindow.Width}x{mainWindow.Height}");
+                }
+                else
+                {
+                    Console.WriteLine($"ApplicationLifetime имеет другой тип: {ApplicationLifetime?.GetType().Name}");
+                }
+                
+                base.OnFrameworkInitializationCompleted();
+                Console.WriteLine("App.OnFrameworkInitializationCompleted успешно завершен");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ОШИБКА в OnFrameworkInitializationCompleted: {ex.Message}");
+                Console.WriteLine($"Стек: {ex.StackTrace}");
+            }
         }
     }
 }

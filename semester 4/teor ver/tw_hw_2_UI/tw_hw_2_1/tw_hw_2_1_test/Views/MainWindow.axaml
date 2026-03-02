@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:tw_hw_2_1_test.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="tw_hw_2_1_test.Views.MainWindow"
+        Title="Моделирование распространения заболевания"
+        Width="1200" Height="600"
+        Background="#2D2D30"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen">
+        <Design.DataContext>
+                <vm:MainWindowViewModel />
+        </Design.DataContext>
+        
+        <!-- <Window.Styles> -->
+        <!--         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.axaml"/> -->
+        <!-- </Window.Styles> -->
+
+        <!-- Просто квадрат с фоном - проверим, видно ли что-то вообще -->
+        <Border Background="LightBlue" Width="200" Height="200" Margin="20">
+                <DataGrid Background="LightGray"
+                             BorderBrush="Red"
+                             BorderThickness="2"
+                             Height="150" Width="150"/>
+        </Border>
+        
+
+</Window>

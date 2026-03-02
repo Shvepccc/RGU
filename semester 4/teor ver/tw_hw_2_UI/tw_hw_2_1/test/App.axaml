@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="test.App"
+             xmlns:local="using:test"
+             xmlns:converters="clr-namespace:test.Converters"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    </Application.Styles>
+             
+     <Application.Resources>
+         <ResourceDictionary>
+             <converters:NullableDoubleConverter x:Key="NullableDoubleConverter"/>
+         </ResourceDictionary>
+     </Application.Resources>
+</Application>

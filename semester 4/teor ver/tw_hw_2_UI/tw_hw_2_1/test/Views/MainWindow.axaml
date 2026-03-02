@@ -1,0 +1,123 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:test.ViewModels"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        x:Class="test.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Graph Test" Width="1000" Height="700">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        Margin="10">
+        
+        <Button 
+            Grid.Row="0" 
+            Classes="main_btn" 
+            Height="30"
+            VerticalAlignment="Top"
+            >Загрузить данные</Button>
+    
+        <Grid 
+            Grid.Row="1"
+            Margin="10"
+            ColumnDefinitions="*, Auto">
+            
+            <Border ClipToBounds="True">
+                <Canvas x:Name="GraphCanvas"
+                        PointerWheelChanged="OnWheel"
+                        PointerPressed="OnPressed"
+                        PointerMoved="OnMoved"
+                        PointerReleased="OnReleased"/>
+            </Border>
+
+            
+            
+            <!-- <ScrollViewer HorizontalScrollBarVisibility="Visible" -->
+            <!--               VerticalScrollBarVisibility="Auto" -->
+            <!--               IsScrollChainingEnabled="True"> -->
+            <!-- -->
+            <!--     ~1~ Сам граф @1@ -->
+            <!--     <graph:GraphPanel x:Name="TheGraph" -->
+            <!--                     Graph="{Binding Graph}" -->
+            <!--                     LayoutMethod="SugiyamaScheme" -->
+            <!--                     Background="LightGray"/> -->
+            <!-- </ScrollViewer> -->
+            
+            <!-- <Border BorderBrush="Aqua" Background="Aquamarine"> -->
+            <!--      -->
+            <!-- </Border> -->
+            
+            <!-- <graph:Graph Name="GraphControl"> -->
+            <!--     <graph:GraphPanel.DataTemplates> -->
+            <!--         <DataTemplate DataType="vm:GraphNode"> -->
+            <!--             <Border BorderBrush="Black" BorderThickness="1"  -->
+            <!--                     Background="LightBlue" CornerRadius="5" -->
+            <!--                     Padding="10,5"> -->
+            <!--                 <TextBlock Text="{Binding Label}"/> -->
+            <!--             </Border> -->
+            <!--         </DataTemplate> -->
+            <!--     </graph:GraphPanel.DataTemplates> -->
+            <!-- </graph:Graph> -->
+            
+            <dg:DataGrid
+                Grid.Column="1"
+                BorderThickness="2"
+                AutoGenerateColumns="True"
+                GridLinesVisibility="All"
+                BorderBrush="Gray"
+                IsReadOnly="True"
+                FontSize="8"
+                RowHeight="20"
+                ItemsSource="{Binding Users}"
+                VerticalAlignment="Top"/>
+        </Grid>
+    
+        <Grid Grid.Row="2"
+            VerticalAlignment="Bottom"
+            ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto">
+    
+            <Button Grid.Column="0" Classes="main_btn" Margin="10">Старт</Button>
+            <Button Grid.Column="1" Classes="main_btn" Margin="10">Сброс</Button>
+    
+            <TextBlock Grid.Column="2" Text="p₁" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox Grid.Column="3"
+                     Text="{Binding P1, 
+                     StringFormat={}{0:0.00},
+                     Converter={StaticResource NullableDoubleConverter}}"
+                     Width="80"
+                     Height="22"
+                     FontSize="14"
+                     Padding="2"
+                     VerticalContentAlignment="Center"
+                     TextAlignment="Right"/>
+    
+            <TextBlock Grid.Column="4" Text="p₂" VerticalAlignment="Center" Margin="10,0,5,0"/>
+            <TextBox Grid.Column="5"
+                     Text="{Binding P2, 
+                     StringFormat={}{0:0.00},
+                     Converter={StaticResource NullableDoubleConverter}}"
+                     Width="80"
+                     Height="22"
+                     FontSize="14"
+                     Padding="2"
+                     VerticalContentAlignment="Center"
+                     TextAlignment="Right"/>
+    
+            <Button Grid.Column="7" Classes="main_btn" Margin="0,0,0,0"
+                    Width="200"
+                    HorizontalContentAlignment="Center">Поиск</Button>
+        </Grid>
+    </Grid>
+
+
+
+
+</Window>
+
+

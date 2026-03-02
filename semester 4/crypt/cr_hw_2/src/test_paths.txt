@@ -1,2 +1,3 @@
 test_data/test_1.txt
 test_data/test_2.txt
+test_data/gmurman.pdf
