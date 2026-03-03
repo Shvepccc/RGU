@@ -1,0 +1,123 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_2.ViewModels"
+        xmlns:models="using:task_2.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:task_2.Converters"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+        x:Class="task_2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Simulation of point movement in M-ary tree"
+        xmlns:agc="clr-namespace:AvaloniaGraphControl;assembly=AvaloniaGraphControl">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, Auto, *">
+        <!-- Панель управления -->
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <StackPanel Margin="5">
+                <TextBlock Text="M:"/>
+                <NumericUpDown Value="{Binding M}" Minimum="1" Maximum="10" Width="120"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <TextBlock Text="Depth:"/>
+                <NumericUpDown Value="{Binding Depth}" Minimum="1" Maximum="10" Width="120"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <TextBlock Text="Stop prob p:"/>
+                <NumericUpDown Value="{Binding StopProbability}" Minimum="0" Maximum="1" Increment="0.05" Width="150"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <TextBlock Text="Transition probs:"/>
+                <ItemsControl ItemsSource="{Binding TransitionProbabilities}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <NumericUpDown Value="{Binding}" Minimum="0" Maximum="1" Increment="0.05" Width="150"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <Button Content="Run Experiment" Command="{Binding StartExperimentCommand}" Margin="10" VerticalAlignment="Bottom"/>
+            <Button Content="Reset Stats" Command="{Binding ResetStatisticsCommand}" Margin="10" VerticalAlignment="Bottom"/>
+        </StackPanel>
+    
+        <!-- Панель статистики -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" Background="LightGray">
+            <TextBlock Text="{Binding TotalExperimentsText}" Margin="10,0"/>
+            <TextBlock Text="Leaf hits:" FontWeight="Bold" Margin="20,0,5,0"/>
+            <TextBlock Text="{Binding LeafHitsText}"/>
+            <TextBlock Text="Path lengths:" FontWeight="Bold" Margin="20,0,5,0"/>
+            <TextBlock Text="{Binding PathLengthsText}"/>
+        </StackPanel>
+    
+        <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="10" Margin="5" Grid.Row="2">
+            <agc:GraphPanel 
+                Graph="{Binding MyGraph}" 
+                LayoutMethod="SugiyamaScheme"
+                Background="White">
+                <agc:GraphPanel.DataTemplates>
+                    <DataTemplate DataType="models:tree_node">
+                        <Ellipse Width="20" Height="20"
+                                 Fill="{Binding IsInPath, Converter={StaticResource BoolToBrushConverter}}"
+                                 Stroke="Black" StrokeThickness="1"/>
+                    </DataTemplate>
+                </agc:GraphPanel.DataTemplates>
+            </agc:GraphPanel>
+        </Border>
+    
+        <!-- Холст для дерева -->
+        <!-- <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="10" Margin="5" Grid.Row="2"> -->
+        <!--     <Canvas Name="treeCanvas"> -->
+        <!--         ~1~ Линии связей @1@ -->
+        <!--         ~1~ <ItemsControl ItemsSource="{Binding TreeEdges}"> @1@ -->
+        <!--         ~1~     <ItemsControl.ItemTemplate> @1@ -->
+        <!--         ~1~         <DataTemplate> @1@ -->
+        <!--         ~1~              @1@ -->
+        <!--         ~1~         </DataTemplate> @1@ -->
+        <!--         ~1~     </ItemsControl.ItemTemplate> @1@ -->
+        <!--         ~1~ </ItemsControl> @1@ -->
+        <!--         ~1~ @1@ -->
+        <!--         ~1~ <ItemsControl ItemsSource="{Binding TreeEdges}"> @1@ -->
+        <!--         ~1~     <ItemsControl.ItemsPanel> @1@ -->
+        <!--         ~1~         <ItemsPanelTemplate> @1@ -->
+        <!--         ~1~             <Canvas/> @1@ -->
+        <!--         ~1~         </ItemsPanelTemplate> @1@ -->
+        <!--         ~1~     </ItemsControl.ItemsPanel> @1@ -->
+        <!--         ~1~     <ItemsControl.ItemTemplate> @1@ -->
+        <!--         ~1~         <DataTemplate> @1@ -->
+        <!--         ~1~             <Line Stroke="Gray" StrokeThickness="1" @1@ -->
+        <!--         ~1~                   X1="{Binding X1}" Y1="{Binding Y1}" @1@ -->
+        <!--         ~1~                   X2="{Binding X2}" Y2="{Binding Y2}"/> @1@ -->
+        <!--         ~1~         </DataTemplate> @1@ -->
+        <!--         ~1~     </ItemsControl.ItemTemplate> @1@ -->
+        <!--         ~1~ </ItemsControl> @1@ -->
+        <!-- -->
+        <!--         ~1~ Узлы дерева @1@ -->
+        <!--         <ItemsControl ItemsSource="{Binding TreeNodes}"> -->
+        <!--             <ItemsControl.ItemTemplate> -->
+        <!--                 <DataTemplate> -->
+        <!--                     <Ellipse Width="20" Height="20" -->
+        <!--                              Fill="{Binding IsInPath, Converter={StaticResource BoolToBrushConverter}}" -->
+        <!--                              Stroke="Black" StrokeThickness="1" -->
+        <!--                              Canvas.Left="{Binding x, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-100}" -->
+        <!--                              Canvas.Top="{Binding y, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}"> -->
+        <!--                         <ToolTip.Tip> -->
+        <!--                             <TextBlock Text="{Binding node_id}"/> -->
+        <!--                         </ToolTip.Tip> -->
+        <!--                     </Ellipse> -->
+        <!--                 </DataTemplate> -->
+        <!--             </ItemsControl.ItemTemplate> -->
+        <!--         </ItemsControl> -->
+        <!--     </Canvas> -->
+        <!-- </Border> -->
+    
+    
+    </Grid>
+</Window>
+
+<!-- Canvas.Left="{Binding x, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}" -->
+<!-- Canvas.Top="{Binding y, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}" -->

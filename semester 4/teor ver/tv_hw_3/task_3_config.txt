@@ -1,0 +1,26 @@
+# assembly_machines
+2
+
+# recycle_machines
+1
+
+# assembly_modules
+2
+
+# recycle_modules
+1
+
+# t_assembly
+3
+
+# t_recycle
+4
+
+# component_count
+2
+
+# recipe (q1 q2 ... qn)
+2 3
+
+# arrival rates (s1 s2 ... sn)
+1 2

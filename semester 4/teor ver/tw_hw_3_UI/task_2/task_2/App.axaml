@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:task_2.Converters"
+             x:Class="task_2.App"
+             xmlns:local="using:task_2"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+             
+     <Application.Resources>
+         <ResourceDictionary>
+             <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+             <converters:DoubleOffsetConverter x:Key="DoubleOffsetConverter"/>
+         </ResourceDictionary>
+     </Application.Resources>
+</Application>

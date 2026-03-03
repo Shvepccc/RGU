@@ -59,6 +59,7 @@ int main()
     std::vector<int> f1 = {1, 1, 0, 0, 1};  // x^4 + x + 1
     std::vector<int> f2 = {1, 0, 0, 1, 1};  // x^4 + x^3 + 1
     std::vector<int> f3 = {1, 1, 1, 1, 1};  // x^4 + x^3 + x^2 + x + 1
+
     
     // Тест 1: (x+1)*(x+1)
     print_test_header("(x+1)*(x+1)");
