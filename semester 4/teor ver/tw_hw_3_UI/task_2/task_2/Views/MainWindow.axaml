@@ -4,120 +4,182 @@
         xmlns:models="using:task_2.Models"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        xmlns:paz="using:Avalonia.Controls.PanAndZoom"
         xmlns:converters="clr-namespace:task_2.Converters"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="task_2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Simulation of point movement in M-ary tree"
-        xmlns:agc="clr-namespace:AvaloniaGraphControl;assembly=AvaloniaGraphControl">
+        xmlns:agc="clr-namespace:AvaloniaGraphControl;assembly=AvaloniaGraphControl"
+        MinWidth="700" MinHeight="600">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+    
+    
+    <TabControl SelectedIndex="0">
+        <TabControl.Styles>
+            <Style Selector="TabItem">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Height" Value="10"/>
+                <Setter Property="MinWidth" Value="3"/>
+            </Style>
+        </TabControl.Styles>
+        
+        <TabItem Header="Моделирование">
+            <Grid ColumnDefinitions="Auto, *">
+                <!-- Панель управления -->
+                <StackPanel Name="ControlPanel" Spacing="10" MinWidth="200" Margin="0 0 0 15">
+                    
+                    <StackPanel >
+                        <TextBlock Text="Кол-во экспериментов:"/>
+                        <NumericUpDown Value="{Binding CountExperiments}" 
+                                       Minimum="1" Maximum="10000" Increment="1"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="M:"/>
+                        <NumericUpDown Value="{Binding M}" 
+                                       Minimum="1" Maximum="100"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Глубина:"/>
+                        <NumericUpDown Value="{Binding Depth}" 
+                                       Minimum="1" Maximum="100"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Вероятность остановки (p):"/>
+                        <NumericUpDown Value="{Binding StopProbability}" 
+                                       Minimum="0" Maximum="1" Increment="0.05"/>
+                    </StackPanel>
+                        
+                    <StackPanel>
+                        <TextBlock Text="Вероятности:"/>
+                        <Border BorderBrush="#1d1d1d" BorderThickness="1" CornerRadius="5">
+                            <ScrollViewer Height="200" Padding="6">
+                                <ItemsControl ItemsSource="{Binding TransitionProbabilities}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <NumericUpDown Value="{Binding Value, Mode=TwoWay}"
+                                                           Minimum="0" Maximum="1" Increment="0.05" MinWidth="150" 
+                                                           FormatString="0.00"
+                                                           Margin="0 2 0 0"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Border>
+                    </StackPanel>
+                    
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Button Content="Старт" Command="{Binding StartExperimentCommand}" 
+                                HorizontalAlignment="Stretch" Margin="0 0 10 0 "
+                                HorizontalContentAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Content="Ускорить"
+                                  IsChecked="{Binding DisableSimulationDelay}"/>
+                    </Grid>
+                    
+                    <!-- <Button Content="Сброс статистики" Command="{Binding ResetStatisticsCommand}"  -->
+                    <!--         HorizontalAlignment="Stretch" -->
+                    <!--         IsVisible="False"/> -->
+                        
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Background="LightGray">
+                        <TextBlock Text="{Binding TotalExperimentsText}" Margin="10, 0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+            
+                <Border BorderBrush="#1d1d1d" BorderThickness="1" 
+                        CornerRadius="5" Margin="15 0 0 15 " 
+                        Grid.Column="1">
+                    <paz:ZoomBorder Stretch="None" ZoomSpeed="1.2"
+                                ClipToBounds="True" Focusable="True"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                PanButton="Left"
+                                MinZoomX="0.5"
+                                MinZoomY="0.5"
+                                MaxZoomX="4"
+                                MaxZoomY="4"
+                                ShowZoomIndicator="True">
+                        <agc:GraphPanel
+                            Graph="{Binding MyGraph}" 
+                            LayoutMethod="SugiyamaScheme">
+                            <agc:GraphPanel.DataTemplates>
+                                <DataTemplate DataType="models:tree_node">
+                                    <Ellipse Width="20" Height="20"
+                                             Fill="{Binding IsInPath, Converter={StaticResource BoolToBrushConverter}}"
+                                             Stroke="Black" StrokeThickness="1">
+                                        <ToolTip.Tip>
+                                            <TextBlock Text="{Binding node_id}" FontSize="14"/>
+                                        </ToolTip.Tip>
+                                    </Ellipse>
+                                </DataTemplate>
+                            </agc:GraphPanel.DataTemplates>
+                        </agc:GraphPanel>
+                    </paz:ZoomBorder>
+                </Border>
+                
+                
+            </Grid>
+        </TabItem>
+        <TabItem Header="Статистика">
+            
+            <Grid ColumnDefinitions="Auto, Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid Margin="15"
+                      Grid.RowDefinitions="Auto, *">
+                    <TextBlock Grid.Row="0" Text="Посещения листьев" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10 "/>
+                    <dg:DataGrid Grid.Row="1" 
+                                 ItemsSource="{Binding LeafHitCollectonObservableCollection}" 
+                                 AutoGenerateColumns="False"
+                                 IsReadOnly="True"
+                                 GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1"
+                                 Height="">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="ID листа"
+                                                   Binding="{Binding LeafId}"
+                                                   Width="100"/>
+                    
+                            <dg:DataGridTextColumn Header="Вероятность посещения"
+                                                   Binding="{Binding Hits, StringFormat={}{0:F4}}"
+                                                   Width="200"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </Grid>
+            
+                <Grid Grid.Column="1" 
+                      Margin="15"
+                      Grid.RowDefinitions="Auto, *">
+                    <TextBlock Grid.Row="0" Text="Длины маршрутов" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10 "/>
+                    <dg:DataGrid Grid.Row="1" 
+                                 ItemsSource="{Binding PathLengthsObservableCollection}" 
+                                 AutoGenerateColumns="False"
+                                 IsReadOnly="True"
+                                 GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="Длина"
+                                                   Binding="{Binding pathId}"
+                                                   Width="100"/>
+                        
+                            <dg:DataGridTextColumn Header="Вероятность"
+                                                   Binding="{Binding length, StringFormat={}{0:F4}}"
+                                                   Width="200"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </Grid>
+            
+            </Grid>
+        </TabItem>
+    </TabControl>
 
-    <Grid RowDefinitions="Auto, Auto, *">
-        <!-- Панель управления -->
-        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
-            <StackPanel Margin="5">
-                <TextBlock Text="M:"/>
-                <NumericUpDown Value="{Binding M}" Minimum="1" Maximum="10" Width="120"/>
-            </StackPanel>
-            <StackPanel Margin="5">
-                <TextBlock Text="Depth:"/>
-                <NumericUpDown Value="{Binding Depth}" Minimum="1" Maximum="10" Width="120"/>
-            </StackPanel>
-            <StackPanel Margin="5">
-                <TextBlock Text="Stop prob p:"/>
-                <NumericUpDown Value="{Binding StopProbability}" Minimum="0" Maximum="1" Increment="0.05" Width="150"/>
-            </StackPanel>
-            <StackPanel Margin="5">
-                <TextBlock Text="Transition probs:"/>
-                <ItemsControl ItemsSource="{Binding TransitionProbabilities}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <NumericUpDown Value="{Binding}" Minimum="0" Maximum="1" Increment="0.05" Width="150"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-            <Button Content="Run Experiment" Command="{Binding StartExperimentCommand}" Margin="10" VerticalAlignment="Bottom"/>
-            <Button Content="Reset Stats" Command="{Binding ResetStatisticsCommand}" Margin="10" VerticalAlignment="Bottom"/>
-        </StackPanel>
     
-        <!-- Панель статистики -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" Background="LightGray">
-            <TextBlock Text="{Binding TotalExperimentsText}" Margin="10,0"/>
-            <TextBlock Text="Leaf hits:" FontWeight="Bold" Margin="20,0,5,0"/>
-            <TextBlock Text="{Binding LeafHitsText}"/>
-            <TextBlock Text="Path lengths:" FontWeight="Bold" Margin="20,0,5,0"/>
-            <TextBlock Text="{Binding PathLengthsText}"/>
-        </StackPanel>
-    
-        <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="10" Margin="5" Grid.Row="2">
-            <agc:GraphPanel 
-                Graph="{Binding MyGraph}" 
-                LayoutMethod="SugiyamaScheme"
-                Background="White">
-                <agc:GraphPanel.DataTemplates>
-                    <DataTemplate DataType="models:tree_node">
-                        <Ellipse Width="20" Height="20"
-                                 Fill="{Binding IsInPath, Converter={StaticResource BoolToBrushConverter}}"
-                                 Stroke="Black" StrokeThickness="1"/>
-                    </DataTemplate>
-                </agc:GraphPanel.DataTemplates>
-            </agc:GraphPanel>
-        </Border>
-    
-        <!-- Холст для дерева -->
-        <!-- <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="10" Margin="5" Grid.Row="2"> -->
-        <!--     <Canvas Name="treeCanvas"> -->
-        <!--         ~1~ Линии связей @1@ -->
-        <!--         ~1~ <ItemsControl ItemsSource="{Binding TreeEdges}"> @1@ -->
-        <!--         ~1~     <ItemsControl.ItemTemplate> @1@ -->
-        <!--         ~1~         <DataTemplate> @1@ -->
-        <!--         ~1~              @1@ -->
-        <!--         ~1~         </DataTemplate> @1@ -->
-        <!--         ~1~     </ItemsControl.ItemTemplate> @1@ -->
-        <!--         ~1~ </ItemsControl> @1@ -->
-        <!--         ~1~ @1@ -->
-        <!--         ~1~ <ItemsControl ItemsSource="{Binding TreeEdges}"> @1@ -->
-        <!--         ~1~     <ItemsControl.ItemsPanel> @1@ -->
-        <!--         ~1~         <ItemsPanelTemplate> @1@ -->
-        <!--         ~1~             <Canvas/> @1@ -->
-        <!--         ~1~         </ItemsPanelTemplate> @1@ -->
-        <!--         ~1~     </ItemsControl.ItemsPanel> @1@ -->
-        <!--         ~1~     <ItemsControl.ItemTemplate> @1@ -->
-        <!--         ~1~         <DataTemplate> @1@ -->
-        <!--         ~1~             <Line Stroke="Gray" StrokeThickness="1" @1@ -->
-        <!--         ~1~                   X1="{Binding X1}" Y1="{Binding Y1}" @1@ -->
-        <!--         ~1~                   X2="{Binding X2}" Y2="{Binding Y2}"/> @1@ -->
-        <!--         ~1~         </DataTemplate> @1@ -->
-        <!--         ~1~     </ItemsControl.ItemTemplate> @1@ -->
-        <!--         ~1~ </ItemsControl> @1@ -->
-        <!-- -->
-        <!--         ~1~ Узлы дерева @1@ -->
-        <!--         <ItemsControl ItemsSource="{Binding TreeNodes}"> -->
-        <!--             <ItemsControl.ItemTemplate> -->
-        <!--                 <DataTemplate> -->
-        <!--                     <Ellipse Width="20" Height="20" -->
-        <!--                              Fill="{Binding IsInPath, Converter={StaticResource BoolToBrushConverter}}" -->
-        <!--                              Stroke="Black" StrokeThickness="1" -->
-        <!--                              Canvas.Left="{Binding x, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-100}" -->
-        <!--                              Canvas.Top="{Binding y, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}"> -->
-        <!--                         <ToolTip.Tip> -->
-        <!--                             <TextBlock Text="{Binding node_id}"/> -->
-        <!--                         </ToolTip.Tip> -->
-        <!--                     </Ellipse> -->
-        <!--                 </DataTemplate> -->
-        <!--             </ItemsControl.ItemTemplate> -->
-        <!--         </ItemsControl> -->
-        <!--     </Canvas> -->
-        <!-- </Border> -->
-    
-    
-    </Grid>
 </Window>
-
-<!-- Canvas.Left="{Binding x, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}" -->
-<!-- Canvas.Top="{Binding y, Converter={StaticResource DoubleOffsetConverter}, ConverterParameter=-10}" -->

@@ -1,4 +1,6 @@
+using System.Linq;
 using Avalonia.Controls;
+using Avalonia.VisualTree;
 
 namespace task_2.Views;
 

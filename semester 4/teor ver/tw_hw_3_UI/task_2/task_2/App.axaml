@@ -12,12 +12,14 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
              
      <Application.Resources>
          <ResourceDictionary>
              <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
              <converters:DoubleOffsetConverter x:Key="DoubleOffsetConverter"/>
+             <converters:NullableDoubleConverter x:Key="NullableDoubleConverter"/>
          </ResourceDictionary>
      </Application.Resources>
 </Application>

@@ -10,7 +10,7 @@ public class simulation_engine
     public List<tree_node> simulate_point_movement(
         tree_node root,
         double[] transitionProbabilities, // массив вероятностей для детей (должен суммироваться в 1)
-        ref Dictionary<string, int> leafHits,
+        ref Dictionary<int, int> leafHits,
         ref Dictionary<int, int> pathLengths)
     {
         var path = new List<tree_node>();
