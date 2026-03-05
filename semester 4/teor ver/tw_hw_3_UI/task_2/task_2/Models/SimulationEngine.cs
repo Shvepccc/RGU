@@ -9,7 +9,7 @@ public class simulation_engine
 
     public List<tree_node> simulate_point_movement(
         tree_node root,
-        double[] transitionProbabilities, // массив вероятностей для детей (должен суммироваться в 1)
+        double[] transitionProbabilities,
         ref Dictionary<int, int> leafHits,
         ref Dictionary<int, int> pathLengths)
     {
@@ -19,11 +19,9 @@ public class simulation_engine
 
         while (current.children.Count > 0)
         {
-            // проверка остановки с вероятностью p
             if (_rng.NextDouble() < current.stop_probability)
                 break;
-
-            // выбор ребёнка согласно распределению
+            
             if (transitionProbabilities == null || transitionProbabilities.Length != current.children.Count)
                 throw new InvalidOperationException("Массив вероятностей должен соответствовать количеству детей.");
 
@@ -43,9 +41,8 @@ public class simulation_engine
             current = current.children[selectedIndex];
             path.Add(current);
         }
-
-        // обновление статистики
-        if (current.children.Count == 0) // дошли до листа
+        
+        if (current.children.Count == 0)
         {
             if (!leafHits.ContainsKey(current.node_id))
                 leafHits[current.node_id] = 0;

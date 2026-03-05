@@ -61,31 +61,4 @@ std::string poly_to_string(const std::vector<int>& poly)
     return result;
 }
 
-std::string poly_to_string(uint64_t poly, int n)
-{
-    if (poly == 0) return "0";
-    
-    std::string result;
-    bool first = true;
-    
-    for (int i = n-1; i >= 0; i--)
-    {
-        if (poly & (1 << i))
-        {
-            if (!first) result += " + ";
-            first = false;
-            
-            if (i == 0)
-                result += "1";
-            else if (i == 1)
-                result += "x";
-            else
-                result += "x^" + std::to_string(i);
-        }
-    }
-    
-    return result;
-}
-
-
 #endif

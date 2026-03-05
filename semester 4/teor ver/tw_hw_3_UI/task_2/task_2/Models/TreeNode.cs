@@ -10,5 +10,5 @@ public class tree_node
     public double y { get; set; }
     public double stop_probability { get; set; }
     public List<tree_node> children { get; set; } = new();
-    public bool IsInPath { get; set; } // помечает узел, вошедший в текущий путь
+    public bool IsInPath { get; set; }
 }

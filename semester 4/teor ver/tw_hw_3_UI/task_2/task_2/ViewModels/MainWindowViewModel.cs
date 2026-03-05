@@ -73,8 +73,7 @@ public partial class MainWindowViewModel : ViewModelBase
         public int pathId { get; set; }
         public double length { get; set; }
     }
-
-    // Статистика
+    
     private Dictionary<int, int> _leafHits = new();
     private Dictionary<int, int> _pathLengths = new();
     private int _totalExperiments = 0;
@@ -83,13 +82,11 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public IAsyncRelayCommand StartExperimentCommand { get; }
     public IRelayCommand ResetStatisticsCommand { get; }
-
-    // Строковое представление статистики для отображения
+    
     public string LeafHitsText => string.Join("\n", _leafHits.Select(kvp => $"Лист {kvp.Key}: {kvp.Value} раз"));
     public string PathLengthsText => string.Join("\n", _pathLengths.Select(kvp => $"Длина {kvp.Key}: {kvp.Value} раз"));
     public string TotalExperimentsText => $"Кол-во экспериментов:\n{_totalExperiments}";
     
-    // Добавлено: свойство для получения текущих вероятностей в виде массива double
     public double[] CurrentProbabilities => TransitionProbabilities?.Select(p => p.Value).ToArray() ?? Array.Empty<double>();
 
     public MainWindowViewModel()
@@ -117,14 +114,12 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         TransitionProbabilities = newProbs;
         
-        // Добавлено: подписка на изменения каждого элемента
         foreach (var prob in TransitionProbabilities)
         {
             prob.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == nameof(ProbabilityValue.Value))
                 {
-                    // Здесь можно добавить валидацию или уведомления при изменении
                     OnPropertyChanged(nameof(CurrentProbabilities));
                 }
             };
@@ -140,8 +135,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _leafHits.Clear();
                 _pathLengths.Clear();
                 _totalExperiments = 0;
-            
-                // Очищаем UI-коллекции через диспетчер
+                
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     LeafHitCollectonObservableCollection.Clear();
@@ -169,7 +163,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 
                 var engine = new simulation_engine();
                 
-                // Исправлено: получаем актуальные вероятности из UI
                 var probsArray = CurrentProbabilities;
                 
                 var path = engine.simulate_point_movement(root, probsArray, ref _leafHits, ref _pathLengths);
@@ -203,7 +196,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 foreach (var kvp in _pathLengths)
                     temp_2.Add(new PathLengthInfo(kvp.Key, (double)kvp.Value/_totalExperiments));
                 
-                // Обновляем статистику в UI потоке
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     LeafHitCollectonObservableCollection = 
@@ -224,7 +216,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void ResetStatistics()
     {
-        // Ваш код для сброса статистики
     }
     
     private void CollectNodesAndEdges(tree_node node, List<tree_node> nodes)
