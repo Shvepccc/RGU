@@ -1,0 +1,182 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_2.ViewModels"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:viewModels="clr-namespace:task_2.ViewModels"
+        xmlns:converters="clr-namespace:task_2.Converters"
+        x:Class="task_2.Views.MainWindow"
+        Title="Task 2"
+        Width="1200" Height="700"
+        MinWidth="1000" MinHeight="500"
+        x:DataType="viewModels:MainWindowViewModel">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="300, *, 250" Margin="15">
+        <!-- Левая панель - параметры -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5 0 10 0 ">
+            <StackPanel Grid.Column="0" Spacing="10" Margin="0 0 0 0">
+                <!-- Параметры -->
+                <Border BorderBrush="Navy" 
+                        BorderThickness="1" Padding="10"
+                        CornerRadius="5">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Параметры" FontSize="16" FontWeight="Bold"/>
+                
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Шаг h:"/>
+                            <NumericUpDown Value="{Binding H}" Minimum="0" Increment="0.1"/>
+                    
+                            <TextBlock Text="Количество шагов n:"/>
+                            <NumericUpDown Value="{Binding N}" Minimum="1" Increment="10"/>
+                    
+                            <TextBlock Text="Начальная Y:"/>
+                            <NumericUpDown Value="{Binding Y}" Increment="5"/>
+                    
+                            <TextBlock Text="Размер лога K:"/>
+                            <NumericUpDown Value="{Binding K}" Minimum="1" Increment="1"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Распределение -->
+                <Border BorderBrush="Navy" 
+                        BorderThickness="1" Padding="10"
+                        CornerRadius="5">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Распределение" FontSize="16" FontWeight="Bold"/>
+                        <ComboBox ItemsSource="{Binding Distributions}" 
+                                  SelectedItem="{Binding SelectedDistribution}"/>
+                        
+                        <!-- Равномерное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Равномерное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <StackPanel IsVisible="{Binding !UseSArray}">
+                                <TextBlock Text="Min:"/>
+                                <NumericUpDown Value="{Binding UniformMin}" Minimum="-10" Maximum="10" Increment="0.5"/>
+                                <TextBlock Text="Max:"/>
+                                <NumericUpDown Value="{Binding UniformMax}" Minimum="-10" Maximum="10" Increment="0.5"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <!-- Биномиальное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Биномиальное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Испытания:"/>
+                            <NumericUpDown Value="{Binding BinomialTrials}" Minimum="1" Maximum="20"/>
+                            <TextBlock Text="Вероятность:"/>
+                            <NumericUpDown Value="{Binding BinomialProbability}" Minimum="0" Maximum="1" Increment="0.05"/>
+                        </StackPanel>
+                        
+                        <!-- Геометрическое -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Геометрическое, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Вероятность:"/>
+                            <NumericUpDown Value="{Binding GeometricProbability}" Minimum="0.01" Maximum="0.99" Increment="0.05"/>
+                            <TextBlock Text="Смещение:"/>
+                            <NumericUpDown Value="{Binding GeometricOffset}" Minimum="0" Maximum="10"/>
+                        </StackPanel>
+                        
+                        <!-- Треугольное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Треугольное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Low:"/>
+                            <NumericUpDown Value="{Binding TriangularLow}" Minimum="-10" Maximum="10"/>
+                            <TextBlock Text="High:"/>
+                            <NumericUpDown Value="{Binding TriangularHigh}" Minimum="-10" Maximum="10"/>
+                            <TextBlock Text="Mode:"/>
+                            <NumericUpDown Value="{Binding TriangularMode}" Minimum="-10" Maximum="10"/>
+                        </StackPanel>
+                        
+                        <CheckBox Content="Использовать массив значений S" 
+                                  IsChecked="{Binding UseSArray}" Margin=" 0 0 0 0"/>
+                        
+                        <StackPanel>
+                            <TextBlock Text="Значения S (через запятую):"/>
+                            <TextBox Text="{Binding SArrayText}" 
+                                     Watermark="-2, -1, 0, 1, 2"
+                                     AcceptsReturn="False"
+                                     Padding="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                    <Button Content="Запуск" Command="{Binding RunCommand}" 
+                            Grid.Column="0" Padding="10" HorizontalAlignment="Stretch"
+                            Background="LightGreen" FontWeight="DemiBold"/>
+                    <Button Content="Сохранить config" Command="{Binding SaveConfigCommand}" 
+                            Grid.Column="1" Padding="10" HorizontalAlignment="Stretch"
+                            Background="#CCCCFF"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                    <Button Content="Стоп" Command="{Binding StopCommand}" 
+                            Grid.Column="0" Padding="10" HorizontalAlignment="Stretch"
+                            Background="LightCoral" FontWeight="DemiBold"/>
+                    <Button Content="Загрузить config" Command="{Binding LoadConfigCommand}" 
+                            Grid.Column="1" Padding="10" HorizontalAlignment="Stretch"
+                            Background="#CCCCFF"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- График -->
+        <Grid Grid.Column="1" RowDefinitions="*,Auto" Margin=" 0 5">
+            <lvc:CartesianChart Grid.Row="0" 
+                                Series="{Binding Series}"
+                                XAxes="{Binding XAxes}"
+                                YAxes="{Binding YAxes}"
+                                Margin="5"
+                                LegendPosition="Top"
+                                ZoomMode="Both"/>
+            
+            <Border Grid.Row="1" Background="LightGray" CornerRadius="5" Padding="10" >
+                <StackPanel Orientation="Horizontal" Spacing="20">
+                    <TextBlock Text="Результаты:" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock Text="{Binding CrossingCount, StringFormat=Пересечений: {0}}"/>
+                    <TextBlock Text="{Binding CrossingProbability, StringFormat=Вероятность L: {0:F4}}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        
+        <!-- Правая панель -->
+        <Border Grid.Column="2" BorderBrush="Navy" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
+            <Grid RowDefinitions="Auto,*,Auto,Auto">
+                <TextBlock Grid.Row="0" Text="Логи симуляций" FontWeight="Bold" FontSize="16" Margin="5"/>
+                
+                <ListBox Grid.Row="1" 
+                        ItemsSource="{Binding Logs}" 
+                        SelectedItem="{Binding SelectedLog}"
+                        Margin="0"
+                        CornerRadius="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#F0F0F0" CornerRadius="3" Padding="6" Margin="-4 -3 -4 -4">
+                                <TextBlock Text="{Binding DisplayText}" TextWrapping="Wrap"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <!-- F0F0F0 -->
+                
+                <Button Grid.Row="2" 
+                       Content="Показать на графике" 
+                       Command="{Binding ShowLogCommand}" 
+                       CommandParameter="{Binding SelectedLog}"
+                       Margin="0  10 0 10"
+                       Padding="10"
+                       HorizontalAlignment="Stretch"
+                       Background="LightBlue"
+                       IsEnabled="{Binding SelectedLog, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                
+                <Button Content="Очистить логи" Command="{Binding ClearLogsCommand}" 
+                        Grid.Row="3" Padding="10" HorizontalAlignment="Stretch"
+                        Background="CornflowerBlue"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

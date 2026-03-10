@@ -1,0 +1,219 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_5.ViewModels"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:viewModels="clr-namespace:task_5.ViewModels"
+        xmlns:converters="clr-namespace:task_5.Converters"
+        x:Class="task_5.Views.MainWindow"
+        Title="Task 5"
+        Width="1200" Height="750"
+        MinWidth="1100" MinHeight="500"
+        x:DataType="viewModels:MainWindowViewModel">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Window.Resources>
+        <converters:NullBlockerConverter x:Key="NullBlockerConverter"/>
+    </Window.Resources>
+
+    <Grid ColumnDefinitions="300, *, 270" Margin="15">
+        <!-- Левая панель - параметры -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="5 0 10 0">
+            <StackPanel Grid.Column="0" Spacing="10" Margin="0 0 0 0">
+                <!-- Основные параметры -->
+                <Border BorderBrush="Navy" 
+                        BorderThickness="1" Padding="10"
+                        CornerRadius="5">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Параметры симуляции" FontSize="16" FontWeight="Bold"/>
+                
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Длина всего отрезка M:"/>
+                            <NumericUpDown Value="{Binding M, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Increment="1"/>
+                            
+                            <TextBlock Text="Длина отрезка h:"/>
+                            <NumericUpDown Value="{Binding H, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0.1" Increment="0.1"/>
+                            
+                            <TextBlock Text="Базовый шаг τ:"/>
+                            <NumericUpDown Value="{Binding Tau, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Increment="1"/>
+                            
+                            <TextBlock Text="Максимальное значение n·τ:"/>
+                            <NumericUpDown Value="{Binding NTau, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Increment="1"/>
+                            
+                            <TextBlock Text="Количество генераций:"/>
+                            <NumericUpDown Value="{Binding GenerationCount, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Increment="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Распределение -->
+                <Border BorderBrush="Navy" 
+                        BorderThickness="1" Padding="10"
+                        CornerRadius="5">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="Распределения" FontSize="16" FontWeight="Bold"/>
+                        <ComboBox ItemsSource="{Binding Distributions}" 
+                                  SelectedItem="{Binding SelectedDistribution}"/>
+                        
+                        <!-- Равномерное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Равномерное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Минимальное значение:"/>
+                            <NumericUpDown Value="{Binding UniformMin, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="{Binding NTau}" Increment="1"/>
+                            <TextBlock Text="Максимальное значение:"/>
+                            <NumericUpDown Value="{Binding UniformMax, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="{Binding NTau}" Increment="1"/>
+                        </StackPanel>
+                        
+                        <!-- Биномиальное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Биномиальное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Количество испытаний:"/>
+                            <NumericUpDown Value="{Binding BinomialTrials, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Maximum="20"/>
+                            <TextBlock Text="Вероятность успеха:"/>
+                            <NumericUpDown Value="{Binding BinomialProbability, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="1" Increment="0.05"/>
+                        </StackPanel>
+                        
+                        <!-- Геометрическое -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Геометрическое, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Вероятность успеха:"/>
+                            <NumericUpDown Value="{Binding GeometricProbability, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0.01" Maximum="0.99" Increment="0.05"/>
+                            <TextBlock Text="Максимальное значение:"/>
+                            <NumericUpDown Value="{Binding GeometricMax, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="1" Maximum="{Binding NTau}" Increment="1"/>
+                        </StackPanel>
+                        
+                        <!-- Треугольное -->
+                        <StackPanel IsVisible="{Binding SelectedDistribution, ConverterParameter=Треугольное, 
+                            Converter={x:Static converters:EnumEqualsConverter.Instance}}">
+                            <TextBlock Text="Минимум:"/>
+                            <NumericUpDown Value="{Binding TriangularLow, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="{Binding NTau}"/>
+                            <TextBlock Text="Максимум:"/>
+                            <NumericUpDown Value="{Binding TriangularHigh, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="{Binding NTau}"/>
+                            <TextBlock Text="Мода:"/>
+                            <NumericUpDown Value="{Binding TriangularMode, 
+                                Converter={StaticResource NullBlockerConverter}}" 
+                                          Minimum="0" Maximum="{Binding NTau}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                    <Button Content="Старт" Command="{Binding GenerateCommand}" 
+                            Grid.Column="0" Padding="10" HorizontalAlignment="Stretch"
+                            Background="LightGreen" FontWeight="DemiBold"/>
+                    <Button Content="Сохранить config" Command="{Binding SaveConfigCommand}" 
+                            Grid.Column="1" Padding="10" HorizontalAlignment="Stretch"
+                            Background="#CCCCFF"/>
+                </Grid>
+                
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                    <Button Content="Стоп" Command="{Binding StopCommand}" 
+                            Grid.Column="0" Padding="10" HorizontalAlignment="Stretch"
+                            Background="LightCoral" FontWeight="DemiBold"/>
+                    <Button Content="Загрузить config" Command="{Binding LoadConfigCommand}" 
+                            Grid.Column="1" Padding="10" HorizontalAlignment="Stretch"
+                            Background="#CCCCFF"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- График -->
+        <Grid Grid.Column="1" RowDefinitions="*,Auto" Margin="10 5">
+            <lvc:CartesianChart Grid.Row="0" 
+                                Series="{Binding Series}"
+                                XAxes="{Binding XAxes}"
+                                YAxes="{Binding YAxes}"
+                                LegendPosition="Top"
+                                ZoomMode="Both"/>
+            
+            <Border Grid.Row="1" Background="LightGray" CornerRadius="5" Padding="10">
+                <StackPanel Orientation="Horizontal" Spacing="20">
+                    <TextBlock Text="Результаты:" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock Text="{Binding StrictlyIncreasingCount, StringFormat=Строго возрастающих: {0}}"/>
+                    <TextBlock Text="{Binding StrictlyIncreasingProbability, StringFormat=Вероятность: {0:F4}}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        
+        <!-- Правая панель - навигация -->
+        <Border Grid.Column="2" BorderBrush="Navy" BorderThickness="1" CornerRadius="5" Margin="5 5 0 5" Padding="10">
+            <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,Auto" RowSpacing="5">
+                <TextBlock Grid.Row="0" Text="Сгенерированные фигуры" FontWeight="Bold" FontSize="16"/>
+                
+                <ListBox Grid.Row="1" 
+                        ItemsSource="{Binding GeneratedFigures}" 
+                        SelectedItem="{Binding SelectedFigure}"
+                        CornerRadius="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="LightGray" CornerRadius="3" Padding="6" Margin="-4 -4 -4 -6">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding DisplayText}" TextWrapping="Wrap" FontWeight="Bold"/>
+                                    <!-- <TextBlock Text="{Binding StepValuesText}" TextWrapping="Wrap" FontSize="11"/> -->
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <!-- Пагинация с NumericUpDown -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="15" Margin=" 0 0 0 10">
+                    <TextBlock Grid.Row="2" Text="{Binding CurrentPageText}"
+                               FontSize="12"/>
+                    <TextBlock Grid.Row="4" 
+                               Text="{Binding PageInfoText}" 
+                               VerticalAlignment="Center" 
+                               FontSize="12"
+                               Foreground="Gray"/>
+                </StackPanel>
+                
+                <NumericUpDown Grid.Row="3" Value="{Binding CurrentPage,
+                    Converter={StaticResource NullBlockerConverter}}" 
+                    Minimum="1" 
+                    Maximum="{Binding TotalPages}"
+                    Increment="1"
+                    FormatString="0"
+                    HorizontalAlignment="Stretch"
+                    Margin=" 0 0 0 5"/>
+                
+                <Button Content="Показать на графике" 
+                        Command="{Binding ShowFigureCommand}" 
+                        CommandParameter="{Binding SelectedFigure}"
+                        Grid.Row="4"
+                        Padding="10"
+                        HorizontalAlignment="Stretch"
+                        Background="LightBlue"
+                        IsEnabled="{Binding SelectedFigure,
+                        Converter={x:Static ObjectConverters.IsNotNull}}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

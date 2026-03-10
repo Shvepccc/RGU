@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task_1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="task_1"
+        MinWidth="700" MinHeight="600">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="Auto, *" Margin="15">
+        <!-- Панель управления -->
+        <StackPanel Name="ControlPanel" Spacing="10" MinWidth="200">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Кол-во экспериментов:"/>
+                <NumericUpDown Value="{Binding CountExperiments}"
+                               Minimum="1" Increment="1"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="B:"/>
+                <NumericUpDown Value="{Binding B}"
+                               Minimum="1"/>
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="p:"/>
+                <NumericUpDown Value="{Binding P}"
+                               Minimum="0" Maximum="1" Increment="0.05" FormatString="0.00##"/>
+            </StackPanel>
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="q:"/>
+                <NumericUpDown Value="{Binding Q}"
+                               Minimum="0" Maximum="1" Increment="0.05" FormatString="0.00##"/>
+            </StackPanel>
+
+
+            <Grid ColumnDefinitions="*, Auto">
+                <Button Content="Старт" Command="{Binding StartExperimentCommand}"
+                        HorizontalAlignment="Stretch" Margin="0 0 10 0 "
+                        HorizontalContentAlignment="Center"/>
+                <CheckBox Grid.Column="1" Content="Ускорить"
+                          IsChecked="{Binding FastMode}"/>
+            </Grid>
+            
+            <Border Grid.Row="2" 
+                    Background="{DynamicResource ThemeBackgroundBrush}"
+                    CornerRadius="5" >
+                
+                <Grid RowDefinitions="*,*,*,*,*">
+                    <!-- Прогресс экспериментов -->
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10 0">
+                        <TextBlock Text="Прогресс: " FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CompletedExperiments, StringFormat=0}"/>
+                        <!-- <TextBlock Text="{Binding CountExperiments, StringFormat=/{0}}"/> -->
+                    </StackPanel>
+                    
+                    <!-- Бесконечность -->
+                    <Border Grid.Row="1" Margin="5" Padding="10" 
+                            Background="#F0FFF0" CornerRadius="5">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Бесконечность " FontWeight="Bold" Foreground="#388E3C"/>
+                                <TextBlock Text="{Binding InfinityPercent, StringFormat={}{0:F1}%}" 
+                                           FontSize="14" FontWeight="Bold" Foreground="#388E3C"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding InfinityCount, StringFormat=Кол-во: {0}}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Кафе -->
+                    <Border Grid.Row="2" Margin="5" Padding="10" 
+                            Background="#F0F0FF" CornerRadius="5">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Кафе " FontWeight="Bold" Foreground="#1976D2"/>
+                                <TextBlock Text="{Binding CafePercent, StringFormat={}{0:F1}%}" 
+                                           FontSize="14" FontWeight="Bold" Foreground="#1976D2"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding CafeCount, StringFormat=Кол-во: {0}}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Обрыв -->
+                    <Border Grid.Row="3" Margin="5" Padding="10" 
+                            Background="#FFF0F0" CornerRadius="5">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Обрыв " FontWeight="Bold" Foreground="#D32F2F"/>
+                                <TextBlock Text="{Binding CliffPercent, StringFormat={}{0:F1}%}" 
+                                           FontSize="14" FontWeight="Bold" Foreground="#D32F2F"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding CliffCount, StringFormat=Кол-во: {0}}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <lvc:CartesianChart Grid.Column="1" Series="{Binding Series}"
+                            ZoomMode="None"
+                            TooltipPosition="Hidden"
+                            Sections="{Binding Sections}"
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}"/>
+    </Grid>
+    
+</Window>
