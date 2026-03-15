@@ -12,7 +12,7 @@ const std::string INPUT_FILE = "test_data/gf.mp4";
 const std::string ENC_FILE = "test_enc.bin";
 const std::string DEC_FILE = "test_dec.mp4";
 
-const cipher_mode_type MODE = cipher_mode_type::CTR;
+const cipher_mode_type MODE = cipher_mode_type::CFB;
 const padding_mode_type PADDING = padding_mode_type::PKCS7;
 const size_t BLOCK_SIZE = 8;
 const size_t THREADS_COUNT = 12;
