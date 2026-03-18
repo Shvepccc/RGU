@@ -26,7 +26,7 @@ double newton_method(
     info.approximations.clear();
     info.approximations.push_back(x);
     
-    for (int i = 0; i < maxIter; ++i)
+    while (true)
     {
         double fx = f(x);
         double dfx = df(x);
@@ -48,7 +48,7 @@ double newton_method(
         info.approximations.push_back(x1);
         ++info.iterations;
         
-        if (std::fabs(x1 - x) < eps * std::max(1.0, std::fabs(x)) || 
+        if (std::fabs(x1 - x) < eps ||  //* std::max(1.0, std::fabs(x))
             std::fabs(fx) < eps)
         {
             info.root = x1;

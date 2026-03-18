@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <functional>
 #include <cmath>
 #include <algorithm>
 #include <iomanip>
@@ -31,21 +30,17 @@ double df(double x)
 int main()
 {
     std::vector<double> initial_guesses = {0.9, 2.1, 2.9};
-    std::vector<RootInfo> results;
+    std::vector<NewtonRootInfo> results;
     double eps = 1e-12;
-    int maxIter = 1000;
     
     std::cout << "Поиск первых трех положительных корней уравнения" << std::endl;
     std::cout << "(x-1)^3 * sin(pi*x) * (cos(2pi*x) - 1) = 0" << std::endl;
     std::cout << std::endl;
-    std::cout << "Аналитически корни должны быть: x = 1, 2, 3" << std::endl;
-    std::cout << std::endl;
     
     for (size_t i = 0; i < initial_guesses.size(); ++i)
     {
-        RootInfo info;
-        double root = newton_method(
-            f, df, initial_guesses[i], eps, maxIter, info);
+        NewtonRootInfo info;
+        double root = newton_method(f, df, initial_guesses[i], eps, 0, info);
         
         if (!std::isnan(root))
         {
@@ -54,7 +49,7 @@ int main()
     }
     
     std::sort(results.begin(), results.end(), 
-        [](const RootInfo& a, const RootInfo& b) { return a.root < b.root; });
+        [](const NewtonRootInfo& a, const NewtonRootInfo& b) { return a.root < b.root; });
     
     for (size_t i = 0; i < results.size() && i < 3; ++i)
     {
@@ -63,7 +58,6 @@ int main()
         std::cout << "Корень " << i + 1 << ": x = " << std::setprecision(6) 
                   << results[i].root << std::endl;
         std::cout << "Итераций: " << results[i].iterations << std::endl;
-        std::cout << "Значение функции: " << f(results[i].root) << std::endl;
         std::cout << "Начальное приближение: " << results[i].approximations[0] << std::endl;
         
         std::cout << "Первые 5 приближений: ";
