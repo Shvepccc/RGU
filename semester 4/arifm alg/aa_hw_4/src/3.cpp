@@ -8,35 +8,30 @@
 
 namespace polynomial_utils {
     
-    // Проверка на ноль
     template<typename T>
     bool isZero(const T& v) { return v == T{}; }
     
     template<typename U>
     bool isZero(const std::complex<U>& v) { return v == std::complex<U>{}; }
     
-    // Проверка на единицу
     template<typename T>
     bool isOne(const T& v) { return v == T{1}; }
     
     template<typename U>
     bool isOne(const std::complex<U>& v) { return v == std::complex<U>{1, 0}; }
     
-    // Проверка на отрицательность (для определения знака при выводе)
     template<typename T>
     bool isNegative(const T& v) { return v < T{}; }
     
     template<typename U>
     bool isNegative(const std::complex<U>& v) { return v.real() < 0; }
     
-    // Получение абсолютного значения
     template<typename T>
     T absValue(const T& v) { return v < T{} ? -v : v; }
     
     template<typename U>
     std::complex<U> absValue(const std::complex<U>& v) { return v; }
     
-    // Возведение в степень
     template<typename T>
     T power(const T& base, int exp) {
         if (exp == 0) return T{1};
@@ -53,7 +48,6 @@ namespace polynomial_utils {
         return res;
     }
     
-    // Вывод коэффициента в поток
     template<typename T>
     void printCoeff(std::ostream& os, const T& coeff, bool needCoeff) {
         if (needCoeff) os << coeff;
@@ -62,7 +56,6 @@ namespace polynomial_utils {
     template<typename U>
     void printCoeff(std::ostream& os, const std::complex<U>& coeff, bool needCoeff) {
         if (needCoeff) {
-            // Печатаем комплексное число в формате a+bi
             os << coeff;
         }
     }
@@ -513,14 +506,8 @@ public:
 
     Polynomial operator+(const Polynomial& other) const
     {
-        if (vars.size() != other.vars.size())
-        {
-            throw std::invalid_argument("Cannot add polynomials with different number of variables");
-        }
-
-        Polynomial result(*this);
-        result.addNodes(result.root, other.root);
-        result.removeZeroCoefficients(result.root);
+        Polynomial result = *this;
+        result += other;
         return result;
     }
 
@@ -534,18 +521,26 @@ public:
 
     Polynomial operator-(const Polynomial& other) const
     {
-        if (vars.size() != other.vars.size())
-        {
-            throw std::invalid_argument("Cannot subtract polynomials with different number of variables");
-        }
-
-        Polynomial result(*this);
-        result.subNodes(result.root, other.root);
-        result.removeZeroCoefficients(result.root);
+        Polynomial result = *this;
+        result -= other;
         return result;
     }
 
     Polynomial operator*(const Polynomial& other) const
+    {
+        Polynomial result = *this;
+        result *= other;
+        return result;
+    }
+
+    Polynomial operator*(const T& scalar) const
+    {
+        Polynomial result = *this;
+        result *= scalar;
+        return result;
+    }
+
+    Polynomial& operator*=(const Polynomial& other)
     {
         if (vars.size() != other.vars.size())
         {
@@ -576,15 +571,15 @@ public:
         }
 
         result.removeZeroCoefficients(result.root);
-        return result;
+        *this = std::move(result);
+        return *this;
     }
 
-    Polynomial operator*(const T& scalar) const
+    Polynomial& operator*=(const T& scalar)
     {
-        Polynomial result(*this);
-        result.scale(result.root, scalar);
-        result.removeZeroCoefficients(result.root);
-        return result;
+        scale(root, scalar);
+        removeZeroCoefficients(root);
+        return *this;
     }
 
     friend Polynomial operator*(const T& scalar, const Polynomial& p)
@@ -594,25 +589,23 @@ public:
 
     Polynomial& operator+=(const Polynomial& other)
     {
-        *this = *this + other;
+        if (vars.size() != other.vars.size())
+        {
+            throw std::invalid_argument("Cannot add polynomials with different number of variables");
+        }
+        addNodes(root, other.root);
+        removeZeroCoefficients(root);
         return *this;
     }
 
     Polynomial& operator-=(const Polynomial& other)
     {
-        *this = *this - other;
-        return *this;
-    }
-
-    Polynomial& operator*=(const Polynomial& other)
-    {
-        *this = *this * other;
-        return *this;
-    }
-
-    Polynomial& operator*=(const T& scalar)
-    {
-        *this = *this * scalar;
+        if (vars.size() != other.vars.size())
+        {
+            throw std::invalid_argument("Cannot subtract polynomials with different number of variables");
+        }
+        subNodes(root, other.root);
+        removeZeroCoefficients(root);
         return *this;
     }
 
@@ -742,13 +735,13 @@ int main() {
         std::vector<std::string> vars2 = {"x", "y"};
         Polynomial<double> p(vars2), q(vars2);
 
-        p.addTerm({2, 1}, 3.5);   // 3.5 x^2 y
-        p.addTerm({0, 1}, 2.3);   // 2.3 y
-        p.addTerm({1, 0}, 1.7);   // 1.7 x
+        p.addTerm({2, 1}, 3.5);
+        p.addTerm({0, 1}, 2.3);
+        p.addTerm({1, 0}, 1.7);
 
-        q.addTerm({1, 0}, 4.0);   // 4 x
-        q.addTerm({0, 1}, -2.0);  // -2 y
-        q.addTerm({0, 0}, 5.0);   // 5
+        q.addTerm({1, 0}, 4.0);
+        q.addTerm({0, 1}, -2.0);
+        q.addTerm({0, 0}, 5.0);
 
         std::cout << "=== Демонстрация для double (2 переменные) ===\n";
         std::cout << "p = " << p << "\n";
@@ -787,7 +780,7 @@ int main() {
         inhomogeneous.addTerm({2, 0}, 1.0);
         inhomogeneous.addTerm({1, 1}, 2.0);
         inhomogeneous.addTerm({0, 2}, 3.0);
-        inhomogeneous.addTerm({0, 0}, 5.0);  // свободный член
+        inhomogeneous.addTerm({0, 0}, 5.0);
 
         std::cout << "\n=== Однородность ===\n";
         std::cout << "h = " << homogeneous << "\n";
@@ -814,9 +807,9 @@ int main() {
         r.addTerm({2, 1, 0}, 5);
 
         Polynomial<int> s(vars3);
-        s.addTerm({1, 0, 2}, 3);   // одинаковый член
+        s.addTerm({1, 0, 2}, 3);
         s.addTerm({0, 2, 1}, 1);
-        s.addTerm({0, 0, 1}, 4);   // c
+        s.addTerm({0, 0, 1}, 4);
 
         std::cout << "\n=== Многочлены от трёх переменных (int) ===\n";
         std::cout << "r = " << r << "\n";
@@ -833,9 +826,9 @@ int main() {
         // -------------------------------------------------------------
         std::vector<std::string> vars1 = {"z"};
         Polynomial<std::complex<double>> f(vars1);
-        f.addTerm({2}, std::complex<double>{1.0, 1.0});   // (1+i) z^2
-        f.addTerm({1}, std::complex<double>{2.0, -1.0});  // (2-i) z
-        f.addTerm({0}, std::complex<double>{0.0, 3.0});   // 3i
+        f.addTerm({2}, std::complex<double>{1.0, 1.0});
+        f.addTerm({1}, std::complex<double>{2.0, -1.0});
+        f.addTerm({0}, std::complex<double>{0.0, 3.0});
 
         std::cout << "\n=== Многочлен от одной переменной (комплексные) ===\n";
         std::cout << "f(z) = " << f << "\n";
@@ -848,13 +841,13 @@ int main() {
         std::vector<std::string> vars_mod = {"uppi", "vappi"};
         Polynomial<Modular<7>> A(vars_mod), B(vars_mod);
 
-        A.addTerm({2, 1}, Modular<7>(3));   // 3 u^2 v
-        A.addTerm({0, 1}, Modular<7>(2));   // 2 v
-        A.addTerm({1, 0}, Modular<7>(1));   // u
+        A.addTerm({2, 1}, Modular<7>(3));
+        A.addTerm({0, 1}, Modular<7>(2));
+        A.addTerm({1, 0}, Modular<7>(1));
 
-        B.addTerm({1, 0}, Modular<7>(4));   // 4 u
-        B.addTerm({0, 1}, Modular<7>(5));   // 5 v  (это -2 по модулю 7)
-        B.addTerm({0, 0}, Modular<7>(5));   // 5
+        B.addTerm({1, 0}, Modular<7>(4));
+        B.addTerm({0, 1}, Modular<7>(5));
+        B.addTerm({0, 0}, Modular<7>(5));
 
         std::cout << "\n=== Многочлены над Z/7Z ===\n";
         std::cout << "A = " << A << "\n";
@@ -874,29 +867,23 @@ int main() {
         std::cout << "Нулевой многочлен: " << zero << " (isZero? " << zero.isZero() << ")\n";
         std::cout << "supp(zero) размер: " << zero.supp().size() << "\n";
 
-        // Сложение с нулём
         std::cout << "p + zero = " << p + zero << "\n";
 
-        // Однородность нулевого многочлена (традиционно считается однородным любой степени,
-        // но наш код вернёт -1, так как нет ненулевых членов — это приемлемо)
         std::cout << "zero.isHomogeneous() = " << zero.isHomogeneous() << "\n";
         std::cout << "zero.homogeneousDegree() = " << zero.homogeneousDegree() << "\n";
 
-        // Проверка на исключения (неправильное количество переменных при добавлении члена)
         try {
-            zero.addTerm({1, 0, 1}, 5.0);  // 3 переменные, а ожидается 2
+            zero.addTerm({1, 0, 1}, 5.0);
         } catch (const std::exception& e) {
             std::cout << "Ожидаемое исключение при addTerm: " << e.what() << "\n";
         }
 
-        // Отрицательные степени не допускаются
         try {
             p.addTerm({-1, 2}, 1.0);
         } catch (const std::exception& e) {
             std::cout << "Ожидаемое исключение (отрицательная степень): " << e.what() << "\n";
         }
 
-        // Сложение многочленов с разным числом переменных
         Polynomial<double> oneVar(vars1);
         try {
             p + oneVar;
@@ -926,7 +913,6 @@ int main() {
 
         Polynomial<double> complexPoly(many_vars);
 
-        // Добавляем члены с разными степенями (суммарные степени: 0, 2, 3, 4, 5, 6)
         complexPoly.addTerm({0, 0, 0, 0, 0, 0, 0}, 3.14159);
         complexPoly.addTerm({2, 0, 1, 0, 0, 0, 0}, 2.71828);
         complexPoly.addTerm({0, 1, 0, 1, 0, 0, 0}, 1.41421);
@@ -945,7 +931,6 @@ int main() {
         std::cout << "Многочлен от 7 переменных:\n";
         std::cout << complexPoly << "\n\n";
 
-        // Вывод носителя сгруппированно по суммарным степеням
         std::cout << "Носитель (supp) с группировкой по суммарной степени:\n";
         auto supp_complex = complexPoly.supp();
         std::map<int, std::vector<std::pair<std::vector<int>, double>>> byDegree;
@@ -974,18 +959,15 @@ int main() {
         }
         std::cout << "\n";
 
-        // Проверка однородности (ожидаем false, так как степени разные)
         std::cout << "Многочлен однороден? " << (complexPoly.isHomogeneous() ? "да" : "нет") << "\n";
         std::cout << "Степень однородности: " << complexPoly.homogeneousDegree() << "\n";
 
-        // Выделение однородных компонент для всех присутствующих степеней
         std::cout << "\nОднородные компоненты:\n";
         for (const auto& [deg, _] : byDegree) {
             auto component = complexPoly.homogeneousComponent(deg);
             std::cout << "  Компонента степени " << deg << ": " << component << "\n";
         }
 
-        // Проверка, что сумма всех компонент даёт исходный многочлен
         Polynomial<double> sumComponents(many_vars);
         for (const auto& [deg, _] : byDegree) {
             sumComponents = sumComponents + complexPoly.homogeneousComponent(deg);
@@ -994,7 +976,6 @@ int main() {
         std::cout << "Сумма компонент == исходный многочлен? " 
                 << (sumComponents == complexPoly ? "ДА" : "НЕТ") << "\n";
 
-        // Вычисление значения в случайной точке (все переменные = 1.0)
         std::vector<double> point7(many_vars.size(), 1.0);
         std::cout << "\nЗначение в точке (1,1,1,1,1,1,1): " 
                 << complexPoly.evaluate(point7) << "\n";
@@ -1003,19 +984,16 @@ int main() {
         for (const auto& term : supp_complex) expected += term.second;
         std::cout << expected << "\n";
 
-        // Вычисление в другой точке
         std::vector<double> point7b = {2.0, 3.0, 1.5, 0.5, 2.5, 1.0, 4.0};
         std::cout << "Значение в точке (2,3,1.5,0.5,2.5,1,4): " 
                 << complexPoly.evaluate(point7b) << "\n";
 
-        // Проверка арифметических операций на сложном многочлене
         std::cout << "\nПроверка операций с самим собой:\n";
         auto doubled = complexPoly + complexPoly;
         std::cout << "f + f = " << doubled << "\n";
         auto squared = complexPoly * complexPoly;
         std::cout << "Количество членов в f*f: " << squared.supp().size() << "\n";
 
-        // Умножение на скаляр
         auto scaled = complexPoly * 2.5;
         std::cout << "f * 2.5 = " << scaled << "\n";
 
