@@ -2,11 +2,8 @@
 #include <string>
 #include <vector>
 #include <random>
-#include <algorithm>
-#include <cmath>
 #include <iomanip>
 #include <limits>
-#include <numeric>
 
 std::string generate_text(size_t length, const std::vector<double>& freqs)
 {

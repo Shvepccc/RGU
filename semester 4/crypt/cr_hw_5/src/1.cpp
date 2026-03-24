@@ -6,7 +6,7 @@
 int main()
 {
     std::cout << "=== Legendre symbol ===\n";
-    std::cout << "(2/7) = " << legendre_symbol(2, 7) << "\n";
+    std::cout << "(2/7) = " << legendre_symbol(5, 10) << "\n";
     std::cout << "(3/7) = " << legendre_symbol(3, 7) << "\n";
     std::cout << "(0/5) = " << legendre_symbol(0, 5) << "\n";
     std::cout << "(-1/13) = " << legendre_symbol(-1, 13) << "\n";
