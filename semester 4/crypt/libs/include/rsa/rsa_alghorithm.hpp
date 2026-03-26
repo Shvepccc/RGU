@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdexcept>
 #include <cstring>
+#include "../paddings/pkcs7_padding.hpp"
 
 class rsa_cipher
 {
@@ -12,7 +13,7 @@ private:
     uint64_t n;
     uint64_t e;
     uint64_t d;
-    size_t block_size;
+    std::size_t block_size;
 
     uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t mod)
     {
@@ -35,16 +36,15 @@ private:
         return result;
     }
 
-    size_t calculate_block_size(uint64_t modulus)
+    std::size_t calculate_rsa_block_size(uint64_t modulus)
     {
-        size_t bits = 0;
+        std::size_t bits = 0;
         uint64_t temp = modulus;
         while (temp > 0)
         {
             ++bits;
             temp >>= 1;
         }
-        
         return (bits - 1) / 8;
     }
 
@@ -52,7 +52,7 @@ public:
     rsa_cipher(uint64_t public_key, uint64_t modulus)
         : n(modulus), e(public_key), d(0)
     {
-        block_size = calculate_block_size(n);
+        block_size = calculate_rsa_block_size(n);
         if (block_size == 0)
         {
             throw std::runtime_error("Block size too small");
@@ -62,7 +62,7 @@ public:
     rsa_cipher(uint64_t public_key, uint64_t private_key, uint64_t modulus)
         : n(modulus), e(public_key), d(private_key)
     {
-        block_size = calculate_block_size(n);
+        block_size = calculate_rsa_block_size(n);
         if (block_size == 0)
         {
             throw std::runtime_error("Block size too small");
@@ -71,27 +71,21 @@ public:
 
     std::vector<uint64_t> encrypt(const std::vector<uint8_t>& data)
     {
+        pkcs7_padding rsa_pad;
+        std::vector<uint8_t> padded_data = rsa_pad.pad(data, block_size);
         std::vector<uint64_t> result;
-        
-        for (size_t i = 0; i < data.size(); i += block_size)
+
+        for (std::size_t i = 0; i < padded_data.size(); i += block_size)
         {
-            uint64_t block = 0;
-            size_t bytes_to_read = std::min(block_size, data.size() - i);
-            
-            for (size_t j = 0; j < bytes_to_read; ++j)
+            uint64_t block_val = 0;
+            for (std::size_t j = 0; j < block_size; ++j)
             {
-                block = (block << 8) | data[i + j];
+                block_val = (block_val << 8) | padded_data[i + j];
             }
-            
-            if (block >= n)
-            {
-                throw std::runtime_error("Block value exceeds modulus");
-            }
-            
-            uint64_t encrypted_block = mod_pow(block, e, n);
-            result.push_back(encrypted_block);
+
+            result.push_back(mod_pow(block_val, e, n));
         }
-        
+
         return result;
     }
 
@@ -101,29 +95,21 @@ public:
         {
             throw std::runtime_error("Private key not available for decryption");
         }
-        
-        std::vector<uint8_t> result;
-        
-        for (uint64_t block : encrypted_data)
+
+        std::vector<uint8_t> padded_data;
+        for (uint64_t encrypted_val : encrypted_data)
         {
-            uint64_t decrypted_block = mod_pow(block, d, n);
-            
-            size_t bytes_to_extract = block_size;
-            uint64_t mask = 0xFF;
-            
-            for (size_t i = 0; i < bytes_to_extract; ++i)
+            uint64_t decrypted_val = mod_pow(encrypted_val, d, n);
+
+            for (std::size_t i = 0; i < block_size; ++i)
             {
-                uint8_t byte = static_cast<uint8_t>((decrypted_block >> (8 * (bytes_to_extract - 1 - i))) & mask);
-                result.push_back(byte);
+                uint8_t byte = static_cast<uint8_t>((decrypted_val >> (8 * (block_size - 1 - i))) & 0xFF);
+                padded_data.push_back(byte);
             }
         }
-        
-        while (!result.empty() && result.back() == 0)
-        {
-            result.pop_back();
-        }
-        
-        return result;
+
+        pkcs7_padding rsa_pad;
+        return rsa_pad.unpad(padded_data, block_size);
     }
 
     void encrypt_file(const std::string& input_file, const std::string& output_file)
@@ -133,19 +119,19 @@ public:
         {
             throw std::runtime_error("Cannot open input file");
         }
-        
+
         std::vector<uint8_t> data((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
         in.close();
-        
+
         std::vector<uint64_t> encrypted = encrypt(data);
-        
+
         std::ofstream out(output_file, std::ios::binary);
         if (!out.is_open())
         {
             throw std::runtime_error("Cannot open output file");
         }
-        
-        size_t count = encrypted.size();
+
+        std::size_t count = encrypted.size();
         out.write(reinterpret_cast<const char*>(&count), sizeof(count));
         out.write(reinterpret_cast<const char*>(encrypted.data()), encrypted.size() * sizeof(uint64_t));
         out.close();
@@ -157,28 +143,28 @@ public:
         {
             throw std::runtime_error("Private key not available for decryption");
         }
-        
+
         std::ifstream in(input_file, std::ios::binary);
         if (!in.is_open())
         {
             throw std::runtime_error("Cannot open input file");
         }
-        
-        size_t count;
+
+        std::size_t count;
         in.read(reinterpret_cast<char*>(&count), sizeof(count));
-        
+
         std::vector<uint64_t> encrypted(count);
         in.read(reinterpret_cast<char*>(encrypted.data()), count * sizeof(uint64_t));
         in.close();
-        
+
         std::vector<uint8_t> decrypted = decrypt(encrypted);
-        
+
         std::ofstream out(output_file, std::ios::binary);
         if (!out.is_open())
         {
             throw std::runtime_error("Cannot open output file");
         }
-        
+
         out.write(reinterpret_cast<const char*>(decrypted.data()), decrypted.size());
         out.close();
     }

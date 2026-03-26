@@ -86,37 +86,16 @@ private:
 
     bool wiener_attack_check(uint64_t p, uint64_t q)
     {
-        uint64_t n = p * q;
-        uint64_t phi_n = (p - 1) * (q - 1);
-        
         uint64_t e = 65537;
-        while (e < phi_n)
-        {
-            if (::gcd(e, phi_n) == 1)
-            {
-                break;
-            }
-            ++e;
-        }
+        uint64_t n = p * q;
         
+        uint64_t dw = static_cast<uint64_t>(std::pow(n, 0.25) / 3);
+    
+        uint64_t phi_n = (p - 1) * (q - 1);
+
         uint64_t d = mod_inverse(e, phi_n);
         
-        if (d == 0)
-        {
-            return true;
-        }
-        
-        uint64_t k = e * d - 1;
-        if (k % phi_n != 0)
-        {
-            return true;
-        }
-        
-        k /= phi_n;
-        
-        uint64_t d_approx = static_cast<uint64_t>(std::pow(n, 0.25) / 3);
-        
-        if (d < d_approx)
+        if (d < dw)
         {
             return false;
         }
@@ -124,7 +103,7 @@ private:
         return true;
     }
 
-public:
+public: 
     struct rsa_key_pair
     {
         uint64_t public_key;

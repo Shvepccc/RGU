@@ -7,7 +7,7 @@ public class Task6 : ITask
     public void Run(string[] args)
     {
         Random rnd = new Random();
-        int experiments = 10000;
+        int experiments = 1000000;
         double p = 0.5;
         
         int countFirst = 0;
