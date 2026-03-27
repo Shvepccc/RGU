@@ -8,21 +8,24 @@
 #include <cmath>
 #include <cstdint>
 #include <random>
+#include <boost/multiprecision/cpp_int.hpp>
+
+using bigint = boost::multiprecision::cpp_int;
 
 class i_primality_test
 {
 public:
     virtual ~i_primality_test() = default;
-    virtual bool is_prime(uint64_t n, double min_probability) = 0;
+    virtual bool is_prime(bigint n, double min_probability) = 0;
 };
 
 class probabilistic_primality_test : public i_primality_test
 {
 protected:
-    virtual bool single_iteration(uint64_t n) = 0;
+    virtual bool single_iteration(bigint n) = 0;
 
 public:
-    bool is_prime(uint64_t n, double min_probability) override
+    bool is_prime(bigint n, double min_probability) override
     {
         if (n < 2) return false;
         if (n == 2 || n == 3) return true;

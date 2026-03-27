@@ -7,6 +7,11 @@
 #include <stdexcept>
 #include <algorithm>
 #include <cmath>
+#include <boost/multiprecision/cpp_int.hpp>
+#include <boost/random.hpp> 
+
+using bigint = boost::multiprecision::cpp_int;
+using boost_dist = boost::random::uniform_int_distribution<bigint>;
 
 class rsa_key_generator
 {
@@ -15,7 +20,7 @@ private:
     double min_probability;
     size_t prime_bits;
 
-    bool is_prime(uint64_t n)
+    bool is_prime(bigint n)
     {
         if (n < 2) return false;
         if (n == 2 || n == 3) return true;
@@ -25,14 +30,14 @@ private:
         return mr_test.is_prime(n, min_probability);
     }
 
-    uint64_t generate_random_prime()
+    bigint generate_random_prime()
     {
-        std::uniform_int_distribution<uint64_t> dist(
-            static_cast<uint64_t>(1) << (prime_bits - 1),
-            (static_cast<uint64_t>(1) << prime_bits) - 1
+        boost_dist dist(
+            static_cast<bigint>(1) << (prime_bits - 1),
+            (static_cast<bigint>(1) << prime_bits) - 1
         );
         
-        uint64_t candidate;
+        bigint candidate;
         do
         {
             candidate = dist(gen);
@@ -41,14 +46,14 @@ private:
         return candidate;
     }
 
-    uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t mod)
+    bigint mod_mul(bigint a, bigint b, bigint mod)
     {
-        return static_cast<uint64_t>((static_cast<__uint128_t>(a) * b) % mod);
+        return (a * b) % mod;
     }
 
-    uint64_t mod_pow_secure(uint64_t base, uint64_t exp, uint64_t mod)
+    bigint mod_pow_secure(bigint base, bigint exp, bigint mod)
     {
-        uint64_t result = 1;
+        bigint result = 1;
         base %= mod;
         while (exp > 0)
         {
@@ -62,19 +67,21 @@ private:
         return result;
     }
 
-    bool fermat_attack_check(uint64_t p, uint64_t q)
+    bool fermat_attack_check(bigint p, bigint q)
     {
-        uint64_t n = p * q;
-        uint64_t sqrt_n = static_cast<uint64_t>(std::sqrt(n));
+        bigint n = p * q;
+        bigint sqrt_n = boost::multiprecision::sqrt(n);
         
-        for (uint64_t a = sqrt_n - 10; a <= sqrt_n + 10; ++a)
+        for (bigint a = sqrt_n - 10; a <= sqrt_n + 10; ++a)
         {
-            uint64_t b_squared = a * a - n;
-            uint64_t b = static_cast<uint64_t>(std::sqrt(b_squared));
+            bigint b_squared = a * a - n;
+            if (b_squared < 0) continue;
+            
+            bigint b = boost::multiprecision::sqrt(b_squared);
             if (b * b == b_squared)
             {
-                uint64_t p_candidate = a - b;
-                uint64_t q_candidate = a + b;
+                bigint p_candidate = a - b;
+                bigint q_candidate = a + b;
                 if (p_candidate == p || p_candidate == q)
                 {
                     return false;
@@ -84,16 +91,17 @@ private:
         return true;
     }
 
-    bool wiener_attack_check(uint64_t p, uint64_t q)
+    bool wiener_attack_check(bigint p, bigint q)
     {
-        uint64_t e = 65537;
-        uint64_t n = p * q;
+        bigint e = 65537;
+        bigint n = p * q;
         
-        uint64_t dw = static_cast<uint64_t>(std::pow(n, 0.25) / 3);
+        bigfloat n_f = n.convert_to<bigfloat>();
+        bigint dw = static_cast<bigint>(boost::multiprecision::pow(n_f, 0.25) / 3.0);
     
-        uint64_t phi_n = (p - 1) * (q - 1);
+        bigint phi_n = (p - 1) * (q - 1);
 
-        uint64_t d = mod_inverse(e, phi_n);
+        bigint d = mod_inverse(e, phi_n);
         
         if (d < dw)
         {
@@ -106,30 +114,30 @@ private:
 public: 
     struct rsa_key_pair
     {
-        uint64_t public_key;
-        uint64_t private_key;
-        uint64_t modulus;
+        bigint public_key;
+        bigint private_key;
+        bigint modulus;
     };
 
     rsa_key_generator(size_t bits, double prob) 
         : gen(std::random_device{}()), min_probability(prob), prime_bits(bits)
     {
-        if (bits < 8 || bits > 32)
+        if (bits < 8 || bits > 4096)
         {
-            throw std::invalid_argument("Prime bits must be between 8 and 32");
+            throw std::invalid_argument("Prime bits must be between 8 and 4096");
         }
     }
 
     rsa_key_pair generate_keys()
     {
-        uint64_t p, q;
+        bigint p, q;
         
         do
         {
             p = generate_random_prime();
             q = generate_random_prime();
         } while (p == q);
-        
+
         if (p > q)
         {
             std::swap(p, q);
@@ -139,16 +147,15 @@ public:
         {
             throw std::runtime_error("Fermat attack vulnerability detected");
         }
-        
         if (!wiener_attack_check(p, q))
         {
             throw std::runtime_error("Wiener attack vulnerability detected");
         }
         
-        uint64_t n = p * q;
-        uint64_t phi_n = (p - 1) * (q - 1);
+        bigint n = p * q;
+        bigint phi_n = (p - 1) * (q - 1);
         
-        uint64_t e = 65537;
+        bigint e = 65537;
         while (e < phi_n)
         {
             if (gcd(e, phi_n) == 1)
@@ -158,7 +165,7 @@ public:
             e += 2;
         }
         
-        uint64_t d = mod_inverse(e, phi_n);
+        bigint d = mod_inverse(e, phi_n);
         
         if (d == 0)
         {

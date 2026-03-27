@@ -4,24 +4,28 @@
 #include "probabilistic_primality_test.hpp"
 #include "../modular_arithmetic.hpp"
 #include <random>
+#include <boost/multiprecision/cpp_int.hpp>
+#include <boost/random.hpp> 
+
+using bigint = boost::multiprecision::cpp_int;
+using boost_dist = boost::random::uniform_int_distribution<bigint>;
 
 // Ferma test ----------------------------------------------------
 class fermat_test : public probabilistic_primality_test
 {
 private:
     std::mt19937_64 gen;
-    std::uniform_int_distribution<uint64_t> dist;
 
 public:
-    fermat_test() : gen(std::random_device{}()), dist(2, 0) {}
+    fermat_test() : gen(std::random_device{}()) {}
 
 protected:
-    bool single_iteration(uint64_t n) override
+    bool single_iteration(bigint n) override
     {
-        dist.param(std::uniform_int_distribution<uint64_t>::param_type(2, n - 2));
-        uint64_t a = dist(gen);
+        boost_dist dist(2, n - 2);
+        bigint a = dist(gen);
         
-        uint64_t result = mod_pow(a, n - 1, n);
+        bigint result = mod_pow(a, n - 1, n);
         return result == 1;
     }
 };
@@ -32,25 +36,23 @@ class solovay_strassen_test : public probabilistic_primality_test
 {
 private:
     std::mt19937_64 gen;
-    std::uniform_int_distribution<uint64_t> dist;
 
 public:
-    solovay_strassen_test() : gen(std::random_device{}()), dist(2, 0) {}
+    solovay_strassen_test() : gen(std::random_device{}()) {}
 
 protected:
-    bool single_iteration(uint64_t n) override
+    bool single_iteration(bigint n) override
     {
-        dist.param(std::uniform_int_distribution<uint64_t>::param_type(2, n - 2));
-        uint64_t a = dist(gen);
+        boost_dist dist(2, n - 2);
+        bigint a = dist(gen);
         
         int jacobi = jacobi_symbol(a, n);
-        if (jacobi == 0)
-        {
-            return false;
-        }
+        if (jacobi == 0) return false;
         
-        uint64_t pow_result = mod_pow(a, (n - 1) / 2, n);
-        return pow_result == static_cast<uint64_t>(jacobi);
+        bigint pow_result = mod_pow(a, (n - 1) / 2, n);
+        
+        bigint target = (jacobi < 0) ? (n - 1) : bigint(jacobi);
+        return pow_result == target;
     }
 };
 
@@ -60,19 +62,18 @@ class miller_rabin_test : public probabilistic_primality_test
 {
 private:
     std::mt19937_64 gen;
-    std::uniform_int_distribution<uint64_t> dist;
 
 public:
-    miller_rabin_test() : gen(std::random_device{}()), dist(2, 0) {}
+    miller_rabin_test() : gen(std::random_device{}()) {}
 
 protected:
-    bool single_iteration(uint64_t n) override
+    bool single_iteration(bigint n) override
     {
-        dist.param(std::uniform_int_distribution<uint64_t>::param_type(2, n - 2));
-        uint64_t a = dist(gen);
+        boost_dist dist(2, n - 2);
+        bigint a = dist(gen);
         
-        uint64_t d = n - 1;
-        uint64_t s = 0;
+        bigint d = n - 1;
+        bigint s = 0;
         
         while (d % 2 == 0)
         {
@@ -80,24 +81,16 @@ protected:
             ++s;
         }
         
-        uint64_t x = mod_pow(a, d, n);
+        bigint x = mod_pow(a, d, n);
         
-        if (x == 1 || x == n - 1)
-        {
-            return true;
-        }
+        if (x == 1 || x == n - 1) return true;
         
-        for (uint64_t r = 1; r < s; ++r)
+        for (bigint r = 1; r < s; ++r)
         {
-            x = (static_cast<__uint128_t>(x) * x) % n;
-            if (x == n - 1)
-            {
-                return true;
-            }
-            if (x == 1)
-            {
-                return false;
-            }
+            x = (x * x) % n; 
+            
+            if (x == n - 1) return true;
+            if (x == 1) return false;
         }
         
         return false;

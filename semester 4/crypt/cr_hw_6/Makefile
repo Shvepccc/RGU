@@ -8,6 +8,13 @@ DEBUG_CXXFLAGS := -Wall -Wextra -g -O0 -std=c++17
 DEBUGGER_CMD := lldb
 ARGS := # Arguments to pass to run/valgrind
 
+# Пути для Boost (Homebrew на Apple Silicon)
+BOOST_INCLUDE_DIR := /opt/homebrew/include
+
+# Добавляем Boost к флагам компиляции
+CXXFLAGS += -I$(BOOST_INCLUDE_DIR)
+DEBUG_CXXFLAGS += -I$(BOOST_INCLUDE_DIR)
+
 ifeq ($(V),1)
 	Q :=
 else

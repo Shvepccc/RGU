@@ -2,12 +2,13 @@
 #include "../include/rsa/rsa_alghorithm.hpp"
 #include "../include/rsa/rsa_key_generator.hpp"
 #include <string>
+#include <chrono>
 
 int main(int argc, char* argv[])
 {
     try
     {
-        std::string input_filename = "2_test.txt";
+        std::string input_filename = "gf.mp4";
         
         if (argc > 1)
         {
@@ -21,7 +22,7 @@ int main(int argc, char* argv[])
         std::string encrypted_filename = base_name + ".enc" + extension;
         std::string decrypted_filename = base_name + ".dec" + extension;
         
-        rsa_key_generator generator(16, 0.999999);
+        rsa_key_generator generator(128, 0.999999);
         auto keys = generator.generate_keys();
         
         std::cout << "RSA keys generated:\n";
@@ -37,12 +38,18 @@ int main(int argc, char* argv[])
         rsa_cipher cipher_decrypt(keys.public_key, keys.private_key, keys.modulus);
         
         std::cout << "Encrypting file...\n";
+        auto encrypt_start = std::chrono::high_resolution_clock::now();
         cipher_encrypt.encrypt_file(input_filename, encrypted_filename);
-        std::cout << "Encryption completed.\n\n";
+        auto encrypt_end = std::chrono::high_resolution_clock::now();
+        auto encrypt_duration = std::chrono::duration_cast<std::chrono::milliseconds>(encrypt_end - encrypt_start);
+        std::cout << "Encryption completed in " << encrypt_duration.count() << " ms.\n\n";
         
         std::cout << "Decrypting file...\n";
+        auto decrypt_start = std::chrono::high_resolution_clock::now();
         cipher_decrypt.decrypt_file(encrypted_filename, decrypted_filename);
-        std::cout << "Decryption completed.\n\n";
+        auto decrypt_end = std::chrono::high_resolution_clock::now();
+        auto decrypt_duration = std::chrono::duration_cast<std::chrono::milliseconds>(decrypt_end - decrypt_start);
+        std::cout << "Decryption completed in " << decrypt_duration.count() << " ms.\n\n";
         
         std::ifstream original(input_filename, std::ios::binary);
         std::ifstream decrypted(decrypted_filename, std::ios::binary);

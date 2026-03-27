@@ -4,14 +4,20 @@
 #include <iostream>
 #include <cmath>
 #include <cstdint>
+#include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/cpp_bin_float.hpp>
+#include <boost/math/constants/constants.hpp>
 
-int64_t gcd(int64_t a, int64_t b)
+using bigint = boost::multiprecision::cpp_int;
+using bigfloat = boost::multiprecision::cpp_bin_float_50;
+
+bigint gcd(bigint a, bigint b)
 {
-    a = std::llabs(a);
-    b = std::llabs(b);
+    a = boost::multiprecision::abs(a);
+    b = boost::multiprecision::abs(b);
     while (b != 0)
     {
-        int64_t t = b;
+        bigint t = b;
         b = a % b;
         a = t;
     }
@@ -20,22 +26,22 @@ int64_t gcd(int64_t a, int64_t b)
 
 struct Bezout
 {
-    int64_t gcd;
-    int64_t x;
-    int64_t y;
+    bigint gcd;
+    bigint x;
+    bigint y;
 };
 
-Bezout extended_gcd(int64_t a, int64_t b)
+Bezout extended_gcd(bigint a, bigint b)
 {
-    a = std::llabs(a);
-    b = std::llabs(b);
-    int64_t s = 0, old_s = 1;
-    int64_t t = 1, old_t = 0;
-    int64_t r = b, old_r = a;
+    a = boost::multiprecision::abs(a);
+    b = boost::multiprecision::abs(b);
+    bigint s = 0, old_s = 1;
+    bigint t = 1, old_t = 0;
+    bigint r = b, old_r = a;
     while (r != 0)
     {
-        int64_t q = old_r / r;
-        int64_t tmp = r;
+        bigint q = old_r / r;
+        bigint tmp = r;
         r = old_r - q * r;
         old_r = tmp;
 
@@ -50,9 +56,9 @@ Bezout extended_gcd(int64_t a, int64_t b)
     return {old_r, old_s, old_t};
 }
 
-int64_t mod_pow(int64_t base, int64_t exp, int64_t mod)
+bigint mod_pow(bigint base, bigint exp, bigint mod)
 {
-    int64_t result = 1;
+    bigint result = 1;
     base %= mod;
     while (exp > 0)
     {
@@ -66,7 +72,7 @@ int64_t mod_pow(int64_t base, int64_t exp, int64_t mod)
     return result;
 }
 
-int legendre_symbol(int64_t a, int64_t p)
+int legendre_symbol(bigint a, bigint p)
 {
     if (p <= 2 || p % 2 == 0)
     {
@@ -76,11 +82,11 @@ int legendre_symbol(int64_t a, int64_t p)
     if (a < 0) a += p;
     if (a == 0) return 0;
     if (a == 1) return 1;
-    int64_t res = mod_pow(a, (p - 1) / 2, p);
+    bigint res = mod_pow(a, (p - 1) / 2, p);
     return (res == p - 1) ? -1 : static_cast<int>(res);
 }
 
-int jacobi_symbol(int64_t a, int64_t n)
+int jacobi_symbol(bigint a, bigint n)
 {
     if (n <= 0 || n % 2 == 0)
     {
@@ -94,7 +100,7 @@ int jacobi_symbol(int64_t a, int64_t n)
         while (a % 2 == 0)
         {
             a /= 2;
-            int64_t r = n % 8;
+            bigint r = n % 8;
             if (r == 3 || r == 5)
             {
                 t = -t;
@@ -110,23 +116,23 @@ int jacobi_symbol(int64_t a, int64_t n)
     return (n == 1) ? t : 0;
 }
 
-int64_t mod_inverse(int64_t a, int64_t n)
+bigint mod_inverse(bigint a, bigint n)
 {
     Bezout bz = extended_gcd(a, n);
     if (bz.gcd != 1)
     {
         return 0;
     }
-    int64_t res = bz.x % n;
+    bigint res = bz.x % n;
     if (res < 0) res += n;
     return res;
 }
 
-int64_t phi_definition(int64_t n)
+bigint phi_definition(bigint n)
 {
     if (n <= 0) return 0;
-    int64_t count = 0;
-    for (int64_t k = 1; k <= n; ++k)
+    bigint count = 0;
+    for (bigint k = 1; k <= n; ++k)
     {
         if (gcd(k, n) == 1)
         {
@@ -136,12 +142,12 @@ int64_t phi_definition(int64_t n)
     return count;
 }
 
-int64_t phi_factorization(int64_t n)
+bigint phi_factorization(bigint n)
 {
     if (n <= 0) return 0;
-    int64_t result = n;
-    int64_t m = n;
-    for (int64_t p = 2; p * p <= m; ++p)
+    bigint result = n;
+    bigint m = n;
+    for (bigint p = 2; p * p <= m; ++p)
     {
         if (m % p == 0)
         {
@@ -159,14 +165,25 @@ int64_t phi_factorization(int64_t n)
     return result;
 }
 
-double phi_dft(int64_t n)
+double phi_dft(bigint n)
 {
     if (n <= 0) return 0.0;
+    
     double sum = 0.0;
-    for (int64_t k = 1; k <= n; ++k)
+    bigfloat n_float = static_cast<bigfloat>(n);
+    bigfloat pi = boost::math::constants::pi<bigfloat>();
+    
+    for (bigint k = 1; k <= n; ++k)
     {
-        sum += static_cast<double>(gcd(k, n)) * std::cos(2.0 * M_PI * k / n);
+        double gcd_val = static_cast<double>(gcd(k, n)); 
+        
+        bigfloat angle = 2.0 * pi * static_cast<bigfloat>(k) / n_float;
+        
+        double cos_val = static_cast<double>(boost::multiprecision::cos(angle));
+        
+        sum += gcd_val * cos_val;
     }
+    
     return std::llround(sum);
 }
 
