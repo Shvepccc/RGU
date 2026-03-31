@@ -6,7 +6,6 @@
 #include <random>
 #include <stdexcept>
 #include <algorithm>
-#include <cmath>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/random.hpp> 
 
