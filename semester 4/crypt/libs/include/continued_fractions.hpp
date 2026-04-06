@@ -75,6 +75,7 @@ public:
     static std::vector<bool> get_calkin_wilf_path(bigint a, bigint b)
     {
         std::vector<bool> path;
+
         while (a != b)
         {
             if (a > b)
