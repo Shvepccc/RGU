@@ -8,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Numerics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,7 +17,7 @@ using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
-using PolynomialAlgebra; // Подключаем предоставленную библиотеку
+using PolynomialAlgebra;
 
 public partial class MainWindowViewModel : ObservableObject
 {
@@ -93,8 +91,7 @@ public partial class MainWindowViewModel : ObservableObject
             var yMatch = Regex.Match(s, @"y(?:\^(\d+))?");
             if (yMatch.Success)
                 yDeg = yMatch.Groups[1].Success ? int.Parse(yMatch.Groups[1].Value) : 1;
-
-            // Если константа 1
+            
             if (!xMatch.Success && !yMatch.Success && int.TryParse(s, out int c) && c == 1)
             {
                 xDeg = 0;
@@ -195,8 +192,7 @@ public partial class MainWindowViewModel : ObservableObject
                 StatusMessage = "Ошибка: не найдено ни одного образующего.";
                 return;
             }
-
-            // Находим границы сетки для визуализации. Ищем максимальные степени среди образующих.
+            
             int maxX = 0;
             int maxY = 0;
             foreach (var gen in idealGenerators)
@@ -205,28 +201,23 @@ public partial class MainWindowViewModel : ObservableObject
                 if (term.Exps[0] > maxX) maxX = term.Exps[0];
                 if (term.Exps[1] > maxY) maxY = term.Exps[1];
             }
-
-            // Добавляем отступ для наглядности (бесконечная часть идеала)
+            
             maxX += 5;
             maxY += 5;
 
             var idealPoints = new List<ObservablePoint>();
             var remainderPoints = new List<ObservablePoint>();
             var mainPoints = new List<ObservablePoint>();
-
-            // Перебираем точки сетки
+            
             for (int m = 0; m <= maxX; m++)
             {
                 for (int n = 0; n <= maxY; n++)
                 {
-                    // Создаем тестируемый моном P = x^m * y^n
                     var testMonomial = new Polynomial(_variables, TermOrderType.Lex);
                     testMonomial.AddTerm(new[] { m, n }, 1);
-
-                    // Делим тестовый моном на образующие идеала
+                    
                     var (_, remainder) = testMonomial.Divide(idealGenerators);
-
-                    // Если остаток 0, моном принадлежит идеалу I
+                    
                     if (remainder.IsZero() && idealGenerators.Contains(testMonomial))
                     {
                         mainPoints.Add(new ObservablePoint(m, n));
@@ -241,8 +232,7 @@ public partial class MainWindowViewModel : ObservableObject
                     }
                 }
             }
-
-            // Формируем графики
+            
             Series = new ObservableCollection<ISeries>
             {
                 new ScatterSeries<ObservablePoint>

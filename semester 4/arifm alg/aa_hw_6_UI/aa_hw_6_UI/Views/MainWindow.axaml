@@ -3,7 +3,7 @@
         xmlns:vm="using:aa_hw_6_UI.ViewModels"
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         x:Class="aa_hw_6_UI.Views.MainWindow"
-        Title="Визуализация идеалов мономов (Упражнение 3)"
+        Title="aa_hw_6_UI"
         Width="1100" Height="650"
         MinWidth="900" MinHeight="500"
         x:DataType="vm:MainWindowViewModel">
