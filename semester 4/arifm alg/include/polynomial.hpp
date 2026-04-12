@@ -391,6 +391,95 @@ private:
     
 public:
 
+    polynomial S_polynomial(const polynomial& g) const
+    {
+        if (vars.size() != g.vars.size())
+        {
+            throw std::invalid_argument("Polynomials must have same number of variables");
+        }
+        if (vars != g.vars)
+        {
+            throw std::invalid_argument("Polynomials must have same variable names");
+        }
+
+        std::vector<int> multideg_f = multideg();
+        std::vector<int> multideg_g = g.multideg();
+        
+        std::vector<int> gamma(vars.size());
+        for (size_t i = 0; i < vars.size(); ++i)
+        {
+            gamma[i] = std::max(multideg_f[i], multideg_g[i]);
+        }
+        
+        std::vector<int> exp_f(vars.size());
+        std::vector<int> exp_g(vars.size());
+        for (size_t i = 0; i < vars.size(); ++i)
+        {
+            exp_f[i] = gamma[i] - multideg_f[i];
+            exp_g[i] = gamma[i] - multideg_g[i];
+        }
+        
+        polynomial<T> monom_f(vars, t_order.getType());
+        polynomial<T> monom_g(vars, t_order.getType());
+        monom_f.addTerm(exp_f, T{1});
+        monom_g.addTerm(exp_g, T{1});
+        
+        T lc_f = lc();
+        T lc_g = g.lc();
+        
+        polynomial<T> term1 = monom_f * (*this);
+        polynomial<T> term2 = monom_g * g;
+        
+        term1 = term1 / lc_f;
+        term2 = term2 / lc_g;
+        
+        return term1 - term2;
+    }
+    
+    std::vector<int> S_multideg(const polynomial& g) const
+    {
+        polynomial<T> spoly = S_polynomial(g);
+        return spoly.multideg();
+    }
+    
+    std::pair<std::vector<int>, std::vector<int>> multideg_pair(const polynomial& g) const
+    {
+        return {multideg(), g.multideg()};
+    }
+    
+    bool isGroebnerBasis(const std::vector<polynomial<T>>& basis) const
+    {
+        if (basis.empty())
+        {
+            return false;
+        }
+        
+        for (const auto& p : basis)
+        {
+            if (p.vars != vars || p.getterm_order_type() != t_order.getType())
+            {
+                throw std::invalid_argument("All basis polynomials must have same variables and term order");
+            }
+        }
+        
+        for (size_t i = 0; i < basis.size(); ++i)
+        {
+            for (size_t j = i + 1; j < basis.size(); ++j)
+            {
+                polynomial<T> spoly = basis[i].S_polynomial(basis[j]);
+                
+                auto division_result = divide(spoly, basis);
+                
+                if (!division_result.second.isZero())
+                {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+
     std::pair<std::vector<polynomial<T>>, polynomial<T>> 
         divide(const polynomial<T>& f, const std::vector<polynomial<T>>& divisors) const
     {
@@ -758,13 +847,6 @@ public:
         for (const auto& term : terms)
         {
             T new_coeff = term.second / scalar;
-            if constexpr (std::is_integral<T>::value)
-            {
-                if (new_coeff * scalar != term.second)
-                {
-                    throw std::invalid_argument("Division is not exact - scalar does not divide coefficient");
-                }
-            }
             result.addTerm(term.first, new_coeff);
         }
         
@@ -985,5 +1067,29 @@ public:
         return os;
     }
 };
+
+template<typename T>
+polynomial<T> S_polynomial(const polynomial<T>& f, const polynomial<T>& g)
+{
+    return f.S_polynomial(g);
+}
+
+
+template<typename T>
+std::vector<int> S_multideg(const polynomial<T>& f, const polynomial<T>& g)
+{
+    return f.S_multideg(g);
+}
+
+
+template<typename T>
+bool isGroebnerBasis(const std::vector<polynomial<T>>& basis)
+{
+    if (basis.empty())
+    {
+        return false;
+    }
+    return basis[0].isGroebnerBasis(basis);
+}
 
 #endif
