@@ -477,7 +477,6 @@ public:
             }
         }
         
-        return true;
     }
 
     std::pair<std::vector<polynomial<T>>, polynomial<T>> 

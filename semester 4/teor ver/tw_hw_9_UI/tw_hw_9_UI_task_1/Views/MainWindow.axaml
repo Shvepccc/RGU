@@ -1,0 +1,121 @@
+<!-- MainWindow.axaml -->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:tw_hw_9_UI_task_1.ViewModels"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        x:Class="tw_hw_9_UI_task_1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="tw_hw_9_UI_task_1" Width="1200" Height="800">
+
+    <TabControl Margin="10">
+        <TabControl.Styles>
+            <Style Selector="TabItem">
+                <Setter Property="FontSize" Value="16"/>    
+                <Setter Property="FontWeight" Value="Bold"/> 
+                <Setter Property="MinHeight" Value="30"/>   
+                <Setter Property="Padding" Value="10,0"/>   
+            </Style>
+        </TabControl.Styles>
+        
+        <TabItem Header="Управление">
+            <Grid RowDefinitions="*, Auto" ColumnDefinitions="*, *" HorizontalAlignment="Stretch" Margin="0 10 0 0">
+                <Border  Grid.Column="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                    <TextBox Text="{Binding CommandInput}" AcceptsReturn="True" TextWrapping="Wrap" 
+                             Watermark="Введите команды..." 
+                             FontFamily="Consolas" FontSize="16" Padding="10"/>
+                </Border>
+                    
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="15 0 0 0 ">
+                    <TextBox Text="{Binding CommandOutput}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"
+                             Watermark="Вывод результатов..." FontFamily="Consolas" FontSize="16" Padding="10"
+                             />
+                </Border>
+                
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="10" Margin="15">
+                    <Button Content="Выполнить" Command="{Binding ExecuteCommand}" Background="LightGreen" FontWeight="Bold" Padding="15,5"/>
+                    <Button Content="Импорт команд txt" 
+                            Command="{Binding ImportCommandsTxtCommand}" Background="#CCCCFF"/>
+                    <Button Content="Экспорт команд txt" 
+                            Command="{Binding ExportCommandsTxtCommand}" Background="#CCCCFF"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Визуализация">
+            <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="300, *" Margin="0 10 0 5">
+                
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
+                    <TextBlock Text="Выберите величину:" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox ItemsSource="{Binding AvailableVariables}" SelectedItem="{Binding SelectedVariable}" Width="100"/>
+                    <Button Content="Удалить" 
+                            Command="{Binding DeleteVariableCommand}" 
+                            Background="LightCoral" 
+                            IsEnabled="{Binding SelectedVariable, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                </StackPanel>
+
+                <dg:DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DistributionLaw}" 
+                            AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,10,0"
+                            BorderBrush="Gray" BorderThickness="1">
+                    <dg:DataGrid.Columns>
+                        <dg:DataGridTextColumn Header="Значение (x)" Binding="{Binding Value}" Width="*"/>
+                        <dg:DataGridTextColumn Header="Вероятность (p)" Binding="{Binding Probability, StringFormat=\{0:F5\}}" Width="*"/>
+                    </dg:DataGrid.Columns>
+                </dg:DataGrid>
+                
+                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="15">
+                    <Button Content="Импорт JSON" Command="{Binding ImportJsonCommand}" Background="#CCCCFF"/>
+                    <Button Content="Экспорт JSON" Command="{Binding ExportJsonCommand}" Background="#CCCCFF"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="*,*">
+                    <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0,0,0,5" Padding="5">
+                        <Grid RowDefinitions="Auto,*">
+                            <TextBlock Text="Полилайн (Многоугольник распределения)" FontWeight="Bold" Margin="5"/>
+                            <lvc:CartesianChart Grid.Row="1" Series="{Binding PolylineSeries}" 
+                                                XAxes="{Binding XAxes}" YAxes="{Binding PolylineYAxes}"/>
+                        </Grid>
+                    </Border>
+                    
+                    <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0,5,0,0" Padding="5">
+                        <Grid RowDefinitions="Auto,*">
+                            <TextBlock Text="Функция распределения F(x)" FontWeight="Bold" Margin="5"/>
+                            <lvc:CartesianChart Grid.Row="1" Series="{Binding CdfSeries}" 
+                                                XAxes="{Binding XAxes}" YAxes="{Binding CdfYAxes}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </TabItem>
+        
+        
+        <TabItem Header="Помощь">
+            <ScrollViewer Padding="20">
+                <StackPanel Spacing="15">
+                    <TextBlock Text="Справка по командам" FontSize="20" FontWeight="Bold" Foreground="SteelBlue"/>
+            
+                    <TextBlock Text="1. Создание переменной" FontWeight="Bold"/>
+                    <TextBlock Text="Синтаксис: ИМЯ = {значение:вероятность, ...}" TextWrapping="Wrap" Margin="10,0,0,0"/>
+                    <TextBlock Text="Пример: A = {1:0.5, 2:0.2, 5:0.3}" Foreground="Gray" Margin="10,0,0,0"/>
+
+                    <TextBlock Text="2. Операции между переменными" FontWeight="Bold"/>
+                    <TextBlock Text="Поддерживается сложение (+) и умножение (*)." TextWrapping="Wrap" Margin="10,0,0,0"/>
+                    <TextBlock Text="Пример: C = A + B" Foreground="Gray" Margin="10,0,0,0"/>
+                    <TextBlock Text="Пример: D = A * B" Foreground="Gray" Margin="10,0,0,0"/>
+
+                    <TextBlock Text="3. Операции с числами (скалярами)" FontWeight="Bold"/>
+                    <TextBlock Text="Поддерживается только умножение (*)." TextWrapping="Wrap" Margin="10,0,0,0"/>
+                    <TextBlock Text="Пример: B = A * 2.5" Foreground="Gray" Margin="10,0,0,0"/>
+
+                    <TextBlock Text="4. Статистические функции" FontWeight="Bold"/>
+                    <TextBlock Text="Выводят результат в консоль (Output)." TextWrapping="Wrap" Margin="10,0,0,0"/>
+                    <TextBlock Text="• mean(A) - математическое ожидание" Margin="20,0,0,0"/>
+                    <TextBlock Text="• var(A) - дисперсия" Margin="20,0,0,0"/>
+                    <TextBlock Text="• skew(A) - коэффициент асимметрии" Margin="20,0,0,0"/>
+                    <TextBlock Text="• kurt(A) - коэффициент эксцесса" Margin="20,0,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</Window>
