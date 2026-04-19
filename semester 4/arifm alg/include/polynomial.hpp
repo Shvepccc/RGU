@@ -391,6 +391,93 @@ private:
     
 public:
 
+std::vector<polynomial<T>> buchberger(const std::vector<polynomial<T>>& basis) const
+{
+    if (basis.empty())
+    {
+        return {};
+    }
+    std::vector<polynomial<T>> result_g = basis;
+    std::vector<std::pair<std::size_t, std::size_t>> pairs;
+    for (std::size_t i = 0; i < result_g.size(); ++i)
+    {
+        for (std::size_t j = i + 1; j < result_g.size(); ++j)
+        {
+            pairs.push_back({i, j});
+        }
+    }
+    while (!pairs.empty())
+    {
+        std::pair<std::size_t, std::size_t> current_pair = pairs.back();
+        pairs.pop_back();
+        polynomial<T> spoly = result_g[current_pair.first].S_polynomial(result_g[current_pair.second]);
+        auto division_result = divide(spoly, result_g);
+        if (!division_result.second.isZero())
+        {
+            result_g.push_back(division_result.second);
+            for (std::size_t i = 0; i < result_g.size() - 1; ++i)
+            {
+                pairs.push_back({i, result_g.size() - 1});
+            }
+        }
+    }
+    return result_g;
+}
+
+std::vector<polynomial<T>> reduced_groebner_basis(const std::vector<polynomial<T>>& basis) const
+{
+    std::vector<polynomial<T>> groebner_g = buchberger(basis);
+    std::vector<polynomial<T>> minimal_g;
+    for (std::size_t i = 0; i < groebner_g.size(); ++i)
+    {
+        bool redundant = false;
+        std::vector<int> lm_i = groebner_g[i].multideg();
+        for (std::size_t j = 0; j < groebner_g.size(); ++j)
+        {
+            if (i == j)
+            {
+                continue;
+            }
+            std::vector<int> lm_j = groebner_g[j].multideg();
+            bool divides = true;
+            for (std::size_t k = 0; k < lm_i.size(); ++k)
+            {
+                if (lm_i[k] < lm_j[k])
+                {
+                    divides = false;
+                    break;
+                }
+            }
+            if (divides)
+            {
+                redundant = true;
+                break;
+            }
+        }
+        if (!redundant)
+        {
+            polynomial<T> normalized = groebner_g[i];
+            T lead_coeff = normalized.lc();
+            minimal_g.push_back(normalized / lead_coeff);
+        }
+    }
+    std::vector<polynomial<T>> reduced_g = minimal_g;
+    for (std::size_t i = 0; i < reduced_g.size(); ++i)
+    {
+        std::vector<polynomial<T>> others;
+        for (std::size_t j = 0; j < reduced_g.size(); ++j)
+        {
+            if (i != j)
+            {
+                others.push_back(reduced_g[j]);
+            }
+        }
+        auto division_result = divide(reduced_g[i], others);
+        reduced_g[i] = division_result.second;
+    }
+    return reduced_g;
+}
+
     polynomial S_polynomial(const polynomial& g) const
     {
         if (vars.size() != g.vars.size())

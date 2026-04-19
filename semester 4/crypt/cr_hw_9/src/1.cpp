@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     padding_mode_type selected_padding = padding_mode_type::PKCS7; 
     std::size_t block_size_bits = 128; // fixed!
     std::size_t key_size_bits = 256;   // 128, 192, 256
-    std::size_t num_threads = 20;
+    std::size_t num_threads = 6;
 
     std::size_t block_size_bytes = block_size_bits / 8;
     
