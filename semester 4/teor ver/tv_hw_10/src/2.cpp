@@ -316,7 +316,7 @@ public:
 
 int main()
 {
-    int n = 100;
+    int n = 10;
     int iterations = 100;
     double edge_prob = 0.5;
 
