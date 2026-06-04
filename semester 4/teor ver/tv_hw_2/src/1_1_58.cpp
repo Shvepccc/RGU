@@ -2,8 +2,6 @@
 #include <iostream>
 #include "../include/help.hpp"
 
-//TODO: change variable names
-
 int main()
 {
     int countAllFives = 0;

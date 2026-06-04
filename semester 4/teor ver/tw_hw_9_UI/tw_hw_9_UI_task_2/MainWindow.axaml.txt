@@ -1,0 +1,79 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:tw_hw_9_UI_task_2.ViewModels"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        x:Class="tw_hw_9_UI_task_2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="tw_hw_9_UI_task_2" 
+        Width="1200" Height="800">
+
+    <Grid ColumnDefinitions="350, *" Margin="15">
+        
+        <Border Grid.Column="0" BorderBrush="Navy" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,0,10,0">
+            <StackPanel Spacing="15">
+                <TextBlock Text="Настройки моделирования" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                
+                <TextBlock Text="Начальное положение (x_0):" FontWeight="SemiBold"/>
+                <NumericUpDown Value="{Binding InitialPosition}" Increment="1" 
+                               IsEnabled="{Binding IsSimulationNotRunning}"/>
+
+                <TextBlock Text="Количество шагов (n):" FontWeight="SemiBold"/>
+                <NumericUpDown Value="{Binding StepsCount}" Minimum="1" Maximum="1000" Increment="1"
+                               IsEnabled="{Binding IsSimulationNotRunning}"/>
+
+                <Border Background="#F0F8FF" CornerRadius="5" Padding="10" BorderBrush="LightBlue" BorderThickness="1">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Закон перемещения:" FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding MovementLawInfo}" TextWrapping="Wrap" Foreground="DarkSlateGray"/>
+                        <Button Content="Загрузить из JSON" 
+                                Command="{Binding LoadLawCommand}" 
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="#CCCCFF"/>
+                    </StackPanel>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+                    <Button Grid.Column="0" Content="Старт" 
+                            Command="{Binding StartCommand}" 
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="LightGreen" FontWeight="Bold" Height="40"/>
+                    <Button Grid.Column="1" Content="Стоп" 
+                            Command="{Binding StopCommand}" 
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="LightCoral" FontWeight="Bold" Height="40"/>
+                </Grid>
+
+                <TextBlock Text="{Binding CurrentStatusText}" 
+                           Foreground="DarkBlue" 
+                           Margin="0,20,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1" RowDefinitions="*, *">
+            
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0,0,0,5" Padding="10">
+                <Grid RowDefinitions="Auto, *">
+                    <!-- <TextBlock Grid.Row="0" Text="Процесс случайного блуждания (ℝ)" FontWeight="Bold" FontSize="16"/> -->
+                    <lvc:CartesianChart Grid.Row="1" 
+                                        Series="{Binding SimulationSeries}"
+                                        XAxes="{Binding SimXAxes}"
+                                        YAxes="{Binding SimYAxes}"
+                                        TooltipPosition="Hidden"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Margin="0,5,0,0" Padding="10">
+                <Grid RowDefinitions="Auto, *">
+                    <TextBlock Grid.Row="0" Text="Вероятности конечных положений (за n шагов)" FontWeight="Bold" FontSize="16"/>
+                    <lvc:CartesianChart Grid.Row="1" 
+                                        Series="{Binding DistributionSeries}"
+                                        XAxes="{Binding DistXAxes}"
+                                        ZoomMode="Both"/>
+                </Grid>
+            </Border>
+            
+        </Grid>
+    </Grid>
+</Window>

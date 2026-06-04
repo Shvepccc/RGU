@@ -1,0 +1,127 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_3.ViewModels"
+        xmlns:agc="clr-namespace:AvaloniaGraphControl;assembly=AvaloniaGraphControl"
+        xmlns:paz="using:Avalonia.Controls.PanAndZoom"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        x:Class="task_3.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="task_3" Width="1100" Height="700">
+
+    <TabControl>
+        <TabControl.Styles>
+            <Style Selector="TabItem">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Height" Value="10"/>
+                <Setter Property="MinWidth" Value="3"/>
+            </Style>
+        </TabControl.Styles>
+        <TabItem Header="Моделирование">
+            <Grid ColumnDefinitions="300, *" Margin="0 0 0 10">
+                
+                <StackPanel Spacing="10" Margin="12">
+                    <TextBlock Text="Параметры системы" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Количество жителей (n):"/>
+                        <NumericUpDown Value="{Binding N}" Minimum="2"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Число передач слуха (r):" />
+                        <NumericUpDown Value="{Binding R}" Minimum="1"/>
+                    </StackPanel>
+                
+                    <StackPanel>
+                        <TextBlock Text="Размер группы получателей (N):" />
+                        <NumericUpDown Value="{Binding NumN}" Minimum="1"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Количество экспериментов (K):" />
+                        <NumericUpDown Value="{Binding K}" Minimum="1"/>
+                    </StackPanel>
+                    
+                    <Separator Height="1" Background="LightGray" Margin="0,10"/>
+
+                    <UniformGrid Columns="3" ColumnSpacing="4">
+                        <Button Content="Старт" Command="{Binding StartSimulationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Content="{Binding PauseButtonText}" Command="{Binding PauseSimulationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Content="Стоп" Command="{Binding StopSimulationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </UniformGrid>
+                    
+                    <Button Content="Сбросить всё" Command="{Binding ResetSimulationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+
+                    <StackPanel Spacing="4" Margin="0,15,0,0">
+                        <TextBlock Text="{Binding StatusInfo}" FontSize="12" TextWrapping="Wrap" Foreground="DarkBlue"/>
+                        <Grid ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Прогресс серии:" FontSize="12"/>
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentExperimentProgress, StringFormat='{}{0}'}" HorizontalAlignment="Right" FontWeight="Bold"/>
+                        </Grid>
+                        <ProgressBar Minimum="0" Maximum="{Binding K}" Value="{Binding CurrentExperimentProgress}" Height="14"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" BorderBrush="DarkGray" BorderThickness="2" Margin="10" Background="#FAFAFA" CornerRadius="10" ClipToBounds="True">
+                    <Panel>
+                        <paz:ZoomBorder Stretch="None" ZoomSpeed="1.2" PanButton="Left" IsVisible="{Binding IsGraphVisualizable}">
+                            <agc:GraphPanel Graph="{Binding RumorGraph}" LayoutMethod="MDS">
+                                <agc:GraphPanel.DataTemplates>
+                                    <DataTemplate DataType="x:String">
+                                        <Border Width="30" Height="30" Background="LightBlue" CornerRadius="15" BorderBrush="Black" BorderThickness="1">
+                                            <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11" FontWeight="Bold"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </agc:GraphPanel.DataTemplates>
+                            </agc:GraphPanel>
+                        </paz:ZoomBorder>
+
+                        <TextBlock IsVisible="{Binding !IsGraphVisualizable}" 
+                                   Text="Графическая отрисовка отключена для поддержания высокой производительности.&#x0a;Расчеты производятся в фоновом режиме." 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Gray" FontSize="14"/>
+                    </Panel>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Статистика">
+            <Grid RowDefinitions="Auto, *" Margin="12">
+                
+                <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,0,0,15" Background="#F0F4F8">
+                    <Grid ColumnDefinitions="*, *, *, *">
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                            <TextBlock Text="Эмпирическая вероятность А" FontSize="11" Foreground="Gray"/>
+                            <TextBlock Text="{Binding EmpProbA}" FontSize="18" FontWeight="Bold" Foreground="DarkGreen"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                            <TextBlock Text="Аналитическая вероятность А" FontSize="11" Foreground="Gray"/>
+                            <TextBlock Text="{Binding AnProbA}" FontSize="18" FontWeight="Bold" Foreground="Green"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                            <TextBlock Text="Эмпирическая вероятность Б" FontSize="11" Foreground="Gray"/>
+                            <TextBlock Text="{Binding EmpProbB}" FontSize="18" FontWeight="Bold" Foreground="DarkRed"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                            <TextBlock Text="Аналитическая вероятность Б" FontSize="11" Foreground="Gray"/>
+                            <TextBlock Text="{Binding AnProbB}" FontSize="18" FontWeight="Bold" Foreground="Red"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <DockPanel Grid.Row="1">
+                    <TextBlock DockPanel.Dock="Top" Text="Журнал исходов проведенных экспериментов:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <dg:DataGrid ItemsSource="{Binding ExperimentsList}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="№ Эксперимента" Binding="{Binding Id}" Width="150"/>
+                            <dg:DataGridTextColumn Header="Статус окончания" Binding="{Binding Status}" Width="*"/>
+                            <dg:DataGridTextColumn Header="Успешных шагов (r)" Binding="{Binding StepsCompleted}" Width="150" IsVisible="False"/>
+                            <dg:DataGridTextColumn Header="Всего узнало людей" Binding="{Binding TotalInformed}" Width="180"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </DockPanel>
+                
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

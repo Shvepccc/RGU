@@ -2,9 +2,6 @@
 #include <vector>
 #include "../include/help.hpp"
 
-//TODO: change variable names
-//TODO: correct analytic solution
-
 int main()
 {
     int countNotMoreThanThree = 0;

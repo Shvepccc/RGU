@@ -113,7 +113,7 @@ int main()
     data_file << "precision,e_time_ms,e_operations,e_terms,pi_time_ms,pi_operations,pi_terms\n";
     high_prec::default_precision(4);
     
-    for (int p = 100000; p < 100000+1; p++)
+    for (int p = 1; p < 1000+1; p++)
     {
         std::cout << "Computing for precision: " << p << std::endl;
         

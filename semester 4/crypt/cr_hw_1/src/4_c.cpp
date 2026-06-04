@@ -59,9 +59,9 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::string input = argv[1];
-    std::string output = argv[2];
-    std::string key_str = argv[3];
+    std::string input = argv[2];
+    std::string output = argv[3];
+    std::string key_str = argv[4];
 
     try
     {

@@ -1,0 +1,7 @@
+Compiling implementation inc_src/bit_manipulator.cpp -> build/inc_src/bit_manipulator.o
+Compiling implementation inc_src/bit_permutation.cpp -> build/inc_src/bit_permutation.o
+Compiling implementation inc_src/bit_substitution.cpp -> build/inc_src/bit_substitution.o
+Compiling main src/2.cpp -> build/2
+Linking with implementations: build/inc_src/bit_manipulator.o build/inc_src/bit_permutation.o build/inc_src/bit_substitution.o
+rm build/inc_src/bit_substitution.o build/inc_src/bit_permutation.o build/inc_src/bit_manipulator.o
+Running task 3...

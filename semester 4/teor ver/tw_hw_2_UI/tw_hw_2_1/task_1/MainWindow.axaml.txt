@@ -1,0 +1,167 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task_1.ViewModels"
+        xmlns:models="using:task_1.Models"
+        xmlns:agc="clr-namespace:AvaloniaGraphControl;assembly=AvaloniaGraphControl"
+        xmlns:paz="using:Avalonia.Controls.PanAndZoom"
+        xmlns:dg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        xmlns:converters="clr-namespace:task_1.Converters"
+        x:Class="task_1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Симуляция Распространения Заболевания" Width="1100" Height="700">
+
+    <Window.Resources>
+        <converters:StateToBrushConverter x:Key="StateToBrushConverter"/>
+    </Window.Resources>
+
+    <TabControl>
+        <TabControl.Styles>
+            <Style Selector="TabItem">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Height" Value="10"/>
+                <Setter Property="MinWidth" Value="3"/>
+            </Style>
+        </TabControl.Styles>
+        <TabItem Header="Моделирование">
+            <Grid ColumnDefinitions="280, *" Margin="0 0 0 10">
+                
+                <StackPanel Spacing="12" Margin="12">
+                    <Button Content="Загрузить данные (.txt)" Command="{Binding LoadGraphCommand}" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" FontSize="11" Foreground="Gray"/>
+                    
+                    <StackPanel>
+                        <TextBlock Text="P_1 (Вероятность заражения):"/>
+                        <NumericUpDown Value="{Binding P}" Minimum="0" Maximum="1" Increment="0.01" FormatString="0.00"/>
+                    </StackPanel>
+                    
+                    <StackPanel>
+                        <TextBlock Text="P_2 (Вероятность исцеления):"/>
+                        <NumericUpDown Value="{Binding P1}" Minimum="0" Maximum="1" Increment="0.01" FormatString="0.00"/>
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="4" RowSpacing="4">
+                        <Button Grid.Column="0" Content="Старт" 
+                                Command="{Binding StartSimulationCommand}" 
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Grid.Column="1" Content="Стоп" 
+                                Command="{Binding StopSimulationCommand}" 
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Grid.Row="1" Grid.ColumnSpan="2" 
+                                Content="{Binding PauseButtonText}" 
+                                Command="{Binding PauseSimulationCommand}" 
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </Grid>
+                    
+                    <Button Content="Сбросить симуляцию" 
+                            Command="{Binding ResetSimulationCommand}" 
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    
+                    <TextBlock Text="{Binding CurrentStep, StringFormat='Текущий шаг: {0}'}"/>
+                    
+                    <CheckBox IsChecked="{Binding IsGraphVisualizable}" Margin="0,10,0,0">
+                        <TextBlock Text="Отрисовывать граф на экране" TextWrapping="Wrap" FontSize="11"/>
+                    </CheckBox>
+                    
+                    <StackPanel Spacing="5" Margin="0,20,0,0">
+                        <TextBlock Text="Легенда:" FontWeight="Bold"/>
+                        <TextBlock Text="■ Здоровые" Foreground="Gray"/>
+                        <TextBlock Text="■ Зараженные" Foreground="Salmon"/>
+                        <TextBlock Text="■ Исцеленные" Foreground="LightGreen"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" BorderBrush="DarkGray" BorderThickness="2" Margin="10" Background="#F9F9F9"  CornerRadius="10">
+                    <Panel>
+                        <paz:ZoomBorder Stretch="None" ZoomSpeed="1.2" PanButton="Left" 
+                                        IsVisible="{Binding IsGraphVisualizable}" ClipToBounds="True"
+                                        CornerRadius="10">
+                            <agc:GraphPanel Graph="{Binding NetworkGraph}" LayoutMethod="MDS">
+                                <agc:GraphPanel.DataTemplates>
+                                    <DataTemplate DataType="models:PersonNode">
+                                        <Border Width="34" Height="34" Background="Transparent" IsHitTestVisible="True">
+                                            <Panel>
+                                                <Ellipse Width="26" Height="26" 
+                                                         Fill="{Binding State, Converter={StaticResource StateToBrushConverter}}" 
+                                                         Stroke="#333333" StrokeThickness="1.5"/>
+                                                <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" FontWeight="Bold" Foreground="#111111"/>
+                                            </Panel>
+                                            <ToolTip.Tip>
+                                                <StackPanel Margin="5">
+                                                    <TextBlock Text="{Binding Id, StringFormat='ID Человека: {0}'}" FontWeight="Bold"/>
+                                                    <TextBlock Text="{Binding State, StringFormat='Статус: {0}'}"/>
+                                                    <TextBlock Text="{Binding NeighborIndices.Length, StringFormat='Контактов: {0}'}"/>
+                                                </StackPanel>
+                                            </ToolTip.Tip>
+                                        </Border>
+                                    </DataTemplate>
+                                </agc:GraphPanel.DataTemplates>
+                            </agc:GraphPanel>
+                        </paz:ZoomBorder>
+
+                        <TextBlock IsVisible="{Binding !IsGraphVisualizable}" 
+                                   Text="Визуализация отключена для ускорения вычислений на больших объемах данных.&#x0a; Результаты доступны во вкладке 'Статистика'." 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   TextAlignment="Center" Foreground="DimGray" FontSize="14" Margin="20"/>
+                    </Panel>
+                </Border>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Статистика">
+            <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" Margin="0 0 0 10">
+                
+                <DockPanel Grid.Row="0" Grid.Column="0" Margin="4">
+                    <TextBlock DockPanel.Dock="Top" Text="Все не заразившиеся люди" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <dg:DataGrid ItemsSource="{Binding UninfectedList}"
+                                 AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="ID Узла" Binding="{Binding Id}" Width="*"/>
+                            <dg:DataGridTextColumn Header="Кол-во связей" Binding="{Binding NeighborIndices.Length}" Width="*"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </DockPanel>
+
+                <DockPanel Grid.Row="0" Grid.Column="1" Margin="4">
+                    <TextBlock DockPanel.Dock="Top" Text="Все исцелившиеся люди" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <dg:DataGrid ItemsSource="{Binding HealedList}" 
+                                 AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="ID Узла" Binding="{Binding Id}" Width="*"/>
+                            <dg:DataGridTextColumn Header="Кол-во связей" Binding="{Binding NeighborIndices.Length}" Width="*"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </DockPanel>
+
+                <DockPanel Grid.Row="1" Grid.Column="0" Margin="4">
+                    <TextBlock DockPanel.Dock="Top" Text="Исцелились, но окружение НЕ исцелено" FontWeight="Bold" Margin="0,0,0,4" Foreground="DarkGreen"/>
+                    <dg:DataGrid ItemsSource="{Binding HealedUnhealedEnvList}"
+                                 AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="ID Узла" Binding="{Binding Id}" Width="*"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </DockPanel>
+
+                <DockPanel Grid.Row="1" Grid.Column="1" Margin="4">
+                    <TextBlock DockPanel.Dock="Top" Text="Здоровы, хотя ВСЁ окружение заражено" FontWeight="Bold" Margin="0,0,0,4" Foreground="DarkRed"/>
+                    <dg:DataGrid ItemsSource="{Binding UninfectedInfectedEnvList}"
+                                 AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="All"
+                                 BorderBrush="#1d1d1d"
+                                 BorderThickness="1">
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridTextColumn Header="ID Узла" Binding="{Binding Id}" Width="*"/>
+                        </dg:DataGrid.Columns>
+                    </dg:DataGrid>
+                </DockPanel>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

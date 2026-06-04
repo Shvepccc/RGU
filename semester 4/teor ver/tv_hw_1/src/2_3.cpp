@@ -6,6 +6,8 @@
 #include <iomanip>
 #include "../include/help.hpp"
 
+#define NUM_EXPERIMENTS 1000000
+
 int flipCoin()
 {
     return getRandomNumber(1, 2);
